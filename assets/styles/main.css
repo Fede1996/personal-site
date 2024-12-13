@@ -39,9 +39,11 @@ body {
 
 /* Section Styles */
 section {
-    padding: 50px;
-    background-color: white;
-    margin-bottom: 20px;
+    padding: 40px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+    background: #fff;
+    border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
