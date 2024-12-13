@@ -189,3 +189,7 @@ header nav a {
 header nav a:hover {
     color: #a020f0;
 }
+
+#intro {
+    color: #fff;
+}
