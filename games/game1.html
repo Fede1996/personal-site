@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Debugging Master</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+        h1 {
+            color: #007acc;
+        }
+        .game-container {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            margin: 20px auto;
+            background: #e0e4e5;
+            border: 2px solid #444;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .bug {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #e74c3c;
+            border-radius: 50%;
+            cursor: pointer;
+            animation: moveBug 3s linear infinite;
+        }
+        @keyframes moveBug {
+            0% {
+                top: 0;
+                left: 0;
+            }
+            100% {
+                top: 350px;
+                left: 550px;
+            }
+        }
+        .stats {
+            margin: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007acc;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #005f99;
+        }
+    </style>
+</head>
+<body>
+    <h1>Debugging Master</h1>
+    <p>Risolvi i bug cliccando sui cerchi rossi prima che scada il tempo!</p>
+    <div class="stats">
+        <p><strong>Punteggio:</strong> <span id="score">0</span></p>
+        <p><strong>Tempo Rimasto:</strong> <span id="time">30</span> secondi</p>
+    </div>
+    <div class="game-container" id="game-container"></div>
+    <button class="button" id="start-button">Inizia</button>
+
+    <script>
+        const gameContainer = document.getElementById('game-container');
+        const scoreDisplay = document.getElementById('score');
+        const timeDisplay = document.getElementById('time');
+        const startButton = document.getElementById('start-button');
+
+        let score = 0;
+        let timeLeft = 30;
+        let gameInterval;
+
+        function createBug() {
+            const bug = document.createElement('div');
+            bug.classList.add('bug');
+            const x = Math.random() * (gameContainer.clientWidth - 50);
+            const y = Math.random() * (gameContainer.clientHeight - 50);
+            bug.style.left = `${x}px`;
+            bug.style.top = `${y}px`;
+
+            bug.addEventListener('click', () => {
+                score++;
+                scoreDisplay.textContent = score;
+                bug.remove();
+            });
+
+            gameContainer.appendChild(bug);
+
+            setTimeout(() => {
+                bug.remove();
+            }, 2000);
+        }
+
+        function startGame() {
+            score = 0;
+            timeLeft = 30;
+            scoreDisplay.textContent = score;
+            timeDisplay.textContent = timeLeft;
+            startButton.disabled = true;
+
+            gameInterval = setInterval(() => {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    timeDisplay.textContent = timeLeft;
+                    createBug();
+                } else {
+                    clearInterval(gameInterval);
+                    alert(`Tempo scaduto! Punteggio finale: ${score}`);
+                    startButton.disabled = false;
+                }
+            }, 1000);
+        }
+
+        startButton.addEventListener('click', startGame);
+    </script>
+</body>
+</html>
