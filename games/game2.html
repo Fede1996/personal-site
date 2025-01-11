@@ -5,170 +5,190 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Public Persona Maker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-        }
-        h1 {
-            margin-top: 20px;
-            font-size: 2rem;
-        }
-        .bars {
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            margin: 20px 0;
-            gap: 20px;
+            height: 100vh;
+            background-color: #34495e;
+            color: #ecf0f1;
         }
-        .bar {
-            width: 200px;
-            height: 20px;
-            background-color: #ddd;
-            border: 1px solid #aaa;
-            position: relative;
+
+        .story-container {
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            background-color: #2c3e50;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
-        .progress {
-            height: 100%;
-            background-color: #007acc;
-            width: 100%;
-            transition: width 0.3s;
+
+        .event-description {
+            font-size: 18px;
+            margin-bottom: 20px;
         }
-        .popularity .progress {
-            background-color: #f39c12;
+
+        .choices {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
-        .event {
-            background-color: white;
-            border: 1px solid #aaa;
-            border-radius: 5px;
-            padding: 15px;
-            margin: 20px auto;
-            width: 80%;
-            max-width: 400px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .event button {
-            margin: 10px;
+
+        .choice-button {
             padding: 10px 20px;
-            background-color: #007acc;
+            font-size: 16px;
+            background-color: #3498db;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
         }
-        .event button:hover {
-            background-color: #005f99;
+
+        .choice-button:hover {
+            background-color: #2980b9;
         }
-        #timer {
-            font-size: 1.5rem;
-            margin: 20px 0;
+
+        .status {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #f1c40f;
+        }
+
+        .end-message {
+            font-size: 20px;
+            color: #e74c3c;
+            margin-top: 20px;
+        }
+
+        .start-button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #1abc9c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .start-button:hover {
+            background-color: #16a085;
         }
     </style>
 </head>
 <body>
-    <h1>Public Persona Maker</h1>
-    <div id="timer">60s</div>
-
-    <div class="bars">
-        <div class="bar career">
-            <div class="progress" id="career-bar"></div>
+    <div class="story-container" id="storyContainer">
+        <div class="event-description" id="eventDescription">
+            Benvenuto nel tuo viaggio per diventare una celebrità informatica. Ogni scelta influenzerà il tuo percorso!
         </div>
-        <div class="bar popularity">
-            <div class="progress" id="popularity-bar"></div>
+        <div class="choices" id="choicesContainer">
+            <button class="start-button" onclick="startGame()">Inizia Gioco</button>
         </div>
-    </div>
-
-    <div class="event" id="event-box">
-        <p id="event-text">Premi Start per iniziare il gioco!</p>
-        <button onclick="startGame()">Start</button>
+        <div class="status" id="status"></div>
+        <div class="end-message" id="endMessage"></div>
     </div>
 
     <script>
-        const careerBar = document.getElementById('career-bar');
-        const popularityBar = document.getElementById('popularity-bar');
-        const eventBox = document.getElementById('event-box');
-        const eventText = document.getElementById('event-text');
-        const timerElement = document.getElementById('timer');
-
-        let careerValue = 100;
-        let popularityValue = 100;
-        let gameInterval;
-        let timeLeft = 60;
-
         const events = [
             {
-                text: "Un cliente ha bisogno di un debug urgente!",
-                effects: { career: +10, popularity: -10 },
+                description: "Hai scelto di avviare una startup innovativa. Come primo passo, scegli un settore su cui concentrarti.",
+                options: [
+                    { text: "Intelligenza Artificiale", nextEvent: 1, impact: "La tua startup attira investitori curiosi.", type: "career" },
+                    { text: "Blockchain", nextEvent: 2, impact: "Affronti una concorrenza spietata, ma guadagni visibilità.", type: "public" }
+                ]
             },
             {
-                text: "Sei stato invitato a un'intervista televisiva!",
-                effects: { career: -10, popularity: +15 },
+                description: "Hai scelto Intelligenza Artificiale. Il tuo primo prototipo è pronto, ma non è perfetto. Come procedi?",
+                options: [
+                    { text: "Lancia il prodotto subito", nextEvent: 3, impact: "Ottieni un feedback precoce ma anche critiche.", type: "public" },
+                    { text: "Raffina il prodotto", nextEvent: 4, impact: "Ci vuole più tempo, ma il risultato è più stabile.", type: "career" }
+                ]
             },
             {
-                text: "Un follower su Twitter chiede consigli tecnici!",
-                effects: { career: +5, popularity: +5 },
+                description: "Hai scelto Blockchain. Un potenziale partner ti offre un contratto. Accetti senza verificare?",
+                options: [
+                    { text: "Accetta subito", nextEvent: 5, impact: "Scopri troppo tardi che il partner è inaffidabile.", type: "public" },
+                    { text: "Fai una due diligence", nextEvent: 6, impact: "Ti guadagni la fiducia di investitori seri.", type: "career" }
+                ]
             },
             {
-                text: "Un progetto importante sta per fallire senza il tuo intervento!",
-                effects: { career: +20, popularity: -15 },
+                description: "Il tuo prototipo è stato criticato. Un concorrente lancia un prodotto simile. Come rispondi?",
+                options: [
+                    { text: "Fai marketing aggressivo", nextEvent: 7, impact: "Guadagni utenti rapidamente, ma a caro prezzo.", type: "public" },
+                    { text: "Migliora il prodotto", nextEvent: 8, impact: "Riconquisti la fiducia del pubblico.", type: "career" }
+                ]
             },
             {
-                text: "Partecipa a un evento di networking!",
-                effects: { career: -5, popularity: +10 },
-            },
+                description: "Dopo aver raffinato il prodotto, ottieni recensioni positive. Cosa fai ora?",
+                options: [
+                    { text: "Cerca investitori", nextEvent: 9, impact: "Raccogli fondi per espandere il team.", type: "career" },
+                    { text: "Lancia una campagna di crowdfunding", nextEvent: 10, impact: "Crei una comunità fedele.", type: "public" }
+                ]
+            }
+            // Aggiungi più eventi qui per arricchire la narrativa.
         ];
 
-        function updateBars() {
-            careerBar.style.width = careerValue + '%';
-            popularityBar.style.width = popularityValue + '%';
-        }
+        let currentEvent = null;
+        let careerPoints = 0;
+        let publicPoints = 0;
 
-        function endGame() {
-            clearInterval(gameInterval);
-            eventText.textContent = `Gioco terminato! Punteggio finale: Carriera ${careerValue}, Popolarità ${popularityValue}`;
-            eventBox.innerHTML = '<button onclick="startGame()">Ricomincia</button>';
-        }
-
-        function triggerEvent() {
-            const randomEvent = events[Math.floor(Math.random() * events.length)];
-            eventText.textContent = randomEvent.text;
-            eventBox.innerHTML = `
-                <button onclick="applyEffects(${randomEvent.effects.career}, ${randomEvent.effects.popularity})">Accetta</button>
-                <button onclick="applyEffects(0, 0)">Ignora</button>
-            `;
-        }
-
-        function applyEffects(careerChange, popularityChange) {
-            careerValue = Math.max(0, Math.min(100, careerValue + careerChange));
-            popularityValue = Math.max(0, Math.min(100, popularityValue + popularityChange));
-            updateBars();
-
-            if (careerValue === 0 || popularityValue === 0) {
-                endGame();
-                return;
-            }
-
-            triggerEvent();
-        }
+        const eventDescription = document.getElementById("eventDescription");
+        const choicesContainer = document.getElementById("choicesContainer");
+        const status = document.getElementById("status");
+        const endMessage = document.getElementById("endMessage");
 
         function startGame() {
-            careerValue = 100;
-            popularityValue = 100;
-            timeLeft = 60;
-            updateBars();
-            triggerEvent();
+            careerPoints = 0;
+            publicPoints = 0;
+            displayEvent(0);
+        }
 
-            gameInterval = setInterval(() => {
-                timeLeft--;
-                timerElement.textContent = timeLeft + 's';
+        function displayEvent(eventIndex) {
+            currentEvent = events[eventIndex];
+            eventDescription.textContent = currentEvent.description;
+            choicesContainer.innerHTML = "";
 
-                if (timeLeft <= 0) {
-                    endGame();
-                }
-            }, 1000);
+            currentEvent.options.forEach((option, index) => {
+                const button = document.createElement("button");
+                button.className = "choice-button";
+                button.textContent = option.text;
+                button.onclick = () => chooseOption(index);
+                choicesContainer.appendChild(button);
+            });
+        }
+
+        function chooseOption(optionIndex) {
+            const chosenOption = currentEvent.options[optionIndex];
+            status.textContent = chosenOption.impact;
+
+            if (chosenOption.type === "career") {
+                careerPoints++;
+            } else if (chosenOption.type === "public") {
+                publicPoints++;
+            }
+
+            if (chosenOption.nextEvent !== undefined) {
+                setTimeout(() => displayEvent(chosenOption.nextEvent), 2000);
+            } else {
+                displayScore();
+            }
+        }
+
+        function displayScore() {
+            choicesContainer.innerHTML = "";
+            if (careerPoints > publicPoints) {
+                endMessage.textContent = "Sei un brillante Ingegnere Informatico!";
+            } else {
+                endMessage.textContent = "Hai conquistato il mondo come Personaggio Pubblico!";
+            }
         }
     </script>
 </body>
