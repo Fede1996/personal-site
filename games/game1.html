@@ -33,6 +33,7 @@
             border-radius: 10px;
             background-color: #34495e;
             overflow: hidden;
+            display: none;
         }
 
         .circle {
@@ -93,10 +94,26 @@
             font-size: 16px;
             text-align: center;
         }
+
+        .start-button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #2ecc71;
+            color: #ecf0f1;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .start-button:hover {
+            background-color: #27ae60;
+        }
     </style>
 </head>
 <body>
     <h1>Debugging Master</h1>
+    <button class="start-button" id="startButton">Inizia Gioco</button>
     <div class="game-container" id="gameContainer">
         <div class="score-board">Punteggio: <span id="score">0</span></div>
         <div class="timer">Tempo: <span id="timer">30</span>s</div>
@@ -109,6 +126,7 @@
 
     <script>
         const gameContainer = document.getElementById('gameContainer');
+        const startButton = document.getElementById('startButton');
         const scoreDisplay = document.getElementById('score');
         const timerDisplay = document.getElementById('timer');
 
@@ -166,6 +184,9 @@
         }
 
         function startGame() {
+            startButton.style.display = 'none';
+            gameContainer.style.display = 'block';
+
             gameInterval = setInterval(() => {
                 if (timer > 0) {
                     spawnCircle();
@@ -174,11 +195,20 @@
                 } else {
                     clearInterval(gameInterval);
                     alert(`Tempo scaduto! Punteggio finale: ${score}`);
+                    resetGame();
                 }
             }, 1000);
         }
 
-        startGame();
+        function resetGame() {
+            score = 0;
+            timer = 30;
+            updateDisplay();
+            startButton.style.display = 'block';
+            gameContainer.style.display = 'none';
+        }
+
+        startButton.addEventListener('click', startGame);
     </script>
 </body>
 </html>
