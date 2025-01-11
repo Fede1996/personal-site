@@ -62,6 +62,34 @@
             color: #f1c40f;
         }
 
+        .bar-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .bar {
+            width: 45%;
+            height: 20px;
+            background-color: #bdc3c7;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-inner {
+            height: 100%;
+            transition: width 0.3s;
+        }
+
+        .career-bar {
+            background-color: #1abc9c;
+        }
+
+        .public-bar {
+            background-color: #e74c3c;
+        }
+
         .end-message {
             font-size: 20px;
             color: #e74c3c;
@@ -92,6 +120,14 @@
         <div class="choices" id="choicesContainer">
             <button class="start-button" onclick="startGame()">Inizia Gioco</button>
         </div>
+        <div class="bar-container">
+            <div class="bar">
+                <div class="bar-inner career-bar" id="careerBar" style="width: 50%;"></div>
+            </div>
+            <div class="bar">
+                <div class="bar-inner public-bar" id="publicBar" style="width: 50%;"></div>
+            </div>
+        </div>
         <div class="status" id="status"></div>
         <div class="end-message" id="endMessage"></div>
     </div>
@@ -101,53 +137,127 @@
             {
                 description: "Hai scelto di avviare una startup innovativa. Come primo passo, scegli un settore su cui concentrarti.",
                 options: [
-                    { text: "Intelligenza Artificiale", nextEvent: 1, impact: "La tua startup attira investitori curiosi.", type: "career" },
-                    { text: "Blockchain", nextEvent: 2, impact: "Affronti una concorrenza spietata, ma guadagni visibilità.", type: "public" }
+                    { text: "Intelligenza Artificiale", nextEvent: 1, impact: "career", effect: 10 },
+                    { text: "Blockchain", nextEvent: 2, impact: "public", effect: 10 }
                 ]
             },
             {
                 description: "Hai scelto Intelligenza Artificiale. Il tuo primo prototipo è pronto, ma non è perfetto. Come procedi?",
                 options: [
-                    { text: "Lancia il prodotto subito", nextEvent: 3, impact: "Ottieni un feedback precoce ma anche critiche.", type: "public" },
-                    { text: "Raffina il prodotto", nextEvent: 4, impact: "Ci vuole più tempo, ma il risultato è più stabile.", type: "career" }
+                    { text: "Lancia il prodotto subito", nextEvent: 3, impact: "public", effect: 5 },
+                    { text: "Raffina il prodotto", nextEvent: 4, impact: "career", effect: 10 }
                 ]
             },
             {
                 description: "Hai scelto Blockchain. Un potenziale partner ti offre un contratto. Accetti senza verificare?",
                 options: [
-                    { text: "Accetta subito", nextEvent: 5, impact: "Scopri troppo tardi che il partner è inaffidabile.", type: "public" },
-                    { text: "Fai una due diligence", nextEvent: 6, impact: "Ti guadagni la fiducia di investitori seri.", type: "career" }
+                    { text: "Accetta subito", nextEvent: 5, impact: "public", effect: -10 },
+                    { text: "Fai una due diligence", nextEvent: 6, impact: "career", effect: 15 }
                 ]
             },
             {
                 description: "Il tuo prototipo è stato criticato. Un concorrente lancia un prodotto simile. Come rispondi?",
                 options: [
-                    { text: "Fai marketing aggressivo", nextEvent: 7, impact: "Guadagni utenti rapidamente, ma a caro prezzo.", type: "public" },
-                    { text: "Migliora il prodotto", nextEvent: 8, impact: "Riconquisti la fiducia del pubblico.", type: "career" }
+                    { text: "Fai marketing aggressivo", nextEvent: 7, impact: "public", effect: 10 },
+                    { text: "Migliora il prodotto", nextEvent: 8, impact: "career", effect: 10 }
                 ]
             },
             {
                 description: "Dopo aver raffinato il prodotto, ottieni recensioni positive. Cosa fai ora?",
                 options: [
-                    { text: "Cerca investitori", nextEvent: 9, impact: "Raccogli fondi per espandere il team.", type: "career" },
-                    { text: "Lancia una campagna di crowdfunding", nextEvent: 10, impact: "Crei una comunità fedele.", type: "public" }
+                    { text: "Cerca investitori", nextEvent: 9, impact: "career", effect: 10 },
+                    { text: "Lancia una campagna di crowdfunding", nextEvent: 10, impact: "public", effect: 10 }
+                ]
+            },
+            {
+                description: "Un famoso influencer vuole collaborare con te. Cosa fai?",
+                options: [
+                    { text: "Accetti per aumentare la visibilità", nextEvent: 1, impact: "public", effect: 15 },
+                    { text: "Declini per concentrarti sul lavoro tecnico", nextEvent: 2, impact: "career", effect: 10 }
+                ]
+            },
+            {
+                description: "Una tua idea innovativa viene copiata da un concorrente. Come rispondi?",
+                options: [
+                    { text: "Fai causa per difendere il tuo lavoro", nextEvent: 3, impact: "career", effect: 10 },
+                    { text: "Pubblicizzi la tua versione come l'originale", nextEvent: 4, impact: "public", effect: 15 }
+                ]
+            },
+            {
+                description: "Ricevi un invito a un evento di networking esclusivo. Partecipi?",
+                options: [
+                    { text: "Partecipi e fai nuove connessioni", nextEvent: 5, impact: "public", effect: 10 },
+                    { text: "Rimani a casa per lavorare su un progetto", nextEvent: 6, impact: "career", effect: 10 }
+                ]
+            },
+            {
+                description: "Un cliente importante ti chiede di cambiare completamente il progetto. Come reagisci?",
+                options: [
+                    { text: "Modifichi il progetto per soddisfare il cliente", nextEvent: 7, impact: "public", effect: 10 },
+                    { text: "Mantieni la tua visione originale", nextEvent: 8, impact: "career", effect: 15 }
+                ]
+            },
+            {
+                description: "Il tuo software presenta un grave bug durante una presentazione pubblica. Come gestisci la situazione?",
+                options: [
+                    { text: "Ammetti l'errore e prometti di risolverlo", nextEvent: 9, impact: "public", effect: -5 },
+                    { text: "Improvvisi una spiegazione convincente", nextEvent: 10, impact: "public", effect: 10 }
+                ]
+            },
+            {
+                description: "Hai l'opportunità di pubblicare un libro sulla tua esperienza. Lo fai?",
+                options: [
+                    { text: "Sì, per aumentare la tua notorietà", nextEvent: 11, impact: "public", effect: 20 },
+                    { text: "No, preferisci concentrarti sulla tecnologia", nextEvent: 12, impact: "career", effect: 15 }
+                ]
+            },
+            {
+                description: "Un giornalista vuole intervistarti sulla tua startup. Cosa fai?",
+                options: [
+                    { text: "Accetti e racconti la tua storia", nextEvent: 13, impact: "public", effect: 10 },
+                    { text: "Declini per mantenere la privacy", nextEvent: 14, impact: "career", effect: 5 }
+                ]
+            },
+            {
+                description: "Un team di ricerca universitario vuole collaborare con te. Cosa scegli?",
+                options: [
+                    { text: "Collabori per costruire nuove connessioni", nextEvent: 15, impact: "public", effect: 15 },
+                    { text: "Continui a lavorare indipendentemente", nextEvent: 16, impact: "career", effect: 10 }
+                ]
+            },
+            {
+                description: "Un bug che hai trascurato causa una perdita di dati per alcuni utenti. Come agisci?",
+                options: [
+                    { text: "Offri un risarcimento agli utenti colpiti", nextEvent: 17, impact: "public", effect: -10 },
+                    { text: "Fai un aggiornamento rapido per risolvere il problema", nextEvent: 18, impact: "career", effect: 10 }
+                ]
+            },
+            {
+                description: "Un ex collega critica pubblicamente il tuo stile di gestione. Come rispondi?",
+                options: [
+                    { text: "Rispondi pubblicamente con calma e professionalità", nextEvent: 19, impact: "public", effect: 10 },
+                    { text: "Ignori le critiche e vai avanti", nextEvent: 20, impact: "career", effect: 5 }
                 ]
             }
-            // Aggiungi più eventi qui per arricchire la narrativa.
         ];
 
         let currentEvent = null;
-        let careerPoints = 0;
-        let publicPoints = 0;
+        let careerPoints = 50;
+        let publicPoints = 50;
+        let choicesMade = 0;
 
         const eventDescription = document.getElementById("eventDescription");
         const choicesContainer = document.getElementById("choicesContainer");
+        const careerBar = document.getElementById("careerBar");
+        const publicBar = document.getElementById("publicBar");
         const status = document.getElementById("status");
         const endMessage = document.getElementById("endMessage");
 
         function startGame() {
-            careerPoints = 0;
-            publicPoints = 0;
+            careerPoints = 50;
+            publicPoints = 50;
+            choicesMade = 0;
+            endMessage.textContent = "";
             displayEvent(0);
         }
 
@@ -167,27 +277,42 @@
 
         function chooseOption(optionIndex) {
             const chosenOption = currentEvent.options[optionIndex];
-            status.textContent = chosenOption.impact;
-
-            if (chosenOption.type === "career") {
-                careerPoints++;
-            } else if (chosenOption.type === "public") {
-                publicPoints++;
+            if (chosenOption.impact === "career") {
+                careerPoints += chosenOption.effect;
+            } else if (chosenOption.impact === "public") {
+                publicPoints += chosenOption.effect;
             }
 
-            if (chosenOption.nextEvent !== undefined) {
-                setTimeout(() => displayEvent(chosenOption.nextEvent), 2000);
+            choicesMade++;
+            updateBars();
+
+            if (careerPoints <= 0 || publicPoints <= 0) {
+                endGame("bad");
+            } else if (choicesMade >= 20) {
+                endGame("good");
             } else {
-                displayScore();
+                displayEvent(chosenOption.nextEvent);
             }
         }
 
-        function displayScore() {
+        function updateBars() {
+            careerBar.style.width = `${careerPoints}%`;
+            publicBar.style.width = `${publicPoints}%`;
+            status.textContent = `Punti Carriera: ${careerPoints} | Punti Notorietà Pubblica: ${publicPoints}`;
+        }
+
+        function endGame(type) {
             choicesContainer.innerHTML = "";
-            if (careerPoints > publicPoints) {
-                endMessage.textContent = "Sei un brillante Ingegnere Informatico!";
-            } else {
-                endMessage.textContent = "Hai conquistato il mondo come Personaggio Pubblico!";
+            if (type === "bad") {
+                endMessage.textContent = "Hai fallito il tuo viaggio! Una delle tue barre è arrivata a 0.";
+            } else if (type === "good") {
+                if (careerPoints > publicPoints) {
+                    endMessage.textContent = "Congratulazioni! Hai costruito una carriera tecnica di successo!";
+                } else if (publicPoints > careerPoints) {
+                    endMessage.textContent = "Congratulazioni! Sei diventato una figura pubblica influente!";
+                } else {
+                    endMessage.textContent = "Congratulazioni! Hai bilanciato perfettamente la tua carriera tecnica e pubblica!";
+                }
             }
         }
     </script>
