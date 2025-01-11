@@ -187,7 +187,7 @@ header nav a {
 }
 
 header nav a:hover {
-    color: red;
+    color: green;
     text-decoration: none;
 }
 
