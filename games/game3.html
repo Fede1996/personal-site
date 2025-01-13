@@ -122,6 +122,9 @@
     let satisfactionLevel = 0;
     let days = 0;
 
+    const STRESS_THRESHOLD = 20;
+    const MAX_DAYS = 20;
+
     function startGame() {
       document.getElementById('start-container').style.display = 'none';
       document.getElementById('game-container').style.display = 'block';
@@ -129,14 +132,14 @@
 
     function randomEvent() {
       const events = [
-        { type: 'bonus', message: "Hai guadagnato punti extra per il lavoro tecnico!", effect: { tech: 3, public: 0 } },
-        { type: 'bonus', message: "Un evento pubblico ha migliorato la tua reputazione!", effect: { tech: 0, public: 3 } },
-        { type: 'malus', message: "Un problema tecnico ti ha fatto perdere punti.", effect: { tech: -3, public: 0 } },
-        { type: 'malus', message: "Un imprevisto pubblico ha danneggiato la tua immagine.", effect: { tech: 0, public: -3 } },
-        { type: 'neutral', message: "Una giornata normale, senza eventi significativi.", effect: { tech: 0, public: 0 } },
+        { message: "Hai ricevuto un premio per un progetto tecnico!", effect: { tech: 5, public: 0, stress: -2 } },
+        { message: "Un evento pubblico ha avuto grande successo!", effect: { tech: 0, public: 5, stress: -2 } },
+        { message: "Un guasto tecnico ha rallentato il tuo lavoro.", effect: { tech: -5, public: 0, stress: 3 } },
+        { message: "Un imprevisto ha danneggiato la tua reputazione pubblica.", effect: { tech: 0, public: -5, stress: 3 } },
+        { message: "Ti senti stanco, le performance calano.", effect: { tech: -3, public: -3, stress: 5 } },
+        { message: "Una giornata tranquilla, tutto è andato bene.", effect: { tech: 0, public: 0, stress: -1 } },
       ];
-      const randomIndex = Math.floor(Math.random() * events.length);
-      return events[randomIndex];
+      return events[Math.floor(Math.random() * events.length)];
     }
 
     function submitChoice() {
@@ -151,17 +154,23 @@
 
       techScore += techHours;
       publicScore += publicHours;
-      stressLevel += techHours * 0.5 + publicHours * 0.5;
-      satisfactionLevel += socialHours * 1.5;
-      stressLevel -= socialHours * 0.5;
+      stressLevel += techHours * 0.8 + publicHours * 0.8;
+      satisfactionLevel += socialHours * 2;
+      stressLevel -= socialHours;
+
+      if (stressLevel > STRESS_THRESHOLD) {
+        alert("Sei troppo stressato! Devi investire almeno 4 ore nella vita sociale.");
+        return;
+      }
 
       const event = randomEvent();
       document.getElementById('event-message').innerText = event.message;
+
       techScore += event.effect.tech;
       publicScore += event.effect.public;
+      stressLevel += event.effect.stress;
 
       days++;
-
       document.getElementById('tech-score').textContent = Math.round(techScore);
       document.getElementById('public-score').textContent = Math.round(publicScore);
       document.getElementById('stress-level').textContent = Math.round(stressLevel);
@@ -170,11 +179,9 @@
       document.getElementById('tech-progress').style.width = (techScore / (techScore + publicScore)) * 100 + '%';
       document.getElementById('public-progress').style.width = (publicScore / (techScore + publicScore)) * 100 + '%';
 
-      if (days >= 10) {
-        setTimeout(() => {
-          alert(`Partita finita! Risultati:\nCarriera Tecnica: ${Math.round(techScore)}\nCarriera Pubblica: ${Math.round(publicScore)}\nStress: ${Math.round(stressLevel)}\nSoddisfazione: ${Math.round(satisfactionLevel)}`);
-          location.reload();
-        }, 500);
+      if (days >= MAX_DAYS) {
+        alert(`Gioco terminato! Risultati finali:\nCarriera Tecnica: ${Math.round(techScore)}\nCarriera Pubblica: ${Math.round(publicScore)}\nStress: ${Math.round(stressLevel)}\nSoddisfazione: ${Math.round(satisfactionLevel)}`);
+        location.reload();
       }
     }
   </script>
