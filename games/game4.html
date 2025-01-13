@@ -7,170 +7,196 @@
   <style>
     body {
       font-family: 'Arial', sans-serif;
-      background: linear-gradient(to bottom, #ffecd2, #fcb69f);
+      background-color: #f8f9fa;
       margin: 0;
       overflow: hidden;
-      color: #333;
-    }
-    #start-container {
-      text-align: center;
-      margin-top: 20%;
-      padding: 20px;
-    }
-    #start-container button {
-      background: #ff6f61;
-      color: #fff;
-      padding: 15px 30px;
-      font-size: 1.2em;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-    }
-    #start-container button:hover {
-      background: #e05550;
-    }
-    #game-container {
-      display: none;
-      text-align: center;
     }
     canvas {
-      margin-top: 20px;
-      border: 3px solid #333;
-      background: #fff url('https://via.placeholder.com/600x400/FFD700/FFFFFF?text=Insta+Dash') no-repeat center;
-      background-size: cover;
-      border-radius: 15px;
+      display: block;
+      margin: 20px auto;
+      background-color: #fff;
+      border: 2px solid #000;
     }
     .status {
-      font-size: 20px;
-      padding: 10px;
-      background: rgba(255, 255, 255, 0.9);
-      margin-bottom: 10px;
-      border-radius: 10px;
-      display: inline-block;
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-size: 18px;
+      z-index: 10;
+    }
+    .instructions {
+      position: fixed;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-size: 16px;
+      color: #555;
+      font-style: italic;
     }
     #life-bar {
-      width: 100%;
-      height: 25px;
-      background: #ccc;
       position: fixed;
-      bottom: 0;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 20px;
+      background-color: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
     }
     #life-bar > div {
       height: 100%;
-      background: linear-gradient(to right, #6dd5ed, #2193b0);
+      background-color: #4caf50;
       width: 100%;
-      transition: width 0.3s ease-out;
     }
   </style>
 </head>
 <body>
-  <div id="start-container">
-    <h1>Insta Dash: L'Influencer</h1>
-    <p>Raccogli solo i commenti positivi (🌟) e schiva quelli negativi (💢).</p>
-    <p>Mantieni il morale alto e diventa il miglior influencer!</p>
-    <button onclick="startGame()">Inizia il Gioco</button>
+  <div class="status">
+    <p id="score">Score: 0</p>
+    <p id="life">Life: 100</p>
   </div>
-
-  <div id="game-container">
-    <div class="status">
-      <span id="score">Punteggio: 0</span>
-    </div>
-    <canvas id="gameCanvas" width="600" height="400"></canvas>
-    <div id="life-bar"><div id="life-progress"></div></div>
+  <canvas id="gameCanvas" width="600" height="400"></canvas>
+  <div class="instructions">
+    <p>Usa le frecce sinistra (<b>&larr;</b>) e destra (<b>&rarr;</b>) per muovere il rettangolo e raccogliere i commenti positivi!</p>
+    <p>Evita i commenti negativi che riducono la tua vita.</p>
+  </div>
+  <div id="life-bar">
+    <div id="life-progress"></div>
   </div>
 
   <script>
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
 
-    const player = { x: 280, y: 350, width: 40, height: 40, speed: 5 };
-    const positiveItems = [];
-    const negativeItems = [];
-    const lifeBar = document.getElementById('life-progress');
-    const scoreDisplay = document.getElementById('score');
+    // Giocatore
+    const player = {
+      x: canvas.width / 2 - 20,
+      y: canvas.height - 60,
+      width: 50,
+      height: 50,
+      color: 'blue',
+      speed: 7,
+      moveLeft: false,
+      moveRight: false,
+    };
 
+    // Stati del gioco
     let life = 100;
     let score = 0;
     let isGameOver = false;
-    let left = false, right = false;
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') left = true;
-      if (e.key === 'ArrowRight') right = true;
-    });
-    document.addEventListener('keyup', (e) => {
-      if (e.key === 'ArrowLeft') left = false;
-      if (e.key === 'ArrowRight') right = false;
-    });
+    // Oggetti
+    const items = [];
+    const colors = { positive: 'green', negative: 'red' };
 
-    function startGame() {
-      document.getElementById('start-container').style.display = 'none';
-      document.getElementById('game-container').style.display = 'block';
-      updateGame();
-    }
-
+    // Genera un oggetto
     function createItem(type) {
-      const size = 30;
-      return {
-        x: Math.random() * (canvas.width - size),
-        y: -size,
-        size,
-        type,
-        speed: Math.random() * 2 + 2
-      };
+      const size = 40; // Dimensione degli oggetti
+      const x = Math.random() * (canvas.width - size);
+      const speed = Math.random() * 2 + 2; // Velocità base
+      return { x, y: -size, size, speed, type };
     }
 
+    // Generazione degli oggetti
+    function generateItems() {
+      if (Math.random() < 0.03) items.push(createItem('positive'));
+      if (Math.random() < 0.02) items.push(createItem('negative'));
+    }
+
+    // Controlla collisioni
+    function checkCollision(item) {
+      return (
+        item.x < player.x + player.width &&
+        item.x + item.size > player.x &&
+        item.y < player.y + player.height &&
+        item.y + item.size > player.y
+      );
+    }
+
+    // Gestione tastiera
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') player.moveLeft = true;
+      if (e.key === 'ArrowRight') player.moveRight = true;
+    });
+    window.addEventListener('keyup', (e) => {
+      if (e.key === 'ArrowLeft') player.moveLeft = false;
+      if (e.key === 'ArrowRight') player.moveRight = false;
+    });
+
+    // Aggiorna il gioco
     function updateGame() {
       if (isGameOver) return;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Movimento giocatore
-      if (left && player.x > 0) player.x -= player.speed;
-      if (right && player.x < canvas.width - player.width) player.x += player.speed;
+      // Movimento del giocatore
+      if (player.moveLeft && player.x > 0) player.x -= player.speed;
+      if (player.moveRight && player.x < canvas.width - player.width) player.x += player.speed;
 
-      // Crea oggetti
-      if (Math.random() < 0.02) positiveItems.push(createItem('positive'));
-      if (Math.random() < 0.015) negativeItems.push(createItem('negative'));
+      // Generazione di nuovi oggetti
+      generateItems();
 
-      // Disegna giocatore
-      ctx.fillStyle = '#007bff';
-      ctx.fillRect(player.x, player.y, player.width, player.height);
-
-      // Gestisci oggetti
-      [...positiveItems, ...negativeItems].forEach((item, index, array) => {
+      // Aggiorna e disegna gli oggetti
+      items.forEach((item, index) => {
         item.y += item.speed;
-        ctx.fillStyle = item.type === 'positive' ? 'green' : 'red';
-        ctx.fillText(item.type === 'positive' ? '🌟' : '💢', item.x, item.y);
 
         // Collisione
-        if (item.y + item.size > player.y &&
-          item.x + item.size > player.x && item.x < player.x + player.width) {
+        if (checkCollision(item)) {
           if (item.type === 'positive') {
             score += 10;
-            life = Math.min(100, life + 5);
+            life = Math.min(100, life + 5); // Bonus vita
           } else {
-            life -= 15;
+            life -= 15; // Danno vita
           }
-          array.splice(index, 1);
+          items.splice(index, 1);
         }
 
-        // Rimuovi oggetti fuori schermo
-        if (item.y > canvas.height) array.splice(index, 1);
+        // Rimuovi gli oggetti fuori schermo
+        if (item.y > canvas.height) items.splice(index, 1);
+
+        // Disegna oggetti
+        ctx.fillStyle = colors[item.type];
+        ctx.fillRect(item.x, item.y, item.size, item.size);
+
+        // Disegna testo sopra gli oggetti
+        ctx.fillStyle = '#fff';
+        ctx.font = '16px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText(
+          item.type === 'positive' ? '+Commento' : '-Hater',
+          item.x + item.size / 2,
+          item.y + item.size / 1.5
+        );
       });
 
-      // Aggiorna HUD
-      scoreDisplay.textContent = `Punteggio: ${score}`;
+      // Disegna il giocatore
+      ctx.fillStyle = player.color;
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+
+      // Aggiorna barra vita
+      life = Math.max(0, life);
+      const lifeBar = document.getElementById('life-progress');
       lifeBar.style.width = life + '%';
 
+      // Aggiorna punteggio
+      document.getElementById('score').textContent = `Score: ${score}`;
+      document.getElementById('life').textContent = `Life: ${life}`;
+
+      // Controllo fine gioco
       if (life <= 0) {
         isGameOver = true;
-        alert('Game Over! Punteggio finale: ' + score);
+        alert(`Game Over! Final Score: ${score}`);
+      } else {
+        requestAnimationFrame(updateGame);
       }
-
-      requestAnimationFrame(updateGame);
     }
+
+    // Inizializza il gioco
+    updateGame();
   </script>
 </body>
 </html>
