@@ -3,186 +3,173 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Career Balance: Time Split</title>
+  <title>Insta Dash: L'Influencer</title>
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #ffecd2, #fcb69f);
       margin: 0;
-      padding: 0;
-      background: linear-gradient(to right, #4e54c8, #8f94fb);
-      color: #fff;
-      text-align: center;
-    }
-    h1 {
-      font-size: 2.5em;
-      margin-top: 20px;
-    }
-    #game-container {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 15px;
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-      padding: 30px;
-      max-width: 400px;
-      margin: 20px auto;
-      color: #333;
-    }
-    button {
-      background: #6c63ff;
-      color: #fff;
-      padding: 15px 30px;
-      border: none;
-      border-radius: 30px;
-      font-size: 1em;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    button:hover {
-      background: #5952c0;
-    }
-    input[type="number"] {
-      width: 80px;
-      padding: 5px;
-      margin: 5px 0;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    .status {
-      margin: 20px 0;
-      font-size: 1.1em;
-    }
-    .progress-bar {
-      width: 100%;
-      height: 25px;
-      background: #ddd;
-      border-radius: 15px;
       overflow: hidden;
-      margin: 10px 0;
-    }
-    .progress-bar > div {
-      height: 100%;
-      text-align: center;
-      color: #fff;
-      font-weight: bold;
-      line-height: 25px;
-    }
-    #event-message {
-      font-size: 1em;
       color: #333;
-      margin-top: 15px;
     }
     #start-container {
       text-align: center;
-      margin-top: 50px;
+      margin-top: 20%;
+      padding: 20px;
+    }
+    #start-container button {
+      background: #ff6f61;
+      color: #fff;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    #start-container button:hover {
+      background: #e05550;
+    }
+    #game-container {
+      display: none;
+      text-align: center;
+    }
+    canvas {
+      margin-top: 20px;
+      border: 3px solid #333;
+      background: #fff url('https://via.placeholder.com/600x400/FFD700/FFFFFF?text=Insta+Dash') no-repeat center;
+      background-size: cover;
+      border-radius: 15px;
+    }
+    .status {
+      font-size: 20px;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      margin-bottom: 10px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+    #life-bar {
+      width: 100%;
+      height: 25px;
+      background: #ccc;
+      position: fixed;
+      bottom: 0;
+    }
+    #life-bar > div {
+      height: 100%;
+      background: linear-gradient(to right, #6dd5ed, #2193b0);
+      width: 100%;
+      transition: width 0.3s ease-out;
     }
   </style>
 </head>
 <body>
   <div id="start-container">
-    <h1>Career Balance: Time Split</h1>
-    <p>Riuscirai a bilanciare lavoro e vita personale? Inizia ora!</p>
-    <button onclick="startGame()">Inizia Partita</button>
+    <h1>Insta Dash: L'Influencer</h1>
+    <p>Raccogli solo i commenti positivi (🌟) e schiva quelli negativi (💢).</p>
+    <p>Mantieni il morale alto e diventa il miglior influencer!</p>
+    <button onclick="startGame()">Inizia il Gioco</button>
   </div>
 
-  <div id="game-container" style="display: none;">
-    <h2>Distribuisci il tuo tempo!</h2>
-    <p>Hai 10 ore disponibili oggi. Come vuoi distribuirle?</p>
-    
-    <div>
-      <input type="number" id="tech-hours" min="0" max="10" value="5">
-      <label for="tech-hours">Ore Tecniche</label><br>
-      <input type="number" id="public-hours" min="0" max="10" value="5">
-      <label for="public-hours">Ore Pubbliche</label><br>
-      <input type="number" id="social-hours" min="0" max="10" value="0">
-      <label for="social-hours">Ore Sociali</label><br>
-      <button onclick="submitChoice()">Conferma</button>
-    </div>
-
+  <div id="game-container">
     <div class="status">
-      <p><strong>Carriera Tecnica:</strong> <span id="tech-score">0</span></p>
-      <p><strong>Carriera Pubblica:</strong> <span id="public-score">0</span></p>
-      <p><strong>Stress:</strong> <span id="stress-level">0</span></p>
-      <p><strong>Soddisfazione:</strong> <span id="satisfaction-level">0</span></p>
+      <span id="score">Punteggio: 0</span>
     </div>
-
-    <div class="progress-bar">
-      <div id="tech-progress" style="width: 0%; background: #4caf50;"></div>
-    </div>
-    <div class="progress-bar">
-      <div id="public-progress" style="width: 0%; background: #2196f3;"></div>
-    </div>
-
-    <div id="event-message"></div>
+    <canvas id="gameCanvas" width="600" height="400"></canvas>
+    <div id="life-bar"><div id="life-progress"></div></div>
   </div>
 
   <script>
-    let techScore = 0;
-    let publicScore = 0;
-    let stressLevel = 0;
-    let satisfactionLevel = 0;
-    let days = 0;
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
 
-    const STRESS_THRESHOLD = 20;
-    const MAX_DAYS = 20;
+    const player = { x: 280, y: 350, width: 40, height: 40, speed: 5 };
+    const positiveItems = [];
+    const negativeItems = [];
+    const lifeBar = document.getElementById('life-progress');
+    const scoreDisplay = document.getElementById('score');
+
+    let life = 100;
+    let score = 0;
+    let isGameOver = false;
+    let left = false, right = false;
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') left = true;
+      if (e.key === 'ArrowRight') right = true;
+    });
+    document.addEventListener('keyup', (e) => {
+      if (e.key === 'ArrowLeft') left = false;
+      if (e.key === 'ArrowRight') right = false;
+    });
 
     function startGame() {
       document.getElementById('start-container').style.display = 'none';
       document.getElementById('game-container').style.display = 'block';
+      updateGame();
     }
 
-    function randomEvent() {
-      const events = [
-        { message: "Hai ricevuto un premio per un progetto tecnico!", effect: { tech: 5, public: 0, stress: -2 } },
-        { message: "Un evento pubblico ha avuto grande successo!", effect: { tech: 0, public: 5, stress: -2 } },
-        { message: "Un guasto tecnico ha rallentato il tuo lavoro.", effect: { tech: -5, public: 0, stress: 3 } },
-        { message: "Un imprevisto ha danneggiato la tua reputazione pubblica.", effect: { tech: 0, public: -5, stress: 3 } },
-        { message: "Ti senti stanco, le performance calano.", effect: { tech: -3, public: -3, stress: 5 } },
-        { message: "Una giornata tranquilla, tutto è andato bene.", effect: { tech: 0, public: 0, stress: -1 } },
-      ];
-      return events[Math.floor(Math.random() * events.length)];
+    function createItem(type) {
+      const size = 30;
+      return {
+        x: Math.random() * (canvas.width - size),
+        y: -size,
+        size,
+        type,
+        speed: Math.random() * 2 + 2
+      };
     }
 
-    function submitChoice() {
-      const techHours = parseInt(document.getElementById('tech-hours').value);
-      const publicHours = parseInt(document.getElementById('public-hours').value);
-      const socialHours = parseInt(document.getElementById('social-hours').value);
+    function updateGame() {
+      if (isGameOver) return;
 
-      if (techHours + publicHours + socialHours !== 10) {
-        alert("Devi distribuire esattamente 10 ore!");
-        return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Movimento giocatore
+      if (left && player.x > 0) player.x -= player.speed;
+      if (right && player.x < canvas.width - player.width) player.x += player.speed;
+
+      // Crea oggetti
+      if (Math.random() < 0.02) positiveItems.push(createItem('positive'));
+      if (Math.random() < 0.015) negativeItems.push(createItem('negative'));
+
+      // Disegna giocatore
+      ctx.fillStyle = '#007bff';
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+
+      // Gestisci oggetti
+      [...positiveItems, ...negativeItems].forEach((item, index, array) => {
+        item.y += item.speed;
+        ctx.fillStyle = item.type === 'positive' ? 'green' : 'red';
+        ctx.fillText(item.type === 'positive' ? '🌟' : '💢', item.x, item.y);
+
+        // Collisione
+        if (item.y + item.size > player.y &&
+          item.x + item.size > player.x && item.x < player.x + player.width) {
+          if (item.type === 'positive') {
+            score += 10;
+            life = Math.min(100, life + 5);
+          } else {
+            life -= 15;
+          }
+          array.splice(index, 1);
+        }
+
+        // Rimuovi oggetti fuori schermo
+        if (item.y > canvas.height) array.splice(index, 1);
+      });
+
+      // Aggiorna HUD
+      scoreDisplay.textContent = `Punteggio: ${score}`;
+      lifeBar.style.width = life + '%';
+
+      if (life <= 0) {
+        isGameOver = true;
+        alert('Game Over! Punteggio finale: ' + score);
       }
 
-      techScore += techHours;
-      publicScore += publicHours;
-      stressLevel += techHours * 0.8 + publicHours * 0.8;
-      satisfactionLevel += socialHours * 2;
-      stressLevel -= socialHours;
-
-      if (stressLevel > STRESS_THRESHOLD) {
-        alert("Sei troppo stressato! Devi investire almeno 4 ore nella vita sociale.");
-        return;
-      }
-
-      const event = randomEvent();
-      document.getElementById('event-message').innerText = event.message;
-
-      techScore += event.effect.tech;
-      publicScore += event.effect.public;
-      stressLevel += event.effect.stress;
-
-      days++;
-      document.getElementById('tech-score').textContent = Math.round(techScore);
-      document.getElementById('public-score').textContent = Math.round(publicScore);
-      document.getElementById('stress-level').textContent = Math.round(stressLevel);
-      document.getElementById('satisfaction-level').textContent = Math.round(satisfactionLevel);
-
-      document.getElementById('tech-progress').style.width = (techScore / (techScore + publicScore)) * 100 + '%';
-      document.getElementById('public-progress').style.width = (publicScore / (techScore + publicScore)) * 100 + '%';
-
-      if (days >= MAX_DAYS) {
-        alert(`Gioco terminato! Risultati finali:\nCarriera Tecnica: ${Math.round(techScore)}\nCarriera Pubblica: ${Math.round(publicScore)}\nStress: ${Math.round(stressLevel)}\nSoddisfazione: ${Math.round(satisfactionLevel)}`);
-        location.reload();
-      }
+      requestAnimationFrame(updateGame);
     }
   </script>
 </body>
