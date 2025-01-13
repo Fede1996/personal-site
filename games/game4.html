@@ -6,16 +6,18 @@
   <title>Insta Dash: L'Influencer</title>
   <style>
     body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f8f9fa;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to bottom, #ffe5f0, #f0f8ff);
       margin: 0;
       overflow: hidden;
     }
     canvas {
       display: block;
       margin: 20px auto;
-      background-color: #fff;
-      border: 2px solid #000;
+      background-color: #ffffff;
+      border: 3px solid #4caf50;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
     .status {
       position: fixed;
@@ -24,33 +26,39 @@
       transform: translateX(-50%);
       text-align: center;
       font-size: 18px;
-      z-index: 10;
+      font-weight: bold;
+      color: #4caf50;
     }
     .instructions {
       position: fixed;
-      bottom: 50px;
+      bottom: 80px;
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
       font-size: 16px;
       color: #555;
       font-style: italic;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
     #life-bar {
       position: fixed;
-      bottom: 10px;
+      bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
       width: 80%;
       height: 20px;
-      background-color: #e0e0e0;
+      background-color: #d3d3d3;
       border-radius: 10px;
       overflow: hidden;
     }
     #life-bar > div {
       height: 100%;
-      background-color: #4caf50;
+      background: linear-gradient(to right, #4caf50, #8bc34a);
       width: 100%;
+      transition: width 0.3s;
     }
   </style>
 </head>
@@ -61,8 +69,8 @@
   </div>
   <canvas id="gameCanvas" width="600" height="400"></canvas>
   <div class="instructions">
-    <p>Usa le frecce sinistra (<b>&larr;</b>) e destra (<b>&rarr;</b>) per muovere il rettangolo e raccogliere i commenti positivi!</p>
-    <p>Evita i commenti negativi che riducono la tua vita.</p>
+    Usa le frecce sinistra (<b>&larr;</b>) e destra (<b>&rarr;</b>) per muovere il rettangolo.<br>
+    Raccogli i commenti positivi (+10 punti) e schiva i commenti negativi (-15 vita).
   </div>
   <div id="life-bar">
     <div id="life-progress"></div>
@@ -72,42 +80,36 @@
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
 
-    // Giocatore
     const player = {
       x: canvas.width / 2 - 20,
-      y: canvas.height - 60,
+      y: canvas.height - 70,
       width: 50,
       height: 50,
-      color: 'blue',
-      speed: 7,
+      color: '#007bff',
+      speed: 8,
       moveLeft: false,
       moveRight: false,
     };
 
-    // Stati del gioco
     let life = 100;
     let score = 0;
     let isGameOver = false;
 
-    // Oggetti
     const items = [];
-    const colors = { positive: 'green', negative: 'red' };
+    const colors = { positive: '#4caf50', negative: '#f44336' };
 
-    // Genera un oggetto
     function createItem(type) {
-      const size = 40; // Dimensione degli oggetti
+      const size = 40;
       const x = Math.random() * (canvas.width - size);
-      const speed = Math.random() * 2 + 2; // Velocità base
+      const speed = Math.random() * 3 + 2;
       return { x, y: -size, size, speed, type };
     }
 
-    // Generazione degli oggetti
     function generateItems() {
       if (Math.random() < 0.03) items.push(createItem('positive'));
       if (Math.random() < 0.02) items.push(createItem('negative'));
     }
 
-    // Controlla collisioni
     function checkCollision(item) {
       return (
         item.x < player.x + player.width &&
@@ -117,7 +119,6 @@
       );
     }
 
-    // Gestione tastiera
     window.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowLeft') player.moveLeft = true;
       if (e.key === 'ArrowRight') player.moveRight = true;
@@ -127,66 +128,54 @@
       if (e.key === 'ArrowRight') player.moveRight = false;
     });
 
-    // Aggiorna il gioco
     function updateGame() {
       if (isGameOver) return;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Movimento del giocatore
       if (player.moveLeft && player.x > 0) player.x -= player.speed;
       if (player.moveRight && player.x < canvas.width - player.width) player.x += player.speed;
 
-      // Generazione di nuovi oggetti
       generateItems();
 
-      // Aggiorna e disegna gli oggetti
       items.forEach((item, index) => {
         item.y += item.speed;
 
-        // Collisione
         if (checkCollision(item)) {
           if (item.type === 'positive') {
             score += 10;
-            life = Math.min(100, life + 5); // Bonus vita
+            life = Math.min(100, life + 5);
           } else {
-            life -= 15; // Danno vita
+            life -= 15;
           }
           items.splice(index, 1);
         }
 
-        // Rimuovi gli oggetti fuori schermo
         if (item.y > canvas.height) items.splice(index, 1);
 
-        // Disegna oggetti
         ctx.fillStyle = colors[item.type];
         ctx.fillRect(item.x, item.y, item.size, item.size);
 
-        // Disegna testo sopra gli oggetti
         ctx.fillStyle = '#fff';
         ctx.font = '16px Arial';
         ctx.textAlign = 'center';
         ctx.fillText(
-          item.type === 'positive' ? '+Commento' : '-Hater',
+          item.type === 'positive' ? '+LIKE' : '-HATER',
           item.x + item.size / 2,
           item.y + item.size / 1.5
         );
       });
 
-      // Disegna il giocatore
       ctx.fillStyle = player.color;
       ctx.fillRect(player.x, player.y, player.width, player.height);
 
-      // Aggiorna barra vita
       life = Math.max(0, life);
       const lifeBar = document.getElementById('life-progress');
       lifeBar.style.width = life + '%';
 
-      // Aggiorna punteggio
       document.getElementById('score').textContent = `Score: ${score}`;
       document.getElementById('life').textContent = `Life: ${life}`;
 
-      // Controllo fine gioco
       if (life <= 0) {
         isGameOver = true;
         alert(`Game Over! Final Score: ${score}`);
@@ -195,7 +184,6 @@
       }
     }
 
-    // Inizializza il gioco
     updateGame();
   </script>
 </body>
