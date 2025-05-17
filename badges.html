@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Le Collezioni – Nuovo Arcobaleno</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="section text-gray-900">
+<style>
+    .section {
+        background: linear-gradient(to bottom, #e7b4d4, #f6bbb0, #f9d88b, #e8f6a0, #b8e2c2, #a7d6ec, #c2c3f1, #dbc4e9);
+    }
+    .subsection {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;  /* centra orizzontalmente */
+        align-items: center;      /* centra verticalmente */
+    }
+    .subsection2 {
+        min-height: 200vh;
+        justify-content: center;  /* centra orizzontalmente */
+        align-items: center;      /* centra verticalmente */
+    }
+    .rainbow-button {
+  position: relative;
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(270deg, #ff0057, #ffb600, #39ff14, #00cfff, #9d00ff, #ff0057);
+  background-size: 1200% 1200%;
+  border: 3px solid transparent;
+  border-radius: 9999px;
+  box-shadow: 0 0 25px rgba(255, 0, 255, 0.4), 0 0 50px rgba(0, 255, 255, 0.2);
+  animation: animatedGradient 6s ease infinite, pulseGlow 3s ease-in-out infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  cursor: pointer;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
+}
+
+.rainbow-button:hover {
+  transform: scale(1.07) rotate(-0.5deg);
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.7), 0 0 80px rgba(255, 0, 255, 0.6);
+}
+
+@keyframes animatedGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(255, 0, 255, 0.4), 0 0 50px rgba(0, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.6), 0 0 80px rgba(0, 255, 255, 0.4);
+  }
+}
+header {
+    position: sticky;
+    top: 0;
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+header nav a:hover {
+    color: pink;
+    text-decoration: none;
+}
+</style>
+<header>
+    <nav>
+        <a href="index.html">Dev</a>
+        <a href="public.html">Personaggio Pubblico</a>
+        <a href="games.html">Giochi</a>
+    </nav>
+</header>
+<section class="subsection py-12 px-6">
+  <div class="max-w-4xl mx-auto text-center">
+    <img src="badges/logo.png" alt="Origine" class="h-16 mx-auto mb-2">
+    <h2 class="text-3xl font-bold mb-4">Un Nuovo Arcobaleno</h2>
+    <p class="text-lg text-gray-700">
+      Questo progetto nasce da un’esigenza reale e condivisa: dare voce alle persone neurodivergenti attraverso simboli visivi riconoscibili e orgogliosi. Proprio come altre comunità hanno potuto costruire una narrativa inclusiva, anche noi possiamo raccontare chi siamo. Questo è un passo verso la visibilità.
+    </p>
+    <div style="height:10vh"></div>
+    <a href="#" onclick="openResponsiveVideo()" class="rainbow-button">
+        🎥 Guarda il Video Manifesto
+    </a>
+  </div>
+</section>
+
+<section class="subsection py-12 px-6">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-2xl font-bold mb-4">📝 Il Manifesto</h2>
+    <p class="text-md text-gray-800">
+      Crediamo nel diritto fondamentale di ogni persona di esistere senza dover chiedere il permesso, senza dover fornire spiegazioni, senza dover giustificare il proprio modo di essere.<br>
+Viviamo in un mondo che spesso pretende uniformità, ma noi celebriamo la differenza come un valore, non come un'eccezione da tollerare.<br><br>
+
+Crediamo che la neurodivergenza – che si tratti di autismo, ADHD, dislessia, o qualsiasi altra forma di funzionamento neurologico atipico – non sia un errore da correggere, ma una variazione naturale e preziosa dell’esperienza umana.<br>
+Non vogliamo "aggiustare" le menti che non si conformano agli standard, ma costruire una società che sappia accoglierle, valorizzarle e imparare da esse.<br><br>
+
+Le nostre menti funzionano in modi unici. E in questa unicità c’è forza, creatività, intuizione, complessità.<br>
+Meritiamo riconoscimento per chi siamo, rispetto per ciò che viviamo, e rappresentazione nei luoghi in cui si racconta il mondo – dai media alle istituzioni, dalla scuola al lavoro.<br><br>
+
+Questo spazio nasce per dare voce a tutto ciò. Per creare connessioni autentiche, abbattere stereotipi, coltivare empatia.<br>
+Per ricordarci, ogni giorno, che essere diversi non significa essere sbagliati.<br>
+    </p>
+  </div>
+</section>
+
+<section class="subsection py-16 px-6">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-12">💬 Citazioni che ispirano</h2>
+    
+    <div class="space-y-10">
+      <blockquote class="bg-white shadow-md rounded-xl p-6">
+        <p class="italic text-lg text-gray-800 mb-2">"Non giudicare sbagliato ciò che non conosci, cogli l’occasione per comprendere."</p>
+        <footer class="text-right text-sm font-semibold text-gray-600">— Pablo Picasso</footer>
+      </blockquote>
+      
+      <blockquote class="bg-white shadow-md rounded-xl p-6">
+        <p class="italic text-lg text-gray-800 mb-2">"Sono lieto di vedere che siamo diversi. Che insieme si possa diventare più grandi della somma di entrambi."</p>
+        <footer class="text-right text-sm font-semibold text-gray-600">— Leonard Nimoy</footer>
+      </blockquote>
+
+      <blockquote class="bg-white shadow-md rounded-xl p-6">
+        <p class="italic text-lg text-gray-800 mb-2">"Voi ridete perché sono diverso, io rido perché siete tutti uguali."</p>
+        <footer class="text-right text-sm font-semibold text-gray-600">— Kurt Cobain</footer>
+      </blockquote>
+
+      <blockquote class="bg-white shadow-md rounded-xl p-6">
+        <p class="italic text-lg text-gray-800 mb-2">"Non dobbiamo semplicemente sopportare le differenze fra gli individui e i gruppi, ma anzi accoglierle come le benvenute, considerandole un arricchimento della nostra esistenza."</p>
+        <footer class="text-right text-sm font-semibold text-gray-600">— Albert Einstein</footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="subsection py-16 px-6">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-3xl font-bold mb-6">🎨 Perché oggetti che parlano?</h2>
+    <p class="text-lg text-gray-700 mb-4">
+      Perché a volte un gesto, un simbolo, un dettaglio può dire più di mille spiegazioni. Un oggetto pensato con cura può diventare un messaggio visibile, un modo per affermare la propria identità, una dichiarazione di presenza in un mondo che spesso ignora ciò che non capisce.
+    </p>
+    <p class="text-lg text-gray-700 mb-4">
+      Crediamo nella forza dei segni, dei simboli, delle parole che si portano addosso o si condividono. Per questo creiamo cose che parlano: oggetti che raccontano storie, incarnano valori, accendono conversazioni.
+    </p>
+    <p class="text-lg text-gray-700 mb-4">
+      Che si tratti di un accessorio, di un’opera grafica, di un testo o di un progetto più ampio, ciò che proponiamo nasce con uno scopo preciso: rendere visibile ciò che conta, ciò che spesso viene lasciato ai margini.
+    </p>
+    <p class="text-lg text-gray-700">
+      Vogliamo offrire strumenti di espressione e connessione, per chi non vuole più sentirsi solo nella propria differenza. Ogni creazione è un invito: a riconoscersi, a raccontarsi, a esistere senza paura.
+    </p>
+  </div>
+</section>
+
+  <section id="collezioni" class="subsection2 p-6 max-w-6xl mx-auto">
+    <h1 class="text-4xl font-bold text-center mb-12">🌈 Le Collezioni</h1>
+
+    <!-- Collezione Alpha -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-semibold mb-6 text-center">Collezione Alpha</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="rounded-xl p-4 bg-pink-200 shadow-md">
+          <img src="badges/badge1.png" alt="ADHD" class="w-16 h-16 mx-auto mb-2">
+          <div class="text-lg font-bold text-center">ADHD</div>
+          <p class="text-sm text-center">Disturbo neuroevolutivo caratterizzato da disattenzione, impulsività e iperattività. Può influenzare il rendimento scolastico, lavorativo e le relazioni sociali.</p>
+        </div>
+        <div class="rounded-xl p-4 bg-red-400 shadow-md">
+          <img src="badges/badge2.png" alt="Autismo" class="w-16 h-16 mx-auto mb-2">
+          <div class="text-lg font-bold text-center">Autismo</div>
+          <p class="text-sm text-center">Condizione neurodivergente che influisce sul modo in cui una persona comunica, interagisce socialmente e percepisce il mondo. Si presenta con un ampio spettro di manifestazioni.</p>
+        </div>
+        <div class="rounded-xl p-4 bg-orange-300 shadow-md">
+          <img src="badges/badge3.png" alt="Dislessia" class="w-16 h-16 mx-auto mb-2">
+          <div class="text-lg font-bold text-center">Dislessia</div>
+          <p class="text-sm text-center">Disturbo specifico dell’apprendimento che rende difficile la lettura fluente e corretta. Non è legato all’intelligenza, ma a un diverso modo di elaborare il linguaggio scritto.</p>
+        </div>
+        <div class="rounded-xl p-4 bg-yellow-300 shadow-md">
+          <img src="badges/badge4.png" alt="Autismo con bisogno di supporto lieve" class="w-16 h-16 mx-auto mb-2">
+          <div class="text-lg font-bold text-center">Autismo con bisogno di supporto lieve</div>
+          <p class="text-sm text-center">È la forma meno “intensa” dello spettro autistico secondo il DSM-5. Le persone necessitano di un supporto minimo, ma mostrano comunque difficoltà nella comunicazione sociale e nella flessibilità comportamentale.</p>
+        </div>
+        <div class="rounded-xl p-4 bg-green-400 shadow-md">
+          <img src="badges/badge5.png" alt="Disturbo ossessivo compulsivo" class="w-16 h-16 mx-auto mb-2">
+          <div class="text-lg font-bold text-center">Disturbo ossessivo compulsivo</div>
+          <p class="text-sm text-center">Disturbo d’ansia caratterizzato da pensieri ossessivi ricorrenti e comportamenti compulsivi messi in atto per alleviare l’ansia o prevenire eventi temuti.</p>
+        </div>
+        <div class="rounded-xl p-4 bg-cyan-300 shadow-md">
+          <img src="badges/badge6.png" alt="Ansia" class="w-16 h-16 mx-auto mb-2">
+          <div class="text-lg font-bold text-center">Ansia</div>
+          <p class="text-sm text-center">Stato psico-fisico caratterizzato da apprensione, tensione e paura, spesso senza una causa apparente. Può diventare patologico se eccessivo o persistente.</p>
+        </div>
+        <div class="rounded-xl p-4 bg-blue-500 shadow-md">
+          <img src="badges/badge7.png" alt="Disordine bipolare" class="w-16 h-16 mx-auto mb-2">
+          <div class="text-lg font-bold text-center">Disturbo bipolare</div>
+          <p class="text-sm text-center">Condizione psichiatrica che alterna fasi di umore elevato (mania o ipomania) a fasi depressive. Influisce significativamente sul funzionamento quotidiano e sulla qualità della vita.</p>
+        </div>
+        <div class="rounded-xl p-4 bg-purple-500 shadow-md">
+          <img src="badges/badge8.png" alt="Sinestesia" class="w-16 h-16 mx-auto mb-2">
+          <div class="text-lg font-bold text-center">Sinestesia</div>
+          <p class="text-sm text-center">Condizione neurologica in cui la stimolazione di un senso o via sensoriale attiva automaticamente un'altra, come “vedere” i suoni o “sentire” i colori. Non è un disturbo, ma una variazione percettiva.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Collezione Beta -->
+    <div>
+      <h2 class="text-2xl font-semibold mb-6 text-center">Collezione Beta</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="rounded-xl p-4 bg-pink-300 shadow-md">
+          <img src="badges/3.png" alt="Origine" class="w-16 h-16 mx-auto mb-2">
+          <div class="text-lg font-bold text-center">Disturbo borderline della personalità</div>
+          <p class="text-sm text-center">Disturbo della personalità caratterizzato da instabilità emotiva, difficoltà nelle relazioni interpersonali, impulsività e paura intensa dell’abbandono.</p>
+        </div>
+        <div class="rounded-xl p-4 bg-red-500 shadow-md">
+          <img src="badges/7.png" alt="Impulso" class="w-16 h-16 mx-auto mb-2">
+          <div class="text-lg font-bold text-center">Sindrome di Tourette</div>
+          <p class="text-sm text-center">Disturbo neurologico che provoca tic motori e vocali involontari e ripetitivi, spesso manifestati in modo improvviso e incontrollabile.</p>
+        </div>
+        <div class="rounded-xl p-4 bg-orange-400 shadow-md">
+          <img src="badges/5.png" alt="Rigenerazione" class="w-16 h-16 mx-auto mb-2">
+          <div class="text-lg font-bold text-center">Disprassia</div>
+          <p class="text-sm text-center">Disturbo della coordinazione motoria che rende difficile pianificare e eseguire movimenti volontari, influenzando abilità come scrivere, parlare o gestire oggetti.</p>
+        </div>
+        <div class="rounded-xl p-4 bg-yellow-400 shadow-md">
+          <img src="badges/6.png" alt="Chiarezza" class="w-16 h-16 mx-auto mb-2">
+          <div class="text-lg font-bold text-center">Disgrafia</div>
+          <p class="text-sm text-center">Disturbo specifico dell’apprendimento che riguarda la scrittura, caratterizzato da difficoltà nella grafia, nella spaziatura e nella composizione dei testi.</p>
+        </div>
+        <div class="rounded-xl p-4 bg-green-500 shadow-md">
+          <img src="badges/2.png" alt="Connessione" class="w-16 h-16 mx-auto mb-2">
+          <div class="text-lg font-bold text-center">Mutismo selettivo</div>
+          <p class="text-sm text-center">Condizione d’ansia in cui una persona, spesso un bambino, non parla in situazioni sociali specifiche pur essendo capace di parlare normalmente in contesti familiari.</p>
+        </div>
+        <div class="rounded-xl p-4 bg-cyan-400 shadow-md">
+          <img src="badges/4.png" alt="Espressione" class="w-16 h-16 mx-auto mb-2">
+          <div class="text-lg font-bold text-center">Persona altamente sensibile</div>
+          <p class="text-sm text-center">Tratto temperamentale in cui una persona percepisce e processa gli stimoli esterni in modo più intenso e profondo rispetto alla media.</p>
+        </div>
+        <div class="rounded-xl p-4 bg-blue-600 shadow-md">
+          <img src="badges/8.png" alt="Equilibrio" class="w-16 h-16 mx-auto mb-2">
+          <div class="text-lg font-bold text-center">Iperlessia</div>
+          <p class="text-sm text-center">Capacità precoce e avanzata di leggere rispetto all’età, spesso accompagnata da una forte curiosità e abilità nel riconoscere parole scritte.</p>
+        </div>
+        <div class="rounded-xl p-4 bg-purple-600 shadow-md">
+          <img src="badges/1.png" alt="Consapevolezza" class="w-16 h-16 mx-auto mb-2">
+          <div class="text-lg font-bold text-center">Discalculia</div>
+          <p class="text-sm text-center">Disturbo specifico dell’apprendimento legato alla difficoltà nel comprendere e utilizzare i numeri, fare calcoli o capire concetti matematici.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+<section class="subsection py-16 px-6">
+  <div class="max-w-3xl mx-auto text-center">
+    <h2 class="text-3xl font-bold mb-6">💡 Come sostenere il progetto</h2>
+    <p class="text-lg text-gray-700 mb-4">
+      Questo progetto vive grazie all’energia delle persone che ci credono. Se ti riconosci nei nostri valori, se ti sta a cuore la visibilità e la dignità delle menti neurodivergenti, ci sono diversi modi in cui puoi darci una mano.
+    </p>
+    <ul class="text-left text-lg text-gray-700 list-disc list-inside mb-8">
+      <li><strong>Parlane</strong>: condividi il progetto con amici, colleghi, gruppi e community. Anche una parola detta nel posto giusto può fare la differenza.</li>
+      <li><strong>Compila il nostro form</strong>: partecipa alla nostra ricerca di mercato per avviare il progetto.</li>
+      <li><strong>Scrivici</strong>: usa il nostro contatto mail se vuoi ricevere informazioni.</li>
+    </ul>
+    <div class="flex justify-center space-x-4">
+      <a href="https://forms.gle/6N1opEfqhu1Hq5df9" target="_blank" class="rainbow-button">
+        ✍ Compila il form
+      </a>
+      <a href="mailto:federicogorrino@gmail.com" class="rainbow-button">
+        ✉ Scrivici via email
+      </a>
+    </div>
+  </div>
+</section>
+<script>
+  function openResponsiveVideo() {
+    const isMobile = window.innerWidth <= 768;
+    const mobileVideoUrl = "https://youtube.com/shorts/_A322ZzYAIQ?feature=share";
+    const desktopVideoUrl = "https://youtu.be/T1Kbc-k194Q";
+    const selectedUrl = isMobile ? mobileVideoUrl : desktopVideoUrl;
+
+    window.open(selectedUrl, '_blank', 'noopener,noreferrer');
+  }
+</script>
+</body>
+</html>
