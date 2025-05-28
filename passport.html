@@ -302,6 +302,32 @@ button:hover {
   
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    const nome = document.getElementById('nome');
+    const cognome = document.getElementById('cognome');
+    const sesso = document.getElementById('sesso');
+    const eta = document.getElementById('eta');
+
+    const name = document.getElementById('name');
+    const surname = document.getElementById('surname');
+    const sex = document.getElementById('sex');
+    const age = document.getElementById('age');
+
+    nome.addEventListener('input', () => {
+      name.textContent = nome.value;
+    });
+
+    cognome.addEventListener('input', () => {
+      surname.textContent = cognome.value;
+    });
+
+    sesso.addEventListener('input', () => {
+      sex.textContent = sesso.value;
+    });
+
+    eta.addEventListener('input', () => {
+      age.textContent = eta.value;
+    });
+    
     const images = document.querySelectorAll('#imageGrid img');
     images.forEach(img => {
       img.addEventListener('click', () => {
