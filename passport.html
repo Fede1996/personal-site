@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Passaporto Neurodivergente</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .section {
+      background: linear-gradient(to bottom, #e7b4d4, #f6bbb0, #f9d88b, #e8f6a0, #b8e2c2, #a7d6ec, #c2c3f1, #dbc4e9);
+    }
+
+    .footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background: #333;
+      color: #fff;
+      padding: 10px 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    header nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    header nav a:hover {
+      color: pink;
+    }
+
+    /* Griglia immagini responsive */
+    #imageGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 16px;
+      padding: 15px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #ccc;
+      max-width: 800px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .img-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #imageGrid img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      filter: brightness(0);
+      transition: filter 0.3s ease, transform 0.3s ease;
+      border-radius: 8px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+    }
+
+    #imageGrid img.colorful {
+      filter: none !important;
+      transform: scale(1.05);
+    }
+
+    .img-desc {
+      margin-top: 6px;
+      font-family: 'Georgia', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: clamp(0.7rem, 1vw, 0.9rem);
+      color: white;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-align: center;
+      user-select: none;
+      width: 100%;
+      box-sizing: border-box;
+      transition: background-color 0.3s ease;
+    }
+
+    .img-container:hover .img-desc {
+      background-color: rgba(0, 0, 0, 0.85);
+    }
+
+    button {
+    position: relative;
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(270deg, #ff0057, #ffb600, #39ff14, #00cfff, #9d00ff, #ff0057);
+  background-size: 1200% 1200%;
+  border: 3px solid transparent;
+  border-radius: 9999px;
+  box-shadow: 0 0 25px rgba(255, 0, 255, 0.4), 0 0 50px rgba(0, 255, 255, 0.2);
+  animation: animatedGradient 6s ease infinite, pulseGlow 3s ease-in-out infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  cursor: pointer;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
+}
+
+button:hover {
+    transform: scale(1.07) rotate(-0.5deg);
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.7), 0 0 80px rgba(255, 0, 255, 0.6);
+}
+
+  </style>
+</head>
+<body class="section text-gray-900">
+
+<header>
+  <nav>
+    <a href="index.html">Progetto Neurodivergent League</a>
+  </nav>
+</header>
+
+<section id="passportSection" class="min-h-screen py-12 px-6 flex flex-col justify-center items-center">
+  <div class="max-w-4xl mx-auto text-center mb-8">
+    <img src="logo-neuro.png" alt="Logo Neurodivergent" class="h-16 mx-auto mb-2" />
+    <h2 class="text-3xl font-bold mb-4">Passaporto neurodivergente</h2>
+  </div>
+
+  <div class="max-w-4xl mx-auto w-full">
+    <div class="flex flex-col md:flex-row border border-gray-300 rounded-lg overflow-hidden shadow-lg bg-white">
+      <!-- Colonna sinistra -->
+      <div class="w-full md:w-2/5 p-4 flex items-center justify-center border-b md:border-b-0 md:border-r border-gray-300">
+        <img src="image_profile.png" alt="Foto profilo" class="h-24 md:h-32 rounded-full shadow-md" />
+      </div>
+      <!-- Colonna destra -->
+      <div class="w-full md:w-3/5 p-6 text-left">
+        <form class="space-y-4">
+          <div>
+            <label for="nome" class="block text-sm font-medium text-gray-700">Nome</label>
+            <input type="text" id="nome" name="nome" placeholder="Nome" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-2 focus:ring-purple-400" />
+          </div>
+          <div>
+            <label for="cognome" class="block text-sm font-medium text-gray-700">Cognome</label>
+            <input type="text" id="cognome" name="cognome" placeholder="Cognome" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-2 focus:ring-purple-400" />
+          </div>
+          <div>
+            <label for="sesso" class="block text-sm font-medium text-gray-700">Sesso</label>
+            <select id="sesso" name="sesso" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-2 focus:ring-purple-400">
+              <option value="">Seleziona</option>
+              <option>Maschio</option>
+              <option>Femmina</option>
+              <option>Non binario</option>
+              <option>Altro / Preferisco non dire</option>
+            </select>
+          </div>
+          <div>
+            <label for="eta" class="block text-sm font-medium text-gray-700">Età</label>
+            <input type="number" id="eta" name="eta" placeholder="30" min="0" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-2 focus:ring-purple-400" />
+          </div>
+
+          <!-- Galleria immagini -->
+          <div class="mt-6">
+            <h4 class="text-lg font-semibold mb-4">Seleziona le neurodivergenze</h4>
+            <div id="imageGrid">
+              <div class="img-container">
+                <img src="1.png" alt="Neurodivergenza 1" />
+                <p class="img-desc">Neurodivergenza 1</p>
+              </div>
+              <div class="img-container">
+                <img src="1.png" alt="Neurodivergenza 2" />
+                <p class="img-desc">Neurodivergenza 2</p>
+              </div>
+              <div class="img-container">
+                <img src="1.png" alt="Neurodivergenza 3" />
+                <p class="img-desc">Neurodivergenza 3</p>
+              </div>
+              <div class="img-container">
+                <img src="1.png" alt="Neurodivergenza 4" />
+                <p class="img-desc">Neurodivergenza 4</p>
+              </div>
+              <div class="img-container">
+                <img src="1.png" alt="Neurodivergenza 5" />
+                <p class="img-desc">Neurodivergenza 5</p>
+              </div>
+              <div class="img-container">
+                <img src="1.png" alt="Neurodivergenza 6" />
+                <p class="img-desc">Neurodivergenza 6</p>
+              </div>
+              <div class="img-container">
+                <img src="1.png" alt="Neurodivergenza 7" />
+                <p class="img-desc">Neurodivergenza 7</p>
+              </div>
+              <div class="img-container">
+                <img src="1.png" alt="Neurodivergenza 8" />
+                <p class="img-desc">Neurodivergenza 8</p>
+              </div>
+              <div class="img-container">
+                <img src="1.png" alt="Neurodivergenza 9" />
+                <p class="img-desc">Neurodivergenza 9</p>
+              </div>
+              <div class="img-container">
+                <img src="1.png" alt="Neurodivergenza 10" />
+                <p class="img-desc">Neurodivergenza 10</p>
+              </div>
+              <div class="img-container">
+                <img src="1.png" alt="Neurodivergenza 11" />
+                <p class="img-desc">Neurodivergenza 11</p>
+              </div>
+              <div class="img-container">
+                <img src="1.png" alt="Neurodivergenza 12" />
+                <p class="img-desc">Neurodivergenza 12</p>
+              </div>
+              <div class="img-container">
+                <img src="1.png" alt="Neurodivergenza 13" />
+                <p class="img-desc">Neurodivergenza 13</p>
+              </div>
+              <div class="img-container">
+                <img src="1.png" alt="Neurodivergenza 14" />
+                <p class="img-desc">Neurodivergenza 14</p>
+              </div>
+              <div class="img-container">
+                <img src="1.png" alt="Neurodivergenza 15" />
+                <p class="img-desc">Neurodivergenza 15</p>
+              </div>
+              <div class="img-container">
+                <img src="1.png" alt="Neurodivergenza 16" />
+                <p class="img-desc">Neurodivergenza 16</p>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+  <div style="height: 1vh;"></div>
+  <button id="downloadPdfBtn" title="Scarica PDF">📄 Scarica PDF</button>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('#imageGrid img');
+    images.forEach(img => {
+      img.addEventListener('click', () => {
+        img.classList.toggle('colorful');
+      });
+    });
+
+    const downloadBtn = document.getElementById('downloadPdfBtn');
+    const elementToPrint = document.getElementById('passportSection');
+
+    downloadBtn.addEventListener('click', () => {
+      // Temporaneamente nascondi il bottone per non includerlo nel PDF
+      downloadBtn.style.display = 'none';
+
+      const element = document.getElementById('passportSection');
+      const opt = {
+        margin: 0.5,
+        filename: 'passaporto_neurodivergente.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+
+      // Delay per dare il tempo al DOM di aggiornarsi
+      setTimeout(() => {
+        html2pdf().set(opt).from(element).save().then(() => {
+          // Rendi di nuovo visibile il bottone dopo salvataggio
+          downloadBtn.style.display = 'inline-block';
+        }).catch((error) => {
+          alert('Errore durante la generazione del PDF. Controlla la console.');
+          console.error(error);
+          downloadBtn.style.display = 'inline-block';
+        });
+      }, 300);
+    });
+
+  });
+</script>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2024 Federico Silvio Gorrino | Tutti i diritti riservati</p>
+  </div>
+</footer>
+
+</body>
+</html>
