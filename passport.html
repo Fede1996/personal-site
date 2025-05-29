@@ -304,16 +304,40 @@ document.getElementById("downloadPdfBtn").addEventListener("click", async () => 
   let cursorY = 800;
 
   // Funzione per disegnare testo
-  const drawText = (label, value) => {
-    page.drawText(`${label}: ${value}`, {
-      x: startX,
-      y: cursorY,
-      size: textSize,
-      font: timesRomanFont,
-      color: rgb(0, 0, 0),
-    });
-    cursorY -= lineHeight;
-  };
+  for (const [index, img] of selectedImages.entries()) {
+  const label = img.nextElementSibling?.textContent || `Badge ${index + 1}`;
+  const imgSrc = img.src;
+
+  // Recupera e incorpora l'immagine
+  const imgBytes = await fetch(imgSrc).then(res => res.arrayBuffer());
+  const embeddedImg = imgSrc.endsWith('.png')
+    ? await pdfDoc.embedPng(imgBytes)
+    : await pdfDoc.embedJpg(imgBytes);
+
+  const badgeWidth = 40;
+  const badgeHeight = 40;
+  const badgeX = startX + 20;
+  const badgeY = cursorY - badgeHeight + 10;
+
+  // Inserisce immagine
+  page.drawImage(embeddedImg, {
+    x: badgeX,
+    y: badgeY,
+    width: badgeWidth,
+    height: badgeHeight,
+  });
+
+  // Inserisce il nome accanto all’immagine
+  page.drawText(label, {
+    x: badgeX + badgeWidth + 10,
+    y: cursorY,
+    size: textSize - 1,
+    font: timesRomanFont,
+    color: rgb(0.2, 0.2, 0.2),
+  });
+
+  cursorY -= badgeHeight + 10;
+}
 
   // Scrive i dati principali
   drawText('Nome', nome);
