@@ -260,118 +260,98 @@ button:hover {
 <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
   
 <script>
-  document.querySelectorAll('#imageGrid img').forEach(img => {
-    img.addEventListener('click', () => {
-      img.classList.toggle('colorful');
-    });
-  });
-  
-document.getElementById("downloadPdfBtn").addEventListener("click", async () => {
+  document.getElementById("downloadPdfBtn").addEventListener("click", async () => {
   const { PDFDocument, StandardFonts, rgb } = PDFLib;
 
-  // Crea un nuovo PDF
   const pdfDoc = await PDFDocument.create();
-  const page = pdfDoc.addPage([595, 842]); // Formato A4
+  const page = pdfDoc.addPage([595, 842]);
   const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
 
-  // Carica immagine statica (profilo)
-  const imageUrl = 'assets/images/image_profile.png'; // Cambia percorso se necessario
+  // 1. Carica immagine profilo
+  const imageUrl = 'assets/images/image_profile.png';
   const imageBytes = await fetch(imageUrl).then(res => res.arrayBuffer());
   const profileImage = await pdfDoc.embedPng(imageBytes);
-
-  // Imposta dimensioni e posizione immagine
-  const imgWidth = 100;
-  const imgHeight = 100;
-  const imgX = 50;
-  const imgY = 800 - imgHeight;
   page.drawImage(profileImage, {
-    x: imgX,
-    y: imgY,
-    width: imgWidth,
-    height: imgHeight,
+    x: 50, y: 700, width: 100, height: 100
   });
 
-  // Raccolta dati dal DOM
+  // 2. Leggi dati form
   const nome = document.getElementById('nome').value || '---';
   const cognome = document.getElementById('cognome').value || '---';
   const sesso = document.getElementById('sesso').value || '---';
   const eta = document.getElementById('eta').value || '---';
 
-  // Impostazioni di testo
   const textSize = 14;
   const lineHeight = 24;
-  const startX = imgX + imgWidth + 20;
-  let cursorY = 800;
+  const startX = 170;
+  let cursorY = 780;
 
-  // Funzione per disegnare testo
-  for (const [index, img] of selectedImages.entries()) {
-  const label = img.nextElementSibling?.textContent || `Badge ${index + 1}`;
-  const imgSrc = img.src;
+  const drawText = (label, value) => {
+    page.drawText(`${label}: ${value}`, {
+      x: startX,
+      y: cursorY,
+      size: textSize,
+      font: timesRomanFont,
+      color: rgb(0, 0, 0),
+    });
+    cursorY -= lineHeight;
+  };
 
-  // Recupera e incorpora l'immagine
-  const imgBytes = await fetch(imgSrc).then(res => res.arrayBuffer());
-  const embeddedImg = imgSrc.endsWith('.png')
-    ? await pdfDoc.embedPng(imgBytes)
-    : await pdfDoc.embedJpg(imgBytes);
-
-  const badgeWidth = 40;
-  const badgeHeight = 40;
-  const badgeX = startX + 20;
-  const badgeY = cursorY - badgeHeight + 10;
-
-  // Inserisce immagine
-  page.drawImage(embeddedImg, {
-    x: badgeX,
-    y: badgeY,
-    width: badgeWidth,
-    height: badgeHeight,
-  });
-
-  // Inserisce il nome accanto all’immagine
-  page.drawText(label, {
-    x: badgeX + badgeWidth + 10,
-    y: cursorY,
-    size: textSize - 1,
-    font: timesRomanFont,
-    color: rgb(0.2, 0.2, 0.2),
-  });
-
-  cursorY -= badgeHeight + 10;
-}
-
-  // Scrive i dati principali
   drawText('Nome', nome);
   drawText('Cognome', cognome);
   drawText('Sesso', sesso);
   drawText('Età', eta);
 
-  // Neurodivergenze selezionate
+  // ✅ QUI: definisci selectedImages PRIMA di usarla
   const selectedImages = Array.from(document.querySelectorAll('#imageGrid img.colorful'));
-  drawText('Neurodivergenze selezionate', '');
-  selectedImages.forEach((img, index) => {
-  const label = img.nextElementSibling?.textContent || `Badge ${index + 1}`;
-  page.drawText(`- ${label}`, {
-    x: startX + 20,
-    y: cursorY,
-    size: textSize - 1,
-    font: timesRomanFont,
-    color: rgb(0.2, 0.2, 0.2),
-  });
-  cursorY -= lineHeight - 6;
-});
 
-  // Salvataggio PDF
+  // Titolo sezione neurodivergenze
+  cursorY -= 10;
+  drawText('Neurodivergenze selezionate', '');
+
+  // Inserisci immagini + testi
+  for (const [index, img] of selectedImages.entries()) {
+    const label = img.nextElementSibling?.textContent || `Badge ${index + 1}`;
+    const imgSrc = img.src;
+
+    const imgBytes = await fetch(imgSrc).then(res => res.arrayBuffer());
+    const embeddedImg = imgSrc.endsWith('.png')
+      ? await pdfDoc.embedPng(imgBytes)
+      : await pdfDoc.embedJpg(imgBytes);
+
+    const badgeWidth = 40;
+    const badgeHeight = 40;
+    const badgeX = startX + 20;
+    const badgeY = cursorY - badgeHeight + 10;
+
+    page.drawImage(embeddedImg, {
+      x: badgeX,
+      y: badgeY,
+      width: badgeWidth,
+      height: badgeHeight,
+    });
+
+    page.drawText(label, {
+      x: badgeX + badgeWidth + 10,
+      y: cursorY,
+      size: textSize - 1,
+      font: timesRomanFont,
+      color: rgb(0.2, 0.2, 0.2),
+    });
+
+    cursorY -= badgeHeight + 10;
+  }
+
   const pdfBytes = await pdfDoc.save();
   const blob = new Blob([pdfBytes], { type: 'application/pdf' });
   const url = URL.createObjectURL(blob);
-
   const link = document.createElement('a');
   link.href = url;
   link.download = 'passaporto_neurodivergente.pdf';
   link.click();
-
   URL.revokeObjectURL(url);
 });
+
 </script>
 
 <footer class="footer">
