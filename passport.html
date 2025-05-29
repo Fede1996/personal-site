@@ -8,11 +8,17 @@
   <style>
     #pdf-version {
   display: block;
-  visibility: visible;
-  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 210mm;         /* A4 width */
+  min-height: 297mm;    /* A4 height */
+  padding: 20mm;
   background-color: white;
   color: black;
   font-size: 14px;
+  z-index: 10000;
+  overflow: auto;
 }
     
     .section {
