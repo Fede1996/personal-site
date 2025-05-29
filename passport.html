@@ -341,7 +341,6 @@ button:hover {
       // Temporaneamente nascondi il bottone per non includerlo nel PDF
       downloadBtn.style.display = 'none';
 
-      const element = document.getElementById('pdf-version');
       const opt = {
         margin: 0.5,
         filename: 'passaporto_neurodivergente.pdf',
@@ -352,6 +351,7 @@ button:hover {
 
       // Delay per dare il tempo al DOM di aggiornarsi
       setTimeout(() => {
+        const element = document.getElementById('pdf-version');
         html2pdf().set(opt).from(element).save().then(() => {
           // Rendi di nuovo visibile il bottone dopo salvataggio
           downloadBtn.style.display = 'inline-block';
