@@ -260,6 +260,12 @@ button:hover {
 <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
   
 <script>
+  document.querySelectorAll('#imageGrid img').forEach(img => {
+    img.addEventListener('click', () => {
+      img.classList.toggle('colorful');
+    });
+  });
+  
 document.getElementById("downloadPdfBtn").addEventListener("click", async () => {
   const { PDFDocument, StandardFonts, rgb } = PDFLib;
 
