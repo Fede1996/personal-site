@@ -263,20 +263,41 @@ button:hover {
 document.getElementById("downloadPdfBtn").addEventListener("click", async () => {
   const { PDFDocument, StandardFonts, rgb } = PDFLib;
 
+  // Crea un nuovo PDF
   const pdfDoc = await PDFDocument.create();
-  const page = pdfDoc.addPage([595, 842]); // A4 in punti
+  const page = pdfDoc.addPage([595, 842]); // Formato A4
   const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
 
+  // Carica immagine statica (profilo)
+  const imageUrl = 'assets/images/image_profile.png'; // Cambia percorso se necessario
+  const imageBytes = await fetch(imageUrl).then(res => res.arrayBuffer());
+  const profileImage = await pdfDoc.embedPng(imageBytes);
+
+  // Imposta dimensioni e posizione immagine
+  const imgWidth = 100;
+  const imgHeight = 100;
+  const imgX = 50;
+  const imgY = 800 - imgHeight;
+  page.drawImage(profileImage, {
+    x: imgX,
+    y: imgY,
+    width: imgWidth,
+    height: imgHeight,
+  });
+
+  // Raccolta dati dal DOM
   const nome = document.getElementById('nome').value || '---';
   const cognome = document.getElementById('cognome').value || '---';
   const sesso = document.getElementById('sesso').value || '---';
   const eta = document.getElementById('eta').value || '---';
 
+  // Impostazioni di testo
   const textSize = 14;
   const lineHeight = 24;
-  const startX = 50;
+  const startX = imgX + imgWidth + 20;
   let cursorY = 800;
 
+  // Funzione per disegnare testo
   const drawText = (label, value) => {
     page.drawText(`${label}: ${value}`, {
       x: startX,
@@ -288,6 +309,7 @@ document.getElementById("downloadPdfBtn").addEventListener("click", async () => 
     cursorY -= lineHeight;
   };
 
+  // Scrive i dati principali
   drawText('Nome', nome);
   drawText('Cognome', cognome);
   drawText('Sesso', sesso);
@@ -308,7 +330,7 @@ document.getElementById("downloadPdfBtn").addEventListener("click", async () => 
     cursorY -= lineHeight - 6;
   });
 
-  // Salvataggio
+  // Salvataggio PDF
   const pdfBytes = await pdfDoc.save();
   const blob = new Blob([pdfBytes], { type: 'application/pdf' });
   const url = URL.createObjectURL(blob);
