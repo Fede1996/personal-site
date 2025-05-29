@@ -365,30 +365,38 @@ button:hover {
     const downloadBtn = document.getElementById('downloadPdfBtn');
 
     downloadBtn.addEventListener('click', () => {
-      // Temporaneamente nascondi il bottone per non includerlo nel PDF
-      downloadBtn.style.display = 'none';
+  const pdfContent = document.getElementById('pdf-version');
 
-      const opt = {
-        margin: 0.5,
-        filename: 'passaporto_neurodivergente.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-      };
+  // Mostra il contenuto PDF temporaneamente
+  pdfContent.style.display = 'block';
+  downloadBtn.style.display = 'none';
 
-      // Delay per dare il tempo al DOM di aggiornarsi
-      setTimeout(() => {
-        const element = document.getElementById('pdf-version');
-        html2pdf().set(opt).from(element).save().then(() => {
-          // Rendi di nuovo visibile il bottone dopo salvataggio
-          downloadBtn.style.display = 'inline-block';
-        }).catch((error) => {
-          alert('Errore durante la generazione del PDF. Controlla la console.');
-          console.error(error);
-          downloadBtn.style.display = 'inline-block';
-        });
-      }, 300);
+  // DEBUG: stampa contenuto
+  console.log("Contenuto del div #pdf-version:");
+  console.log(pdfContent.innerHTML);
+
+  const opt = {
+    margin: 0.5,
+    filename: 'passaporto_neurodivergente.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+  };
+
+  setTimeout(() => {
+    html2pdf().set(opt).from(pdfContent).save().then(() => {
+      // Ripristina stato
+      downloadBtn.style.display = 'inline-block';
+      pdfContent.style.display = 'none';
+    }).catch((error) => {
+      alert('Errore durante la generazione del PDF. Controlla la console.');
+      console.error(error);
+      downloadBtn.style.display = 'inline-block';
+      pdfContent.style.display = 'none';
     });
+  }, 300);
+});
+
 
   });
 </script>
