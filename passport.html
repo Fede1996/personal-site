@@ -257,149 +257,69 @@ button:hover {
   <button id="downloadPdfBtn" title="Scarica PDF">📄 Scarica PDF</button>
 </section>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
-<div id="pdf-version">
-  <style>
-    #pdf-version {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 210mm;
-  min-height: 297mm;
-  padding: 20mm;
-  margin: 0 auto;
-  background: white;
-  color: black;
-  font-size: 14px;
-  box-sizing: border-box;
-}
-
-#pdf-version table {
-  margin: auto;
-  width: 100%;
-  max-width: 100%;
-  border-collapse: collapse;
-}
-
-#pdf-version td {
-  padding: 8px;
-  vertical-align: middle;
-}
-  </style>
-  <table>
-    <tr>
-      <td>
-        <table>
-          <tr>
-            <td style="text-align: center; align-items: center; vertical-align: middle;">
-              <img src="assets/images/image_profile.png" alt="Foto profilo" class="h-24 md:h-32 rounded-full shadow-md" />
-            </td>
-            <td>
-              <table>
-                <tr>
-                  <td style="text-align: right; vertical-align: middle;">Nome:</td>
-                  <td id="name" style="text-align: left; vertical-align: middle;"></td>
-                </tr>
-                <tr>
-                  <td style="text-align: right; vertical-align: middle;">Cognome:</td>
-                  <td id="surname" style="text-align: left; vertical-align: middle;"></td>
-                </tr>
-                <tr>
-                  <td style="text-align: right; vertical-align: middle;">Sesso:</td>
-                  <td id="sex" style="text-align: left; vertical-align: middle;"></td>
-                </tr>
-                <tr>
-                  <td style="text-align: right; vertical-align: middle;">Età:</td>
-                  <td id="age" style="text-align: left; vertical-align: middle;"></td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        
-      </td>
-    </tr>
-  </table>
-</div>
+<script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
   
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const nome = document.getElementById('nome');
-    const cognome = document.getElementById('cognome');
-    const sesso = document.getElementById('sesso');
-    const eta = document.getElementById('eta');
+document.getElementById("downloadPdfBtn").addEventListener("click", async () => {
+  const { PDFDocument, StandardFonts, rgb } = PDFLib;
 
-    const name = document.getElementById('name');
-    const surname = document.getElementById('surname');
-    const sex = document.getElementById('sex');
-    const age = document.getElementById('age');
+  const pdfDoc = await PDFDocument.create();
+  const page = pdfDoc.addPage([595, 842]); // A4 in punti
+  const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
 
-    nome.addEventListener('input', () => {
-      name.textContent = nome.value;
+  const nome = document.getElementById('nome').value || '---';
+  const cognome = document.getElementById('cognome').value || '---';
+  const sesso = document.getElementById('sesso').value || '---';
+  const eta = document.getElementById('eta').value || '---';
+
+  const textSize = 14;
+  const lineHeight = 24;
+  const startX = 50;
+  let cursorY = 800;
+
+  const drawText = (label, value) => {
+    page.drawText(`${label}: ${value}`, {
+      x: startX,
+      y: cursorY,
+      size: textSize,
+      font: timesRomanFont,
+      color: rgb(0, 0, 0),
     });
-
-    cognome.addEventListener('input', () => {
-      surname.textContent = cognome.value;
-    });
-
-    sesso.addEventListener('input', () => {
-      sex.textContent = sesso.value;
-    });
-
-    eta.addEventListener('input', () => {
-      age.textContent = eta.value;
-    });
-    
-    const images = document.querySelectorAll('#imageGrid img');
-    images.forEach(img => {
-      img.addEventListener('click', () => {
-        img.classList.toggle('colorful');
-      });
-    });
-
-    const downloadBtn = document.getElementById('downloadPdfBtn');
-
-    downloadBtn.addEventListener('click', () => {
-  const pdfContent = document.getElementById('pdf-version');
-
-  // Mostra il contenuto PDF temporaneamente
-  pdfContent.style.display = 'block';
-  downloadBtn.style.display = 'none';
-
-  // DEBUG: stampa contenuto
-  console.log("Contenuto del div #pdf-version:");
-  console.log(pdfContent.innerHTML);
-
-  const opt = {
-    margin: 0,
-    filename: 'passaporto_neurodivergente.pdf',
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true },
-    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+    cursorY -= lineHeight;
   };
 
-  setTimeout(() => {
-    html2pdf().set(opt).from(pdfContent).save().then(() => {
-      // Ripristina stato
-      downloadBtn.style.display = 'inline-block';
-      pdfContent.style.display = 'none';
-    }).catch((error) => {
-      alert('Errore durante la generazione del PDF. Controlla la console.');
-      console.error(error);
-      downloadBtn.style.display = 'inline-block';
-      pdfContent.style.display = 'none';
+  drawText('Nome', nome);
+  drawText('Cognome', cognome);
+  drawText('Sesso', sesso);
+  drawText('Età', eta);
+
+  // Neurodivergenze selezionate
+  const selectedImages = Array.from(document.querySelectorAll('#imageGrid img.colorful'));
+  drawText('Neurodivergenze selezionate', '');
+  selectedImages.forEach((img, index) => {
+    const label = img.nextElementSibling?.textContent || `Badge ${index + 1}`;
+    page.drawText(`- ${label}`, {
+      x: startX + 20,
+      y: cursorY,
+      size: textSize - 1,
+      font: timesRomanFont,
+      color: rgb(0.2, 0.2, 0.2),
     });
-  }, 300);
-});
-
-
+    cursorY -= lineHeight - 6;
   });
+
+  // Salvataggio
+  const pdfBytes = await pdfDoc.save();
+  const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'passaporto_neurodivergente.pdf';
+  link.click();
+
+  URL.revokeObjectURL(url);
+});
 </script>
 
 <footer class="footer">
