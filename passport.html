@@ -184,67 +184,67 @@ button:hover {
             <div id="imageGrid">
               <div class="img-container">
                 <img src="assets/images/1.png" alt="Neurodivergenza 1" />
-                <p class="img-desc">Neurodivergenza 1</p>
+                <p class="img-desc">Discalculia</p>
               </div>
               <div class="img-container">
                 <img src="assets/images/2.png" alt="Neurodivergenza 2" />
-                <p class="img-desc">Neurodivergenza 2</p>
+                <p class="img-desc">Mutismo selettivo</p>
               </div>
               <div class="img-container">
                 <img src="assets/images/3.png" alt="Neurodivergenza 3" />
-                <p class="img-desc">Neurodivergenza 3</p>
+                <p class="img-desc">Disturbo borderline della personalità</p>
               </div>
               <div class="img-container">
                 <img src="assets/images/4.png" alt="Neurodivergenza 4" />
-                <p class="img-desc">Neurodivergenza 4</p>
+                <p class="img-desc">Persona altamente sensibile</p>
               </div>
               <div class="img-container">
                 <img src="assets/images/5.png" alt="Neurodivergenza 5" />
-                <p class="img-desc">Neurodivergenza 5</p>
+                <p class="img-desc">Disprassia</p>
               </div>
               <div class="img-container">
                 <img src="assets/images/6.png" alt="Neurodivergenza 6" />
-                <p class="img-desc">Neurodivergenza 6</p>
+                <p class="img-desc">Disgrafia</p>
               </div>
               <div class="img-container">
                 <img src="assets/images/7.png" alt="Neurodivergenza 7" />
-                <p class="img-desc">Neurodivergenza 7</p>
+                <p class="img-desc">Sindrome di Tourette</p>
               </div>
               <div class="img-container">
                 <img src="assets/images/8.png" alt="Neurodivergenza 8" />
-                <p class="img-desc">Neurodivergenza 8</p>
+                <p class="img-desc">Iperlessia</p>
               </div>
               <div class="img-container">
                 <img src="assets/images/badge1.png" alt="Neurodivergenza 9" />
-                <p class="img-desc">Neurodivergenza 9</p>
+                <p class="img-desc">ADHD</p>
               </div>
               <div class="img-container">
                 <img src="assets/images/badge2.png" alt="Neurodivergenza 10" />
-                <p class="img-desc">Neurodivergenza 10</p>
+                <p class="img-desc">Autismo</p>
               </div>
               <div class="img-container">
                 <img src="assets/images/badge3.png" alt="Neurodivergenza 11" />
-                <p class="img-desc">Neurodivergenza 11</p>
+                <p class="img-desc">Dislessia</p>
               </div>
               <div class="img-container">
                 <img src="assets/images/badge4.png" alt="Neurodivergenza 12" />
-                <p class="img-desc">Neurodivergenza 12</p>
+                <p class="img-desc">Autismo con bisogno di supporto lieve</p>
               </div>
               <div class="img-container">
                 <img src="assets/images/badge5.png" alt="Neurodivergenza 13" />
-                <p class="img-desc">Neurodivergenza 13</p>
+                <p class="img-desc">Disturbo ossessivo compulsivo</p>
               </div>
               <div class="img-container">
                 <img src="assets/images/badge6.png" alt="Neurodivergenza 14" />
-                <p class="img-desc">Neurodivergenza 14</p>
+                <p class="img-desc">Ansia</p>
               </div>
               <div class="img-container">
                 <img src="assets/images/badge7.png" alt="Neurodivergenza 15" />
-                <p class="img-desc">Neurodivergenza 15</p>
+                <p class="img-desc">Disturbo bipolare</p>
               </div>
               <div class="img-container">
                 <img src="assets/images/badge8.png" alt="Neurodivergenza 16" />
-                <p class="img-desc">Neurodivergenza 16</p>
+                <p class="img-desc">Sinestesia</p>
               </div>
             </div>
           </div>
@@ -325,16 +325,16 @@ document.getElementById("downloadPdfBtn").addEventListener("click", async () => 
   const selectedImages = Array.from(document.querySelectorAll('#imageGrid img.colorful'));
   drawText('Neurodivergenze selezionate', '');
   selectedImages.forEach((img, index) => {
-    const label = img.nextElementSibling?.textContent || `Badge ${index + 1}`;
-    page.drawText(`- ${label}`, {
-      x: startX + 20,
-      y: cursorY,
-      size: textSize - 1,
-      font: timesRomanFont,
-      color: rgb(0.2, 0.2, 0.2),
-    });
-    cursorY -= lineHeight - 6;
+  const label = img.nextElementSibling?.textContent || `Badge ${index + 1}`;
+  page.drawText(`- ${label}`, {
+    x: startX + 20,
+    y: cursorY,
+    size: textSize - 1,
+    font: timesRomanFont,
+    color: rgb(0.2, 0.2, 0.2),
   });
+  cursorY -= lineHeight - 6;
+});
 
   // Salvataggio PDF
   const pdfBytes = await pdfDoc.save();
