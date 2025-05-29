@@ -6,33 +6,6 @@
   <title>Passaporto Neurodivergente</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
-    #pdf-version {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 210mm;
-  min-height: 297mm;
-  padding: 20mm;
-  margin: 0 auto;
-  background: white;
-  color: black;
-  font-size: 14px;
-  box-sizing: border-box;
-}
-
-#pdf-version table {
-  margin: auto;
-  width: 100%;
-  max-width: 100%;
-  border-collapse: collapse;
-}
-
-#pdf-version td {
-  padding: 8px;
-  vertical-align: middle;
-}
-    
     .section {
       background: linear-gradient(to bottom, #e7b4d4, #f6bbb0, #f9d88b, #e8f6a0, #b8e2c2, #a7d6ec, #c2c3f1, #dbc4e9);
     }
@@ -287,6 +260,34 @@ button:hover {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <div id="pdf-version">
+  <style>
+    #pdf-version {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 20mm;
+  margin: 0 auto;
+  background: white;
+  color: black;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+#pdf-version table {
+  margin: auto;
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+}
+
+#pdf-version td {
+  padding: 8px;
+  vertical-align: middle;
+}
+  </style>
   <table>
     <tr>
       <td>
