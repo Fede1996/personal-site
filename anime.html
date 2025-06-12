@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GorriNerd: Anime</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0e0e0e;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    header {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .story-wrapper {
+      width: 100%;
+      max-width: 360px;
+      position: relative;
+      aspect-ratio: 9 / 16;
+      background: #000;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .story-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: opacity 0.5s ease-in-out;
+      background: #000;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .nav-buttons button {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: none;
+      background-color: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-buttons button.active {
+      background-color: white;
+      transform: scale(1.3);
+    }
+
+    @media (max-width: 400px) {
+      header {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>GorriNerd: Anime</header>
+
+<div class="story-wrapper" id="storyWrapper">
+  <img id="storyImage" class="story-image" src="" alt="story"/>
+</div>
+
+<div class="nav-buttons" id="navButtons"></div>
+
+<script>
+  const images = [
+    'assets/images/anime/story1.jpeg',
+    'assets/images/anime/story2.jpeg',
+    'assets/images/anime/story3.jpeg',
+    'assets/images/anime/story4.jpeg',
+    'assets/images/anime/story5.jpeg',
+    'assets/images/anime/story6.jpeg',
+    'assets/images/anime/story7.jpeg',
+    'assets/images/anime/story8.jpeg',
+  ];
+
+  const imageEl = document.getElementById('storyImage');
+  const navButtons = document.getElementById('navButtons');
+  let currentIndex = Math.floor(Math.random() * images.length);
+
+  function showImage(index) {
+    if (index < 0) index = images.length - 1;
+    if (index >= images.length) index = 0;
+    currentIndex = index;
+
+    imageEl.style.opacity = 0;
+    setTimeout(() => {
+      imageEl.src = images[currentIndex];
+      imageEl.style.opacity = 1;
+      updateButtons();
+    }, 200);
+  }
+
+  function updateButtons() {
+    document.querySelectorAll('.nav-buttons button').forEach((btn, idx) => {
+      btn.classList.toggle('active', idx === currentIndex);
+    });
+  }
+
+  function createButtons() {
+    images.forEach((_, index) => {
+      const btn = document.createElement('button');
+      btn.addEventListener('click', () => showImage(index));
+      navButtons.appendChild(btn);
+    });
+  }
+
+  createButtons();
+  showImage(currentIndex);
+</script>
+
+</body>
+</html>
