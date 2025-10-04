@@ -1,0 +1,380 @@
+/* ================================================= */
+/* 0. PALETTE E FONT NARRATIVA */
+/* ================================================= */
+:root {
+    --colore-celeste: #E6F0F8; /* Sfondo principale */
+    --colore-terra: #8B4513;   /* Marrone caldo, accenti */
+    --colore-scuro: #36454F;   /* Blu Scuro/Nero per testo */
+    --colore-bianco: #FFFFFF;
+}
+
+body {
+    font-family: Georgia, serif; /* Font classico e leggibile */
+    background-color: var(--colore-celeste);
+    color: var(--colore-scuro);
+    line-height: 1.6;
+    text-align: center;
+    scroll-behavior: smooth;
+}
+
+/* Reset base e link */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+a { text-decoration: none; transition: color 0.3s, border-color 0.3s; }
+.content-wrapper { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+.section { padding: 60px 0; }
+
+/* Classi Sfondo e Testo */
+.bg-celeste { background-color: var(--colore-celeste); }
+.bg-bianco { background-color: var(--colore-bianco); }
+.bg-scuro { background-color: var(--colore-scuro); }
+.text-terra { color: var(--colore-terra); }
+.text-scuro { color: var(--colore-scuro); }
+.text-bianco { color: var(--colore-bianco); }
+
+.section-title {
+    font-size: 2em;
+    font-weight: normal;
+    margin-bottom: 40px;
+}
+
+/* ================================================= */
+/* 1. HERO SECTION E CTA */
+/* ================================================= */
+.hero-narrativa {
+    padding: 100px 0 60px;
+    background: linear-gradient(to bottom, var(--colore-celeste), var(--colore-bianco));
+}
+
+.headline-narrativa {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.sottotitolo-narrativa {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Bottoni (CTA) */
+.cta-button {
+    display: inline-block;
+    padding: 12px 30px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 4px;
+    text-transform: uppercase;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    border: 2px solid var(--colore-terra);
+    cursor: pointer;
+}
+
+.btn-terra {
+    background-color: var(--colore-terra);
+    color: var(--colore-bianco);
+}
+.btn-terra:hover {
+    background-color: #A0522D; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Anteprima delle Copertine */
+.book-preview-wrapper {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.preview-book-image {
+    width: 150px;
+    height: auto;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    transition: transform 0.4s;
+}
+.preview-book-image.left {
+    transform: rotate(-3deg);
+}
+.preview-book-image.right {
+    transform: rotate(3deg);
+}
+.preview-book-image:hover {
+    transform: scale(1.05) rotate(0deg) !important;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ================================================= */
+/* 2. PRESENTAZIONE LIBRI (AFFIANCATA) */
+/* ================================================= */
+.book-presentation-card {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    padding: 40px 0;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--colore-terra);
+}
+
+/* Alternanza di layout */
+.card-left { flex-direction: row; }
+.card-right { flex-direction: row-reverse; }
+
+.book-cover {
+    width: 200px;
+    min-width: 200px;
+    height: auto;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.book-details {
+    text-align: left;
+    flex-grow: 1;
+}
+.book-details h3 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--colore-terra);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.summary-text {
+    font-style: italic;
+    margin-bottom: 20px;
+}
+.key-features {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 20px;
+    text-align: left;
+}
+.key-features li {
+    margin-bottom: 5px;
+}
+.key-features li::before {
+    content: "📖";
+    color: var(--colore-terra);
+    margin-right: 8px;
+}
+
+
+/* ================================================= */
+/* 3. STAMPA E ARTICOLI (NUOVA SEZIONE) */
+/* ================================================= */
+
+.articles-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.article-card {
+    max-width: 300px;
+    background-color: var(--colore-bianco);
+    padding: 25px;
+    text-align: left;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.article-card:hover {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px); 
+}
+
+.article-card h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: var(--colore-terra);
+}
+
+.article-source {
+    font-size: 0.9em;
+    color: #888;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.article-summary {
+    margin-bottom: 15px;
+    font-size: 0.95em;
+}
+
+.btn-terra-link {
+    display: inline-block;
+    color: var(--colore-terra);
+    font-weight: bold;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.2s;
+}
+
+.btn-terra-link:hover {
+    color: var(--colore-terra);
+    border-bottom: 2px solid var(--colore-terra);
+}
+
+
+/* ================================================= */
+/* 4. RECENSIONI E FOOTER */
+/* ================================================= */
+.testimonial-narrativa-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.recensione-card {
+    max-width: 450px;
+    text-align: left;
+    padding: 20px;
+    background-color: var(--colore-bianco);
+    border-left: 5px solid var(--colore-terra);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-style: normal;
+}
+.recensione-card p {
+    font-style: italic;
+    margin-bottom: 10px;
+}
+cite {
+    display: block;
+    font-size: 0.9em;
+    text-align: right;
+}
+
+.footer-narrativa {
+    padding: 40px 0 20px;
+    text-align: center;
+}
+.footer-narrativa h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+.newsletter-form-narrativa {
+    margin: 20px auto 30px;
+    display: flex;
+    justify-content: center;
+    max-width: 500px;
+}
+.input-narrativa {
+    padding: 10px 15px;
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    font-size: 1em;
+}
+.newsletter-form-narrativa button {
+    border-radius: 0 4px 4px 0;
+    margin-top: 0;
+}
+
+
+/* ================================================= */
+/* MEDIA QUERIES (Responsive) */
+/* ================================================= */
+@media (max-width: 768px) {
+    .headline-narrativa { font-size: 2.2em; }
+    
+    /* Sezione Libri */
+    .book-presentation-card { 
+        flex-direction: column; 
+        text-align: center; 
+    }
+    .card-right { 
+        flex-direction: column; 
+    }
+    .book-details {
+        text-align: center;
+    }
+    .book-details h3 {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+    }
+    .key-features {
+        text-align: center;
+    }
+    .book-cover {
+        margin-top: 20px;
+    }
+
+    /* Articoli e Recensioni */
+    .articles-grid, .testimonial-narrativa-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+    .article-card, .recensione-card {
+        max-width: 90%;
+    }
+
+    /* Newsletter */
+    .newsletter-form-narrativa { flex-direction: column; }
+    .input-narrativa { 
+        width: 100%; 
+        margin-bottom: 10px; 
+        border-radius: 4px;
+    }
+    .newsletter-form-narrativa button { 
+        width: 100%; 
+        border-radius: 4px; 
+    }
+}
+.footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+.footer-content p {
+    margin: 5px 0;
+}
+
+.footer-content a {
+    color: #a020f0;
+    text-decoration: none;
+}
+
+.footer-content a:hover {
+    text-decoration: underline;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+header nav a:hover {
+    color: #A0522D;
+    text-decoration: none;
+}

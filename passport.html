@@ -5,132 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Passaporto Neurodivergente</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <style>
-    .section {
-      background: linear-gradient(to bottom, #e7b4d4, #f6bbb0, #f9d88b, #e8f6a0, #b8e2c2, #a7d6ec, #c2c3f1, #dbc4e9);
-    }
-
-    .footer {
-      background: #333;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      background: #333;
-      color: #fff;
-      padding: 10px 20px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
-    }
-
-    header nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    header nav a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 15px;
-      font-size: 1rem;
-      font-weight: bold;
-    }
-
-    header nav a:hover {
-      color: pink;
-    }
-
-    /* Griglia immagini responsive */
-    #imageGrid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-      gap: 16px;
-      padding: 15px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 0 10px #ccc;
-      max-width: 800px;
-      width: 100%;
-      margin: 0 auto;
-    }
-
-    .img-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    #imageGrid img {
-      width: 100%;
-      height: auto;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      filter: brightness(0);
-      transition: filter 0.3s ease, transform 0.3s ease;
-      border-radius: 8px;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
-      cursor: pointer;
-    }
-
-    #imageGrid img.colorful {
-      filter: none !important;
-      transform: scale(1.05);
-    }
-
-    .img-desc {
-      margin-top: 6px;
-      font-family: 'Georgia', serif;
-      font-style: italic;
-      font-weight: 600;
-      font-size: clamp(0.7rem, 1vw, 0.9rem);
-      color: white;
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 3px 8px;
-      border-radius: 6px;
-      text-align: center;
-      user-select: none;
-      width: 100%;
-      box-sizing: border-box;
-      transition: background-color 0.3s ease;
-    }
-
-    .img-container:hover .img-desc {
-      background-color: rgba(0, 0, 0, 0.85);
-    }
-
-    button {
-    position: relative;
-  display: inline-block;
-  padding: 1rem 2.5rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #fff;
-  background: linear-gradient(270deg, #ff0057, #ffb600, #39ff14, #00cfff, #9d00ff, #ff0057);
-  background-size: 1200% 1200%;
-  border: 3px solid transparent;
-  border-radius: 9999px;
-  box-shadow: 0 0 25px rgba(255, 0, 255, 0.4), 0 0 50px rgba(0, 255, 255, 0.2);
-  animation: animatedGradient 6s ease infinite, pulseGlow 3s ease-in-out infinite;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center;
-  cursor: pointer;
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
-}
-
-button:hover {
-    transform: scale(1.07) rotate(-0.5deg);
-  box-shadow: 0 0 35px rgba(255, 255, 255, 0.7), 0 0 80px rgba(255, 0, 255, 0.6);
-}
-
-  </style>
+  <link rel="stylesheet" href="assets/styles/passport.css">
 </head>
 <body class="section text-gray-900">
 
@@ -192,7 +67,7 @@ button:hover {
               </div>
               <div class="img-container">
                 <img src="assets/images/3.png" alt="Neurodivergenza 3" />
-                <p class="img-desc">Disturbo borderline della personalità</p>
+                <p class="img-desc">Disturbo borderline di personalità</p>
               </div>
               <div class="img-container">
                 <img src="assets/images/4.png" alt="Neurodivergenza 4" />
@@ -220,7 +95,7 @@ button:hover {
               </div>
               <div class="img-container">
                 <img src="assets/images/badge2.png" alt="Neurodivergenza 10" />
-                <p class="img-desc">Autismo</p>
+                <p class="img-desc">Autismo Liv. 3</p>
               </div>
               <div class="img-container">
                 <img src="assets/images/badge3.png" alt="Neurodivergenza 11" />
@@ -228,15 +103,15 @@ button:hover {
               </div>
               <div class="img-container">
                 <img src="assets/images/badge4.png" alt="Neurodivergenza 12" />
-                <p class="img-desc">Autismo con bisogno di supporto lieve</p>
+                <p class="img-desc">Autismo Liv. 1</p>
               </div>
               <div class="img-container">
                 <img src="assets/images/badge5.png" alt="Neurodivergenza 13" />
-                <p class="img-desc">Disturbo ossessivo compulsivo</p>
+                <p class="img-desc">Disturbo ossessivo compulsivo (OCD)</p>
               </div>
               <div class="img-container">
                 <img src="assets/images/badge6.png" alt="Neurodivergenza 14" />
-                <p class="img-desc">Ansia</p>
+                <p class="img-desc">Disturbo d’Ansia Generalizzata (GAD)</p>
               </div>
               <div class="img-container">
                 <img src="assets/images/badge7.png" alt="Neurodivergenza 15" />
@@ -245,6 +120,38 @@ button:hover {
               <div class="img-container">
                 <img src="assets/images/badge8.png" alt="Neurodivergenza 16" />
                 <p class="img-desc">Sinestesia</p>
+              </div>
+              <div class="img-container">
+                <img src="assets/images/badge-1.png" alt="Neurodivergenza 17" />
+                <p class="img-desc">Emicrania cronaca</p>
+              </div>
+              <div class="img-container">
+                <img src="assets/images/badge-2.png" alt="Neurodivergenza 18" />
+                <p class="img-desc">Attacchi di panico</p>
+              </div>
+              <div class="img-container">
+                <img src="assets/images/badge-3.png" alt="Neurodivergenza 19" />
+                <p class="img-desc">Plusdotazione</p>
+              </div>
+              <div class="img-container">
+                <img src="assets/images/badge-4.png" alt="Neurodivergenza 20" />
+                <p class="img-desc">Stress</p>
+              </div>
+              <div class="img-container">
+                <img src="assets/images/badge-5.png" alt="Neurodivergenza 21" />
+                <p class="img-desc">Depressione</p>
+              </div>
+              <div class="img-container">
+                <img src="assets/images/badge-6.png" alt="Neurodivergenza 22" />
+                <p class="img-desc">Burnout</p>
+              </div>
+              <div class="img-container">
+                <img src="assets/images/badge-7.png" alt="Neurodivergenza 23" />
+                <p class="img-desc">Afasia</p>
+              </div>
+              <div class="img-container">
+                <img src="assets/images/badge-8.png" alt="Neurodivergenza 24" />
+                <p class="img-desc">Autismo Liv. 2</p>
               </div>
             </div>
           </div>

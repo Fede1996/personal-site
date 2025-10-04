@@ -1,14 +1,10 @@
-/* Base Styles */
-body, h1, h2, h3, p, ul, li {
-    margin: 0;
-    padding: 0;
-}
+
 
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f4;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
     color: #333;
-    line-height: 1.6;
 }
 
 .hero {
@@ -28,10 +24,12 @@ body {
 
 .hero h1 {
     font-size: 2.5rem;
+    margin: 20px 0;
 }
 
 .hero p {
     font-size: 1.2rem;
+    margin: 10px 0;
     line-height: 1.6;
 }
 

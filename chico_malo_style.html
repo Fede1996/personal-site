@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chico Malo - Fight for your dreams</title>
+    <link rel="stylesheet" href="assets/styles/chico_malo_style.css">
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            // =======================================================
+            // I. LOGICA PER IL CAROSELLO GLOBALE (Classe: .carousel-slide)
+            // Questo gestisce UN UNICO grande carosello.
+            // =======================================================
+
+            const slidesGlobal = document.getElementsByClassName("carousel-slide");
+            let slideIndexGlobal = 0; 
+            const DELAY_GLOBAL = 4000; // 4 secondi
+
+            function showSlidesGlobal() {
+                if (slidesGlobal.length === 0) return;
+            
+                // Nasconde tutte le slide
+                for (let i = 0; i < slidesGlobal.length; i++) {
+                    slidesGlobal[i].classList.remove('active'); 
+                }
+
+                // Passa alla slide successiva (ciclo 1 -> 2 -> ... -> N -> 1)
+                slideIndexGlobal++;
+                if (slideIndexGlobal > slidesGlobal.length) {
+                    slideIndexGlobal = 1; 
+                }
+
+                // Mostra la slide corrente
+                slidesGlobal[slideIndexGlobal - 1].classList.add('active'); 
+            
+                // Ripete
+                setTimeout(showSlidesGlobal, DELAY_GLOBAL); 
+            }
+        
+            // Avvio del carosello globale
+            if (slidesGlobal.length > 0) {
+                slidesGlobal[0].classList.add('active'); // Mostra la prima slide subito
+                slideIndexGlobal = 1; 
+                setTimeout(showSlidesGlobal, DELAY_GLOBAL); 
+            }
+        
+
+            // =======================================================
+            // II. LOGICA PER I CAROSELLI MULTIPLI (Contenitore: .carousel-container1)
+            // Questo gestisce TUTTI i caroselli in modo indipendente.
+            // =======================================================
+        
+            const carouselContainers = document.getElementsByClassName("carousel-container1");
+
+            // Array per tenere traccia dello stato di ogni carosello (indice della slide attiva)
+            // [0, 0, 0, ...]
+            let slideIndexes = Array.from(carouselContainers).map(() => 0); 
+
+            // Array che conterrà le NodeList delle slide di ogni carosello
+            const allSlides = []; 
+            const DELAY_MULTI = 4000; // 4 secondi
+
+            // 1. Prepara la struttura dati: Mappa i contenitori alle loro slide figlie.
+            for (let i = 0; i < carouselContainers.length; i++) {
+                // CORREZIONE: Usa querySelectorAll per selezionare i figli all'interno del contenitore i-esimo.
+                const slidesOfThisCarousel = carouselContainers[i].querySelectorAll(".carousel-slide1");
+                allSlides.push(slidesOfThisCarousel);
+            }
+
+
+            // 2. Funzione parametrizzata per gestire un carosello specifico.
+            function showSlidesMulti(carouselIndex) {
+                const slides = allSlides[carouselIndex];
+                let currentSlideIndex = slideIndexes[carouselIndex];
+            
+                // Nasconde tutte le slide nel carosello corrente
+                slides.forEach(slide => slide.classList.remove('active'));
+
+                // Passa alla slide successiva (gestione ciclica)
+                currentSlideIndex++;
+                if (currentSlideIndex >= slides.length) {
+                    currentSlideIndex = 0; // Torna alla prima
+                }
+
+                // Mostra la slide corrente
+                slides[currentSlideIndex].classList.add('active'); 
+            
+                // Aggiorna l'indice globale per questo carosello specifico
+                slideIndexes[carouselIndex] = currentSlideIndex;
+            
+                // Ripete la funzione, passando l'indice corretto
+                setTimeout(() => showSlidesMulti(carouselIndex), 2000); 
+            }
+        
+
+            // 3. Avvio di tutti i caroselli multipli.
+            for (let i = 0; i < carouselContainers.length; i++) {
+                // Avvia il carosello solo se ha slide al suo interno
+                if (allSlides[i].length > 0) {
+                    // Mostra subito la prima slide
+                    allSlides[i][0].classList.add('active');
+
+                    // Avvia il ciclo, passando l'indice 'i' del carosello da gestire
+                    setTimeout(() => showSlidesMulti(i), 2000); 
+                }
+            }
+        
+        });
+    </script>
+</head>
+<body class="bg-dark">
+    <header>
+        <nav>
+            <a href="projects.html">Progetti</a>
+        </nav>
+    </header>
+
+    <header class="hero-section dynamic-bg">
+        
+        <div class="hero-media-background">
+            
+            <div class="carousel-container" id="heroCarousel">
+                
+                <div class="carousel-slide fade">
+                    <img src="assets/images/chico_malo_style/img1.png" 
+                         alt="Modello in azione 1 - Giacca Vortex" 
+                         class="background-image">
+                </div>
+
+                <div class="carousel-slide fade">
+                    <img src="assets/images/chico_malo_style/img2.png" 
+                         alt="Modello in azione 2 - Pantalone Frequenza" 
+                         class="background-image">
+                </div>
+
+                <div class="carousel-slide fade">
+                    <img src="assets/images/chico_malo_style/img3.png" 
+                         alt="Modello in azione 3 - Felpa Pulsar" 
+                         class="background-image">
+                </div>
+
+                <div class="carousel-slide fade">
+                    <img src="assets/images/chico_malo_style/img4.png" 
+                         alt="Modello in azione 4 - Tuta Energia" 
+                         class="background-image">
+                </div>
+                
+            </div> 
+        </div>
+        
+        <div class="hero-overlay"></div>
+
+        <div class="content-wrapper">
+            <div class="hero-content">
+                <h1 class="headline text-bianco">
+                    Chico Malo<br>Fight for your dreams.
+                </h1>
+                <p class="sottotitolo text-grigio">
+                    Scopri la collezione che fonde design audace e libertà di espressione.
+                </p>
+                <a href="#shop" class="cta-button btn-viola">
+                    ESPLORA LA COLLEZIONE
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section id="vision" class="section brand-story bg-darker">
+        <div class="content-wrapper">
+            <h2 class="section-title text-viola">Un sogno. Uno stile.</h2>
+            <div class="story-container">
+                <p class="text-bianco">
+                    Crediamo in un abbigliamento che non solo veste, ma amplifica la tua essenza. Ogni capo è un'affermazione, una parte di te pronta ad emergere.
+                </p>
+                <img src="assets/images/chico_malo_style/img5.png" alt="Modello in movimento" class="story-image dynamic-border">
+            </div>
+        </div>
+    </section>
+
+    <section id="shop" class="section prodotti bg-dark">
+        <div class="content-wrapper">
+            <h2 class="section-title text-viola">Le nostre T-SHIRT.</h2>
+            <div class="product-grid">
+
+                <div class="product-card dynamic-hover">
+                    <img src="assets/images/chico_malo_style/tshirt/img1.png" alt="Nome Prodotto 1">
+                    <h3 class="product-name text-bianco">Maglietta</h3>
+                    <p class="product-desc text-grigio">Con scritta "Per aspera ad astra".</p>
+                </div>
+
+                <div class="product-card dynamic-hover">
+                    <img src="assets/images/chico_malo_style/tshirt/img2.png" alt="Nome Prodotto 2">
+                    <h3 class="product-name text-bianco">Maglietta</h3>
+                    <p class="product-desc text-grigio">Con scritta "Creativity is a state of mind".</p>
+                </div>
+
+                <div class="product-card dynamic-hover">
+                    <img src="assets/images/chico_malo_style/tshirt/img3.png" alt="Nome Prodotto 3">
+                    <h3 class="product-name text-bianco">Maglietta</h3>
+                    <p class="product-desc text-grigio">Con scritta "Love others but above all love yourself".</p>
+                </div>
+                <div class="product-card dynamic-hover">
+                    <img src="assets/images/chico_malo_style/tshirt/img4.png" alt="Nome Prodotto 1">
+                    <h3 class="product-name text-bianco">Maglietta</h3>
+                    <p class="product-desc text-grigio">Con scritta "Turin".</p>
+                </div>
+
+                <div class="product-card dynamic-hover">
+                    <img src="assets/images/chico_malo_style/tshirt/img5.png" alt="Nome Prodotto 2">
+                    <h3 class="product-name text-bianco">Maglietta</h3>
+                    <p class="product-desc text-grigio">Con scritta "You don't need to be everyone's superhero, just be one person's".</p>
+                </div>
+
+                <div class="product-card dynamic-hover">
+                    <img src="assets/images/chico_malo_style/tshirt/img6.png" alt="Nome Prodotto 3">
+                    <h3 class="product-name text-bianco">Maglietta</h3>
+                    <p class="product-desc text-grigio">Box logo.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="shop" class="section prodotti bg-dark">
+        <div class="content-wrapper">
+            <h2 class="section-title text-viola">Le nostre Polo.</h2>
+            <div class="product-grid">
+
+                <div class="product-card dynamic-hover">
+                    <div class="carousel-container1">
+                        <div class="carousel-slide1 active">
+                            <img src="assets/images/chico_malo_style/polo/img1_1.png" alt="Maglietta Vista Frontale">
+                        </div>
+                        <div class="carousel-slide1">
+                            <img src="assets/images/chico_malo_style/polo/img1_2.png" alt="Maglietta Vista Posteriore">
+                        </div>
+
+                    </div>
+                    <h3 class="product-name text-bianco">Polo</h3>
+                    <p class="product-desc text-grigio">Con motivo "Flaming logo".</p>
+                </div>
+
+                <div class="product-card dynamic-hover">
+                    <div class="carousel-container1">
+                        <div class="carousel-slide1 active">
+                            <img src="assets/images/chico_malo_style/polo/img2_1.png" alt="Maglietta Vista Frontale">
+                        </div>
+                        <div class="carousel-slide1">
+                            <img src="assets/images/chico_malo_style/polo/img2_2.png" alt="Maglietta Vista Posteriore">
+                        </div>
+
+                    </div>
+                    <h3 class="product-name text-bianco">Polo</h3>
+                    <p class="product-desc text-grigio">Con motivo "Big logo".</p>
+                </div>
+
+                <div class="product-card dynamic-hover">
+                    <div class="carousel-container1">
+                        <div class="carousel-slide1 active">
+                            <img src="assets/images/chico_malo_style/polo/img3_1.png" alt="Maglietta Vista Frontale">
+                        </div>
+                        <div class="carousel-slide1">
+                            <img src="assets/images/chico_malo_style/polo/img3_2.png" alt="Maglietta Vista Posteriore">
+                        </div>
+                    </div>
+                    <h3 class="product-name text-bianco">Polo</h3>
+                    <p class="product-desc text-grigio">Con motivo "Full art".</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="shop" class="section prodotti bg-dark">
+        <div class="content-wrapper">
+            <h2 class="section-title text-viola">Le nostre Borse.</h2>
+            <div class="product-grid">
+
+                <div class="product-card dynamic-hover">
+                    <img src="assets/images/chico_malo_style/bags/img1.png" alt="Nome Prodotto 1">
+                    <h3 class="product-name text-bianco">Borsa</h3>
+                    <p class="product-desc text-grigio">Zaino.</p>
+                </div>
+
+                <div class="product-card dynamic-hover">
+                    <img src="assets/images/chico_malo_style/bags/img2.png" alt="Nome Prodotto 2">
+                    <h3 class="product-name text-bianco">Borsa</h3>
+                    <p class="product-desc text-grigio">Borsello a tracolla.</p>
+                </div>
+
+                <div class="product-card dynamic-hover">
+                    <img src="assets/images/chico_malo_style/bags/img3.png" alt="Nome Prodotto 3">
+                    <h3 class="product-name text-bianco">Borsa</h3>
+                    <p class="product-desc text-grigio">Pochette.</p>
+                </div>
+                <div class="product-card dynamic-hover">
+                    <img src="assets/images/chico_malo_style/bags/img4.png" alt="Nome Prodotto 1">
+                    <h3 class="product-name text-bianco">Borsa</h3>
+                    <p class="product-desc text-grigio">Sacca a Coulisse.</p>
+                </div>
+
+                <div class="product-card dynamic-hover">
+                    <img src="assets/images/chico_malo_style/bags/img5.png" alt="Nome Prodotto 2">
+                    <h3 class="product-name text-bianco">Borsa</h3>
+                    <p class="product-desc text-grigio">Borsone da palestra.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="shop" class="section prodotti bg-dark">
+        <div class="content-wrapper">
+            <h2 class="section-title text-viola">Le nostre scarpe.</h2>
+            <div class="product-grid">
+
+                <div class="product-card dynamic-hover">
+                    <div class="carousel-container1">
+                        <div class="carousel-slide1 active">
+                            <img src="assets/images/chico_malo_style/shoes/img1_1.png" alt="Maglietta Vista Frontale">
+                        </div>
+                        <div class="carousel-slide1">
+                            <img src="assets/images/chico_malo_style/shoes/img1_2.png" alt="Maglietta Vista Posteriore">
+                        </div>
+
+                    </div>
+                    <h3 class="product-name text-bianco">Scarpe</h3>
+                    <p class="product-desc text-grigio">Giacca urbana con taglio asimmetrico e dettagli riflettenti.</p>
+                </div>
+
+                <div class="product-card dynamic-hover">
+                    <div class="carousel-container1">
+                        <div class="carousel-slide1 active">
+                            <img src="assets/images/chico_malo_style/shoes/img2_1.png" alt="Maglietta Vista Frontale">
+                        </div>
+                        <div class="carousel-slide1">
+                            <img src="assets/images/chico_malo_style/shoes/img2_2.png" alt="Maglietta Vista Posteriore">
+                        </div>
+
+                    </div>
+                    <h3 class="product-name text-bianco">Scarpe</h3>
+                    <p class="product-desc text-grigio">Giacca urbana con taglio asimmetrico e dettagli riflettenti.</p>
+                </div>
+
+                <div class="product-card dynamic-hover">
+                    <div class="carousel-container1">
+                        <div class="carousel-slide1 active">
+                            <img src="assets/images/chico_malo_style/shoes/img3_1.png" alt="Maglietta Vista Frontale">
+                        </div>
+                        <div class="carousel-slide1">
+                            <img src="assets/images/chico_malo_style/shoes/img3_2.png" alt="Maglietta Vista Posteriore">
+                        </div>
+                    </div>
+                    <h3 class="product-name text-bianco">Scarpe</h3>
+                    <p class="product-desc text-grigio">Giacca urbana con taglio asimmetrico e dettagli riflettenti.</p>
+                </div>
+
+                <div class="product-card dynamic-hover">
+                    <div class="carousel-container1">
+                        <div class="carousel-slide1 active">
+                            <img src="assets/images/chico_malo_style/shoes/img4_1.png" alt="Maglietta Vista Frontale">
+                        </div>
+                        <div class="carousel-slide1">
+                            <img src="assets/images/chico_malo_style/shoes/img4_2.png" alt="Maglietta Vista Posteriore">
+                        </div>
+
+                    </div>
+                    <h3 class="product-name text-bianco">Scarpe</h3>
+                    <p class="product-desc text-grigio">Giacca urbana con taglio asimmetrico e dettagli riflettenti.</p>
+                </div>
+
+                <div class="product-card dynamic-hover">
+                    <div class="carousel-container1">
+                        <div class="carousel-slide1 active">
+                            <img src="assets/images/chico_malo_style/shoes/img5_1.png" alt="Maglietta Vista Frontale">
+                        </div>
+                        <div class="carousel-slide1">
+                            <img src="assets/images/chico_malo_style/shoes/img5_2.png" alt="Maglietta Vista Posteriore">
+                        </div>
+
+                    </div>
+                    <h3 class="product-name text-bianco">Scarpe</h3>
+                    <p class="product-desc text-grigio">Giacca urbana con taglio asimmetrico e dettagli riflettenti.</p>
+                </div>
+
+                <div class="product-card dynamic-hover">
+                    <div class="carousel-container1">
+                        <div class="carousel-slide1 active">
+                            <img src="assets/images/chico_malo_style/shoes/img6_1.png" alt="Maglietta Vista Frontale">
+                        </div>
+                        <div class="carousel-slide1">
+                            <img src="assets/images/chico_malo_style/shoes/img6_2.png" alt="Maglietta Vista Posteriore">
+                        </div>
+                    </div>
+                    <h3 class="product-name text-bianco">Scarpe</h3>
+                    <p class="product-desc text-grigio">Giacca urbana con taglio asimmetrico e dettagli riflettenti.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="shop" class="section prodotti bg-dark">
+        <div class="content-wrapper">
+            <h2 class="section-title text-viola">I nostri accessori.</h2>
+            <div class="product-grid">
+
+                <div class="product-card dynamic-hover">
+                    <img src="assets/images/chico_malo_style/accessories/img1.png" alt="Nome Prodotto 1">
+                    <h3 class="product-name text-bianco">Accessorio</h3>
+                    <p class="product-desc text-grigio">Bandana.</p>
+                </div>
+
+                <div class="product-card dynamic-hover">
+                    <img src="assets/images/chico_malo_style/accessories/img2.png" alt="Nome Prodotto 2">
+                    <h3 class="product-name text-bianco">Accessorio</h3>
+                    <p class="product-desc text-grigio">Cappello.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="social" class="section testimonianze bg-darker">
+        <div class="content-wrapper">
+            <h2 class="section-title text-viola">L'Energia dei Nostri Clienti.</h2>
+            <div class="testimonial-container">
+                <blockquote class="text-bianco">
+                    "Finalmente un brand che capisce il mio bisogno di stile e movimento. Fantastico!"
+                    <cite class="text-grigio">— Marco R.</cite>
+                </blockquote>
+                 <blockquote class="text-bianco">
+                    "I capi sono incredibili, il design è unico e attira sempre l'attenzione. Adoro!"
+                    <cite class="text-grigio">— Elena G.</cite>
+                </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <section id="newsletter" class="section newsletter bg-dark">
+        <div class="content-wrapper">
+            <h2 class="section-title text-viola">Presto nuove news.</h2>
+            <p class="text-bianco">Non perderti un 2026 stiloso.</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Federico Silvio Gorrino | Tutti i diritti riservati</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -5,115 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Le Collezioni – Nuovo Arcobaleno</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles/badges.css">
 </head>
 <body class="section text-gray-900">
-<style>
-    .footer {
-      background: #333;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-  }
-
-  .footer-content p {
-      margin: 5px 0;
-  }
-
-  .footer-content a {
-      color: #a020f0;
-      text-decoration: none;
-  }
-
-  .footer-content a:hover {
-      text-decoration: underline;
-  }
-    .section {
-        background: linear-gradient(to bottom, #e7b4d4, #f6bbb0, #f9d88b, #e8f6a0, #b8e2c2, #a7d6ec, #c2c3f1, #dbc4e9);
-    }
-    .subsection {
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;  /* centra orizzontalmente */
-        align-items: center;      /* centra verticalmente */
-    }
-    .subsection2 {
-        min-height: 200vh;
-        justify-content: center;  /* centra orizzontalmente */
-        align-items: center;      /* centra verticalmente */
-    }
-    .rainbow-button {
-  position: relative;
-  display: inline-block;
-  padding: 1rem 2.5rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #fff;
-  background: linear-gradient(270deg, #ff0057, #ffb600, #39ff14, #00cfff, #9d00ff, #ff0057);
-  background-size: 1200% 1200%;
-  border: 3px solid transparent;
-  border-radius: 9999px;
-  box-shadow: 0 0 25px rgba(255, 0, 255, 0.4), 0 0 50px rgba(0, 255, 255, 0.2);
-  animation: animatedGradient 6s ease infinite, pulseGlow 3s ease-in-out infinite;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center;
-  cursor: pointer;
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
-}
-
-.rainbow-button:hover {
-  transform: scale(1.07) rotate(-0.5deg);
-  box-shadow: 0 0 35px rgba(255, 255, 255, 0.7), 0 0 80px rgba(255, 0, 255, 0.6);
-}
-
-@keyframes animatedGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 25px rgba(255, 0, 255, 0.4), 0 0 50px rgba(0, 255, 255, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 40px rgba(255, 255, 255, 0.6), 0 0 80px rgba(0, 255, 255, 0.4);
-  }
-}
-header {
-    position: sticky;
-    top: 0;
-    background: #333;
-    color: #fff;
-    padding: 10px 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-header nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-header nav a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 1rem;
-    font-weight: bold;
-}
-
-header nav a:hover {
-    color: pink;
-    text-decoration: none;
-}
-</style>
 <header>
     <nav>
-        <a href="public.html">Personaggio Pubblico</a>
+        <a href="projects.html">Progetti</a>
     </nav>
 </header>
 <section class="subsection py-12 px-6">
@@ -381,9 +278,6 @@ Per ricordarci, ogni giorno, che essere diversi non significa essere sbagliati.<
       <li><strong>Scrivici</strong>: usa il nostro contatto mail se vuoi ricevere informazioni.</li>
     </ul>
     <div class="flex justify-center space-x-4">
-      <a href="https://forms.gle/6N1opEfqhu1Hq5df9" target="_blank" class="rainbow-button">
-        ✍ Compila il form
-      </a>
       <a href="mailto:federicogorrino@gmail.com" class="rainbow-button">
         ✉ Scrivici via email
       </a>
