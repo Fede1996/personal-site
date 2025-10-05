@@ -378,3 +378,10 @@ header nav a:hover {
     color: #A0522D;
     text-decoration: none;
 }
+
+section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
