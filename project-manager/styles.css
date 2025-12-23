@@ -1,0 +1,426 @@
+:root {
+    --primary-color: #D32F2F;
+    /* Rosso Premium */
+    --primary-dark: #B71C1C;
+    --primary-light: #FFCDD2;
+    --accent-color: #FF5252;
+
+    --status-red: #E53935;
+    --status-yellow: #FDD835;
+    --status-green: #43A047;
+
+    --bg-color: #F5F5F5;
+    --card-bg: #FFFFFF;
+    --text-primary: #212121;
+    --text-secondary: #757575;
+
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --radius: 12px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    padding-bottom: 80px;
+    /* Space for FAB loop */
+}
+
+/* Header */
+.app-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.app-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    object-fit: contain;
+    padding: 2px;
+}
+
+h1 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* Task List */
+.task-list {
+    padding: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-secondary);
+}
+
+/* Task Item Card */
+.task-item {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-sm);
+    border-left: 6px solid var(--status-red);
+    /* Default fallback */
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.02) 0%, transparent 100%);
+}
+
+.task-item.status-green {
+    border-left-color: var(--status-green);
+}
+
+.task-item.status-yellow {
+    border-left-color: var(--status-yellow);
+}
+
+.task-item.status-red {
+    border-left-color: var(--status-red);
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.task-info {
+    flex: 1;
+}
+
+.task-code {
+    font-size: 0.75rem;
+    font-weight: 700;
+    opacity: 0.7;
+    margin-bottom: 0.25rem;
+    display: inline-block;
+    padding: 2px 6px;
+    background: #eee;
+    border-radius: 4px;
+}
+
+.task-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.task-meta {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.task-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    color: var(--text-secondary);
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.btn-icon:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--primary-color);
+}
+
+/* Subtasks Container */
+.subtasks-container {
+    margin-top: 1rem;
+    padding-left: 1rem;
+    border-left: 2px solid #eee;
+    display: none;
+    /* Hidden by default */
+}
+
+.subtasks-container.open {
+    display: block;
+}
+
+/* FAB */
+#add-root-task-btn,
+.fab {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+    z-index: 99;
+}
+
+#add-root-task-btn:active,
+.fab:active {
+    transform: scale(0.95);
+}
+
+/* Mini FAB for subtasks (inline) */
+.btn-add-subtask {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    background: none;
+    border: 1px dashed var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    width: 100%;
+    margin-top: 0.5rem;
+    cursor: pointer;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    backdrop-filter: blur(2px);
+}
+
+.modal.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-content h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.form-group input:focus {
+    outline: 2px solid var(--primary-color);
+    border-color: transparent;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-text {
+    background: transparent;
+    color: var(--text-secondary);
+}
+
+/* Utility */
+.hidden {
+    display: none !important;
+}
+
+/* --- LOGIN SCREEN --- */
+.login-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), #b71c1c);
+    /* Red Gradient */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    transition: opacity 0.5s;
+}
+
+.login-box {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 90%;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.login-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 18px;
+    /* Squircle */
+    margin-bottom: 1.5rem;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-box h1 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.login-box p {
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.google-btn {
+    background-color: white;
+    color: #444;
+    border: 1px solid #ddd;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* CSS removed: .google-btn::before replaced by inline SVG */
+
+.google-btn:hover {
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.logout-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+}
+
+.logout-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}

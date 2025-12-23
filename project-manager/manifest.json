@@ -1,0 +1,20 @@
+{
+  "name": "Project Manager",
+  "short_name": "Progetti",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#F5F5F5",
+  "theme_color": "#D32F2F",
+  "icons": [
+    {
+      "src": "assets/logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "assets/logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
