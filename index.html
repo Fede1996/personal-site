@@ -3,171 +3,1217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Federico Silvio Gorrino - Developer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/styles/main.css">
-    <link rel="icon" type="image/x-icon" href="assets/images/logo-dev.jpg">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/logo-dev.jpg">
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2MP2WYQB7B"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <title>Federico Gorrino - Una Voce Dal Profondo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600;700&family=Cinzel+Decorative&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* --- RESET & BASE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  gtag('config', 'G-2MP2WYQB7B');
-</script>
+        @font-face {
+            font-family: 'Arimo';
+            src: url('C:\\Users\\f.gorrino\\Desktop\\Asset\\fonts\\Arimo-VariableFont_wght.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Instrumental Serif';
+            src: url('C:\\Users\\f.gorrino\\Desktop\\Asset\\fonts\\InstrumentSerif-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Instrumental Serif Italic';
+            src: url('C:\\Users\\f.gorrino\\Desktop\\Asset\\fonts\\InstrumentSerif-Italic.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        body {
+            font-family: 'Arimo', sans-serif;
+            background-color: #f7e7d4; /* Sfondo panna/crema analogico */
+            color: #211533;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Il gradiente radiale parte dal viola intenso al centro 
+               e sfuma verso il giallo/crema ai bordi.
+            */
+            background: radial-gradient(
+                circle at 50% 50%, 
+                #602ba0 0%,    /* Viola chiaro al centro */
+                #be9fd5 30%,   /* Transizione viola */
+                #f9cd72 60%,   /* Giallo tenue */
+                #f7e7d4 85%    /* Ritorno al colore di sfondo */
+            );
+            /* Blend mode per fondersi meglio col fondo se necessario */
+            opacity: 0.8; 
+            z-index: -1; /* Mantiene la chiazza dietro i contenuti */
+            pointer-events: none; /* Non blocca i click */
+        }
+
+        /* --- BACKGROUND AURORA (Sfumatura globale) --- */
+        .aurora-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        header {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr; /* 3 colonne: sinistra, centro, destra */
+            align-items: center;
+            padding: 20px 60px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            transition: all 0.3s ease;
+            background: transparent;
+            box-sizing: border-box; /* Importante per i padding */
+        }
+
+        /* Il tuo logo (a sinistra) */
+        .logo {
+            justify-self: start;
+        }
+
+        /* La tua navigazione (al centro) */
+        .desktop-nav {
+            justify-self: center; /* Forza la centratura assoluta */
+            display: flex;
+            gap: 30px; /* Spazio tra i link */
+        }
+
+        header {
+            display: flex !important;
+            justify-content: space-between !important; /* Spinge logo a sx e hamburger a dx */
+            align-items: center !important;
+            padding: 20px 60px !important;
+            width: 100% !important;
+            position: fixed !important;
+            top: 0 !important;
+            z-index: 9999 !important;
+            box-sizing: border-box !important;
+        }
+
+        /* Facciamo in modo che la Nav sia al centro assoluto */
+        .desktop-nav {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 30px;
+        }
+
+        /* Forza l'hamburger a essere un pulsante visibile */
+        .hamburger {
+            display: none; /* Forza la visualizzazione */
+            flex-direction: column !important;
+            justify-self: end !important; /* Forza la destra */
+            width: 40px !important;
+            height: 30px !important;
+            background: transparent !important;
+            border: none !important;
+            cursor: pointer !important;
+            z-index: 10000 !important;
+        }
+
+        /* Forza le linee a essere visibili */
+        .hamburger span {
+            display: block !important;
+            width: 30px !important;
+            height: 3px !important;
+            background-color: #211533 !important;
+            margin-bottom: 5px !important;
+        }
+
+        /* Il menù nascosto inizialmente */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -350px; /* Larghezza personalizzata (es. 350px invece che 100%) */
+            width: 350px;
+            height: 100%;
+            background-color: #f7e7d4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            z-index: 9999;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 1px 1px #602ba0; /* L'ombra che volevi */
+        }
+
+        .mobile-menu.open {
+            right: 0;
+        }
+
+        /* Stile per la X */
+        .close-btn {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: none;
+            border: none;
+            font-size: 40px;
+            cursor: pointer;
+            color: #211533;
+        }
+
+        .mobile-menu a {
+            font-size: 22px;
+            text-decoration: none;
+            color: #211533;
+        }
+
+        /* Il menu/icona a destra */
+        .menu-right {
+            justify-self: end;
+        }
+
+        /* Questa classe viene aggiunta da JS quando scrolli */
+        header.scrolled {
+            background: #f7e7d4; /* Colore crema leggermente opaco */
+            box-shadow: 0 1px 1px #602ba0; /* L'ombra che volevi */
+            padding: 15px 60px; /* Si restringe un po' per eleganza */
+        }
+
+        .logo {
+            height: 30px;
+            color: #602ba0;
+            transform: rotate(-5deg);
+            line-height: 1;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #211533;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover { opacity: 0.6; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+
+        .hero p.subtitle {
+            font-family: 'Instrumental Serif', serif;
+            font-size: clamp(1.2rem, 4vw, 2.2rem);
+            margin-bottom: 30px;
+        }
+
+        .subtitle-white {
+            font-family: 'Instrumental Serif Italic', serif;
+            color: #f7e7d4;
+            text-shadow: -1px -1px 0 #602ba0, 1px -1px 0 #602ba0, -1px 1px 0 #602ba0, 1px 1px 0 #602ba0;
+        }
+
+        .title-white {
+            font-family: 'Arimo', sans-serif;
+            color: #f7e7d4;
+            text-shadow: -1px -1px 0 #602ba0, 1px -1px 0 #602ba0, -1px 1px 0 #602ba0, 1px 1px 0 #602ba0;
+        }
+
+        .vertical-line {
+            width: 1px;
+            height: 60px;
+            background-color: #211533;
+            margin: 20px 0;
+        }
+
+        /* --- SEZIONE CARD FLIP (Layout 2x4) --- */
+        .section-cards {
+            padding: 100px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        /* --- LOGICA FLIP CARD --- */
+        .flip-card {
+            perspective: 1500px;
+            height: 550px; /* Card alte e slanciate come nell'immagine */
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        /* --- FRONTALE CARD (Stile "ECHO" richiesto) --- */
+        .flip-card-front {
+            box-shadow: 0 1px 1px #602ba0;
+            background-color: #f7e7d4;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 60px 40px 30px;
+            border: 1px solid rgba(26, 17, 38, 0.05);
+        }
+
+        /* Il "Blob" colorato al centro */
+        .blob {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 60%;
+            filter: blur(50px);
+            opacity: 0.7;
+            z-index: 0;
+            border-radius: 50%;
+        }
+
+        /* --- BLOB DINAMICI (Palette Audace e Differenziata) --- */
+        
+        /* --- BLOB DINAMICI (Fronte) --- */
+        .blob-1 { background: radial-gradient(circle, #FF4500, #8B0000, #2F0000); }
+        .blob-2 { background: radial-gradient(circle, #FFFACD, #CD853F, #5D4037); }
+        .blob-3 { background: radial-gradient(circle, #FFFF00, #FF8C00, #DAA520); }
+        .blob-4 { background: radial-gradient(circle, #E0FFFF, #20B2AA, #000080); }
+        .blob-5 { background: radial-gradient(circle, #FFD700, #D2691E, #4B0082); }
+        .blob-6 { background: radial-gradient(circle, #F5F5DC, #BDB76B, #708090); }
+        .blob-7 { background: radial-gradient(circle, #00FFFF, #4682B4, #0000FF); }
+        .blob-8 { background: radial-gradient(circle, #E6E6FA, #6A5ACD, #191970); }
+
+        .card-content-front {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            justify-content: flex-end;
+        }
+
+        .card-title-serif {
+            font-family: 'Arimo', sans-serif;
+            font-size: 5rem; /* Aumentato per rendere i simboli iconici e imponenti */
+            line-height: 1;
+            margin-bottom: 10px;
+            font-weight: 400;
+            color: #1a1126;
+        }
+
+        .card-col-num {
+            font-family: 'Instrumental Serif', serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+        }
+
+        .card-divider {
+            /*width: 15px;
+            height: 1px;
+            background: #1a1126;*/
+            font-family: 'Instrumental Serif', serif;
+            margin: 15px 0;
+        }
+
+        .card-tagline {
+            font-family: 'Instrumental Serif', serif;
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .card-terms {
+            font-family: 'Instrumental Serif', serif;
+            height: 2rem;
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .dot-sep { width: 4px; height: 4px; background: #211533; border-radius: 50%; }
+
+        .card-footer-text {
+            font-size: 0.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.5;
+        }
+
+        /* --- RETRO CARD --- */
+        .flip-card-back {
+            color: #f7e7d4;
+            box-shadow: 0 1px 1px #602ba0;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .flip-card-back h3 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        /* --- SEZIONE LIBRI (CARD BIANCHE FISSE) --- */
+        .section-books {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .book-card {
+            background: #f7e7d4;
+            box-shadow: 0 1px 1px #602ba0;
+            max-width: 950px;
+            margin: 0 auto 60px;
+            margin-top: 50px;
+            border-radius: 20px;
+            padding: 50px;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .book-card.reverse { flex-direction: row-reverse; }
+
+        .book-img {
+            flex: 1;
+            max-width: 300px;
+            border-radius: 4px;
+        }
+
+        .book-info { flex: 2; }
+
+        .book-info h2 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        .book-info p.desc {
+            font-family: 'Instrumental Serif Italic', serif;
+            color: #602ba0;
+            margin-bottom: 25px;
+        }
+
+        .book-meta {
+            list-style: none;
+            margin-bottom: 30px;
+            font-family: 'Instrumental Serif', serif;
+        }
+
+        .book-meta li {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .amazon-btn {
+            display: inline-block;
+            background: #602ba0;
+            color: #f7e7d4;
+            text-decoration: none;
+            padding: 15px 35px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            border: 2px solid #602ba0; /* Bordo sottile color crema */
+            box-sizing: border-box;    /* Importante per non sballare le dimensioni */
+        }
+
+        .amazon-btn:hover { background: #f7e7d4; color: #583d8c; transform: translateY(-3px); }
+
+        /* --- SEZIONE COMMUNITY --- */
+        .section-community {
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .community-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .review-card {
+            background: #f7e7d4;
+            box-shadow: 0 1px 1px #602ba0;
+            padding: 40px 30px;
+            border-radius: 15px;
+            width: 300px;
+        }
+
+        .review-card img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+
+        .review-card h4 { font-family: 'Arimo', sans-serif; margin-bottom: 5px; }
+        .review-card p { font-size: 0.85rem; font-style: italic; color: #4a4054; }
+
+        /* --- SEZIONE SUPPORTO --- */
+        .section-support {
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .support-box {
+            /*background: rgba(255,255,255,0.6);*/
+            backdrop-filter: blur(10px);
+            padding: 60px;
+            /*border-radius: 30px;*/
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .support-box p { font-family: 'Arimo', sans-serif; font-size: 1.5rem; margin-bottom: 30px; }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-outline {
+            text-decoration: none;
+            border: 1px solid #211533;
+            color: #211533;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-outline:hover { background: #211533; color: #f7e7d4; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 850px) {
+            .grid-container { grid-template-columns: 1fr; }
+            .book-card { flex-direction: column; text-align: center; }
+            .book-card.reverse { flex-direction: column; }
+            header { padding: 20px; }
+            .desktop-nav { display: none; }
+            .hamburger { display: flex; }
+        }
+
+        /* Posizionamento comune per gli elementi centrali */
+        .circle-frame, .blob {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* Stile del cerchio sottile */
+        .circle-frame {
+            width: 60%; /* Regola la dimensione a tuo piacimento */
+            height: 60%;
+            border: 1px solid #211533; /* Sottile e semi-trasparente */
+            border-radius: 50%;
+            z-index: 2; /* Il cerchio sta sopra il colore per "contenerlo" */
+            pointer-events: none; /* Non interferisce con il mouse */
+        }
+        
+        .saturn-ring {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg); /* Ruotato per dare prospettiva */
+            width: 320px;   /* Più largo del cerchio per sbordare */
+            height: 100px;  /* Molto schiacciato per simulare l'ellisse */
+            border: 1px solid rgba(26, 17, 38, 0.3); /* Sottile */
+            border-radius: 50%;
+            z-index: 3;     /* Sopra il cerchio e sopra il blob */
+            pointer-events: none;
+            box-shadow: 0 1px 1px #602ba0;
+        }
+
+        /* Stile base per tutti i retro (mantiene leggibilità) */
+        .flip-card-back {
+            color: #211533;
+            background-color: #f7e7d4;
+            transition: background 0.5s ease;
+        }
+
+        /* Pulsante centrale (Fisso) */
+        .blob-button {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            text-align: center;
+            z-index: 10;
+            box-shadow: 0 1px 1px #602ba0;
+        }
+
+        .shop-text { font-family: 'Arimo', sans-serif; color: #211533; font-size: 11px; font-weight: bold; text-transform: uppercase; }
+
+        /* Contenitore che ruota */
+        .satellites-wrapper {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: rotateSystem 30s linear infinite;
+            pointer-events: none;
+        }
+
+        /* Bracci che definiscono la posizione angolare */
+        .orbit-arm {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+        }
+
+        /* Satellite che mantiene la distanza e raddrizza il testo */
+        .satellite {
+            position: absolute;
+            /* Usiamo !important per forzare il browser a ignorare il vecchio valore */
+            transform: translateY(-170px) !important; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80px;
+            animation: counterRotate 40s linear infinite;
+            pointer-events: auto;
+        }
+
+        .satellite img { 
+            width: 50px; 
+            height: 50px; 
+        }
+
+        .satellite span { 
+            font-family: 'Instrumental Serif Italic', serif;
+            font-size: 10px; 
+            color: #211533;
+            margin-top: 5px; 
+            text-transform: uppercase; 
+        }
+
+        .subtitle-user {
+            font-family: 'Instrumental Serif Italic', serif;
+            color: #602ba0;
+        }
+
+        .desc-user {
+            font-family: 'Instrumental Serif', serif;
+            color: #211533;
+        }
+
+        .section-support {
+            padding: 60px 20px;
+            text-align: center;
+            font-family: 'Arimo', sans-serif;
+        }
+
+        .support-box {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .support-box h3 {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn-group {
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px; /* Spazio tra i bottoni */
+        }
+
+        .btn-contact {
+            display: inline-block;
+            padding: 10px 20px;
+            border: 1px solid #211533;
+            color: #211533;
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .btn-contact:hover {
+            background: #211533;
+            color: #f7e7d4; /* Colore di sfondo del tuo sito */
+        }
+
+        .legal-note {
+            font-family: 'Instrumental Serif Italic' !important;
+            font-size: 0.75rem;
+            margin-top: 20px;
+            color: #f7e7d4;
+            text-shadow: -1px -1px 0 #602ba0, 1px -1px 0 #602ba0, -1px 1px 0 #602ba0, 1px 1px 0 #602ba0;
+        }
+
+        .license-text {
+            color: #211533;
+            font-family: 'Instrumental Serif' !important;
+        }
+        
+        /* Animazioni */
+        @keyframes rotateSystem { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes counterRotate { from { transform: rotate(0deg); } to { transform: rotate(-3600deg); } }
+    </style>
+</head>
 <body>
+
+    <div class="aurora-bg"></div>
+
     <header>
-        <nav>
-            <a href="index.html">Dev</a>
-            <a href="public.html">Personaggio Pubblico</a>
-            <a href="projects.html">Progetti</a>
+        <div><img src="C:\Users\f.gorrino\Desktop\Asset\firme.png" class="logo"></div>
+        <nav class="desktop-nav">
+            <a href="#hero">Intro</a>
+            <a href="#collezioni">Collezioni</a>
+            <a href="#libri">Libri</a>
+            <a href="#community">Community</a>
         </nav>
+        <button class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </header>
 
-<!-- Header -->
-<section id="intro" class="hero">
-    <div class="intro-content">
-    <img src="assets/images/logo-dev.jpg" alt="Logo" class="logo">
-    <h1>Federico Silvio Gorrino</h1>
-    <p>Backend Developer & Software Engineer</p>
-    <p>Backend Developer con oltre 5 anni di esperienza, specializzato in Java, Python, C++, Cloud Computing e molto altro.</p>
-    </div>
-</section>
+    <nav class="mobile-menu">
+        <button class="close-btn" onclick="toggleMenu()">×</button>
+        <a href="#hero">Intro</a>
+        <a href="#collezioni">Collezioni</a>
+        <a href="#libri">Libri</a>
+        <a href="#community">Community</a>
+    </nav>
 
-<!-- About Section -->
-<section id="about" class="section">
-    <h2>Chi Sono</h2>
-    <p>Sono un Backend Developer con esperienza in contesti aziendali dinamici e startup innovative. Ho lavorato su progetti complessi di sviluppo backend, cloud computing (AWS, GCP) e programmazione in vari linguaggi come Java, Python, C++ e altro ancora. La mia passione è risolvere problemi complessi e migliorare l'efficienza dei processi aziendali tramite soluzioni tecnologiche avanzate. Attualmente sono alla ricerca di una posizione stabile dove poter applicare le competenze acquisite e contribuire alla crescita di progetti strategici.</p>
-</section>
+    <section class="hero" id="hero">
+        <div class="vertical-line"></div>
+        <h1>Una Voce<br>Dal Profondo</h1>
+        <p class="subtitle">guardarsi, formarsi, <span class="subtitle-white">scoprirsi</span>.</p>
+        <div class="vertical-line"></div>
+        <p style="max-width: 600px; font-weight: 300; font-family: 'Instrumental Serif', serif;">Un universo che unisce introspezione, conoscenza e creatività per accompagnarti in un viaggio autentico.</p>
+    </section>
 
-<!-- Experience Section -->
-<section id="experience" class="section">
-    <h2>Esperienza Lavorativa</h2>
-    <div class="experience-item">
-        <h3>Reply, Turin (Consultant III)</h3>
-        <p><strong>Jan 2025 - Present</strong></p>
-        <ul>
-            <li>Consulente per la migrazione di database.</li>
-            <li>Gestione del software e lancio delle pipeline di migrazione in Python.</li>
-            <li>Uso di databse SQL like sia in Cloud che no.</li>
-        </ul>
-    </div>
-    <div class="experience-item">
-        <h3>Software Solutions, Turin (Freelancer)</h3>
-        <p><strong>Apr 2022 - Dec 2024</strong></p>
-        <ul>
-            <li>Consulenza e sviluppo backend per varie startup e aziende, con focus su AWS, GCP, e database.</li>
-            <li>Sviluppo di soluzioni personalizzate per migliorare la gestione e l'elaborazione dei dati.</li>
-        </ul>
-    </div>
-    <div class="experience-item">
-        <h3>Young Platform, Turin (Backend Developer)</h3>
-        <p><strong>Oct 2022 - Dec 2022</strong></p>
-        <ul>
-            <li>Sviluppo backend per la piattaforma di criptovalute, utilizzando linguaggi come Python e Go.</li>
-            <li>Implementazione di soluzioni scalabili per gestire migliaia di transazioni al secondo.</li>
-        </ul>
-    </div>
-    <div class="experience-item">
-        <h3>Reply, Milan (Consultant II)</h3>
-        <p><strong>Dec 2020 - Apr 2022</strong></p>
-        <ul>
-            <li>Consulente per progetti software complessi e gestione del ciclo di vita delle applicazioni.</li>
-            <li>Collaborazione con team di sviluppo per implementare soluzioni in Java e Python.</li>
-            <li>Ottimizzazione dei sistemi backend e cloud per migliorarne le prestazioni.</li>
-        </ul>
-    </div>
-</section>
+    <section class="section-cards" id="collezioni">
+        <h2 style="font-family: 'Arimo', sans-serif; font-size: 2.5rem;">Ogni collezione un <span class="title-white">mondo</span></h2>
+        
+        <div class="grid-container">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="circle-frame"></div>
+                        <div class="blob blob-1"></div>
+                        <div class="card-content-front">
+                            <h3 class="card-title-serif">MARS</h3>
+                            <p class="card-col-num">Mood and Stress</p>
+                            <div class="card-divider">&#10022;</div>
+                            <p class="card-tagline">Accendi il coraggio, governa la tempesta</p>
+                            <div class="card-terms">
+                                <span>BURNOUT</span>&#10022;
+                                <span>STRESS</span>&#10022;
+                                <span>DYSTHYMIA</span>
+                            </div>
+                            <div class="card-terms">
+                                <span>DEPRESSION</span>&#10022;
+                                <span>BIPOLAR DISORDER</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card-back back-1">
+                        <!-- Pulsante Centrale (Fisso) -->
+                        <a href="https://www.redbubble.com" class="blob-button blob-1">
+                            <span class="shop-text">MARS</span>
+                        </a>
 
-<!-- Skills Section -->
-<section id="skills" class="section">
-    <h2>Le Mie Competenze</h2>
-    <div class="skills-container">
-        <div class="skill-category">
-            <h3>Backend Development (Python, Golang, Java, C#, C++)</h3>
-            <div class="skill-bar">
-                <div class="skill-progress backend" style="width: 90%;"></div>
+                        <!-- Contenitore che ruota -->
+                        <div class="satellites-wrapper">
+                            <div class="orbit-arm" style="transform: rotate(0deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 4\burnout.png"><span>BURNOUT</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(72deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 4\stress.png"><span>STRESS</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(144deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 4\distimia.png"><span>DYSTHYMIA</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(216deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 4\depressione.png"><span>DEPRESSION</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(288deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 4\disturbo_bipolare.png"><span>BIPOLAR DISORDER</span></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="circle-frame"></div>
+                        <div class="blob blob-2"></div>
+                        <div class="card-content-front">
+                            <h3 class="card-title-serif">MERCURY</h3>
+                            <p class="card-col-num">Learning Differences</p>
+                            <div class="card-divider">&#10022;</div>
+                            <p class="card-tagline">Il pensiero segue rotte inedite</p>
+                            <div class="card-terms">
+                                <span>DYSLEXIA</span>&#10022;
+                                <span>DYSPRAXIA</span>&#10022;
+                                <span>HYPERLEXIA</span>
+                            </div>
+                            <div class="card-terms">
+                                <span>DYSCALCULIA</span>&#10022;
+                                <span>DYSGRAPHIA</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card-back back-2">
+                        <!-- Pulsante Centrale (Fisso) -->
+                        <a href="https://www.redbubble.com" class="blob-button blob-2">
+                            <span class="shop-text">MERCURY</span>
+                        </a>
+
+                        <!-- Contenitore che ruota -->
+                        <div class="satellites-wrapper">
+                            <div class="orbit-arm" style="transform: rotate(0deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 2\dislessia.png"><span>DYSLEXIA</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(72deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 2\disprassia.png"><span>DYSPRAXIA</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(144deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 2\iperlessia.png"><span>HYPERLEXIA</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(216deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 2\discalculia.png"><span>DYSCALCULIA</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(288deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 2\disgrafia.png"><span>DYSGRAPHIA</span></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="circle-frame"></div>
+                        <div class="blob blob-3"></div>
+                        <div class="card-content-front">
+                            <h3 class="card-title-serif">VENUS</h3>
+                            <p class="card-col-num">Personality Disorders</p>
+                            <div class="card-divider">&#10022;</div>
+                            <p class="card-tagline">Nell'armonia del sé, il ritratto dell'anima</p>
+                            <div class="card-terms">
+                                <span>AVOIDANT PERSONALITY DISORDER</span>&#10022;
+                                <span>ANTISOCIAL PERSONALITY DISORDER</span>&#10022;
+                                <span>PARANOID PERSONALITY DISORDER</span>
+                            </div>
+                            <div class="card-terms">
+                                <span>BORDERLINE PERSONALITY DISORDER</span>&#10022;
+                                <span>NARCISSISTIC PERSONALITY DISORDER</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card-back back-3">
+                        <!-- Pulsante Centrale (Fisso) -->
+                        <a href="https://www.redbubble.com" class="blob-button blob-3">
+                            <span class="shop-text">VENUS</span>
+                        </a>
+
+                        <!-- Contenitore che ruota -->
+                        <div class="satellites-wrapper">
+                            <div class="orbit-arm" style="transform: rotate(0deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 5\disturbo_evitante_personalità.png"><span>AVOIDANT PERSONALITY DISORDER</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(72deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 5\disturbo_antisociale_personalità.png"><span>ANTISOCIAL PERSONALITY DISORDER</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(144deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 5\disturbo_paranoide_personalità.png"><span>PARANOID PERSONALITY DISORDER</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(216deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 5\disturbo_borderline_personalità.png"><span>BORDERLINE PERSONALITY DISORDER</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(288deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 5\disturbo_narcisistico_personalità.png"><span>NARCISSISTIC PERSONALITY DISORDER</span></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="circle-frame"></div>
+                        <div class="blob blob-4"></div>
+                        <div class="card-content-front">
+                            <h3 class="card-title-serif">EARTH</h3>
+                            <p class="card-col-num">Brain and Perception</p>
+                            <div class="card-divider">&#10022;</div>
+                            <p class="card-tagline">Radicati nel reale, esplora l'infinito</p>
+                            <div class="card-terms">
+                                <span>PHANTOM LIMB</span>&#10022;
+                                <span>HYPERTHYMESIA</span>&#10022;
+                                <span>SYNESTHESIA</span>
+                            </div>
+                            <div class="card-terms">
+                                <span>SAVANT SYNDROME</span>&#10022;
+                                <span>PROSOPAGNOSIA</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card-back back-4">
+                        <!-- Pulsante Centrale (Fisso) -->
+                        <a href="https://www.redbubble.com" class="blob-button blob-4">
+                            <span class="shop-text">EARTH</span>
+                        </a>
+
+                        <!-- Contenitore che ruota -->
+                        <div class="satellites-wrapper">
+                            <div class="orbit-arm" style="transform: rotate(0deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 7\arto_fantasma.png"><span>PHANTOM LIMB</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(72deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 7\ipertimesia.png"><span>HYPERTHYMESIA</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(144deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 7\sinestesia.png"><span>SYNESTHESIA</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(216deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 7\sindrome_savant.png"><span>SAVANT SYNDROME</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(288deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 7\prosopagnosia.png"><span>PROSOPAGNOSIA</span></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="circle-frame"></div>
+                        <div class="blob blob-5"></div>
+                        <div class="card-content-front">
+                            <h3 class="card-title-serif">JUPITER</h3>
+                            <p class="card-col-num">Neurodivergence</p>
+                            <div class="card-divider">&#10022;</div>
+                            <p class="card-tagline">Oltre i confini, la visione si espande</p>
+                            <div class="card-terms">
+                                <span>AUTISM LEVEL 1</span>&#10022;
+                                <span>AUTISM LEVEL 2</span>&#10022;
+                                <span>AUTISM LEVEL 3</span>
+                            </div>
+                            <div class="card-terms">
+                                <span>TOURETTE SYNDROME</span>&#10022;
+                                <span>ADHD</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card-back back-5">
+                        <!-- Pulsante Centrale (Fisso) -->
+                        <a href="https://www.redbubble.com" class="blob-button blob-5">
+                            <span class="shop-text">JUPITER</span>
+                        </a>
+
+                        <!-- Contenitore che ruota -->
+                        <div class="satellites-wrapper">
+                            <div class="orbit-arm" style="transform: rotate(0deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 1\autismo_lv1.png"><span>AUTISM LEVEL 1</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(72deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 1\autismo_lv2.png"><span>AUTISM LEVEL 2</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(144deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 1\autismo_lv3.png"><span>AUTISM LEVEL 3</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(216deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 1\sindrome_tourette.png"><span>TOURETTE SYNDROME</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(288deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 1\adhd.png"><span>ADHD</span></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="circle-frame"></div>
+                        <div class="saturn-ring"></div>
+                        <div class="blob blob-6"></div>
+                        <div class="card-content-front">
+                            <h3 class="card-title-serif">SATURN</h3>
+                            <p class="card-col-num">Neuro-Development</p>
+                            <div class="card-divider">&#10022;</div>
+                            <p class="card-tagline">Costruire il tempo, plasmare il divenire</p>
+                            <div class="card-terms">
+                                <span>MULTIPOTENTIALITY</span>&#10022;
+                                <span>HSP</span>&#10022;
+                                <span>GIFTEDNESS</span>
+                            </div>
+                            <div class="card-terms">
+                                <span>ASYNCHRONOUS DEVELOPMENT</span>&#10022;
+                                <span>SENSORY OVER-REACTIVITY</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card-back back-6">
+                        <!-- Pulsante Centrale (Fisso) -->
+                        <a href="https://www.redbubble.com" class="blob-button blob-6">
+                            <span class="shop-text">SATURN</span>
+                        </a>
+
+                        <!-- Contenitore che ruota -->
+                        <div class="satellites-wrapper">
+                            <div class="orbit-arm" style="transform: rotate(0deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 8\multi_potenzialità.png"><span>MULTIPOTENTIALITY</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(72deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 8\persona_altamente_sensibile.png"><span>HSP</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(144deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 8\plusdotazione.png"><span>GIFTEDNESS</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(216deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 8\asincronia_sviluppo.png"><span>ASYNCHRONOUS DEVELOPMENT</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(288deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 8\iper_reattività_sensoriale.png"><span>SENSORY OVER-REACTIVITY</span></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="circle-frame"></div>
+                        <div class="blob blob-7"></div>
+                        <div class="card-content-front">
+                            <h3 class="card-title-serif">URANUS</h3>
+                            <p class="card-col-num">Neurological Disorders</p>
+                            <div class="card-divider">&#10022;</div>
+                            <p class="card-tagline">L'energia che danza tra le connessioni</p>
+                            <div class="card-terms">
+                                <span>APHASIA</span>&#10022;
+                                <span>CHRONIC MIGRAINE</span>&#10022;
+                                <span>EPILEPSY</span>
+                            </div>
+                            <div class="card-terms">
+                                <span>PARKINSON'S DISEASE</span>&#10022;
+                                <span>MULTIPLE SCLEROSIS</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card-back back-7">
+                        <!-- Pulsante Centrale (Fisso) -->
+                        <a href="https://www.redbubble.com" class="blob-button blob-7">
+                            <span class="shop-text">URANUS</span>
+                        </a>
+
+                        <!-- Contenitore che ruota -->
+                        <div class="satellites-wrapper">
+                            <div class="orbit-arm" style="transform: rotate(0deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 6\afasia.png"><span>APHASIA</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(72deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 6\emicrania_cronica.png"><span>CHRONIC MIGRAINE</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(144deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 6\epilessia.png"><span>EPILEPSY</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(216deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 6\malattia_parkinson.png"><span>PARKINSON'S DISEASE</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(288deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 6\sclerosi_multipla.png"><span>MULTIPLE SCLEROSIS</span></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="circle-frame"></div>
+                        <div class="blob blob-8"></div>
+                        <div class="card-content-front">
+                            <h3 class="card-title-serif">NEPTUNE</h3>
+                            <p class="card-col-num">Anxiety Disorders</p>
+                            <div class="card-divider">&#10022;</div>
+                            <p class="card-tagline">Placare l'abisso, ritrovare la riva</p>
+                            <div class="card-terms">
+                                <span>PANIC ATTACKS</span>&#10022;
+                                <span>GAD</span>&#10022;
+                                <span>OCD</span>
+                            </div>
+                            <div class="card-terms">
+                                <span>SOCIAL ANXIETY DISORDER</span>&#10022;
+                                <span>SELECTIVE MUTISM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card-back back-8">
+                        <!-- Pulsante Centrale (Fisso) -->
+                        <a href="https://www.redbubble.com" class="blob-button blob-8">
+                            <span class="shop-text">NEPTUNE</span>
+                        </a>
+
+                        <!-- Contenitore che ruota -->
+                        <div class="satellites-wrapper">
+                            <div class="orbit-arm" style="transform: rotate(0deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 3\attacchi_panico.png"><span>PANIC ATTACKS</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(72deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 3\disturbo_ansia_generalizzata.png"><span>GAD</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(144deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 3\disturbo_ossessivo_compulsivo.png"><span>OCD</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(216deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 3\disturbo_ansia_sociale.png"><span>SOCIAL ANXIETY DISORDER</span></div></div>
+                            <div class="orbit-arm" style="transform: rotate(288deg);"><div class="satellite"><img src="C:\Users\f.gorrino\Desktop\Asset\Collezione 3\mutismo_selettivo.png"><span>SELECTIVE MUTISM</span></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+    </section>
+
+    <section class="section-books" id="libri">
+        <h2 style="font-family: 'Arimo', sans-serif; font-size: 2.5rem;">Ogni storia un <span class="title-white">viaggio</span></h2>
+
+        <div class="book-card">
+            <img src="C:\Users\f.gorrino\Desktop\Asset\copertina.jpg" class="book-img" alt="Libro Ombre di Verità">
+            <div class="book-info">
+                <h2>Sogni di Libertà</h2>
+                <p class="desc">Una raccolta di favole moderne sul coraggio di essere felici.</p>
+                <ul class="book-meta">
+                    <li><i class="fa-solid fa-users"></i> Adatto: Dai 6 ai 18 anni</li>
+                    <li><i class="fa-solid fa-book-open"></i> Lunghezza: 79 pagine di pura narrazione</li>
+                </ul>
+                <a href="#" class="amazon-btn">Vai su Amazon</a>
             </div>
         </div>
-        <div class="skill-category">
-            <h3>Cloud Computing (AWS & GCP)</h3>
-            <div class="skill-bar">
-                <div class="skill-progress cloud" style="width: 85%;"></div>
+
+        <div class="book-card reverse">
+            <img src="C:\Users\f.gorrino\Desktop\Asset\copertina_1.jpg" class="book-img" alt="Libro Geometrie dell'Anima">
+            <div class="book-info">
+                <h2>Ombre di Verità</h2>
+                <p class="desc">Una raccolta di racconti introspettivi sul coraggio di guardarsi dentro.</p>
+                <ul class="book-meta">
+                    <li><i class="fa-solid fa-users"></i> Adatto: Dai 6 ai 18 anni</li>
+                    <li><i class="fa-solid fa-book-open"></i> Lunghezza: 165 pagine di pura narrazione</li>
+                </ul>
+                <a href="#" class="amazon-btn">Vai su Amazon</a>
             </div>
         </div>
-        <div class="skill-category">
-            <h3>UX/UI</h3>
-            <div class="skill-bar">
-                <div class="skill-progress programming" style="width: 70%;"></div>
+    </section>
+
+    <section class="section-community" id="community">
+        <h2 style="font-family: 'Arimo', sans-serif; font-size: 2.5rem;">Cosa dice la <span class="title-white">Community</span></h2>
+        <div class="community-grid">
+            <div class="review-card">
+                <img src="C:\Users\f.gorrino\Desktop\Asset\user\roberto.jpg" alt="Roberto">
+                <h4>Roberto Baldassari</h4>
+                <h5 class="subtitle-user">Ex Deputato della Repubblica Italiana</h5>
+                <p class="desc-user">"Un esordio luminoso. Un libro che non vuole complicare il mondo, ma provare a curarlo attraverso il potere del racconto."</p>
+            </div>
+            <div class="review-card">
+                <img src="C:\Users\f.gorrino\Desktop\Asset\user\transatlantike.jpg" alt="Transatlantike">
+                <h4>Le Transatlantike</h4>
+                <h5 class="subtitle-user">Associazione di Promozione Sociale</h5>
+                <p class="desc-user">"Un libro in cui la voglia di libertà porta i protagonisti a superare le paure e ad essere se stessi."</p>
+            </div>
+            <div class="review-card">
+                <img src="C:\Users\f.gorrino\Desktop\Asset\user\valentina.jpg" alt="Valentina">
+                <h4>Valentina Santini</h4>
+                <h5 class="subtitle-user">Egittologa</h5>
+                <p class="desc-user">"Federico ha il superpotere di far danzare le parole. Nelle sue storie (che non sono mai solo "storie") c'è una musica che suona come un regalo e che fa bene all'anima."</p>
             </div>
         </div>
-        <div class="skill-category">
-            <h3>Frontend Development (ReactJS, Angular, Vue)</h3>
-            <div class="skill-bar">
-                <div class="skill-progress frontend" style="width: 50%;"></div>
+    </section>
+
+    <section class="section-support">
+        <div class="support-box">
+            <h2 style="font-family: 'Arimo', sans-serif; font-size: 2.5rem;">Informazioni e Licenze</h2>
+            <p class="license-text">Le opere esposte sono tutelate da diritto d'autore. Per collaborazioni, richieste professionali o per consultare il catalogo delle licenze autorizzate, puoi trovarmi qui:</p>
+
+            <div class="btn-group">
+                <a href="mailto:contatto@federicogorrino.it" class="amazon-btn">Email</a>
+                <a href="#" class="amazon-btn">Instagram</a>
+                <a href="#" class="amazon-btn">Redbubble (Licenze)</a>
             </div>
+
+            <p class="legal-note">Ogni riproduzione non autorizzata è vietata.</p>
         </div>
-        <div class="skill-category">
-            <h3>Database (MySQL, PostgreSQL, MongoDb, Redis)</h3>
-            <div class="skill-bar">
-                <div class="skill-progress database" style="width: 75%;"></div>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
 
-<!-- Education Section -->
-<section id="education" class="section">
-    <h2>Educazione</h2>
-    <div class="education-item">
-        <h3>Polytechnic University of Turin</h3>
-        <p><strong>MSc in Computer Engineering</strong> | <em>Sep 2018 – Oct 2020</em></p>
-        <p><strong>Thesis:</strong> <a href="https://webthesis.biblio.polito.it/view/creators/Gorrino=3AFederico_Silvio=3A=3A.html" target="_blank" rel="noopener noreferrer">"Applying Machine Learning to a Telegram Conversational Agent as Educational Support"</a></p>
-        <p><strong>Final Mark:</strong> 101/110</p>
-    </div>
-    <div class="education-item">
-        <h3>Polytechnic University of Turin</h3>
-        <p><strong>BSc in Computer Engineering</strong> | <em>Aug 2015 – Sep 2018</em></p>
-    </div>
-</section>
+    <footer style="padding: 50px; text-align: center; font-size: 0.7rem; opacity: 0.5; text-transform: uppercase; letter-spacing: 2px;">
+        UNA VOCE DAL PROFONDO • Federico Gorrino &copy; 2024
+    </footer>
 
-<!-- Languages Section -->
-<section id="languages" class="section">
-    <h2>Lingue</h2>
-    <ul>
-        <li><strong>Italiano:</strong> Madrelingua</li>
-        <li><strong>Inglese:</strong> Lavorativo Professionale</li>
-        <li><strong>Francese:</strong> Lavorativo Limitato</li>
-    </ul>
-</section>
+    <script>
+        const header = document.querySelector('header');
 
-<!-- Certifications Section -->
-<section id="certifications" class="section">
-    <h2>Certificazioni</h2>
-    <ul>
-        <li><strong>Google Cloud Certified - Professional Cloud Architect</strong></li>
-        <li><strong>Corso base di CNV</strong></li>
-        <li><strong>Corso per HR e Leadership</strong></li>
-    </ul>
-</section>
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) { // Se scrolli più di 50px
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
 
-<!-- Contact Section -->
-<section id="contact" class="section">
-    <h2>Contattami</h2>
-    <p>Se vuoi collaborare o discutere di un progetto, sentiti libero di contattarmi!</p>
-    <p>Email: <a href="mailto:fs.gorrino.dev@gmail.com">fs.gorrino.dev@gmail.com</a></p>
-    <p>Telefono: <a href="tel:+393466380444">+39 346 638 0444</a></p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/federico-silvio-gorrino-044446123/" target="_blank">Federico Silvio Gorrino</a></p>
-</section>
+        function toggleMenu() {
+            const menu = document.querySelector('.mobile-menu');
+            menu.classList.toggle('open');
+            // Blocca scroll pagina
+            document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : 'auto';
+        }
 
-<!-- Footer -->
-<footer>
-    <p>&copy; 2024 Federico Silvio Gorrino | Tutti i diritti riservati</p>
-</footer>
+        // CHIUSURA AUTOMATICA: aggiungi questo pezzo
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                const menu = document.querySelector('.mobile-menu');
+                menu.classList.remove('open');
+                document.body.style.overflow = 'auto'; // Ripristina scroll
+            });
+        });
+    </script>
 
 </body>
 </html>
