@@ -19,7 +19,7 @@
 
         @font-face {
             font-family: 'Arimo';
-            src: url('.\\Asset\\fonts\\Arimo-VariableFont_wght.ttf') format('truetype');
+            src: url('C:\\Users\\f.gorrino\\Desktop\\Asset\\fonts\\Arimo-VariableFont_wght.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
@@ -27,7 +27,7 @@
 
         @font-face {
             font-family: 'Instrumental Serif';
-            src: url('.\\Asset\\fonts\\InstrumentSerif-Regular.ttf') format('truetype');
+            src: url('C:\\Users\\f.gorrino\\Desktop\\Asset\\fonts\\InstrumentSerif-Regular.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
@@ -35,7 +35,7 @@
 
         @font-face {
             font-family: 'Instrumental Serif Italic';
-            src: url('.\\Asset\\fonts\\InstrumentSerif-Italic.ttf') format('truetype');
+            src: url('C:\\Users\\f.gorrino\\Desktop\\Asset\\fonts\\InstrumentSerif-Italic.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
@@ -272,6 +272,13 @@
             margin: 20px 0;
         }
 
+        .section-mascotte {
+            padding: 100px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
         /* --- SEZIONE CARD FLIP (Layout 2x4) --- */
         .section-cards {
             padding: 100px 20px;
@@ -304,6 +311,10 @@
 
         .flip-card:hover .flip-card-inner {
             transform: rotateY(180deg);
+        }
+
+        .card-disble:hover .flip-card-inner {
+            transform: none;
         }
 
         .flip-card-front, .flip-card-back {
@@ -351,6 +362,8 @@
         .blob-6 { background: radial-gradient(circle, #F5F5DC, #BDB76B, #708090); }
         .blob-7 { background: radial-gradient(circle, #00FFFF, #4682B4, #0000FF); }
         .blob-8 { background: radial-gradient(circle, #E6E6FA, #6A5ACD, #191970); }
+        .blob-9 { background: radial-gradient(circle, #000000 15%, #0B001A 50%, #8B00FF 80%, #000000 100%); }
+        .blob-10 { background: radial-gradient(circle, #FFFFFF 20%, #E0F7FA 55%, #80DEEA 85%, #FFFFFF 100%); }
 
         .card-content-front {
             position: relative;
@@ -590,6 +603,21 @@
             .hamburger { display: flex; }
         }
 
+        /* Di base mostra l'immagine desktop e nasconde quella mobile */
+        .logo-mobile {
+          display: none;
+        }
+
+        /* Sotto i 850px inverte la visibilità */
+        @media (max-width: 850px) {
+          .logo {
+            display: none;
+          }
+          .logo-mobile {
+            display: block;
+          }
+        }
+
         /* Posizionamento comune per gli elementi centrali */
         .circle-frame, .blob {
             position: absolute;
@@ -753,6 +781,32 @@
             color: #211533;
             font-family: 'Instrumental Serif' !important;
         }
+
+        /* Il contenitore principale deve fare da ancora */
+        .book-card {
+            position: relative;
+            /* Manti le tue regole esistenti (es. display: flex; overflow: hidden; ecc.) */
+        }
+        
+        /* Posizionamento fisso in alto a destra */
+        .moon-icon {
+            position: absolute;
+            top: 15px;       /* Distanza dal bordo superiore */
+            right: 15px;     /* Distanza dal bordo destro */
+            font-size: 1.5rem; /* Dimensione dell'emoji */
+            line-height: 1;  /* Evita spaziature indesiderate */
+            z-index: 10;     /* Assicura che stia sopra agli altri elementi */
+        }
+
+        /* Posizionamento fisso in alto a destra */
+        .moon-icon-reverse {
+            position: absolute;
+            top: 15px;       /* Distanza dal bordo superiore */
+            left: 15px;     /* Distanza dal bordo destro */
+            font-size: 1.5rem; /* Dimensione dell'emoji */
+            line-height: 1;  /* Evita spaziature indesiderate */
+            z-index: 10;     /* Assicura che stia sopra agli altri elementi */
+        }
         
         /* Animazioni */
         @keyframes rotateSystem { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -792,6 +846,21 @@
         <p class="subtitle">guardarsi, formarsi, <span class="subtitle-white">scoprirsi</span>.</p>
         <div class="vertical-line"></div>
         <p style="max-width: 600px; font-weight: 300; font-family: 'Instrumental Serif', serif;">Un universo che unisce introspezione, conoscenza e creatività per accompagnarti in un viaggio autentico.</p>
+    </section>
+
+    <section class="section-mascotte" id="mascotte">
+        <h2 style="font-family: 'Arimo', sans-serif; font-size: 2.5rem;">La nostra <span class="title-white">mascotte</span></h2>
+
+        <div class="book-card reverse">
+            <img src=".\Asset\mascotte.png" class="book-img" alt="Libro Geometrie dell'Anima">
+            <div class="book-info">
+                <h2>La nostra mascotte: Silen</h2>
+                <p class="desc">Un viaggio intergalattico alla scoperta del proprio mondo interiore.</p>
+                <span>
+                    Silen è la specie ancestrale da cui discendono tutti gli abitanti del nostro Sistema Solare. Attraverso le sue diverse forme planetarie, ci accompagna a scoprire la bellezza e la complessità di ogni sfumatura della neurodivergenza. Una raccolta di racconti introspettivi sul coraggio di guardarsi dentro, capirsi e accogliersi.
+                </span>
+            </div>
+        </div>
     </section>
 
     <section class="section-cards" id="collezioni">
@@ -1118,6 +1187,7 @@
         <h2 style="font-family: 'Arimo', sans-serif; font-size: 2.5rem;">Ogni storia un <span class="title-white">viaggio</span></h2>
 
         <div class="book-card">
+            <span class="moon-icon">🌑</span>
             <img src=".\Asset\copertina.jpg" class="book-img" alt="Libro Ombre di Verità">
             <div class="book-info">
                 <h2>Sogni di Libertà</h2>
@@ -1131,6 +1201,7 @@
         </div>
 
         <div class="book-card reverse">
+            <span class="moon-icon-reverse">🌓</span>
             <img src=".\Asset\copertina_1.jpg" class="book-img" alt="Libro Geometrie dell'Anima">
             <div class="book-info">
                 <h2>Ombre di Verità</h2>
@@ -1142,7 +1213,67 @@
                 <a href="#" class="amazon-btn">Vai su Amazon</a>
             </div>
         </div>
+
+        <div class="book-card">
+            <span class="moon-icon">🌕</span>
+            <img src=".\Asset\copertina_2.jpg" class="book-img" alt="Libro Ombre di Verità">
+            <div class="book-info">
+                <h2>L'erede di Sherlock Holmes</h2>
+                <p class="desc">Una raccolta di favole moderne sul coraggio di essere felici.</p>
+                <ul class="book-meta">
+                    <li><i class="fa-solid fa-users"></i> Adatto: Dai 6 ai 18 anni</li>
+                    <li><i class="fa-solid fa-book-open"></i> Lunghezza: ???</li>
+                </ul>
+                <a href="#" class="amazon-btn">Coming in 2027</a>
+            </div>
+        </div>
     </section>
+
+    <!--<section class="section-cards" id="collezioni">
+        <h2 style="font-family: 'Arimo', sans-serif; font-size: 2.5rem;">Ogni gioco un'<span class="title-white">esperienza</span></h2>
+
+        <div class="grid-container">
+            <div class="flip-card card-disble">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="circle-frame"></div>
+                        <div class="blob blob-9"></div>
+                        <div class="card-content-front">
+                            <h3 class="card-title-serif">BLACK HOLE</h3>
+                            <div class="card-divider">&#10022;</div>
+                            <p class="card-tagline">Accendi il coraggio, governa la tempesta</p>
+                            <div class="card-terms">
+                                Gioca questa esperienza
+                            </div>
+                            <div class="card-terms">
+                                Nel 2028
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card card-disble">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="circle-frame"></div>
+                        <div class="blob blob-10"></div>
+                        <div class="card-content-front">
+                            <h3 class="card-title-serif">WHITE HOLE</h3>
+                            <div class="card-divider">&#10022;</div>
+                            <p class="card-tagline">Il pensiero segue rotte inedite</p>
+                            <div class="card-terms">
+                                Gioca questa esperienza
+                            </div>
+                            <div class="card-terms">
+                                Nel 2028
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>-->
 
     <section class="section-community" id="community">
         <h2 style="font-family: 'Arimo', sans-serif; font-size: 2.5rem;">Cosa dice la <span class="title-white">Community</span></h2>
