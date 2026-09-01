@@ -641,12 +641,19 @@
             top: 45%;
             left: 50%;
             transform: translate(-50%, -50%) rotate(-15deg); /* Ruotato per dare prospettiva */
-            width: 320px;   /* Più largo del cerchio per sbordare */
-            height: 100px;  /* Molto schiacciato per simulare l'ellisse */
+            width: 400px;   /* Più largo del cerchio per sbordare */
+            height: 125px;  /* Molto schiacciato per simulare l'ellisse */
             border: 1px solid #211533; /* Sottile e semi-trasparente */
             border-radius: 50%;
             z-index: 3;     /* Sopra il cerchio e sopra il blob */
             pointer-events: none;
+        }
+
+        @media (max-width: 850px) {
+            .saturn-ring {
+                width: 480px;   /* Più largo del cerchio per sbordare */
+                height: 150px;  /* Molto schiacciato per simulare l'ellisse */
+            }
         }
 
         /* Stile base per tutti i retro (mantiene leggibilità) */
