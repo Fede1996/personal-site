@@ -806,6 +806,19 @@
             line-height: 1;  /* Evita spaziature indesiderate */
             z-index: 10;     /* Assicura che stia sopra agli altri elementi */
         }
+
+        .saturn-mini-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg); /* Ruotato per dare prospettiva */
+            width: 160px;   /* Più largo del cerchio per sbordare */
+            height: 50px;  /* Molto schiacciato per simulare l'ellisse */
+            border: 1px solid #211533; /* Sottile e semi-trasparente */
+            border-radius: 50%;
+            z-index: 20;     /* Sopra il cerchio e sopra il blob */
+            pointer-events: none;
+        }
         
         /* Animazioni */
         @keyframes rotateSystem { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -1089,7 +1102,7 @@
                         </div>
                     </div>
                     <div class="flip-card-back back-6">
-                        <div class="saturn-ring"></div>
+                        <div class="saturn-mini-ring"></div>
                         <!-- Pulsante Centrale (Fisso) -->
                         <a href="https://www.redbubble.com" class="blob-button blob-6">
                             <span class="shop-text">SATURN</span>
