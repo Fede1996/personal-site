@@ -826,6 +826,22 @@
             z-index: 20;     /* Sopra il cerchio e sopra il blob */
             pointer-events: none;
         }
+
+        .amazon-btn-disabled {
+            display: inline-block;
+            background: #f7e7d4;
+            color: #583d8c;
+            text-decoration: none;
+            padding: 15px 35px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            border: 2px solid #602ba0; /* Bordo sottile color crema */
+            box-sizing: border-box;    /* Importante per non sballare le dimensioni */
+        }
         
         /* Animazioni */
         @keyframes rotateSystem { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -1249,7 +1265,7 @@
                     <li><i class="fa-solid fa-users"></i> Adatto: Dai 6 ai 18 anni</li>
                     <li><i class="fa-solid fa-book-open"></i> Lunghezza: ???</li>
                 </ul>
-                <a href="#" class="amazon-btn">Coming in 2027</a>
+                <div class="amazon-btn-disabled">Coming in 2027</a>
             </div>
         </div>
     </section>
