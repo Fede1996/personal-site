@@ -845,9 +845,11 @@
         }
 
         .desc-section-box {
-            min-width: 100vh;
+            min-height: 100vh; /* Usa height invece di width per l'altezza dello schermo */
             display: flex;
-            align-items: center; /* Centra verticalmente */
+            flex-direction: column; /* Dispone gli elementi in verticale (una colonna) */
+            justify-content: center; /* Centra verticalmente lungo l'asse principale */
+            align-items: center; /* Centra orizzontalmente lungo l'asse trasversale */
         }
         
         /* Animazioni */
