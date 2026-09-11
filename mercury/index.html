@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Federico Gorrino - Una Voce Dal Profondo</title>
+    <link rel="icon" type="image/png" href="-.\Asset\icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600;700&family=Cinzel+Decorative&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Collegamento al file CSS -->
+    <link rel="stylesheet" href="..\style.css">
+</head>
+<body>
+
+    <div class="aurora-bg"></div>
+
+    <header>
+        <div>
+            <img src="..\Asset\firme.png" class="logo">
+            <img src="..\Asset\firme-mobile.png" class="logo logo-mobile">
+        </div>
+        <nav class="desktop-nav">
+            <a href="#hero">Intro</a>
+            <a href="#mascotte">Mascotte</a>
+            <a href="#simboli">Simboli</a>
+        </nav>
+        <button class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <nav class="mobile-menu">
+        <button class="close-btn" onclick="toggleMenu()">×</button>
+        <a href="#hero">Intro</a>
+        <a href="#mascotte">Mascotte</a>
+        <a href="#simboli">Simboli</a>
+    </nav>
+
+    <section class="hero" id="hero">
+        <div class="vertical-line"></div>
+        <h1>MERCURY</h1>
+        <p class="subtitle">LEARNING DIFFERENCES</span>.</p>
+        <div class="vertical-line"></div>
+        <p style="max-width: 600px; font-weight: 300; font-family: 'Instrumental Serif', serif;">Il pensiero segue rotte inedite.</p>
+    </section>
+
+    <section class="section-mascotte" id="mascotte">
+        <h2 style="font-family: 'Arimo', sans-serif; font-size: 2.5rem;">LA NOSTRA <span class="title-white">MASCOTTE</span></h2>
+
+        <div class="book-card reverse">
+            <img src="..\Asset\Planet forms\MERCURY.png" class="book-img" alt="Libro Geometrie dell'Anima">
+            <div class="book-info">
+                <h2>La nostra mascotte: Silen</h2>
+                <p class="desc">Un viaggio intergalattico alla scoperta del proprio mondo interiore.</p>
+                <span>
+                    Silen è la specie ancestrale da cui discendono tutti gli abitanti del nostro Sistema Solare. Attraverso le sue diverse forme planetarie, ci accompagna a scoprire la bellezza e la complessità di ogni sfumatura della neurodivergenza. Una raccolta di racconti introspettivi sul coraggio di guardarsi dentro, capirsi e accogliersi.
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-books" id="libri">
+        <div class="desc-section-box">
+            <h2 style="font-family: 'Arimo', sans-serif; font-size: 2.5rem;">OGNI <span class="title-white">LUNA</span> ILLUMINA UNA STORIA</h2><br/><br/>
+            <p class="license-text" style="font-size: 1.1rem;">Come il viaggio della luna attraverso il cielo notturno, la collana Voci dal Profondo traccia un percorso di autodeterminazione personale.<br/>Dalla luce dei racconti di speranza del primo volume, si attraversa l'ombra della disillusione nel secondo, fino ad giungere al terzo libro: un romanzo che fonde entrambe le anime in un'unica visione.</p>
+        </div>
+        <div class="book-card">
+            <img src="..\Asset\Collezione 2\discalculia.png" class="book-img" alt="Libro Ombre di Verità">
+            <div class="book-info">
+                <h2>DYSCALCULIA</h2>
+                <p class="desc">Una raccolta di favole moderne sul coraggio di essere felici.</p>
+                <div><span>
+                    Silen è la specie ancestrale da cui discendono tutti gli abitanti del nostro Sistema Solare.
+                </span></div>
+                <a href="https://www.amazon.it/Sogni-Libertà-raccolta-moderne-coraggio/dp/B0FL1BCGF5/" class="amazon-btn">Vai su Redbubble</a>
+            </div>
+        </div>
+
+        <div class="book-card reverse">
+            <img src="..\Asset\Collezione 2\disgrafia.png" class="book-img" alt="Libro Geometrie dell'Anima">
+            <div class="book-info">
+                <h2>DYSGRAPHIA</h2>
+                <p class="desc">Una raccolta di racconti introspettivi sul coraggio di guardarsi dentro.</p>
+                <div><span>
+                    Silen è la specie ancestrale da cui discendono tutti gli abitanti del nostro Sistema Solare.
+                </span></div>
+                <a href="https://www.amazon.it/Ombre-Verità-raccolta-introspettivi-guardarsi-ebook/dp/B0GBY45ZVC/" class="amazon-btn">Vai su Redbubble</a>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="..\Asset\Collezione 2\dislessia.png" class="book-img" alt="Libro Ombre di Verità">
+            <div class="book-info">
+                <h2>DYSLEXIA</h2>
+                <p class="desc">Una raccolta di favole moderne sul coraggio di essere felici.</p>
+                <div><span>
+                    Silen è la specie ancestrale da cui discendono tutti gli abitanti del nostro Sistema Solare.
+                </span></div>
+                <a href="https://www.amazon.it/Ombre-Verità-raccolta-introspettivi-guardarsi-ebook/dp/B0GBY45ZVC/" class="amazon-btn">Vai su Redbubble</a>
+            </div>
+        </div>
+
+        <div class="book-card reverse">
+            <img src="..\Asset\Collezione 2\disprassia.png" class="book-img" alt="Libro Geometrie dell'Anima">
+            <div class="book-info">
+                <h2>DYSPRAXIA</h2>
+                <p class="desc">Una raccolta di racconti introspettivi sul coraggio di guardarsi dentro.</p>
+                <div><span>
+                    Silen è la specie ancestrale da cui discendono tutti gli abitanti del nostro Sistema Solare.
+                </span></div>
+                <a href="https://www.amazon.it/Ombre-Verità-raccolta-introspettivi-guardarsi-ebook/dp/B0GBY45ZVC/" class="amazon-btn">Vai su Redbubble</a>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="..\Asset\Collezione 2\iperlessia.png" class="book-img" alt="Libro Ombre di Verità">
+            <div class="book-info">
+                <h2>HYPERLEXIA</h2>
+                <p class="desc">Una raccolta di favole moderne sul coraggio di essere felici.</p>
+                <div><span>
+                    Silen è la specie ancestrale da cui discendono tutti gli abitanti del nostro Sistema Solare.
+                </span></div>
+                <a href="https://www.amazon.it/Ombre-Verità-raccolta-introspettivi-guardarsi-ebook/dp/B0GBY45ZVC/" class="amazon-btn">Vai su Redbubble</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const header = document.querySelector('header');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) { // Se scrolli più di 50px
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        function toggleMenu() {
+            const menu = document.querySelector('.mobile-menu');
+            menu.classList.toggle('open');
+            // Blocca scroll pagina
+            document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : 'auto';
+        }
+
+        // CHIUSURA AUTOMATICA: aggiungi questo pezzo
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                const menu = document.querySelector('.mobile-menu');
+                menu.classList.remove('open');
+                document.body.style.overflow = 'auto'; // Ripristina scroll
+            });
+        });
+    </script>
+</body>
