@@ -162,6 +162,12 @@ header {
     text-decoration: none;
     color: #211533;
 }
+.mobile-home{
+    color: #f7e7d4 !important;
+}
+.mobile-home:hover{
+    color: #602ba0 !important;
+}
 /* Il menu/icona a destra */
 .menu-right {
     justify-self: end;
@@ -528,6 +534,9 @@ nav a:hover { opacity: 0.6; }
   }
   .logo-mobile {
     display: block;
+  }
+  .home-btn {
+    display: none;
   }
 }
 /* Posizionamento comune per gli elementi centrali */
