@@ -1,104 +1,105 @@
-/* --- RESET & BASE --- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ============ VARIABILI ============ */
+:root {
+    --crema: #f7e7d4;
+    --viola: #602ba0;
+    --inchiostro: #211533;
+    --sans: 'Arimo', sans-serif;
+    --serif: 'Instrumental Serif', serif;
+    --serif-it: 'Instrumental Serif Italic', serif;
+    --ombra: 0 1px 1px var(--viola);
+    --orbit-radius: 170px; /* raggio dei satelliti sul retro card */
 }
+
+/* ============ RESET & BASE ============ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 @font-face {
     font-family: 'Arimo';
-    src: url('C:\\Users\\f.gorrino\\Desktop\\Asset\\fonts\\Arimo-VariableFont_wght.ttf') format('truetype');
+    src: url('Asset/fonts/Arimo-VariableFont_wght.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Instrumental Serif';
-    src: url('C:\\Users\\f.gorrino\\Desktop\\Asset\\fonts\\InstrumentSerif-Regular.ttf') format('truetype');
+    src: url('Asset/fonts/InstrumentSerif-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Instrumental Serif Italic';
-    src: url('C:\\Users\\f.gorrino\\Desktop\\Asset\\fonts\\InstrumentSerif-Italic.ttf') format('truetype');
+    src: url('Asset/fonts/InstrumentSerif-Italic.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
+
+html { scroll-behavior: smooth; }
+
 body {
-    font-family: 'Arimo', sans-serif;
-    background-color: #f7e7d4; /* Sfondo panna/crema analogico */
-    color: #211533;
+    font-family: var(--sans);
+    background-color: var(--crema);
+    color: var(--inchiostro);
     line-height: 1.6;
     overflow-x: hidden;
 }
+/* Chiazza radiale viola/giallo dietro i contenuti */
 body::before {
     content: "";
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Il gradiente radiale parte dal viola intenso al centro 
-       e sfuma verso il giallo/crema ai bordi.
-    */
-    background: radial-gradient(
-        circle at 50% 50%, 
-        #602ba0 0%,    /* Viola chiaro al centro */
-        #be9fd5 30%,   /* Transizione viola */
-        #f9cd72 60%,   /* Giallo tenue */
-        #f7e7d4 85%    /* Ritorno al colore di sfondo */
-    );
-    /* Blend mode per fondersi meglio col fondo se necessario */
-    opacity: 0.8; 
-    z-index: -1; /* Mantiene la chiazza dietro i contenuti */
-    pointer-events: none; /* Non blocca i click */
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, #602ba0 0%, #be9fd5 30%, #f9cd72 60%, var(--crema) 85%);
+    opacity: 0.8;
+    z-index: -1;
+    pointer-events: none;
 }
-/* --- BACKGROUND AURORA (Sfumatura globale) --- */
 .aurora-bg {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     z-index: -2;
     pointer-events: none;
 }
+section { scroll-margin-top: 90px; }
+
+/* Nei container flex centrati i figli di testo non devono superare la larghezza disponibile */
+.hero > *,
+.desc-section-box > *,
+.card-content-front > *,
+.book-info > *,
+.review-card > *,
+.support-box > * {
+    max-width: 100%;
+}
+img { max-width: 100%; }
+
+/* ============ HEADER ============ */
 header {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr; /* 3 colonne: sinistra, centro, destra */
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 20px 60px;
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 100;
+    z-index: 9999;
     transition: all 0.3s ease;
     background: transparent;
-    box-sizing: border-box; /* Importante per i padding */
+    box-sizing: border-box;
 }
-/* Il tuo logo (a sinistra) */
+header.scrolled {
+    background: var(--crema);
+    box-shadow: var(--ombra);
+    padding: 15px 60px;
+}
 .logo {
-    justify-self: start;
+    height: 30px;
+    color: var(--viola);
+    transform: rotate(-5deg);
+    line-height: 1;
 }
-/* La tua navigazione (al centro) */
-.desktop-nav {
-    justify-self: center; /* Forza la centratura assoluta */
-    display: flex;
-    gap: 30px; /* Spazio tra i link */
-}
-header {
-    display: flex !important;
-    justify-content: space-between !important; /* Spinge logo a sx e hamburger a dx */
-    align-items: center !important;
-    padding: 20px 60px !important;
-    width: 100% !important;
-    position: fixed !important;
-    top: 0 !important;
-    z-index: 9999 !important;
-    box-sizing: border-box !important;
-}
-/* Facciamo in modo che la Nav sia al centro assoluto */
+.logo-mobile { display: none; }
+
 .desktop-nav {
     position: absolute;
     left: 50%;
@@ -106,34 +107,45 @@ header {
     display: flex;
     gap: 30px;
 }
-/* Forza l'hamburger a essere un pulsante visibile */
+.desktop-nav a,
+nav a {
+    text-decoration: none;
+    color: var(--inchiostro);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    transition: opacity 0.3s;
+}
+nav a:hover { opacity: 0.6; }
+
 .hamburger {
-    display: none; /* Forza la visualizzazione */
-    flex-direction: column !important;
-    justify-self: end !important; /* Forza la destra */
-    width: 40px !important;
-    height: 30px !important;
-    background: transparent !important;
-    border: none !important;
-    cursor: pointer !important;
-    z-index: 10000 !important;
+    display: none;
+    flex-direction: column;
+    justify-self: end;
+    width: 40px;
+    height: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 10000;
 }
-/* Forza le linee a essere visibili */
 .hamburger span {
-    display: block !important;
-    width: 30px !important;
-    height: 3px !important;
-    background-color: #211533 !important;
-    margin-bottom: 5px !important;
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: var(--inchiostro);
+    margin-bottom: 5px;
 }
-/* Il menù nascosto inizialmente */
+
+/* ============ MENU MOBILE ============ */
 .mobile-menu {
     position: fixed;
     top: 0;
-    right: -350px; /* Larghezza personalizzata (es. 350px invece che 100%) */
-    width: 350px;
+    right: -350px;
+    width: min(350px, 85vw);
     height: 100%;
-    background-color: #f7e7d4;
+    background-color: var(--crema);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -141,12 +153,9 @@ header {
     gap: 40px;
     z-index: 9999;
     transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 1px 1px #602ba0; /* L'ombra che volevi */
+    box-shadow: var(--ombra);
 }
-.mobile-menu.open {
-    right: 0;
-}
-/* Stile per la X */
+.mobile-menu.open { right: 0; }
 .close-btn {
     position: absolute;
     top: 30px;
@@ -155,52 +164,20 @@ header {
     border: none;
     font-size: 40px;
     cursor: pointer;
-    color: #211533;
+    color: var(--inchiostro);
 }
 .mobile-menu a {
     font-size: 22px;
     text-decoration: none;
-    color: #211533;
+    color: var(--inchiostro);
 }
-.mobile-home{
-    color: #f7e7d4 !important;
-}
-.mobile-home:hover{
-    color: #602ba0 !important;
-}
-/* Il menu/icona a destra */
-.menu-right {
-    justify-self: end;
-}
-/* Questa classe viene aggiunta da JS quando scrolli */
-header.scrolled {
-    background: #f7e7d4; /* Colore crema leggermente opaco */
-    box-shadow: 0 1px 1px #602ba0; /* L'ombra che volevi */
-    padding: 15px 60px; /* Si restringe un po' per eleganza */
-}
-.logo {
-    height: 30px;
-    color: #602ba0;
-    transform: rotate(-5deg);
-    line-height: 1;
-}
-nav {
-    display: flex;
-    gap: 25px;
-}
-nav a {
-    text-decoration: none;
-    color: #211533;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 600;
-    transition: opacity 0.3s;
-}
-nav a:hover { opacity: 0.6; }
-/* --- HERO SECTION --- */
+.mobile-home { color: var(--crema) !important; }
+.mobile-home:hover { color: var(--viola) !important; }
+
+/* ============ HERO ============ */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -216,49 +193,85 @@ nav a:hover { opacity: 0.6; }
     margin-bottom: 10px;
 }
 .hero p.subtitle {
-    font-family: 'Instrumental Serif', serif;
+    font-family: var(--serif);
     font-size: clamp(1.2rem, 4vw, 2.2rem);
     margin-bottom: 30px;
 }
-.subtitle-white {
-    font-family: 'Instrumental Serif Italic', serif;
-    color: #f7e7d4;
-    text-shadow: -1px -1px 0 #602ba0, 1px -1px 0 #602ba0, -1px 1px 0 #602ba0, 1px 1px 0 #602ba0;
-}
-.title-white {
-    font-family: 'Arimo', sans-serif;
-    color: #f7e7d4;
-    text-shadow: -1px -1px 0 #602ba0, 1px -1px 0 #602ba0, -1px 1px 0 #602ba0, 1px 1px 0 #602ba0;
+.hero p.intro {
+    width: 100%;
+    max-width: min(600px, 100%);
+    font-weight: 300;
+    font-family: var(--serif);
 }
 .vertical-line {
     width: 1px;
     height: 60px;
-    background-color: #211533;
+    background-color: var(--inchiostro);
     margin: 20px 0;
 }
-.section-mascotte {
-    padding: 100px 20px;
-    max-width: 1100px;
-    margin: 0 auto;
-    text-align: center;
+.subtitle-white,
+.title-white {
+    color: var(--crema);
+    text-shadow: -1px -1px 0 var(--viola), 1px -1px 0 var(--viola), -1px 1px 0 var(--viola), 1px 1px 0 var(--viola);
 }
-/* --- SEZIONE CARD FLIP (Layout 2x4) --- */
+.subtitle-white { font-family: var(--serif-it); }
+.title-white { font-family: var(--sans); }
+
+/* ============ SEZIONI ============ */
+.section-mascotte,
 .section-cards {
-    padding: 100px 20px;
+    padding: clamp(45px, 6vw, 75px) 20px;
     max-width: 1100px;
     margin: 0 auto;
     text-align: center;
 }
+.section-books,
+.section-community,
+.section-support {
+    padding: clamp(40px, 5vw, 65px) 20px;
+    text-align: center;
+}
+.section-support { font-family: var(--sans); }
+
+.desc-section-box {
+    min-height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 80vw;
+    margin: 0 auto;
+}
+h2.section-title {
+    font-family: var(--sans);
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    line-height: 1.2;
+}
+.desc-section-box .section-title { margin-bottom: 28px; }
+.license-text {
+    color: var(--inchiostro);
+    font-family: var(--serif);
+}
+.license-text.lead { font-size: 1.1rem; }
+footer {
+    padding: 50px;
+    text-align: center;
+    font-size: 0.7rem;
+    opacity: 0.5;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* ============ CARD FLIP (griglia 2x4) ============ */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-    margin-top: 50px;
+    gap: clamp(25px, 4vw, 40px);
+    margin-top: 40px;
 }
-/* --- LOGICA FLIP CARD --- */
 .flip-card {
     perspective: 1500px;
-    height: 550px; /* Card alte e slanciate come nell'immagine */
+    height: min(550px, 130vw);
 }
 .flip-card-inner {
     position: relative;
@@ -268,13 +281,13 @@ nav a:hover { opacity: 0.6; }
     transform-style: preserve-3d;
     cursor: pointer;
 }
-.flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-}
-.card-disble:hover .flip-card-inner {
-    transform: none;
-}
-.flip-card-front, .flip-card-back {
+.flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+.card-disble:hover .flip-card-inner { transform: none; }
+/* Auto-flip: la card mostra il retro quando è al centro della pagina */
+.flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+.card-disble.flipped .flip-card-inner { transform: none; }
+.flip-card-front,
+.flip-card-back {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -282,17 +295,18 @@ nav a:hover { opacity: 0.6; }
     border-radius: 4px;
     overflow: hidden;
 }
-/* --- FRONTALE CARD (Stile "ECHO" richiesto) --- */
+
+/* Fronte */
 .flip-card-front {
-    box-shadow: 0 1px 1px #602ba0;
-    background-color: #f7e7d4;
+    box-shadow: var(--ombra);
+    background-color: var(--crema);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 60px 40px 30px;
+    justify-content: center;
+    padding: clamp(30px, 5vw, 50px) clamp(22px, 4vw, 40px);
     border: 1px solid rgba(26, 17, 38, 0.05);
 }
-/* Il "Blob" colorato al centro */
+/* Blob colorato al centro */
 .blob {
     position: absolute;
     top: 45%;
@@ -305,80 +319,60 @@ nav a:hover { opacity: 0.6; }
     z-index: 0;
     border-radius: 50%;
 }
-/* --- BLOB DINAMICI (Palette Audace e Differenziata) --- */
-
-/* --- BLOB DINAMICI (Fronte) --- */
-.blob-1 { background: radial-gradient(circle, #FF4500, #8B0000, #2F0000); }
-.blob-2 { background: radial-gradient(circle, #FFFACD, #CD853F, #5D4037); }
-.blob-3 { background: radial-gradient(circle, #FFFF00, #FF8C00, #DAA520); }
-.blob-4 { background: radial-gradient(circle, #E0FFFF, #20B2AA, #000080); }
-.blob-5 { background: radial-gradient(circle, #FFD700, #D2691E, #4B0082); }
-.blob-6 { background: radial-gradient(circle, #F5F5DC, #BDB76B, #708090); }
-.blob-7 { background: radial-gradient(circle, #00FFFF, #4682B4, #0000FF); }
-.blob-8 { background: radial-gradient(circle, #E6E6FA, #6A5ACD, #191970); }
-.blob-9 { background: radial-gradient(circle, #000000 15%, #0B001A 50%, #8B00FF 80%, #000000 100%); }
+.blob-1  { background: radial-gradient(circle, #FF4500, #8B0000, #2F0000); }
+.blob-2  { background: radial-gradient(circle, #FFFACD, #CD853F, #5D4037); }
+.blob-3  { background: radial-gradient(circle, #FFFF00, #FF8C00, #DAA520); }
+.blob-4  { background: radial-gradient(circle, #E0FFFF, #20B2AA, #000080); }
+.blob-5  { background: radial-gradient(circle, #FFD700, #D2691E, #4B0082); }
+.blob-6  { background: radial-gradient(circle, #F5F5DC, #BDB76B, #708090); }
+.blob-7  { background: radial-gradient(circle, #00FFFF, #4682B4, #0000FF); }
+.blob-8  { background: radial-gradient(circle, #E6E6FA, #6A5ACD, #191970); }
+.blob-9  { background: radial-gradient(circle, #000000 15%, #0B001A 50%, #8B00FF 80%, #000000 100%); }
 .blob-10 { background: radial-gradient(circle, #FFFFFF 20%, #E0F7FA 55%, #80DEEA 85%, #FFFFFF 100%); }
+
 .card-content-front {
     position: relative;
     z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     height: 100%;
-    justify-content: flex-end;
+    text-align: center;
 }
 .card-title-serif {
-    font-family: 'Arimo', sans-serif;
-    font-size: 4.5rem; /* Aumentato per rendere i simboli iconici e imponenti */
-    line-height: 1;
-    margin-bottom: 10px;
+    font-family: var(--sans);
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    margin-bottom: 12px;
     font-weight: 400;
     color: #1a1126;
 }
 .card-col-num {
-    font-family: 'Instrumental Serif', serif;
+    font-family: var(--serif);
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 3px;
-    margin-bottom: 25px;
+    margin-bottom: 14px;
 }
 .card-divider {
-    /*width: 15px;
-    height: 1px;
-    background: #1a1126;*/
-    font-family: 'Instrumental Serif', serif;
-    margin: 15px 0;
+    font-family: var(--serif);
+    margin: 14px 0;
+    line-height: 1;
 }
 .card-tagline {
-    font-family: 'Instrumental Serif', serif;
-    font-size: 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-}
-.card-terms {
-    font-family: 'Instrumental Serif', serif;
-    height: 2rem;
+    font-family: var(--serif);
     font-size: 0.55rem;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    opacity: 0.8;
-    margin-bottom: 20px;
-}
-.dot-sep { width: 4px; height: 4px; background: #211533; border-radius: 50%; }
-.card-footer-text {
-    font-size: 0.5rem;
     letter-spacing: 2px;
-    text-transform: uppercase;
-    opacity: 0.5;
+    line-height: 1.6;
 }
-/* --- RETRO CARD --- */
+
+/* Retro */
 .flip-card-back {
-    color: #f7e7d4;
-    box-shadow: 0 1px 1px #602ba0;
+    color: var(--inchiostro);
+    background-color: var(--crema);
+    box-shadow: var(--ombra);
     transform: rotateY(180deg);
     display: flex;
     flex-direction: column;
@@ -386,205 +380,15 @@ nav a:hover { opacity: 0.6; }
     align-items: center;
     padding: 40px;
     text-align: center;
+    transition: background 0.5s ease;
 }
 .flip-card-back h3 {
-    font-family: 'Arimo', sans-serif;
+    font-family: var(--sans);
     font-size: 2rem;
     margin-bottom: 20px;
 }
-/* --- SEZIONE LIBRI (CARD BIANCHE FISSE) --- */
-.section-books {
-    padding: 80px 20px;
-    text-align: center;
-}
-.book-card {
-    background: #f7e7d4;
-    box-shadow: 0 1px 1px #602ba0;
-    max-width: 950px;
-    margin: 0 auto 60px;
-    margin-top: 50px;
-    border-radius: 20px;
-    padding: 50px;
-    display: flex;
-    align-items: center;
-    gap: 50px;
-}
-.book-card.reverse { flex-direction: row-reverse; }
-.book-img {
-    flex: 1;
-    max-width: 300px;
-    border-radius: 4px;
-}
-.book-info { flex: 2; }
-.book-info h2 {
-    font-family: 'Arimo', sans-serif;
-    font-size: 2.2rem;
-    margin-bottom: 15px;
-}
-.mascotte-circle {
-    width: 2.2rem;
-}
-.book-info p.desc {
-    font-family: 'Instrumental Serif Italic', serif;
-    color: #602ba0;
-    margin-bottom: 25px;
-}
-.book-meta {
-    list-style: none;
-    margin-bottom: 30px;
-    font-family: 'Instrumental Serif', serif;
-}
-.book-meta li {
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.amazon-btn {
-    display: inline-block;
-    background: #602ba0;
-    color: #f7e7d4;
-    text-decoration: none;
-    padding: 15px 35px;
-    border-radius: 8px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.8rem;
-    transition: 0.3s;
-    border: 2px solid #602ba0; /* Bordo sottile color crema */
-    box-sizing: border-box;    /* Importante per non sballare le dimensioni */
-}
-.amazon-btn:hover { background: #f7e7d4; color: #583d8c; transform: translateY(-3px); }
-/* --- SEZIONE COMMUNITY --- */
-.section-community {
-    padding: 100px 20px;
-    text-align: center;
-}
-.community-grid {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 50px;
-    flex-wrap: wrap;
-}
-.review-card {
-    background: #f7e7d4;
-    box-shadow: 0 1px 1px #602ba0;
-    padding: 40px 30px;
-    border-radius: 15px;
-    width: 300px;
-}
-.review-card img {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-    object-fit: cover;
-}
-.review-card h4 { font-family: 'Arimo', sans-serif; margin-bottom: 5px; }
-.review-card p { font-size: 0.85rem; font-style: italic; color: #4a4054; }
-/* --- SEZIONE SUPPORTO --- */
-.section-support {
-    padding: 100px 20px;
-    text-align: center;
-}
-.support-box {
-    /*background: rgba(255,255,255,0.6);*/
-    backdrop-filter: blur(10px);
-    padding: 60px;
-    /*border-radius: 30px;*/
-    max-width: 800px;
-    margin: 0 auto;
-}
-.support-box p { font-family: 'Arimo', sans-serif; font-size: 1.5rem; margin-bottom: 30px; }
-.btn-group {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-}
-.btn-outline {
-    text-decoration: none;
-    border: 1px solid #211533;
-    color: #211533;
-    padding: 12px 25px;
-    border-radius: 30px;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    font-weight: 600;
-    transition: 0.3s;
-}
-.btn-outline:hover { background: #211533; color: #f7e7d4; }
-/* --- RESPONSIVE --- */
-@media (max-width: 850px) {
-    .grid-container { grid-template-columns: 1fr; }
-    .book-card { flex-direction: column; text-align: center; }
-    .book-card.reverse { flex-direction: column; }
-    header { padding: 20px; }
-    .desktop-nav { display: none; }
-    .hamburger { display: flex; }
-}
-/* Di base mostra l'immagine desktop e nasconde quella mobile */
-.logo-mobile {
-  display: none;
-}
-/* Sotto i 1050px inverte la visibilità */
-@media (max-width: 1050px) {
-  .logo {
-    display: none;
-  }
-  .logo-mobile {
-    display: block;
-  }
-  .home-btn {
-    display: none;
-  }
-}
-/* Posizionamento comune per gli elementi centrali */
-.circle-frame, .blob {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
 
-/* Stile del cerchio sottile */
-.circle-frame {
-    width: 60%; /* Regola la dimensione a tuo piacimento */
-    height: 60%;
-    border: 1px solid #211533; /* Sottile e semi-trasparente */
-    border-radius: 50%;
-    z-index: 2; /* Il cerchio sta sopra il colore per "contenerlo" */
-    pointer-events: none; /* Non interferisce con il mouse */
-}
-
-.saturn-ring {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(-15deg); /* Ruotato per dare prospettiva */
-    width: 400px;   /* Più largo del cerchio per sbordare */
-    height: 125px;  /* Molto schiacciato per simulare l'ellisse */
-    border: 1px solid #211533; /* Sottile e semi-trasparente */
-    border-radius: 50%;
-    z-index: 3;     /* Sopra il cerchio e sopra il blob */
-    pointer-events: none;
-}
-@media (max-width: 850px) {
-    .saturn-ring {
-        width: 480px;   /* Più largo del cerchio per sbordare */
-        height: 150px;  /* Molto schiacciato per simulare l'ellisse */
-    }
-}
-/* Stile base per tutti i retro (mantiene leggibilità) */
-.flip-card-back {
-    color: #211533;
-    background-color: #f7e7d4;
-    transition: background 0.5s ease;
-}
-/* Pulsante centrale (Fisso) */
+/* Pulsante centrale fisso (il "pianeta" cliccabile) */
 .blob-button {
     width: 130px;
     height: 130px;
@@ -595,10 +399,27 @@ nav a:hover { opacity: 0.6; }
     text-decoration: none;
     text-align: center;
     z-index: 10;
-    box-shadow: 0 1px 1px #602ba0;
+    box-shadow: var(--ombra);
+    transition: box-shadow 0.3s ease;
 }
-.shop-text { font-family: 'Arimo', sans-serif; color: #211533; font-size: 11px; font-weight: bold; text-transform: uppercase; }
-/* Contenitore che ruota */
+.blob-button:hover { box-shadow: 0 4px 14px rgba(96, 43, 160, 0.35); }
+/* Piccola animazione al tap sul pianeta */
+.blob-button.pressed {
+    animation: planetPulse 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+.shop-text {
+    font-family: var(--sans);
+    color: var(--inchiostro);
+    /*text-shadow: -1px -1px 0 var(--viola), 1px -1px 0 var(--viola), -1px 1px 0 var(--viola), 1px 1px 0 var(--viola);*/
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.35;
+    padding: 0 12px;
+}
+
+/* Sistema di satelliti in rotazione */
 .satellites-wrapper {
     position: absolute;
     width: 100%;
@@ -606,54 +427,195 @@ nav a:hover { opacity: 0.6; }
     animation: rotateSystem 30s linear infinite;
     pointer-events: none;
 }
-/* Bracci che definiscono la posizione angolare */
 .orbit-arm {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 0;
     height: 0;
+    transform: rotate(var(--arm, 0deg));
 }
-/* Satellite che mantiene la distanza e raddrizza il testo */
+/* Il satellite resta alla raggio --orbit-radius e mantiene il testo dritto */
 .satellite {
     position: absolute;
-    /* Usiamo !important per forzare il browser a ignorare il vecchio valore */
-    transform: translateY(-170px) !important; 
+    top: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 80px;
-    animation: counterRotate 40s linear infinite;
+    transform: translateY(calc(-1 * var(--orbit-radius))) rotate(calc(-1 * var(--arm, 0deg)));
+    animation: counterRotate 30s linear infinite;
     pointer-events: auto;
 }
-.satellite img { 
-    width: 50px; 
-    height: 50px; 
+.satellite img {
+    width: 50px;
+    height: 50px;
 }
-.satellite span { 
-    font-family: 'Instrumental Serif Italic', serif;
-    font-size: 10px; 
-    color: #211533;
-    margin-top: 5px; 
-    text-transform: uppercase; 
+.satellite span {
+    font-family: var(--serif-it);
+    font-size: 10px;
+    color: var(--inchiostro);
+    margin-top: 5px;
+    text-transform: uppercase;
 }
-.subtitle-user {
-    font-family: 'Instrumental Serif Italic', serif;
-    color: #602ba0;
+
+/* ============ CERCHI / ANELLI PIANETA ============ */
+.circle-frame,
+.blob {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
-.desc-user {
-    font-family: 'Instrumental Serif', serif;
-    color: #211533;
+.circle-frame {
+    width: 60%;
+    height: 60%;
+    border: 1px solid var(--inchiostro);
+    border-radius: 50%;
+    z-index: 2;
+    pointer-events: none;
 }
-.section-support {
-    padding: 60px 20px;
-    text-align: center;
-    font-family: 'Arimo', sans-serif;
+.saturn-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    width: 85%;
+    height: 23%;
+    border: 1px solid var(--inchiostro);
+    border-radius: 50%;
+    z-index: 3;
+    pointer-events: none;
 }
+.saturn-mini-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    width: 45%;
+    height: 11%;
+    border: 1px solid var(--inchiostro);
+    border-radius: 50%;
+    z-index: 20;
+    pointer-events: none;
+}
+
+/* ============ LIBRI ============ */
+.book-card {
+    position: relative;
+    background: var(--crema);
+    box-shadow: var(--ombra);
+    max-width: 950px;
+    margin: 40px auto;
+    border-radius: 20px;
+    padding: clamp(25px, 5vw, 50px);
+    display: flex;
+    align-items: center;
+    gap: clamp(25px, 5vw, 50px);
+}
+.book-card.reverse { flex-direction: row-reverse; }
+.book-img {
+    flex: 1;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 4px;
+}
+.book-info { flex: 2; }
+.book-info h2 {
+    font-family: var(--sans);
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    line-height: 1.25;
+    margin-bottom: 14px;
+}
+.mascotte-circle { width: 2.2rem; }
+.book-info p.desc {
+    font-family: var(--serif-it);
+    color: var(--viola);
+    margin-bottom: 18px;
+}
+.book-info .amazon-btn,
+.book-info .amazon-btn-disabled {
+    margin-top: 28px;
+}
+.book-meta {
+    list-style: none;
+    margin-bottom: 30px;
+    font-family: var(--serif);
+}
+.book-meta li {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.moon-icon,
+.moon-icon-reverse {
+    position: absolute;
+    top: 15px;
+    font-size: 1.5rem;
+    line-height: 1;
+    z-index: 10;
+}
+.moon-icon { right: 15px; }
+.moon-icon-reverse { left: 15px; }
+
+/* ============ BOTTONI ============ */
+.amazon-btn,
+.amazon-btn-disabled {
+    display: inline-block;
+    text-decoration: none;
+    padding: 15px 35px;
+    border-radius: 8px;
+    font-family: var(--sans);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+    transition: 0.3s;
+    border: 2px solid var(--viola);
+    box-sizing: border-box;
+}
+.amazon-btn { background: var(--viola); color: var(--crema); }
+.amazon-btn:hover { background: var(--crema); color: #583d8c; transform: translateY(-3px); }
+.amazon-btn-disabled { background: var(--crema); color: #583d8c; }
+
+/* ============ COMMUNITY ============ */
+.community-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 50px;
+    flex-wrap: wrap;
+}
+.review-card {
+    background: var(--crema);
+    box-shadow: var(--ombra);
+    padding: 40px 30px;
+    border-radius: 15px;
+    width: min(300px, 100%);
+}
+.review-card img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+.review-card h4 { font-family: var(--sans); margin-bottom: 5px; }
+.review-card p { font-size: 0.85rem; font-style: italic; color: #4a4054; }
+.subtitle-user { font-family: var(--serif-it); color: var(--viola); }
+.desc-user { font-family: var(--serif); color: var(--inchiostro); }
+
+/* ============ SUPPORTO / LICENZE ============ */
 .support-box {
-    max-width: 700px;
+    backdrop-filter: blur(10px);
+    padding: clamp(30px, 6vw, 60px);
+    max-width: 800px;
     margin: 0 auto;
 }
+.support-box p { font-family: var(--sans); font-size: 1.5rem; margin-bottom: 30px; }
 .support-box h3 {
     margin-bottom: 20px;
     font-size: 1.1rem;
@@ -661,98 +623,74 @@ nav a:hover { opacity: 0.6; }
     letter-spacing: 2px;
 }
 .btn-group {
-    margin: 30px 0;
     display: flex;
     justify-content: center;
-    gap: 15px; /* Spazio tra i bottoni */
-}
-.btn-contact {
-    display: inline-block;
-    padding: 10px 20px;
-    border: 1px solid #211533;
-    color: #211533;
-    text-decoration: none;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: 0.3s;
-}
-.btn-contact:hover {
-    background: #211533;
-    color: #f7e7d4; /* Colore di sfondo del tuo sito */
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 30px 0;
 }
 .legal-note {
-    font-family: 'Instrumental Serif Italic' !important;
+    font-family: var(--serif-it);
     font-size: 0.75rem;
     margin-top: 20px;
-    color: #f7e7d4;
-    text-shadow: -1px -1px 0 #602ba0, 1px -1px 0 #602ba0, -1px 1px 0 #602ba0, 1px 1px 0 #602ba0;
+    color: var(--crema);
+    text-shadow: -1px -1px 0 var(--viola), 1px -1px 0 var(--viola), -1px 1px 0 var(--viola), 1px 1px 0 var(--viola);
 }
-.license-text {
-    color: #211533;
-    font-family: 'Instrumental Serif' !important;
+.license-text + .license-text { margin-top: 0; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1050px) {
+    .logo { display: none; }
+    .logo-mobile { display: block; }
+    .home-btn { display: none; }
 }
-/* Il contenitore principale deve fare da ancora */
-.book-card {
-    position: relative;
-    /* Manti le tue regole esistenti (es. display: flex; overflow: hidden; ecc.) */
+@media (max-width: 850px) {
+    :root { --orbit-radius: 130px; }
+    header, header.scrolled { padding: 20px; }
+    .desktop-nav { display: none; }
+    .hamburger { display: flex; }
+    .grid-container { grid-template-columns: 1fr; }
+    .flip-card { height: min(550px, 145vw); }
+    .book-card, .book-card.reverse {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    .book-img {
+        align-self: center;
+        max-width: min(300px, 80vw);
+    }
+    .book-info { width: 100%; }
+    .book-meta li { justify-content: center; }
+    .desc-section-box { max-width: 100%; min-height: 22vh; }
+    .card-tagline { font-size: 0.65rem; }
+    .satellite span { font-size: 9px; }
+}
+@media (max-width: 560px) {
+    :root { --orbit-radius: 115px; }
+    .flip-card-front { padding: 30px 22px; }
+    .satellite { width: 62px; }
+    .satellite img { width: 42px; height: 42px; }
+    .blob-button { width: 105px; height: 105px; }
+    .flip-card-back { padding: 25px; }
+    .support-box p { font-size: 1.15rem; }
 }
 
-/* Posizionamento fisso in alto a destra */
-.moon-icon {
-    position: absolute;
-    top: 15px;       /* Distanza dal bordo superiore */
-    right: 15px;     /* Distanza dal bordo destro */
-    font-size: 1.5rem; /* Dimensione dell'emoji */
-    line-height: 1;  /* Evita spaziature indesiderate */
-    z-index: 10;     /* Assicura che stia sopra agli altri elementi */
-}
-/* Posizionamento fisso in alto a destra */
-.moon-icon-reverse {
-    position: absolute;
-    top: 15px;       /* Distanza dal bordo superiore */
-    left: 15px;     /* Distanza dal bordo destro */
-    font-size: 1.5rem; /* Dimensione dell'emoji */
-    line-height: 1;  /* Evita spaziature indesiderate */
-    z-index: 10;     /* Assicura che stia sopra agli altri elementi */
-}
-.saturn-mini-ring {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(-15deg); /* Ruotato per dare prospettiva */
-    width: 160px;   /* Più largo del cerchio per sbordare */
-    height: 50px;  /* Molto schiacciato per simulare l'ellisse */
-    border: 1px solid #211533; /* Sottile e semi-trasparente */
-    border-radius: 50%;
-    z-index: 20;     /* Sopra il cerchio e sopra il blob */
-    pointer-events: none;
-}
-.amazon-btn-disabled {
-    display: inline-block;
-    background: #f7e7d4;
-    color: #583d8c;
-    text-decoration: none;
-    padding: 15px 35px;
-    border-radius: 8px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.8rem;
-    transition: 0.3s;
-    border: 2px solid #602ba0; /* Bordo sottile color crema */
-    box-sizing: border-box;    /* Importante per non sballare le dimensioni */
-}
-.desc-section-box {
-    min-height: 75vh; /* Usa height invece di width per l'altezza dello schermo */
-    display: flex;
-    flex-direction: column; /* Dispone gli elementi in verticale (una colonna) */
-    justify-content: center; /* Centra verticalmente lungo l'asse principale */
-    align-items: center; /* Centra orizzontalmente lungo l'asse trasversale */
-    max-width: 80vw;
-    margin: 0 auto;
+/* Accessibilità: ferma le rotazioni per chi preferisce meno animazioni */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .satellites-wrapper, .satellite, .blob-button.pressed { animation: none; }
 }
 
-/* Animazioni */
+/* ============ ANIMAZIONI ============ */
 @keyframes rotateSystem { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-@keyframes counterRotate { from { transform: rotate(0deg); } to { transform: rotate(-3600deg); } }
+@keyframes counterRotate {
+    from { transform: translateY(calc(-1 * var(--orbit-radius))) rotate(calc(-1 * var(--arm, 0deg))); }
+    to   { transform: translateY(calc(-1 * var(--orbit-radius))) rotate(calc(-1 * var(--arm, 0deg) - 360deg)); }
+}
+@keyframes planetPulse {
+    0%   { transform: scale(1) rotate(0deg); }
+    30%  { transform: scale(1.16) rotate(-4deg); }
+    60%  { transform: scale(0.94) rotate(2deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
