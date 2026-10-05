@@ -703,6 +703,10 @@ footer {
 .amazon-btn-disabled { background: var(--crema); color: #583d8c; }
 
 /* ============ COMMUNITY ============ */
+.community-lead {
+    max-width: 620px;
+    margin: 18px auto 0;
+}
 .community-grid {
     display: flex;
     justify-content: center;
