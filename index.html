@@ -59,7 +59,7 @@
                 <h2>Silen <img class="mascotte-circle" src="./Asset/circles/normal.png" alt=""/></h2>
                 <p class="desc">Un viaggio intergalattico alla scoperta del proprio mondo interiore.</p>
                 <span>
-                    Silen è la specie ancestrale da cui discendono tutti gli abitanti del nostro Sistema Solare. Attraverso le sue diverse forme planetarie, ci accompagna a scoprire la bellezza e la complessità di ogni sfumatura della neurodivergenza. Una raccolta di racconti introspettivi sul coraggio di guardarsi dentro, capirsi e accogliersi.
+                    Silen è la specie ancestrale da cui discendono tutti i visitatori del nostro universo. Attraverso le sue diverse forme planetarie, ci accompagna a scoprire la bellezza e la complessità di ogni sfumatura dell'umano. Una raccolta di racconti introspettivi sul coraggio di guardarsi dentro, capirsi e accogliersi.
                 </span>
             </div>
         </div>
@@ -81,6 +81,7 @@
                             <p class="card-col-num">Umore e Stress</p>
                             <div class="card-divider">&#10022;</div>
                             <p class="card-tagline">Accendi il coraggio, governa la tempesta</p>
+                            <span class="flip-hint">Tocca per esplorare</span>
                         </div>
                     </div>
                     <div class="flip-card-back back-1">
@@ -111,6 +112,7 @@
                             <p class="card-col-num">Differenze nell'Apprendimento</p>
                             <div class="card-divider">&#10022;</div>
                             <p class="card-tagline">Il pensiero segue rotte inedite</p>
+                            <span class="flip-hint">Tocca per esplorare</span>
                         </div>
                     </div>
                     <div class="flip-card-back back-2">
@@ -141,6 +143,7 @@
                             <p class="card-col-num">Disturbi di Personalità</p>
                             <div class="card-divider">&#10022;</div>
                             <p class="card-tagline">Nell'armonia del sé, il ritratto dell'anima</p>
+                            <span class="flip-hint">Tocca per esplorare</span>
                         </div>
                     </div>
                     <div class="flip-card-back back-3">
@@ -171,6 +174,7 @@
                             <p class="card-col-num">Cervello e Percezione</p>
                             <div class="card-divider">&#10022;</div>
                             <p class="card-tagline">Radicati nel reale, esplora l'infinito</p>
+                            <span class="flip-hint">Tocca per esplorare</span>
                         </div>
                     </div>
                     <div class="flip-card-back back-4">
@@ -201,6 +205,7 @@
                             <p class="card-col-num">Neurodivergenza</p>
                             <div class="card-divider">&#10022;</div>
                             <p class="card-tagline">Oltre i confini, la visione si espande</p>
+                            <span class="flip-hint">Tocca per esplorare</span>
                         </div>
                     </div>
                     <div class="flip-card-back back-5">
@@ -232,12 +237,13 @@
                             <p class="card-col-num">Neurosviluppo</p>
                             <div class="card-divider">&#10022;</div>
                             <p class="card-tagline">Costruire il tempo, plasmare il divenire</p>
+                            <span class="flip-hint">Tocca per esplorare</span>
                         </div>
                     </div>
                     <div class="flip-card-back back-6">
-                        <div class="saturn-mini-ring"></div>
-                        <!-- Pulsante Centrale (Fisso) -->
+                        <!-- Pulsante Centrale (Fisso) — l'anello di Saturno gira attorno al pianeta -->
                         <a href="saturn/" class="blob-button blob-6">
+                            <div class="saturn-mini-ring"></div>
                             <span class="shop-text">Scopri di più</span>
                         </a>
 
@@ -263,6 +269,7 @@
                             <p class="card-col-num">Disturbi Neurologici</p>
                             <div class="card-divider">&#10022;</div>
                             <p class="card-tagline">L'energia che danza tra le connessioni</p>
+                            <span class="flip-hint">Tocca per esplorare</span>
                         </div>
                     </div>
                     <div class="flip-card-back back-7">
@@ -293,6 +300,7 @@
                             <p class="card-col-num">Disturbi d'Ansia</p>
                             <div class="card-divider">&#10022;</div>
                             <p class="card-tagline">Placare l'abisso, ritrovare la riva</p>
+                            <span class="flip-hint">Tocca per esplorare</span>
                         </div>
                     </div>
                     <div class="flip-card-back back-8">
@@ -318,8 +326,8 @@
 
     <section class="section-books" id="libri">
         <div class="desc-section-box">
-            <h2 class="section-title">OGNI <span class="title-white">LUNA</span> ILLUMINA UNA STORIA</h2>
-            <p class="license-text lead">Come il viaggio della luna attraverso il cielo notturno, la collana Voci dal Profondo traccia un percorso di autodeterminazione personale.<br/>Dalla luce dei racconti di speranza del primo volume, si attraversa l'ombra della disillusione nel secondo, fino a giungere al terzo libro: un romanzo che fonde entrambe le anime in un'unica visione.</p>
+            <h2 class="section-title">OGNI <span class="title-white">FASE DI LUNA</span> ILLUMINA UNA STORIA</h2>
+            <p class="license-text lead">Come le fasi della luna nel suo viaggio attraverso il cielo notturno, la collana Voci dal Profondo traccia un percorso di autodeterminazione personale.<br/>Dalla luce dei racconti di speranza del primo volume, si attraversa l'ombra della disillusione nel secondo, fino a giungere al terzo libro: un romanzo che fonde entrambe le anime in un'unica visione.</p>
         </div>
         <div class="book-card">
             <span class="moon-icon">🌑</span>
@@ -434,24 +442,26 @@
             });
         });
 
-        // AUTO-FLIP: la card si gira da sola quando è al centro della pagina
-        const flipObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                entry.target.classList.toggle('flipped', entry.isIntersecting);
-            });
-        }, { rootMargin: '-40% 0px -40% 0px' });
-        document.querySelectorAll('.flip-card:not(.card-disble)').forEach(card => flipObserver.observe(card));
+        // Flip card: hover su desktop (CSS), tap su smartphone.
+        // Da tastiera basta il focus (regola CSS :focus-visible) per girare la card.
+        const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-        // Il pianeta fa una piccola animazione al tap, poi apre la sua pagina
-        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        document.querySelectorAll('.blob-button').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                if (reducedMotion || btn.classList.contains('pressed')) return;
-                e.preventDefault();
-                btn.classList.add('pressed');
-                setTimeout(() => { window.location.href = btn.href; }, 450);
+        if (!canHover) {
+            document.querySelectorAll('.flip-card:not(.card-disble)').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    // Il tap sul pulsante non deve girare la card: deve navigare
+                    if (e.target.closest('.blob-button')) return;
+                    const wasFlipped = card.classList.contains('flipped');
+                    // Una sola card girata alla volta
+                    document.querySelectorAll('.flip-card.flipped').forEach(c => {
+                        if (c !== card) c.classList.remove('flipped');
+                    });
+                    card.classList.toggle('flipped', !wasFlipped);
+                });
             });
-        });
+        }
+        // "Scopri di più" naviga direttamente alla pagina del pianeta (link nativo,
+        // nessun ritardo per l'animazione: il feedback resta in CSS :hover / :active).
     </script>
 
 </body>

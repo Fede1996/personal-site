@@ -272,6 +272,12 @@ footer {
 .flip-card {
     perspective: 1500px;
     height: min(550px, 130vw);
+    -webkit-tap-highlight-color: transparent;
+    border-radius: 4px;
+}
+.flip-card:focus-visible {
+    outline: 2px solid var(--viola);
+    outline-offset: 4px;
 }
 .flip-card-inner {
     position: relative;
@@ -281,11 +287,18 @@ footer {
     transform-style: preserve-3d;
     cursor: pointer;
 }
-.flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
-.card-disble:hover .flip-card-inner { transform: none; }
-/* Auto-flip: la card mostra il retro quando è al centro della pagina */
+/* Hover flip solo su desktop con mouse reale (su touch resterebbe "appiccicato") */
+@media (hover: hover) and (pointer: fine) {
+    .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+    .card-disble:hover .flip-card-inner { transform: none; }
+}
+/* Flip su tap (smartphone) e da tastiera (solo focus da tastiera, non da tap) */
 .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
 .card-disble.flipped .flip-card-inner { transform: none; }
+.flip-card:focus-visible .flip-card-inner,
+.flip-card:has(:focus-visible) .flip-card-inner { transform: rotateY(180deg); }
+.card-disble:focus-visible .flip-card-inner,
+.card-disble:has(:focus-visible) .flip-card-inner { transform: none; }
 .flip-card-front,
 .flip-card-back {
     position: absolute;
@@ -305,6 +318,9 @@ footer {
     justify-content: center;
     padding: clamp(30px, 5vw, 50px) clamp(22px, 4vw, 40px);
     border: 1px solid rgba(26, 17, 38, 0.05);
+    /* Il fronte non deve mai intercettare hover/click: quando la card è girata
+       resta dietro ed era lui a "mangiarsi" gli eventi del pulsante */
+    pointer-events: none;
 }
 /* Blob colorato al centro */
 .blob {
@@ -368,6 +384,28 @@ footer {
     line-height: 1.6;
 }
 
+/* Suggerimento "tocca per girare" — visibile solo su touch */
+.flip-hint {
+    display: none;
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    font-family: var(--sans);
+    font-size: 0.62rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--viola);
+    opacity: 0.75;
+    white-space: nowrap;
+    pointer-events: none;
+}
+@media (hover: none), (pointer: coarse) {
+    .flip-hint { display: block; }
+    .flip-card.flipped .flip-hint { display: none; }
+}
+
 /* Retro */
 .flip-card-back {
     color: var(--inchiostro);
@@ -381,6 +419,16 @@ footer {
     padding: 40px;
     text-align: center;
     transition: background 0.5s ease;
+    /* Il retro invisibile non deve rubare hover/click: si attiva solo quando è girato */
+    pointer-events: none;
+}
+.flip-card.flipped .flip-card-back,
+.flip-card:focus-visible .flip-card-back,
+.flip-card:has(:focus-visible) .flip-card-back {
+    pointer-events: auto;
+}
+@media (hover: hover) and (pointer: fine) {
+    .flip-card:hover .flip-card-back { pointer-events: auto; }
 }
 .flip-card-back h3 {
     font-family: var(--sans);
@@ -390,6 +438,7 @@ footer {
 
 /* Pulsante centrale fisso (il "pianeta" cliccabile) */
 .blob-button {
+    position: relative;
     width: 130px;
     height: 130px;
     border-radius: 50%;
@@ -400,32 +449,77 @@ footer {
     text-align: center;
     z-index: 10;
     box-shadow: var(--ombra);
-    transition: box-shadow 0.3s ease;
+    /* Niente filter/will-change qui: dentro un contesto 3D (preserve-3d)
+       promuovono il pulsante a layer separato e il browser smarrisce
+       l'hit-testing → hover e click non arrivano mai al link. */
+    touch-action: manipulation;
+    transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1),
+                box-shadow 0.35s ease;
 }
-.blob-button:hover { box-shadow: 0 4px 14px rgba(96, 43, 160, 0.35); }
-/* Piccola animazione al tap sul pianeta */
-.blob-button.pressed {
-    animation: planetPulse 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+.blob-button:hover {
+    transform: scale(1.12);
+    box-shadow: 0 0 0 12px rgba(96, 43, 160, 0.18),
+                0 12px 32px rgba(96, 43, 160, 0.45);
+}
+.blob-button:focus-visible {
+    outline: 3px solid var(--viola);
+    outline-offset: 6px;
+    transform: scale(1.1);
+}
+/* Anello pulsante attorno al pianeta al passaggio del mouse */
+.blob-button::after {
+    content: "";
+    position: absolute;
+    inset: -7px;
+    border-radius: 50%;
+    border: 2px solid var(--viola);
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+.blob-button:hover::after,
+.blob-button:focus-visible::after {
+    opacity: 0.55;
+    animation: ringPulse 1.6s ease-out infinite;
+}
+/* Press: feedback immediato al click, senza ritardare la navigazione */
+.blob-button:active {
+    transform: scale(0.92);
+    transition-duration: 0.08s;
+    box-shadow: 0 0 0 6px rgba(96, 43, 160, 0.25);
 }
 .shop-text {
     font-family: var(--sans);
     color: var(--inchiostro);
-    /*text-shadow: -1px -1px 0 var(--viola), 1px -1px 0 var(--viola), -1px 1px 0 var(--viola), 1px 1px 0 var(--viola);*/
     font-size: 11px;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     line-height: 1.35;
     padding: 0 12px;
+    transition: letter-spacing 0.3s ease;
+}
+.blob-button:hover .shop-text,
+.blob-button:focus-visible .shop-text {
+    letter-spacing: 1.3px;
 }
 
-/* Sistema di satelliti in rotazione */
+/* Sistema di satelliti in rotazione.
+   Nessun pointer-events esplicito: tutto il retro eredita dal .flip-card-back,
+   che è interattivo solo quando è girato (così la faccia invisibile non ruba mai hover/click). */
 .satellites-wrapper {
     position: absolute;
     width: 100%;
     height: 100%;
     animation: rotateSystem 30s linear infinite;
-    pointer-events: none;
+}
+/* In hover su un satellite il sistema si ferma: l'etichetta diventa leggibile */
+@media (hover: hover) and (pointer: fine) {
+    .flip-card-back:has(.satellite:hover) .satellites-wrapper,
+    .flip-card-back:has(.satellite:hover) .satellite {
+        animation-play-state: paused;
+    }
 }
 .orbit-arm {
     position: absolute;
@@ -443,21 +537,46 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80px;
+    width: 88px;
     transform: translateY(calc(-1 * var(--orbit-radius))) rotate(calc(-1 * var(--arm, 0deg)));
     animation: counterRotate 30s linear infinite;
-    pointer-events: auto;
+    transition: filter 0.25s ease;
 }
 .satellite img {
     width: 50px;
     height: 50px;
+    transition: transform 0.25s ease;
+    filter: drop-shadow(0 2px 4px rgba(33, 21, 51, 0.25));
 }
 .satellite span {
     font-family: var(--serif-it);
-    font-size: 10px;
+    font-size: 11px;
     color: var(--inchiostro);
-    margin-top: 5px;
+    margin-top: 6px;
     text-transform: uppercase;
+    letter-spacing: 0.3px;
+    line-height: 1.25;
+    text-align: center;
+    /* La pillola cresce con il testo ma resta entro 104px: "Multipotenzialità"
+       sta su una riga, le frasi lunghe vanno a capo invece di uscire dal riquadro */
+    width: max-content;
+    max-width: 104px;
+    overflow-wrap: anywhere;
+    hyphens: auto;
+    /* Pill ad alto contrasto: leggibile anche in movimento */
+    background: rgba(247, 231, 212, 0.95);
+    border: 1px solid rgba(96, 43, 160, 0.28);
+    border-radius: 999px;
+    padding: 3px 8px;
+    box-shadow: 0 2px 6px rgba(33, 21, 51, 0.18);
+}
+@media (hover: hover) and (pointer: fine) {
+    .satellite:hover img { transform: scale(1.15); }
+    .satellite:hover span {
+        background: var(--viola);
+        color: var(--crema);
+        border-color: var(--viola);
+    }
 }
 
 /* ============ CERCHI / ANELLI PIANETA ============ */
@@ -488,13 +607,15 @@ footer {
     z-index: 3;
     pointer-events: none;
 }
+/* Anello sul retro: dimensioni relative al pulsante-pianeta, così resta
+   visibile e proporzionato anche da mobile (prima era in % della card) */
 .saturn-mini-ring {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(-15deg);
-    width: 45%;
-    height: 11%;
+    width: 180%;
+    height: 46%;
     border: 1px solid var(--inchiostro);
     border-radius: 50%;
     z-index: 20;
@@ -644,6 +765,10 @@ footer {
     .logo-mobile { display: block; }
     .home-btn { display: none; }
 }
+/* Card 2 colonne più strette: l'orbita stringe per non far uscire le etichette */
+@media (max-width: 1000px) {
+    :root { --orbit-radius: 140px; }
+}
 @media (max-width: 850px) {
     :root { --orbit-radius: 130px; }
     header, header.scrolled { padding: 20px; }
@@ -664,22 +789,90 @@ footer {
     .book-meta li { justify-content: center; }
     .desc-section-box { max-width: 100%; min-height: 22vh; }
     .card-tagline { font-size: 0.65rem; }
-    .satellite span { font-size: 9px; }
+}
+/* Su touch / schermi stretti: niente orbita, i temi diventano una griglia leggibile */
+@media (hover: none), (max-width: 850px) {
+    .flip-card-back {
+        justify-content: center;
+        gap: 22px;
+        padding: clamp(22px, 5vw, 36px);
+    }
+    .satellites-wrapper {
+        position: static;
+        width: 100%;
+        max-width: 360px;
+        height: auto;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        animation: none;
+    }
+    .orbit-arm {
+        position: static;
+        width: auto;
+        height: auto;
+        transform: none;
+    }
+    .satellite {
+        position: static;
+        width: 100%;
+        height: 100%;
+        transform: none;
+        animation: none;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+        text-align: left;
+        background: rgba(255, 255, 255, 0.45);
+        border: 1px solid rgba(96, 43, 160, 0.15);
+        border-radius: 12px;
+        padding: 8px 10px;
+    }
+    .satellite img {
+        width: 38px;
+        height: 38px;
+        flex-shrink: 0;
+    }
+    .satellite span {
+        margin-top: 0;
+        text-align: left;
+        font-size: 11px;
+        letter-spacing: 0.2px;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        box-shadow: none;
+        line-height: 1.3;
+        /* Nel layout a griglia il testo occupa tutta la colonna */
+        width: auto;
+        max-width: none;
+    }
 }
 @media (max-width: 560px) {
     :root { --orbit-radius: 115px; }
     .flip-card-front { padding: 30px 22px; }
-    .satellite { width: 62px; }
-    .satellite img { width: 42px; height: 42px; }
-    .blob-button { width: 105px; height: 105px; }
-    .flip-card-back { padding: 25px; }
+    .blob-button { width: 112px; height: 112px; }
+    .flip-card-back { padding: 22px; gap: 18px; }
+    .satellites-wrapper {
+        max-width: 320px;
+        gap: 8px;
+    }
+    .satellite {
+        padding: 7px 8px;
+        gap: 8px;
+    }
+    .satellite img { width: 32px; height: 32px; }
+    .satellite span { font-size: 10px; }
     .support-box p { font-size: 1.15rem; }
 }
 
 /* Accessibilità: ferma le rotazioni per chi preferisce meno animazioni */
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .satellites-wrapper, .satellite, .blob-button.pressed { animation: none; }
+    .satellites-wrapper, .satellite, .blob-button::after { animation: none; }
+    .flip-card-inner, .blob-button, .satellite img, .shop-text { transition: none; }
 }
 
 /* ============ ANIMAZIONI ============ */
@@ -688,9 +881,8 @@ footer {
     from { transform: translateY(calc(-1 * var(--orbit-radius))) rotate(calc(-1 * var(--arm, 0deg))); }
     to   { transform: translateY(calc(-1 * var(--orbit-radius))) rotate(calc(-1 * var(--arm, 0deg) - 360deg)); }
 }
-@keyframes planetPulse {
-    0%   { transform: scale(1) rotate(0deg); }
-    30%  { transform: scale(1.16) rotate(-4deg); }
-    60%  { transform: scale(0.94) rotate(2deg); }
-    100% { transform: scale(1) rotate(0deg); }
+@keyframes ringPulse {
+    0%   { transform: scale(0.92); opacity: 0.55; }
+    70%  { transform: scale(1.18); opacity: 0; }
+    100% { transform: scale(1.18); opacity: 0; }
 }
