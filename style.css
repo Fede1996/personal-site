@@ -217,6 +217,24 @@ nav a:hover { opacity: 0.6; }
 .subtitle-white { font-family: var(--serif-it); }
 .title-white { font-family: var(--sans); }
 
+/* ============ PROGETTO (paragrafo sotto la hero) ============ */
+.section-progetto {
+    padding: clamp(35px, 5vw, 70px) 20px clamp(45px, 6vw, 75px);
+    max-width: 820px;
+    margin: 0 auto;
+    text-align: center;
+}
+.progetto-text {
+    font-family: var(--serif);
+    font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+    line-height: 1.8;
+}
+.progetto-text strong {
+    font-family: var(--serif-it);
+    color: var(--viola);
+    font-weight: normal;
+}
+
 /* ============ SEZIONI ============ */
 .section-mascotte,
 .section-cards {
@@ -283,31 +301,50 @@ footer {
     position: relative;
     width: 100%;
     height: 100%;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-style: preserve-3d;
+    /* La prospettiva vive qui: le due facce sono figlie dirette e ognuna
+       ruota su se stessa. Niente preserve-3d: il contesto 3D condiviso tra
+       le facce è quello che faceva fallire backface-visibility in Firefox e
+       Safari/WebKit (scritta, cerchio e blob del fronte restavano visibili
+       sopra il retro quando la card era girata). */
+    perspective: 1500px;
     cursor: pointer;
 }
-/* Hover flip solo su desktop con mouse reale (su touch resterebbe "appiccicato") */
-@media (hover: hover) and (pointer: fine) {
-    .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
-    .card-disble:hover .flip-card-inner { transform: none; }
-}
-/* Flip su tap (smartphone) e da tastiera (solo focus da tastiera, non da tap) */
-.flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
-.card-disble.flipped .flip-card-inner { transform: none; }
-.flip-card:focus-visible .flip-card-inner,
-.flip-card:has(:focus-visible) .flip-card-inner { transform: rotateY(180deg); }
-.card-disble:focus-visible .flip-card-inner,
-.card-disble:has(:focus-visible) .flip-card-inner { transform: none; }
 .flip-card-front,
 .flip-card-back {
     position: absolute;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden;
     border-radius: 4px;
     overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /* Scambio facce a metà transizione (0.4s su 0.8s): a 90° la faccia è
+       di spigolo e il passaggio da fronte a retro non si vede. È lo scambio
+       visibility — non la backface — a garantire che la faccia sbagliata
+       non appaia mai, in tutti i browser. */
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0s linear 0.4s;
 }
+/* Hover flip solo su desktop con mouse reale (su touch resterebbe "appiccicato") */
+@media (hover: hover) and (pointer: fine) {
+    .flip-card:hover .flip-card-front { transform: rotateY(180deg); visibility: hidden; }
+    .flip-card:hover .flip-card-back { transform: rotateY(0deg); visibility: visible; }
+    .card-disble:hover .flip-card-front { transform: none; visibility: visible; }
+    .card-disble:hover .flip-card-back { transform: rotateY(-180deg); visibility: hidden; }
+}
+/* Flip su tap (smartphone) e da tastiera (solo focus da tastiera, non da tap) */
+.flip-card.flipped .flip-card-front,
+.flip-card:focus-visible .flip-card-front,
+.flip-card:has(:focus-visible) .flip-card-front { transform: rotateY(180deg); visibility: hidden; }
+.flip-card.flipped .flip-card-back,
+.flip-card:focus-visible .flip-card-back,
+.flip-card:has(:focus-visible) .flip-card-back { transform: rotateY(0deg); visibility: visible; }
+.card-disble.flipped .flip-card-front,
+.card-disble:focus-visible .flip-card-front,
+.card-disble:has(:focus-visible) .flip-card-front { transform: none; visibility: visible; }
+.card-disble.flipped .flip-card-back,
+.card-disble:focus-visible .flip-card-back,
+.card-disble:has(:focus-visible) .flip-card-back { transform: rotateY(-180deg); visibility: hidden; }
 
 /* Fronte */
 .flip-card-front {
@@ -318,6 +355,8 @@ footer {
     justify-content: center;
     padding: clamp(30px, 5vw, 50px) clamp(22px, 4vw, 40px);
     border: 1px solid rgba(26, 17, 38, 0.05);
+    transform: rotateY(0deg);
+    visibility: visible;
     /* Il fronte non deve mai intercettare hover/click: quando la card è girata
        resta dietro ed era lui a "mangiarsi" gli eventi del pulsante */
     pointer-events: none;
@@ -411,14 +450,15 @@ footer {
     color: var(--inchiostro);
     background-color: var(--crema);
     box-shadow: var(--ombra);
-    transform: rotateY(180deg);
+    /* Parte girata dall'altra parte; quando la card è flippata arriva a 0deg */
+    transform: rotateY(-180deg);
+    visibility: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 40px;
     text-align: center;
-    transition: background 0.5s ease;
     /* Il retro invisibile non deve rubare hover/click: si attiva solo quando è girato */
     pointer-events: none;
 }
@@ -449,9 +489,9 @@ footer {
     text-align: center;
     z-index: 10;
     box-shadow: var(--ombra);
-    /* Niente filter/will-change qui: dentro un contesto 3D (preserve-3d)
-       promuovono il pulsante a layer separato e il browser smarrisce
-       l'hit-testing → hover e click non arrivano mai al link. */
+    /* Niente filter/will-change qui: promuovono il pulsante a layer separato
+       e in alcuni engine si smarrisce l'hit-testing → hover e click non
+       arrivano mai al link. */
     touch-action: manipulation;
     transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1),
                 box-shadow 0.35s ease;
@@ -877,7 +917,8 @@ footer {
     html { scroll-behavior: auto; }
     .satellites-wrapper, .satellite, .blob-button::after { animation: none; }
     .flip-card-inner, .blob-button, .satellite img, .shop-text { transition: none; }
-}
+    /* Flip istantaneo: anche lo scambio delle facce deve essere immediato */
+    .flip-card-front, .flip-card-back { transition: none; }}
 
 /* ============ ANIMAZIONI ============ */
 @keyframes rotateSystem { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
