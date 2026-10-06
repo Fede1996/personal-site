@@ -219,20 +219,31 @@ nav a:hover { opacity: 0.6; }
 
 /* ============ PROGETTO (paragrafo sotto la hero) ============ */
 .section-progetto {
-    padding: clamp(35px, 5vw, 70px) 20px clamp(45px, 6vw, 75px);
-    max-width: 820px;
+    padding: clamp(15px, 3vw, 35px) 20px clamp(45px, 6vw, 75px);
+    max-width: 900px;
     margin: 0 auto;
     text-align: center;
 }
+/* Pannello crema come gli altri blocchi di testo del sito (book-card,
+   review-card): il paragrafo non finisce più sul viola dello sfondo */
 .progetto-text {
+    background: var(--crema);
+    box-shadow: var(--ombra);
+    border-radius: 20px;
+    padding: clamp(28px, 5vw, 48px) clamp(24px, 5vw, 56px);
     font-family: var(--serif);
-    font-size: clamp(1.05rem, 2.6vw, 1.35rem);
-    line-height: 1.8;
+    font-size: clamp(1.05rem, 2.4vw, 1.2rem);
+    line-height: 1.7;
 }
 .progetto-text strong {
     font-family: var(--serif-it);
+    font-style: normal;
     color: var(--viola);
     font-weight: normal;
+}
+.progetto-text em {
+    font-family: var(--serif-it);
+    font-style: normal;
 }
 
 /* ============ SEZIONI ============ */
