@@ -751,16 +751,34 @@ footer {
     align-items: center;
     gap: 10px;
 }
-.moon-icon,
-.moon-icon-reverse {
+/* Badge latitudine: coordinate del sole al posto delle emoji */
+.sun-badge,
+.sun-badge-reverse {
     position: absolute;
     top: 15px;
-    font-size: 1.5rem;
     line-height: 1;
     z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
 }
-.moon-icon { right: 15px; }
-.moon-icon-reverse { left: 15px; }
+.sun-badge { right: 15px; align-items: flex-end; text-align: right; }
+.sun-badge-reverse { left: 15px; align-items: flex-start; text-align: left; }
+.sun-deg {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    color: var(--viola);
+}
+.sun-badge small,
+.sun-badge-reverse small {
+    font-family: var(--sans);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--viola);
+    opacity: 0.75;
+}
 
 /* ============ BOTTONI ============ */
 .amazon-btn,
