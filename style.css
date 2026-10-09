@@ -751,7 +751,7 @@ footer {
     align-items: center;
     gap: 10px;
 }
-/* Badge latitudine: coordinate del sole al posto delle emoji */
+/* Badge del sole: arco di percorso + declinazione, niente emoji */
 .sun-badge,
 .sun-badge-reverse {
     position: absolute;
@@ -760,14 +760,24 @@ footer {
     z-index: 10;
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 4px;
+    color: var(--viola);
 }
 .sun-badge { right: 15px; align-items: flex-end; text-align: right; }
 .sun-badge-reverse { left: 15px; align-items: flex-start; text-align: left; }
+.sun-arc {
+    width: 40px;
+    height: 26px;
+    fill: none;
+    stroke: currentColor;
+}
+/* Tratteggio = traiettoria possibile del sole; il punto è dove si ferma */
+.sun-arc .arc { stroke-width: 1.2; stroke-dasharray: 2.5 2.5; opacity: 0.55; }
+.sun-arc .horizon { stroke-width: 1.2; opacity: 0.55; }
+.sun-arc .sun-dot { fill: currentColor; stroke: none; }
 .sun-deg {
     font-family: var(--serif);
     font-size: 1.4rem;
-    color: var(--viola);
 }
 .sun-badge small,
 .sun-badge-reverse small {
@@ -776,7 +786,6 @@ footer {
     font-weight: 700;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: var(--viola);
     opacity: 0.75;
 }
 
