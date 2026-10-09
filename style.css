@@ -893,10 +893,20 @@ footer {
         text-align: center;
     }
     .book-img {
+        order: 1;
         align-self: center;
         max-width: min(300px, 80vw);
     }
-    .book-info { width: 100%; }
+    /* Su mobile il badge non sta più in angolo: entra nel flusso fra copertina e titolo */
+    .sun-badge,
+    .sun-badge-reverse {
+        position: static;
+        order: 2;
+        align-self: center;
+        align-items: center;
+        text-align: center;
+    }
+    .book-info { order: 3; width: 100%; }
     .book-meta li { justify-content: center; }
     .desc-section-box { max-width: 100%; min-height: 22vh; }
     .card-tagline { font-size: 0.65rem; }
