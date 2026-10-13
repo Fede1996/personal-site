@@ -22,7 +22,7 @@
         <nav class="desktop-nav">
             <a href="#hero">Introduzione</a>
             <a href="#mascotte">Mascotte</a>
-            <a href="#lune">Simboli</a>
+            <a href="#lune">Le lune</a>
         </nav>
         <div><a href="../" class="amazon-btn home-btn">HOME</a></div>
         <button class="hamburger" onclick="toggleMenu()">
@@ -36,7 +36,7 @@
         <button class="close-btn" onclick="toggleMenu()">×</button>
         <a href="#hero">Introduzione</a>
         <a href="#mascotte">Mascotte</a>
-        <a href="#lune">Simboli</a>
+        <a href="#lune">Le lune</a>
         <a href="../" class="amazon-btn mobile-home">HOME</a>
     </nav>
 
@@ -67,74 +67,99 @@
         <div class="desc-section-box">
             <h2 class="section-title">OGNI <span class="title-white">LUNA</span> UNA ROTTA INEDITA</h2>
             <p class="license-text lead">Ogni luna di Mercurio racconta un modo diverso di incontrare parole, numeri e gesti.<br/>Esplora le schede dedicate alle differenze nell'apprendimento e scopri la rotta che parla di te.</p>
+            <p class="license-text note-lead">Ogni scheda ha due voci: <strong>Cos'è</strong> spiega il tema con parole chiare, <strong>La luna racconta</strong> lo attraversa con la voce del progetto. Sono testi divulgativi: non sostituiscono il parere di un professionista — le storie, vere e proprie, stanno nei <a href="../#libri">libri</a>.</p>
         </div>
 
-        <div class="book-card">
+        <div class="book-card" id="dislessia">
             <img src="../Asset/Collezione 2/dislessia.png" class="book-img" alt="Dislessia">
             <div class="book-info">
                 <h2>Dislessia</h2>
                 <p class="desc">Le lettere danzano e insegnano un'altra rotta.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>La dislessia è una difficoltà specifica nell'apprendimento della lettura: decodificare le parole diventa lento e faticoso. Non dipende dall'intelligenza né da pigrizia — con gli strumenti giusti, come testi ad alta leggibilità e tempi adeguati, si studia e si lavora senza penalizzazioni.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     La dislessia cambia il cammino delle parole, non la profondità del pensiero. Su Mercurio, veloce e tortuoso, Silen mostra che leggere il mondo in modo diverso significa spesso vederlo più a fondo.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card reverse">
+        <div class="book-card reverse" id="disprassia">
             <img src="../Asset/Collezione 2/disprassia.png" class="book-img" alt="Disprassia">
             <div class="book-info">
                 <h2>Disprassia</h2>
                 <p class="desc">Il corpo impara il suo passo.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>La disprassia, o disturbo della coordinazione motoria, rende difficoltosi la pianificazione e l'esecuzione dei movimenti: allacciarsi le scarpe, scrivere in modo fluido, organizzare i gesti. Riguarda la coordinazione, non l'intelligenza, e si accompagna con riabilitazione e adattamenti pratici.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     La disprassia rende complesso coordinare gesti e intenzioni, come un'orchestra che cerca il tempo giusto. Questa luna celebra la pazienza del corpo che impara, passo dopo passo, la propria danza.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card">
+        <div class="book-card" id="iperlessia">
             <img src="../Asset/Collezione 2/iperlessia.png" class="book-img" alt="Iperlessia">
             <div class="book-info">
                 <h2>Iperlessia</h2>
                 <p class="desc">Le parole arrivano prima del loro significato.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>L'iperlessia è una capacità di lettura precoce e spontanea, spesso ben oltre l'età anagrafica. Non è un disturbo: è una traiettoria di sviluppo atipica che, isolata, può talvolta nascondere difficoltà nella comprensione o in altre aree dell'apprendimento.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     L'iperlessia porta alle lettere molto presto, spesso prima che il senso arrivi a incontrarle. Silen custodisce questa fame di testo come un dono da accompagnare, non da spegnere.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card reverse">
+        <div class="book-card reverse" id="discalculia">
             <img src="../Asset/Collezione 2/discalculia.png" class="book-img" alt="Discalculia">
             <div class="book-info">
                 <h2>Discalculia</h2>
                 <p class="desc">I numeri sono una lingua straniera.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>La discalculia è una difficoltà specifica con i numeri e il calcolo: capire le quantità, memorizzare le tabellari, incolonnare un'operazione. Come le altre difficoltà specifiche dell'apprendimento, non misura l'intelligenza e si affronta con metodi didattici mirati.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     La discalculia rende i numeri instabili, come scritte sulla sabbia. Su Mercurio si impara che il valore di una persona non si misura in calcoli, ma in come sa attraversare il mondo.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card">
+        <div class="book-card" id="disgrafia">
             <img src="../Asset/Collezione 2/disgrafia.png" class="book-img" alt="Disgrafia">
             <div class="book-info">
                 <h2>Disgrafia</h2>
                 <p class="desc">La mano cerca la sua forma.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>La disgrafia è una difficoltà nella scrittura del segno grafico: lettere irregolari, pressione ineguale, un testo faticoso da leggere. Non è disattenzione: riguarda la motricità fine e l'organizzazione del gesto, e oggi si accompagna anche con strumenti digitali.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     La disgrafia mette distanza tra il pensiero e la scrittura, tra ciò che si vuole dire e ciò che resta sulla carta. Questa luna parla di tutte le forme in cui un'idea trova comunque la strada per uscire.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card reverse">
+        <div class="book-card reverse" id="disortografia">
             <img src="../Asset/Collezione 2/disortografia.png" class="book-img" alt="Disortografia">
             <div class="book-info">
                 <h2>Disortografia</h2>
                 <p class="desc">Le parole cercano la propria via sulla carta.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>La disortografia è la difficoltà ad applicare correttamente le regole ortografiche: accenti, doppie, suoni simili che si confondono. Riguarda la scrittura codificata, non la ricchezza delle idee, e si interviene con esercizi specifici e tempi più lunghi.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     La disortografia è una difficoltà specifica della scrittura ortografica: le lettere si scambiano di posto, gli accenti svaniscono, le regole scivolano via. Non è pigrizia né poca fantasia: il pensiero è chiaro, è il cammino verso la carta a essere impervio. Mercurio ricorda che ogni mente merita il proprio alfabeto.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>

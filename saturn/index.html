@@ -22,7 +22,7 @@
         <nav class="desktop-nav">
             <a href="#hero">Introduzione</a>
             <a href="#mascotte">Mascotte</a>
-            <a href="#lune">Simboli</a>
+            <a href="#lune">Le lune</a>
         </nav>
         <div><a href="../" class="amazon-btn home-btn">HOME</a></div>
         <button class="hamburger" onclick="toggleMenu()">
@@ -36,7 +36,7 @@
         <button class="close-btn" onclick="toggleMenu()">×</button>
         <a href="#hero">Introduzione</a>
         <a href="#mascotte">Mascotte</a>
-        <a href="#lune">Simboli</a>
+        <a href="#lune">Le lune</a>
         <a href="../" class="amazon-btn mobile-home">HOME</a>
     </nav>
 
@@ -67,74 +67,99 @@
         <div class="desc-section-box">
             <h2 class="section-title">OGNI <span class="title-white">LUNA</span> UN CICLO DELLA CRESCITA</h2>
             <p class="license-text lead">Ogni luna di Saturno accompagna un passo del neurosviluppo: i talenti, i sensi, i tempi diversi.<br/>Esplora le schede dedicate alle asincronie della crescita, senza fretta e senza confronti.</p>
+            <p class="license-text note-lead">Ogni scheda ha due voci: <strong>Cos'è</strong> spiega il tema con parole chiare, <strong>La luna racconta</strong> lo attraversa con la voce del progetto. Sono testi divulgativi: non sostituiscono il parere di un professionista — le storie, vere e proprie, stanno nei <a href="../#libri">libri</a>.</p>
         </div>
 
-        <div class="book-card">
+        <div class="book-card" id="multipotenzialita">
             <img src="../Asset/Collezione 8/multi_potenzialità.png" class="book-img" alt="Multipotenzialità">
             <div class="book-info">
                 <h2>Multipotenzialità</h2>
                 <p class="desc">Troppe strade, tutte vere.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>Una persona multipotenziale ha interessi e talenti in molte aree e impara rapidamente cose nuove. Non è un disturbo né mancanza di concentrazione: è un modo di essere che fiorisce quando può collegare discipline diverse.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     La multipotenzialità è la vocazione di chi eccelle in più cose e non riesce a sceglierne una sola. Su Saturno, pianeta dei cicli, Silen racconta che non è un difetto cambiare rotta: è un modo di esplorare il mondo.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card reverse">
+        <div class="book-card reverse" id="persona-altamente-sensibile">
             <img src="../Asset/Collezione 8/persona_altamente_sensibile.png" class="book-img" alt="Persona Altamente Sensibile">
             <div class="book-info">
                 <h2>Persona Altamente Sensibile</h2>
                 <p class="desc">Sentire il mondo con la pelle dell'anima.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>La persona altamente sensibile (PAS) percepisce e elabora gli stimoli con più profondità: emozioni, dettagli, atmosfere. Non è una patologia: è un tratto studiato dalla ricerca, che comporta insieme vulnerabilità e ricchezza percettiva.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     La persona altamente sensibile raccoglie stimoli, emozioni e sfumature che altri non vedono. Questa luna parla di questa ricettività profonda: un dono delicato, da proteggere come si protegge un fiore dal vento.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card">
+        <div class="book-card" id="plusdotazione">
             <img src="../Asset/Collezione 8/plusdotazione.png" class="book-img" alt="Plusdotazione">
             <div class="book-info">
                 <h2>Plusdotazione</h2>
                 <p class="desc">Una mente che chiede orizzonti più ampi.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>La plusdotazione indica capacità intellettive nettamente sopra la media, spesso accompagnate da intensità, curiosità e pensiero divergente. Non significa solo andare bene a scuola: senza riconoscimento e stimoli adeguati può portare noia, isolamento e sofferenza.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     La plusdotazione unisce intensità, rapidità e profondità di pensiero a una sensibilità spesso sottostimata. Silen, su Saturno, custodisce la sete di conoscenza di chi cresce più in fretta del mondo attorno a sé.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card reverse">
+        <div class="book-card reverse" id="sviluppo-asincrono">
             <img src="../Asset/Collezione 8/asincronia_sviluppo.png" class="book-img" alt="Sviluppo Asincrono">
             <div class="book-info">
                 <h2>Sviluppo Asincrono</h2>
                 <p class="desc">Crescere a velocità diverse.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>Nello sviluppo asincrono le aree crescono a velocità diverse: una persona può ragionare molto oltre la propria età ed emotivamente restare della propria età. È tipico della plusdotazione: non è incoerenza, è uno sviluppo non allineato che chiede comprensione.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     Lo sviluppo asincrono mette un'intelligenza adulta dentro un corpo e un cuore che hanno ancora bisogno di tempo. Questa luna racconta la delicatezza di questi tempi diversi, da rispettare senza fretta.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card">
+        <div class="book-card" id="iperreattivita-sensoriale">
             <img src="../Asset/Collezione 8/iper_reattività_sensoriale.png" class="book-img" alt="Iperreattività Sensoriale">
             <div class="book-info">
                 <h2>Iperreattività Sensoriale</h2>
                 <p class="desc">Il mondo arriva a volume pieno.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>L'iperreattività sensoriale significa che alcuni stimoli — luci, suoni, tessuti, profumi — arrivano troppo forti, o troppo deboli. Non è esagerare: è un sistema nervoso che elabora gli input in modo diverso, e conoscere i propri limiti aiuta a proteggere le energie.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     L'iperreattività sensoriale amplifica luci, suoni e contatti, trasformando la quotidianità in una tempesta di stimoli. Silen insegna qui a costruire rifugi sensoriali, piccoli silenzi in cui ritrovare sé stessi.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card reverse">
+        <div class="book-card reverse" id="doppia-eccezionalita">
             <img src="../Asset/Collezione 8/2e.png" class="book-img" alt="Doppia Eccezionalità">
             <div class="book-info">
                 <h2>Doppia Eccezionalità</h2>
                 <p class="desc">Due luci nella stessa orbita.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>La doppia eccezionalità (2e) indica la compresenza di plusdotazione e di una condizione come l'autismo, l'ADHD o una difficoltà specifica dell'apprendimento. I due aspetti si mascherano a vicenda: il talento fa dimenticare la fatica, e la fatica copre il talento.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     La doppia eccezionalità unisce un talento eccezionale e una difficoltà — spesso dell'apprendimento o del neurosviluppo — nella stessa persona: due metà che si esaltano e si confondono a vicenda. Riconoscerne solo una significa perderle entrambe. Saturno, che costruisce il tempo, custodisce entrambe le luci e le accompagna a trovare il proprio ritmo.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>

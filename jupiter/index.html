@@ -22,7 +22,7 @@
         <nav class="desktop-nav">
             <a href="#hero">Introduzione</a>
             <a href="#mascotte">Mascotte</a>
-            <a href="#lune">Simboli</a>
+            <a href="#lune">Le lune</a>
         </nav>
         <div><a href="../" class="amazon-btn home-btn">HOME</a></div>
         <button class="hamburger" onclick="toggleMenu()">
@@ -36,7 +36,7 @@
         <button class="close-btn" onclick="toggleMenu()">×</button>
         <a href="#hero">Introduzione</a>
         <a href="#mascotte">Mascotte</a>
-        <a href="#lune">Simboli</a>
+        <a href="#lune">Le lune</a>
         <a href="../" class="amazon-btn mobile-home">HOME</a>
     </nav>
 
@@ -67,74 +67,99 @@
         <div class="desc-section-box">
             <h2 class="section-title">OGNI <span class="title-white">LUNA</span> UNA DIVERSA IMMENSITÀ</h2>
             <p class="license-text lead">Ogni luna di Giove racconta una sfumatura della neurodivergenza: la comunicazione, l'attenzione, il corpo che parla.<br/>Esplora le schede dedicate alle diverse forme del neurosviluppo e incontra la tua immensità.</p>
+            <p class="license-text note-lead">Ogni scheda ha due voci: <strong>Cos'è</strong> spiega il tema con parole chiare, <strong>La luna racconta</strong> lo attraversa con la voce del progetto. Sono testi divulgativi: non sostituiscono il parere di un professionista — le storie, vere e proprie, stanno nei <a href="../#libri">libri</a>.</p>
         </div>
 
-        <div class="book-card">
+        <div class="book-card" id="autismo-livello-1">
             <img src="../Asset/Collezione 1/autismo_lv1.png" class="book-img" alt="Autismo Livello 1">
             <div class="book-info">
                 <h2>Autismo Livello 1</h2>
                 <p class="desc">Il mondo si sente troppo, e si capisce in modo unico.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>L'autismo di livello 1 (DSM-5) indica una persona autistica che ha bisogno di un supporto lieve: può comunicare e vivere in autonomia, ma la comunicazione sociale, la flessibilità e le sensibilità sensoriali restano faticose. Non è autismo poco autentico: il livello descrive l'aiuto necessario, non il valore della persona.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     L'autismo di livello 1 porta con sé un modo diverso di comunicare, di concentrarsi, di sentire. Su Giove, gigante di tempeste e meraviglie, Silen racconta la ricchezza di chi costruisce mondi ordinati dentro un universo rumoroso.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card reverse">
+        <div class="book-card reverse" id="autismo-livello-2">
             <img src="../Asset/Collezione 1/autismo_lv2.png" class="book-img" alt="Autismo Livello 2">
             <div class="book-info">
                 <h2>Autismo Livello 2</h2>
                 <p class="desc">Un bisogno di chiarezza in un mondo confuso.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>L'autismo di livello 2 indica un bisogno di supporto sostanziale: difficoltà più marcate nella comunicazione, nelle relazioni e nel gestire i cambiamenti, con sensibilità sensoriali forti. Anche qui, il livello misura l'aiuto necessario, non il valore della persona.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     L'autismo di livello 2 chiede più sostegno, più prevedibilità, più tempo. Questa luna parla della dignità di chi ha bisogno di regole chiare per esplorare, a modo suo, la propria immensità.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card">
+        <div class="book-card" id="autismo-livello-3">
             <img src="../Asset/Collezione 1/autismo_lv3.png" class="book-img" alt="Autismo Livello 3">
             <div class="book-info">
                 <h2>Autismo Livello 3</h2>
                 <p class="desc">Comunicare oltre le parole.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>L'autismo di livello 3 indica un bisogno di supporto molto sostanziale, anche nelle attività quotidiane: la comunicazione verbale può essere limitata e i cambiamenti molto destabilizzanti. È il livello di supporto più alto descritto dal DSM-5, e richiede reti di cura dedicate.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     L'autismo di livello 3 vive spesso nel silenzio delle parole, ma non nel silenzio della presenza. Silen custodisce questa voce profonda, che si esprime in gesti, sguardi e bisogni da accogliere con cura.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card reverse">
+        <div class="book-card reverse" id="sindrome-di-tourette">
             <img src="../Asset/Collezione 1/sindrome_tourette.png" class="book-img" alt="Sindrome di Tourette">
             <div class="book-info">
                 <h2>Sindrome di Tourette</h2>
                 <p class="desc">Il corpo che parla prima del pensiero.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>La sindrome di Tourette è un disturbo neurologico caratterizzato da tic motori e vocali involontari che compaiono nell'infanzia. Non è maleducazione né una scelta: i tic possono aumentare con lo stress e attenuarsi con la crescita, e esistono percorsi di cura specifici.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     La sindrome di Tourette porta tic e suoni involontari, piccoli fulmini che attraversano il corpo. Su Giove questa luna racconta la leggerezza con cui si può convivere con l'inatteso, senza vergogna.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card">
+        <div class="book-card" id="adhd">
             <img src="../Asset/Collezione 1/adhd.png" class="book-img" alt="ADHD">
             <div class="book-info">
                 <h2>ADHD</h2>
                 <p class="desc">L'attenzione che non sta ferma, ma sa dove andare.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>L'ADHD, il disturbo da deficit di attenzione/iperattività, è una condizione neurosviluppiva che rende difficile regolare attenzione, impulsività e livello di attività. Non è pigrizia: il cervello organizza le priorità in modo diverso, e struttura, strategie e a volte farmaci fanno la differenza.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     L'ADHD porta energia, slancio e pensieri che corrono più veloci delle parole. Silen celebra questa velocità interiore, e la capacità di trasformarla in creatività quando trova il canale giusto.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card reverse">
+        <div class="book-card reverse" id="alessitimia">
             <img src="../Asset/Collezione 1/alessitimia.png" class="book-img" alt="Alessitimia">
             <div class="book-info">
                 <h2>Alessitimia</h2>
                 <p class="desc">Emozioni che chiedono un nome.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>L'alessitimia è la difficoltà a riconoscere, distinguere e descrivere le proprie emozioni. Non è un disturbo dell'umore né freddezza: è una caratteristica, spesso associata ad altre condizioni, che rende le emozioni difficili da mettere in parole.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     L'alessitimia è la difficoltà a riconoscere e nominare le proprie emozioni: il corpo le sente — tensione, calore, vuoto — ma le parole tardano ad arrivare. Non è freddezza: sono emozioni ancora senza etichetta. Su Giove, oltre i confini delle parole, si impara che anche un sentiero senza nome può portare lontano.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>

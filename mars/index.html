@@ -22,7 +22,7 @@
         <nav class="desktop-nav">
             <a href="#hero">Introduzione</a>
             <a href="#mascotte">Mascotte</a>
-            <a href="#lune">Simboli</a>
+            <a href="#lune">Le lune</a>
         </nav>
         <div><a href="../" class="amazon-btn home-btn">HOME</a></div>
         <button class="hamburger" onclick="toggleMenu()">
@@ -36,7 +36,7 @@
         <button class="close-btn" onclick="toggleMenu()">×</button>
         <a href="#hero">Introduzione</a>
         <a href="#mascotte">Mascotte</a>
-        <a href="#lune">Simboli</a>
+        <a href="#lune">Le lune</a>
         <a href="../" class="amazon-btn mobile-home">HOME</a>
     </nav>
 
@@ -67,74 +67,99 @@
         <div class="desc-section-box">
             <h2 class="section-title">OGNI <span class="title-white">LUNA</span> UNA SCINTILLA</h2>
             <p class="license-text lead">Ogni luna di Marte custodisce un momento dell'esperienza emotiva: la fiamma che consuma, la pioggia sottile, la notte lunga.<br/>Esplora le schede dedicate all'umore e allo stress, e lascia che sia la scintilla giusta a parlare di te.</p>
+            <p class="license-text note-lead">Ogni scheda ha due voci: <strong>Cos'è</strong> spiega il tema con parole chiare, <strong>La luna racconta</strong> lo attraversa con la voce del progetto. Sono testi divulgativi: non sostituiscono il parere di un professionista — le storie, vere e proprie, stanno nei <a href="../#libri">libri</a>.</p>
         </div>
 
-        <div class="book-card">
+        <div class="book-card" id="burnout">
             <img src="../Asset/Collezione 4/burnout.png" class="book-img" alt="Burnout">
             <div class="book-info">
                 <h2>Burnout</h2>
                 <p class="desc">Quando la fiamma consuma chi la custodisce.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>Il burnout è uno stato di esaurimento fisico ed emotivo legato a uno stress prolungato, tipicamente al lavoro o alla cura di qualcuno. Si manifesta con stanchezza profonda, distacco e calo della motivazione: l'Organizzazione Mondiale della Sanità lo descrive come un fenomeno occupazionale, non come una debolezza personale.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     Il burnout è l'eco di un impegno dato tutto, senza pause e senza ritorno. Silen, su Marte, insegna che la fiamma non si spegne per debolezza: si protegge, si nutre e si riaccende con lentezza, per continuare a bruciare senza consumarsi.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card reverse">
+        <div class="book-card reverse" id="stress">
             <img src="../Asset/Collezione 4/stress.png" class="book-img" alt="Stress">
             <div class="book-info">
                 <h2>Stress</h2>
                 <p class="desc">La tempesta che chiede di essere ascoltata.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>Lo stress è la reazione del corpo e della mente a una pressione percepita come eccessiva. A piccole dosi è normale e perfino utile; quando diventa cronico influenza sonno, umore, memoria e salute fisica, e merita di essere ascoltato prima di logorare.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     Lo stress è il vento solare dell'anima: invisibile, insistente, capace di piegare le orbite. Questa luna racconta il momento in cui si impara a distinguere ciò che va affrontato da ciò che va lasciato andare.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card">
+        <div class="book-card" id="distimia">
             <img src="../Asset/Collezione 4/distimia.png" class="book-img" alt="Distimia">
             <div class="book-info">
                 <h2>Distimia</h2>
                 <p class="desc">Una pioggia sottile che non smette.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>La distimia, oggi chiamata disturbo depressivo persistente, è una forma di depressione lieve ma continua: un umore deflesso che accompagna la vita per almeno due anni. Non è tristezza passeggera — spesso si impara a conviverci senza riconoscerla.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     La distimia è un umore che non urla, ma nemmeno tace: accompagna i giorni come una nube bassa e costante. Su Marte, questa voce parla del coraggio di chiedere luce anche quando il cielo sembra fermo.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card reverse">
+        <div class="book-card reverse" id="depressione">
             <img src="../Asset/Collezione 4/depressione.png" class="book-img" alt="Depressione">
             <div class="book-info">
                 <h2>Depressione</h2>
                 <p class="desc">Attraversare il buio per ritrovare la propria orbita.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>La depressione è un disturbo dell'umore che altera il modo di sentire, pensare e vivere il quotidiano: tristezza persistente, perdita di interesse, stanchezza, difficoltà di concentrazione. È una condizione clinica riconosciuta, non una fase che si supera con la forza di volontà, e con il giusto sostegno si può affrontare.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     La depressione è una notte lunga, che toglie peso e colore al mondo. Silen la attraversa senza negarla, per ricordare che anche le notti più profonde hanno un bordo che si può raggiungere.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card">
+        <div class="book-card" id="disturbo-bipolare">
             <img src="../Asset/Collezione 4/disturbo_bipolare.png" class="book-img" alt="Disturbo Bipolare">
             <div class="book-info">
                 <h2>Disturbo Bipolare</h2>
                 <p class="desc">Tra due soli, una rotta che insegna il ritmo.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>Il disturbo bipolare è un disturbo dell'umore in cui si alternano fasi di forte attivazione ed euforia (mania o ipomania) e fasi depressive. Non significa semplicemente avere alti e bassi: è un quadro clinico riconoscibile, che si accompagna con percorsi di cura specifici.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     Il disturbo bipolare vive tra altitudini impossibili e abissi improvvisi. Questa luna racconta l'arte difficile di navigare tra due luci, imparando a riconoscere i propri ritmi prima che diventino tempesta.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card reverse">
+        <div class="book-card reverse" id="anedonia">
             <img src="../Asset/Collezione 4/anedonia.png" class="book-img" alt="Anedonia">
             <div class="book-info">
                 <h2>Anedonia</h2>
                 <p class="desc">Quando la fiamma smette di scaldare.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>L'anedonia è la difficoltà, o l'incapacità, a provare piacere per cose che prima interessavano. È un sintomo, non una diagnosi a sé: può comparire nella depressione, in alcune condizioni neurologiche o dopo periodi di forte stress.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     L'anedonia è la cenere che copre il fuoco: le cose continuano ad accadere, ma nulla più incuriosisce o riscalda. Non è indifferenza, è un velo che spegne il piacere delle cose. Su Marte, questa luna insegna che la fiamma si riaccende piano — nutrendola di piccoli momenti, non imponendole di bruciare.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>

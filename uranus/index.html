@@ -22,7 +22,7 @@
         <nav class="desktop-nav">
             <a href="#hero">Introduzione</a>
             <a href="#mascotte">Mascotte</a>
-            <a href="#lune">Simboli</a>
+            <a href="#lune">Le lune</a>
         </nav>
         <div><a href="../" class="amazon-btn home-btn">HOME</a></div>
         <button class="hamburger" onclick="toggleMenu()">
@@ -36,7 +36,7 @@
         <button class="close-btn" onclick="toggleMenu()">×</button>
         <a href="#hero">Introduzione</a>
         <a href="#mascotte">Mascotte</a>
-        <a href="#lune">Simboli</a>
+        <a href="#lune">Le lune</a>
         <a href="../" class="amazon-btn mobile-home">HOME</a>
     </nav>
 
@@ -67,74 +67,99 @@
         <div class="desc-section-box">
             <h2 class="section-title">OGNI <span class="title-white">LUNA</span> UNA SCINTILLA NEL SISTEMA NERVOSO</h2>
             <p class="license-text lead">Ogni luna di Urano racconta una tempesta del sistema nervoso: le parole che mancano, il dolore che torna, i fulmini che scuotono.<br/>Esplora le schede dedicate ai disturbi neurologici, con rispetto per chi ogni giorno ricompone le proprie connessioni.</p>
+            <p class="license-text note-lead">Ogni scheda ha due voci: <strong>Cos'è</strong> spiega il tema con parole chiare, <strong>La luna racconta</strong> lo attraversa con la voce del progetto. Sono testi divulgativi: non sostituiscono il parere di un professionista — le storie, vere e proprie, stanno nei <a href="../#libri">libri</a>.</p>
         </div>
 
-        <div class="book-card">
+        <div class="book-card" id="afasia">
             <img src="../Asset/Collezione 6/afasia.png" class="book-img" alt="Afasia">
             <div class="book-info">
                 <h2>Afasia</h2>
                 <p class="desc">Le parole smarriscono la strada.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>L'afasia è un disturbo del linguaggio causato da una lesione cerebrale, tipicamente un ictus: si fatica a parlare, capire, leggere o scrivere, mentre l'intelligenza resta intatta. La riabilitazione logopedica può migliorare molto la comunicazione.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     L'afasia interrompe il ponte tra il pensiero e la parola, lasciando intatto il mondo interiore. Su Urano, pianeta dell'imprevisto, Silen racconta che comunicare è molto più delle parole, e che la comprensione trova sempre nuove vie.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card reverse">
+        <div class="book-card reverse" id="emicrania-cronica">
             <img src="../Asset/Collezione 6/emicrania_cronica.png" class="book-img" alt="Emicrania Cronica">
             <div class="book-info">
                 <h2>Emicrania Cronica</h2>
                 <p class="desc">Un dolore che torna, e insegna il rispetto dei propri limiti.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>L'emicrania cronica è un mal di testa ricorrente per almeno 15 giorni al mese, di cui almeno 8 con caratteristiche emicraniche. Non è un semplice mal di testa: è una condizione neurologica invalidante, con nausea e sensibilità a luce e suoni, che si affronta con percorsi specialistici.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     L'emicrania cronica porta con sé un dolore ricorrente, che costringe a fermarsi. Questa luna parla del coraggio di chi convive con il dolore, e dell'importanza di ascoltare il corpo quando chiede tregua.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card">
+        <div class="book-card" id="epilessia">
             <img src="../Asset/Collezione 6/epilessia.png" class="book-img" alt="Epilessia">
             <div class="book-info">
                 <h2>Epilessia</h2>
                 <p class="desc">La tempesta elettrica che attraversa il cervello.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>L'epilessia è una condizione neurologica in cui il cervello produce scariche elettriche anomale, causando crisi ricorrenti. Le crisi hanno forme molto diverse tra loro; con i farmaci giusti la maggior parte delle persone le controlla bene.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     L'epilessia si manifesta in fulmini improvvisi che scuotono il corpo e la mente. Silen, su Urano, custodisce la vulnerabilità di questi momenti e la forza di chi riprende ogni volta la propria orbita.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card reverse">
+        <div class="book-card reverse" id="malattia-di-parkinson">
             <img src="../Asset/Collezione 6/malattia_parkinson.png" class="book-img" alt="Malattia di Parkinson">
             <div class="book-info">
                 <h2>Malattia di Parkinson</h2>
                 <p class="desc">Il tempo che rallenta il gesto.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>La malattia di Parkinson è una malattia neurologica progressiva che rallenta e irrigidisce il movimento: tremore, lentezza, rigidità, difficoltà nell'equilibrio. Nasce dalla perdita di neuroni che producono dopamina, e i trattamenti attuali alleviano molto i sintomi.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     La malattia di Parkinson rende i movimenti lenti e incerti, come sotto un'acqua profonda. Questa luna racconta la dignità di chi impara ogni giorno nuovi equilibri, senza perdere la propria direzione.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card">
+        <div class="book-card" id="sclerosi-multipla">
             <img src="../Asset/Collezione 6/sclerosi_multipla.png" class="book-img" alt="Sclerosi Multipla">
             <div class="book-info">
                 <h2>Sclerosi Multipla</h2>
                 <p class="desc">Un corpo che cambia le proprie mappe.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>La sclerosi multipla è una malattia autoimmune del sistema nervoso centrale: il sistema immunitario danneggia la guaina che protegge i nervi, causando sintomi variabili — stanchezza, vista, equilibrio, formicolii. È diversa da persona a persona, ma oggi esistono terapie che ne modificano il decorso.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     La sclerosi multipla altera i segnali tra cervello e corpo, con imprevedibilità e alternanze. Silen parla qui dell'adattamento quotidiano, della cura e della speranza che accompagna chi vive con un sistema nervoso in perenne ricalcolo.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card reverse">
+        <div class="book-card reverse" id="sla">
             <img src="../Asset/Collezione 6/sla.png" class="book-img" alt="Sclerosi Laterale Amiotrofica (SLA)">
             <div class="book-info">
                 <h2>Sclerosi Laterale Amiotrofica (SLA)</h2>
                 <p class="desc">Quando il movimento si fa silenzio.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>La sclerosi laterale amiotrofica (SLA) è una malattia neurologica progressiva che intacca i motoneuroni, i nervi che comandano i muscoli: il movimento e la parola si riducono progressivamente, mentre mente e sensi restano integri. È rara e ancora senza cure risolutive, ma la ricerca e le cure di supporto incidono molto sulla qualità della vita.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     La sclerosi laterale amiotrofica è una malattia neurodegenerativa dei motoneuroni: il corpo perde progressivamente forza, movimento e parola, mentre la mente resta spesso lucida e presente. È una delle traversate più difficili. Su Urano, tra le connessioni che danzano, questa luna ricorda che la dignità non si misura in movimenti, e che accanto è già cura.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>

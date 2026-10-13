@@ -20,7 +20,7 @@
             <img src="./Asset/firme-mobile.png" class="logo logo-mobile" alt="Federico Gorrino">
         </div>
         <nav class="desktop-nav">
-            <a href="#hero">Introduzione</a>
+            <a href="#progetto">Il mio progetto</a>
             <a href="#mascotte">Mascotte</a>
             <a href="#collezioni">Collezioni</a>
             <a href="#libri">Libri</a>
@@ -35,7 +35,7 @@
 
     <nav class="mobile-menu">
         <button class="close-btn" onclick="toggleMenu()">×</button>
-        <a href="#hero">Introduzione</a>
+        <a href="#progetto">Il mio progetto</a>
         <a href="#mascotte">Mascotte</a>
         <a href="#collezioni">Collezioni</a>
         <a href="#libri">Libri</a>
@@ -50,10 +50,26 @@
         <p class="intro">Un universo di psicologia e narrazione: unisce introspezione, conoscenza e creatività per accompagnarti in un viaggio autentico.</p>
     </section>
 
-    <section class="section-progetto" id="progetto">
-        <p class="progetto-text">
-            <strong>Una Voce Dal Profondo</strong> è un progetto di divulgazione psicologica e narrazione che unisce scienza e creatività per accompagnarti alla scoperta del mondo interiore. Le collezioni tematiche — raccolte attorno agli otto pianeti del Sistema Solare — rendono vicini e comprensibili disturbi, neurodivergenze e sfumature dell'esperienza umana; la collana di libri <em>Voci dal Profondo</em> le trasforma in storie; Silen, la mascotte, guida il viaggio. Uno spazio senza giudizio in cui guardarsi, formarsi e scoprirsi.
-        </p>
+    <section class="section-cosa-trovi" id="progetto">
+        <h2 class="section-title">IL MIO <span class="title-white">PROGETTO</span></h2>
+        <p class="license-text lead">Una Voce Dal Profondo nasce per unire divulgazione psicologica e narrazione: spiegare con chiarezza e raccontare storie, per accompagnarti alla scoperta del mondo interiore. Il sito si legge in tre mosse:</p>
+        <div class="cosa-trovi-grid">
+            <div class="info-card">
+                <h3>Silen</h3>
+                <p>Silen è la mascotte che guida il viaggio: una forma per ogni pianeta, accanto a chi sceglie di guardarsi dentro. Se non sai da dove cominciare, comincia da qui.</p>
+                <a href="#mascotte" class="text-link">Conosci Silen</a>
+            </div>
+            <div class="info-card">
+                <h3>Le collezioni</h3>
+                <p>Quarantotto schede sugli otto pianeti, una per ogni tema: disturbi, neurodivergenze e sfumature dell'esperienza umana. Ogni scheda ha due voci: <strong>Cos'è</strong>, la spiegazione chiara, e <strong>La luna racconta</strong>, la voce poetica del progetto. Non sono storie — quelle stanno nei libri — e non sono schede cliniche: sono divulgazione.</p>
+                <a href="#collezioni" class="text-link">Esplora le collezioni</a>
+            </div>
+            <div class="info-card">
+                <h3>I libri</h3>
+                <p>La collana <em>Voci dal Profondo</em> trasforma quegli stessi temi in storie: favole moderne e racconti introspettivi per ragazze e ragazzi dai 6 ai 18 anni.</p>
+                <a href="#libri" class="text-link">Scopri i libri</a>
+            </div>
+        </div>
     </section>
 
     <section class="section-mascotte" id="mascotte">
@@ -75,6 +91,7 @@
         <div class="desc-section-box">
             <h2 class="section-title">OGNI <span class="title-white">PIANETA</span> UN MONDO INTERIORE</h2>
             <p class="license-text lead">Come i pianeti del Sistema Solare, ogni mente segue rotte uniche.<br/>Esplora le collezioni dedicate alle diverse sfumature dell'esperienza umana: un percorso di divulgazione psicologica che unisce scienza e racconto.</p>
+            <p class="license-text note-lead"><strong>Come funziona:</strong> passa il mouse su un pianeta — o toccalo — per vedere i suoi temi. Clicca un tema per aprire la scheda dedicata, oppure apri tutta la collezione.</p>
         </div>
         <div class="grid-container">
             <div class="flip-card">
@@ -87,23 +104,24 @@
                             <p class="card-col-num">Umore e Stress</p>
                             <div class="card-divider">&#10022;</div>
                             <p class="card-tagline">Accendi il coraggio, governa la tempesta</p>
-                            <span class="flip-hint">Tocca per esplorare</span>
+                            <span class="flip-hint">Passa il mouse o tocca per vedere i temi</span>
                         </div>
                     </div>
                     <div class="flip-card-back back-1">
                         <!-- Pulsante Centrale (Fisso) -->
                         <a href="mars/" class="blob-button blob-1">
-                            <span class="shop-text">Scopri di più</span>
+                            <span class="shop-text">Tutta la collezione</span>
                         </a>
 
-                        <!-- Contenitore che ruota -->
-                        <div class="satellites-wrapper">
-                            <div class="orbit-arm" style="--arm: 0deg;"><div class="satellite"><img src="./Asset/Collezione 4/burnout.png" alt=""><span>Burnout</span></div></div>
-                            <div class="orbit-arm" style="--arm: 60deg;"><div class="satellite"><img src="./Asset/Collezione 4/stress.png" alt=""><span>Stress</span></div></div>
-                            <div class="orbit-arm" style="--arm: 120deg;"><div class="satellite"><img src="./Asset/Collezione 4/distimia.png" alt=""><span>Distimia</span></div></div>
-                            <div class="orbit-arm" style="--arm: 180deg;"><div class="satellite"><img src="./Asset/Collezione 4/depressione.png" alt=""><span>Depressione</span></div></div>
-                            <div class="orbit-arm" style="--arm: 240deg;"><div class="satellite"><img src="./Asset/Collezione 4/disturbo_bipolare.png" alt=""><span>Disturbo Bipolare</span></div></div>
-                            <div class="orbit-arm" style="--arm: 300deg;"><div class="satellite"><img src="./Asset/Collezione 4/anedonia.png" alt=""><span>Anedonia</span></div></div>
+                        <!-- Temi della collezione: ogni voce apre la sua scheda -->
+                        <p class="back-title">Scegli un tema</p>
+                        <div class="moon-links">
+                            <a class="moon-chip" href="mars/#burnout"><img src="./Asset/Collezione 4/burnout.png" alt=""><span>Burnout</span></a>
+                            <a class="moon-chip" href="mars/#stress"><img src="./Asset/Collezione 4/stress.png" alt=""><span>Stress</span></a>
+                            <a class="moon-chip" href="mars/#distimia"><img src="./Asset/Collezione 4/distimia.png" alt=""><span>Distimia</span></a>
+                            <a class="moon-chip" href="mars/#depressione"><img src="./Asset/Collezione 4/depressione.png" alt=""><span>Depressione</span></a>
+                            <a class="moon-chip" href="mars/#disturbo-bipolare"><img src="./Asset/Collezione 4/disturbo_bipolare.png" alt=""><span>Disturbo Bipolare</span></a>
+                            <a class="moon-chip" href="mars/#anedonia"><img src="./Asset/Collezione 4/anedonia.png" alt=""><span>Anedonia</span></a>
                         </div>
                     </div>
                 </div>
@@ -119,23 +137,24 @@
                             <p class="card-col-num">Differenze nell'Apprendimento</p>
                             <div class="card-divider">&#10022;</div>
                             <p class="card-tagline">Il pensiero segue rotte inedite</p>
-                            <span class="flip-hint">Tocca per esplorare</span>
+                            <span class="flip-hint">Passa il mouse o tocca per vedere i temi</span>
                         </div>
                     </div>
                     <div class="flip-card-back back-2">
                         <!-- Pulsante Centrale (Fisso) -->
                         <a href="mercury/" class="blob-button blob-2">
-                            <span class="shop-text">Scopri di più</span>
+                            <span class="shop-text">Tutta la collezione</span>
                         </a>
 
-                        <!-- Contenitore che ruota -->
-                        <div class="satellites-wrapper">
-                            <div class="orbit-arm" style="--arm: 0deg;"><div class="satellite"><img src="./Asset/Collezione 2/dislessia.png" alt=""><span>Dislessia</span></div></div>
-                            <div class="orbit-arm" style="--arm: 60deg;"><div class="satellite"><img src="./Asset/Collezione 2/disprassia.png" alt=""><span>Disprassia</span></div></div>
-                            <div class="orbit-arm" style="--arm: 120deg;"><div class="satellite"><img src="./Asset/Collezione 2/iperlessia.png" alt=""><span>Iperlessia</span></div></div>
-                            <div class="orbit-arm" style="--arm: 180deg;"><div class="satellite"><img src="./Asset/Collezione 2/discalculia.png" alt=""><span>Discalculia</span></div></div>
-                            <div class="orbit-arm" style="--arm: 240deg;"><div class="satellite"><img src="./Asset/Collezione 2/disgrafia.png" alt=""><span>Disgrafia</span></div></div>
-                            <div class="orbit-arm" style="--arm: 300deg;"><div class="satellite"><img src="./Asset/Collezione 2/disortografia.png" alt=""><span>Disortografia</span></div></div>
+                        <!-- Temi della collezione: ogni voce apre la sua scheda -->
+                        <p class="back-title">Scegli un tema</p>
+                        <div class="moon-links">
+                            <a class="moon-chip" href="mercury/#dislessia"><img src="./Asset/Collezione 2/dislessia.png" alt=""><span>Dislessia</span></a>
+                            <a class="moon-chip" href="mercury/#disprassia"><img src="./Asset/Collezione 2/disprassia.png" alt=""><span>Disprassia</span></a>
+                            <a class="moon-chip" href="mercury/#iperlessia"><img src="./Asset/Collezione 2/iperlessia.png" alt=""><span>Iperlessia</span></a>
+                            <a class="moon-chip" href="mercury/#discalculia"><img src="./Asset/Collezione 2/discalculia.png" alt=""><span>Discalculia</span></a>
+                            <a class="moon-chip" href="mercury/#disgrafia"><img src="./Asset/Collezione 2/disgrafia.png" alt=""><span>Disgrafia</span></a>
+                            <a class="moon-chip" href="mercury/#disortografia"><img src="./Asset/Collezione 2/disortografia.png" alt=""><span>Disortografia</span></a>
                         </div>
                     </div>
                 </div>
@@ -151,23 +170,24 @@
                             <p class="card-col-num">Disturbi di Personalità</p>
                             <div class="card-divider">&#10022;</div>
                             <p class="card-tagline">Nell'armonia del sé, il ritratto dell'anima</p>
-                            <span class="flip-hint">Tocca per esplorare</span>
+                            <span class="flip-hint">Passa il mouse o tocca per vedere i temi</span>
                         </div>
                     </div>
                     <div class="flip-card-back back-3">
                         <!-- Pulsante Centrale (Fisso) -->
                         <a href="venus/" class="blob-button blob-3">
-                            <span class="shop-text">Scopri di più</span>
+                            <span class="shop-text">Tutta la collezione</span>
                         </a>
 
-                        <!-- Contenitore che ruota -->
-                        <div class="satellites-wrapper">
-                            <div class="orbit-arm" style="--arm: 0deg;"><div class="satellite"><img src="./Asset/Collezione 5/disturbo_evitante_personalità.png" alt=""><span>Disturbo Evitante</span></div></div>
-                            <div class="orbit-arm" style="--arm: 60deg;"><div class="satellite"><img src="./Asset/Collezione 5/disturbo_antisociale_personalità.png" alt=""><span>Disturbo Antisociale</span></div></div>
-                            <div class="orbit-arm" style="--arm: 120deg;"><div class="satellite"><img src="./Asset/Collezione 5/disturbo_paranoide_personalità.png" alt=""><span>Disturbo Paranoide</span></div></div>
-                            <div class="orbit-arm" style="--arm: 180deg;"><div class="satellite"><img src="./Asset/Collezione 5/disturbo_borderline_personalità.png" alt=""><span>Disturbo Borderline</span></div></div>
-                            <div class="orbit-arm" style="--arm: 240deg;"><div class="satellite"><img src="./Asset/Collezione 5/disturbo_narcisistico_personalità.png" alt=""><span>Disturbo Narcisistico</span></div></div>
-                            <div class="orbit-arm" style="--arm: 300deg;"><div class="satellite"><img src="./Asset/Collezione 5/disturbo_istrionico_personalità.png" alt=""><span>Disturbo Istrionico</span></div></div>
+                        <!-- Temi della collezione: ogni voce apre la sua scheda -->
+                        <p class="back-title">Scegli un tema</p>
+                        <div class="moon-links">
+                            <a class="moon-chip" href="venus/#disturbo-evitante"><img src="./Asset/Collezione 5/disturbo_evitante_personalità.png" alt=""><span>Disturbo Evitante</span></a>
+                            <a class="moon-chip" href="venus/#disturbo-antisociale"><img src="./Asset/Collezione 5/disturbo_antisociale_personalità.png" alt=""><span>Disturbo Antisociale</span></a>
+                            <a class="moon-chip" href="venus/#disturbo-paranoide"><img src="./Asset/Collezione 5/disturbo_paranoide_personalità.png" alt=""><span>Disturbo Paranoide</span></a>
+                            <a class="moon-chip" href="venus/#disturbo-borderline"><img src="./Asset/Collezione 5/disturbo_borderline_personalità.png" alt=""><span>Disturbo Borderline</span></a>
+                            <a class="moon-chip" href="venus/#disturbo-narcisistico"><img src="./Asset/Collezione 5/disturbo_narcisistico_personalità.png" alt=""><span>Disturbo Narcisistico</span></a>
+                            <a class="moon-chip" href="venus/#disturbo-istrionico"><img src="./Asset/Collezione 5/disturbo_istrionico_personalità.png" alt=""><span>Disturbo Istrionico</span></a>
                         </div>
                     </div>
                 </div>
@@ -183,23 +203,24 @@
                             <p class="card-col-num">Cervello e Percezione</p>
                             <div class="card-divider">&#10022;</div>
                             <p class="card-tagline">Radicati nel reale, esplora l'infinito</p>
-                            <span class="flip-hint">Tocca per esplorare</span>
+                            <span class="flip-hint">Passa il mouse o tocca per vedere i temi</span>
                         </div>
                     </div>
                     <div class="flip-card-back back-4">
                         <!-- Pulsante Centrale (Fisso) -->
                         <a href="earth/" class="blob-button blob-4">
-                            <span class="shop-text">Scopri di più</span>
+                            <span class="shop-text">Tutta la collezione</span>
                         </a>
 
-                        <!-- Contenitore che ruota -->
-                        <div class="satellites-wrapper">
-                            <div class="orbit-arm" style="--arm: 0deg;"><div class="satellite"><img src="./Asset/Collezione 7/arto_fantasma.png" alt=""><span>Arto Fantasma</span></div></div>
-                            <div class="orbit-arm" style="--arm: 60deg;"><div class="satellite"><img src="./Asset/Collezione 7/ipertimesia.png" alt=""><span>Ipertimesia</span></div></div>
-                            <div class="orbit-arm" style="--arm: 120deg;"><div class="satellite"><img src="./Asset/Collezione 7/sinestesia.png" alt=""><span>Sinestesia</span></div></div>
-                            <div class="orbit-arm" style="--arm: 180deg;"><div class="satellite"><img src="./Asset/Collezione 7/sindrome_savant.png" alt=""><span>Sindrome Savant</span></div></div>
-                            <div class="orbit-arm" style="--arm: 240deg;"><div class="satellite"><img src="./Asset/Collezione 7/prosopagnosia.png" alt=""><span>Prosopagnosia</span></div></div>
-                            <div class="orbit-arm" style="--arm: 300deg;"><div class="satellite"><img src="./Asset/Collezione 7/afantasia.png" alt=""><span>Afantasia</span></div></div>
+                        <!-- Temi della collezione: ogni voce apre la sua scheda -->
+                        <p class="back-title">Scegli un tema</p>
+                        <div class="moon-links">
+                            <a class="moon-chip" href="earth/#arto-fantasma"><img src="./Asset/Collezione 7/arto_fantasma.png" alt=""><span>Arto Fantasma</span></a>
+                            <a class="moon-chip" href="earth/#ipertimesia"><img src="./Asset/Collezione 7/ipertimesia.png" alt=""><span>Ipertimesia</span></a>
+                            <a class="moon-chip" href="earth/#sinestesia"><img src="./Asset/Collezione 7/sinestesia.png" alt=""><span>Sinestesia</span></a>
+                            <a class="moon-chip" href="earth/#sindrome-savant"><img src="./Asset/Collezione 7/sindrome_savant.png" alt=""><span>Sindrome Savant</span></a>
+                            <a class="moon-chip" href="earth/#prosopagnosia"><img src="./Asset/Collezione 7/prosopagnosia.png" alt=""><span>Prosopagnosia</span></a>
+                            <a class="moon-chip" href="earth/#afantasia"><img src="./Asset/Collezione 7/afantasia.png" alt=""><span>Afantasia</span></a>
                         </div>
                     </div>
                 </div>
@@ -215,23 +236,24 @@
                             <p class="card-col-num">Neurodivergenza</p>
                             <div class="card-divider">&#10022;</div>
                             <p class="card-tagline">Oltre i confini, la visione si espande</p>
-                            <span class="flip-hint">Tocca per esplorare</span>
+                            <span class="flip-hint">Passa il mouse o tocca per vedere i temi</span>
                         </div>
                     </div>
                     <div class="flip-card-back back-5">
                         <!-- Pulsante Centrale (Fisso) -->
                         <a href="jupiter/" class="blob-button blob-5">
-                            <span class="shop-text">Scopri di più</span>
+                            <span class="shop-text">Tutta la collezione</span>
                         </a>
 
-                        <!-- Contenitore che ruota -->
-                        <div class="satellites-wrapper">
-                            <div class="orbit-arm" style="--arm: 0deg;"><div class="satellite"><img src="./Asset/Collezione 1/autismo_lv1.png" alt=""><span>Autismo Livello 1</span></div></div>
-                            <div class="orbit-arm" style="--arm: 60deg;"><div class="satellite"><img src="./Asset/Collezione 1/autismo_lv2.png" alt=""><span>Autismo Livello 2</span></div></div>
-                            <div class="orbit-arm" style="--arm: 120deg;"><div class="satellite"><img src="./Asset/Collezione 1/autismo_lv3.png" alt=""><span>Autismo Livello 3</span></div></div>
-                            <div class="orbit-arm" style="--arm: 180deg;"><div class="satellite"><img src="./Asset/Collezione 1/sindrome_tourette.png" alt=""><span>Sindrome di Tourette</span></div></div>
-                            <div class="orbit-arm" style="--arm: 240deg;"><div class="satellite"><img src="./Asset/Collezione 1/adhd.png" alt=""><span>ADHD</span></div></div>
-                            <div class="orbit-arm" style="--arm: 300deg;"><div class="satellite"><img src="./Asset/Collezione 1/alessitimia.png" alt=""><span>Alessitimia</span></div></div>
+                        <!-- Temi della collezione: ogni voce apre la sua scheda -->
+                        <p class="back-title">Scegli un tema</p>
+                        <div class="moon-links">
+                            <a class="moon-chip" href="jupiter/#autismo-livello-1"><img src="./Asset/Collezione 1/autismo_lv1.png" alt=""><span>Autismo Livello 1</span></a>
+                            <a class="moon-chip" href="jupiter/#autismo-livello-2"><img src="./Asset/Collezione 1/autismo_lv2.png" alt=""><span>Autismo Livello 2</span></a>
+                            <a class="moon-chip" href="jupiter/#autismo-livello-3"><img src="./Asset/Collezione 1/autismo_lv3.png" alt=""><span>Autismo Livello 3</span></a>
+                            <a class="moon-chip" href="jupiter/#sindrome-di-tourette"><img src="./Asset/Collezione 1/sindrome_tourette.png" alt=""><span>Sindrome di Tourette</span></a>
+                            <a class="moon-chip" href="jupiter/#adhd"><img src="./Asset/Collezione 1/adhd.png" alt=""><span>ADHD</span></a>
+                            <a class="moon-chip" href="jupiter/#alessitimia"><img src="./Asset/Collezione 1/alessitimia.png" alt=""><span>Alessitimia</span></a>
                         </div>
                     </div>
                 </div>
@@ -248,24 +270,25 @@
                             <p class="card-col-num">Neurosviluppo</p>
                             <div class="card-divider">&#10022;</div>
                             <p class="card-tagline">Costruire il tempo, plasmare il divenire</p>
-                            <span class="flip-hint">Tocca per esplorare</span>
+                            <span class="flip-hint">Passa il mouse o tocca per vedere i temi</span>
                         </div>
                     </div>
                     <div class="flip-card-back back-6">
                         <!-- Pulsante Centrale (Fisso) — l'anello di Saturno gira attorno al pianeta -->
                         <a href="saturn/" class="blob-button blob-6">
                             <div class="saturn-mini-ring"></div>
-                            <span class="shop-text">Scopri di più</span>
+                            <span class="shop-text">Tutta la collezione</span>
                         </a>
 
-                        <!-- Contenitore che ruota -->
-                        <div class="satellites-wrapper">
-                            <div class="orbit-arm" style="--arm: 0deg;"><div class="satellite"><img src="./Asset/Collezione 8/multi_potenzialità.png" alt=""><span>Multipotenzialità</span></div></div>
-                            <div class="orbit-arm" style="--arm: 60deg;"><div class="satellite"><img src="./Asset/Collezione 8/persona_altamente_sensibile.png" alt=""><span>Persona Altamente Sensibile</span></div></div>
-                            <div class="orbit-arm" style="--arm: 120deg;"><div class="satellite"><img src="./Asset/Collezione 8/plusdotazione.png" alt=""><span>Plusdotazione</span></div></div>
-                            <div class="orbit-arm" style="--arm: 180deg;"><div class="satellite"><img src="./Asset/Collezione 8/asincronia_sviluppo.png" alt=""><span>Sviluppo Asincrono</span></div></div>
-                            <div class="orbit-arm" style="--arm: 240deg;"><div class="satellite"><img src="./Asset/Collezione 8/iper_reattività_sensoriale.png" alt=""><span>Iperreattività Sensoriale</span></div></div>
-                            <div class="orbit-arm" style="--arm: 300deg;"><div class="satellite"><img src="./Asset/Collezione 8/2e.png" alt=""><span>Doppia Eccezionalità</span></div></div>
+                        <!-- Temi della collezione: ogni voce apre la sua scheda -->
+                        <p class="back-title">Scegli un tema</p>
+                        <div class="moon-links">
+                            <a class="moon-chip" href="saturn/#multipotenzialita"><img src="./Asset/Collezione 8/multi_potenzialità.png" alt=""><span>Multipotenzialità</span></a>
+                            <a class="moon-chip" href="saturn/#persona-altamente-sensibile"><img src="./Asset/Collezione 8/persona_altamente_sensibile.png" alt=""><span>Persona Altamente Sensibile</span></a>
+                            <a class="moon-chip" href="saturn/#plusdotazione"><img src="./Asset/Collezione 8/plusdotazione.png" alt=""><span>Plusdotazione</span></a>
+                            <a class="moon-chip" href="saturn/#sviluppo-asincrono"><img src="./Asset/Collezione 8/asincronia_sviluppo.png" alt=""><span>Sviluppo Asincrono</span></a>
+                            <a class="moon-chip" href="saturn/#iperreattivita-sensoriale"><img src="./Asset/Collezione 8/iper_reattività_sensoriale.png" alt=""><span>Iperreattività Sensoriale</span></a>
+                            <a class="moon-chip" href="saturn/#doppia-eccezionalita"><img src="./Asset/Collezione 8/2e.png" alt=""><span>Doppia Eccezionalità</span></a>
                         </div>
                     </div>
                 </div>
@@ -281,23 +304,24 @@
                             <p class="card-col-num">Disturbi Neurologici</p>
                             <div class="card-divider">&#10022;</div>
                             <p class="card-tagline">L'energia che danza tra le connessioni</p>
-                            <span class="flip-hint">Tocca per esplorare</span>
+                            <span class="flip-hint">Passa il mouse o tocca per vedere i temi</span>
                         </div>
                     </div>
                     <div class="flip-card-back back-7">
                         <!-- Pulsante Centrale (Fisso) -->
                         <a href="uranus/" class="blob-button blob-7">
-                            <span class="shop-text">Scopri di più</span>
+                            <span class="shop-text">Tutta la collezione</span>
                         </a>
 
-                        <!-- Contenitore che ruota -->
-                        <div class="satellites-wrapper">
-                            <div class="orbit-arm" style="--arm: 0deg;"><div class="satellite"><img src="./Asset/Collezione 6/afasia.png" alt=""><span>Afasia</span></div></div>
-                            <div class="orbit-arm" style="--arm: 60deg;"><div class="satellite"><img src="./Asset/Collezione 6/emicrania_cronica.png" alt=""><span>Emicrania Cronica</span></div></div>
-                            <div class="orbit-arm" style="--arm: 120deg;"><div class="satellite"><img src="./Asset/Collezione 6/epilessia.png" alt=""><span>Epilessia</span></div></div>
-                            <div class="orbit-arm" style="--arm: 180deg;"><div class="satellite"><img src="./Asset/Collezione 6/malattia_parkinson.png" alt=""><span>Malattia di Parkinson</span></div></div>
-                            <div class="orbit-arm" style="--arm: 240deg;"><div class="satellite"><img src="./Asset/Collezione 6/sclerosi_multipla.png" alt=""><span>Sclerosi Multipla</span></div></div>
-                            <div class="orbit-arm" style="--arm: 300deg;"><div class="satellite"><img src="./Asset/Collezione 6/sla.png" alt=""><span>SLA</span></div></div>
+                        <!-- Temi della collezione: ogni voce apre la sua scheda -->
+                        <p class="back-title">Scegli un tema</p>
+                        <div class="moon-links">
+                            <a class="moon-chip" href="uranus/#afasia"><img src="./Asset/Collezione 6/afasia.png" alt=""><span>Afasia</span></a>
+                            <a class="moon-chip" href="uranus/#emicrania-cronica"><img src="./Asset/Collezione 6/emicrania_cronica.png" alt=""><span>Emicrania Cronica</span></a>
+                            <a class="moon-chip" href="uranus/#epilessia"><img src="./Asset/Collezione 6/epilessia.png" alt=""><span>Epilessia</span></a>
+                            <a class="moon-chip" href="uranus/#malattia-di-parkinson"><img src="./Asset/Collezione 6/malattia_parkinson.png" alt=""><span>Malattia di Parkinson</span></a>
+                            <a class="moon-chip" href="uranus/#sclerosi-multipla"><img src="./Asset/Collezione 6/sclerosi_multipla.png" alt=""><span>Sclerosi Multipla</span></a>
+                            <a class="moon-chip" href="uranus/#sla"><img src="./Asset/Collezione 6/sla.png" alt=""><span>SLA</span></a>
                         </div>
                     </div>
                 </div>
@@ -313,23 +337,24 @@
                             <p class="card-col-num">Disturbi d'Ansia</p>
                             <div class="card-divider">&#10022;</div>
                             <p class="card-tagline">Placare l'abisso, ritrovare la riva</p>
-                            <span class="flip-hint">Tocca per esplorare</span>
+                            <span class="flip-hint">Passa il mouse o tocca per vedere i temi</span>
                         </div>
                     </div>
                     <div class="flip-card-back back-8">
                         <!-- Pulsante Centrale (Fisso) -->
                         <a href="neptune/" class="blob-button blob-8">
-                            <span class="shop-text">Scopri di più</span>
+                            <span class="shop-text">Tutta la collezione</span>
                         </a>
 
-                        <!-- Contenitore che ruota -->
-                        <div class="satellites-wrapper">
-                            <div class="orbit-arm" style="--arm: 0deg;"><div class="satellite"><img src="./Asset/Collezione 3/attacchi_panico.png" alt=""><span>Attacchi di Panico</span></div></div>
-                            <div class="orbit-arm" style="--arm: 60deg;"><div class="satellite"><img src="./Asset/Collezione 3/disturbo_ansia_generalizzata.png" alt=""><span>Disturbo d'Ansia Generalizzata</span></div></div>
-                            <div class="orbit-arm" style="--arm: 120deg;"><div class="satellite"><img src="./Asset/Collezione 3/disturbo_ossessivo_compulsivo.png" alt=""><span>Disturbo Ossessivo-Compulsivo</span></div></div>
-                            <div class="orbit-arm" style="--arm: 180deg;"><div class="satellite"><img src="./Asset/Collezione 3/disturbo_ansia_sociale.png" alt=""><span>Disturbo d'Ansia Sociale</span></div></div>
-                            <div class="orbit-arm" style="--arm: 240deg;"><div class="satellite"><img src="./Asset/Collezione 3/mutismo_selettivo.png" alt=""><span>Mutismo Selettivo</span></div></div>
-                            <div class="orbit-arm" style="--arm: 300deg;"><div class="satellite"><img src="./Asset/Collezione 3/ptsd.png" alt=""><span>Stress Post-Traumatico</span></div></div>
+                        <!-- Temi della collezione: ogni voce apre la sua scheda -->
+                        <p class="back-title">Scegli un tema</p>
+                        <div class="moon-links">
+                            <a class="moon-chip" href="neptune/#attacchi-di-panico"><img src="./Asset/Collezione 3/attacchi_panico.png" alt=""><span>Attacchi di Panico</span></a>
+                            <a class="moon-chip" href="neptune/#disturbo-ansia-generalizzata"><img src="./Asset/Collezione 3/disturbo_ansia_generalizzata.png" alt=""><span>Disturbo d'Ansia Generalizzata</span></a>
+                            <a class="moon-chip" href="neptune/#disturbo-ossessivo-compulsivo"><img src="./Asset/Collezione 3/disturbo_ossessivo_compulsivo.png" alt=""><span>Disturbo Ossessivo-Compulsivo</span></a>
+                            <a class="moon-chip" href="neptune/#disturbo-ansia-sociale"><img src="./Asset/Collezione 3/disturbo_ansia_sociale.png" alt=""><span>Disturbo d'Ansia Sociale</span></a>
+                            <a class="moon-chip" href="neptune/#mutismo-selettivo"><img src="./Asset/Collezione 3/mutismo_selettivo.png" alt=""><span>Mutismo Selettivo</span></a>
+                            <a class="moon-chip" href="neptune/#stress-post-traumatico"><img src="./Asset/Collezione 3/ptsd.png" alt=""><span>Stress Post-Traumatico</span></a>
                         </div>
                     </div>
                 </div>
@@ -340,8 +365,8 @@
 
     <section class="section-books" id="libri">
         <div class="desc-section-box">
-            <h2 class="section-title">OGNI STORIA HA IL SUO <span class="title-white">SOLE</span></h2>
-            <p class="license-text lead">La speranza è la luce che vogliamo tenere vicina: il sole d'estate, dritto sopra di noi, al Tropico del Cancro. La verità fa paura e la tendiamo lontana: il sole d'inverno, basso sul mare, al Tropico del Capricorno. Tra i due tropici corre l'Equatore, dove il sole passa due volte l'anno e giorno e notte si equivalgono.<br/>La collana <em>Voci dal Profondo</em> segue questa geografia del sole: dalla luce dei racconti di speranza del primo volume, all'ombra della disillusione nel secondo, fino a giungere al terzo libro: un romanzo che fonde entrambe le anime in un'unica visione.</p>
+            <h2 class="section-title">OGNI OPERA HA IL SUO <span class="title-white">SOLE</span></h2>
+            <p class="license-text lead">Se le collezioni spiegano, i libri raccontano: la collana <em>Voci dal Profondo</em> trasforma gli stessi temi esplorati tra i pianeti in storie per ragazze e ragazzi. Ogni volume ha il suo sole, e la collana segue la geografia del sole: il primo volume guarda in alto, dove d'estate il sole del Tropico del Cancro (+23,4°) sta dritto sopra di noi — è la speranza, la luce che vogliamo tenere vicina. Il secondo guarda lontano, dove d'inverno il sole del Tropico del Capricorno (-23,4°) resta basso sul mare — è la verità, che tendiamo a tenere lontana. Tra i due tropici corre l'Equatore (0°), dove il sole passa due volte l'anno e giorno e notte si equivalgono: qui si incontrano le due anime della collana, nel terzo libro — un romanzo che le fonde in un'unica visione.</p>
         </div>
         <div class="book-card">
             <span class="sun-badge">

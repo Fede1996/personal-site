@@ -22,7 +22,7 @@
         <nav class="desktop-nav">
             <a href="#hero">Introduzione</a>
             <a href="#mascotte">Mascotte</a>
-            <a href="#lune">Simboli</a>
+            <a href="#lune">Le lune</a>
         </nav>
         <div><a href="../" class="amazon-btn home-btn">HOME</a></div>
         <button class="hamburger" onclick="toggleMenu()">
@@ -36,7 +36,7 @@
         <button class="close-btn" onclick="toggleMenu()">×</button>
         <a href="#hero">Introduzione</a>
         <a href="#mascotte">Mascotte</a>
-        <a href="#lune">Simboli</a>
+        <a href="#lune">Le lune</a>
         <a href="../" class="amazon-btn mobile-home">HOME</a>
     </nav>
 
@@ -67,74 +67,99 @@
         <div class="desc-section-box">
             <h2 class="section-title">OGNI <span class="title-white">LUNA</span> UNA CORRENTE NELL'ABISSO</h2>
             <p class="license-text lead">Ogni luna di Nettuno attraversa le acque dell'ansia: le onde, le correnti, i silenzi.<br/>Esplora le schede dedicate ai disturbi d'ansia e ritrova, luna dopo luna, la tua riva.</p>
+            <p class="license-text note-lead">Ogni scheda ha due voci: <strong>Cos'è</strong> spiega il tema con parole chiare, <strong>La luna racconta</strong> lo attraversa con la voce del progetto. Sono testi divulgativi: non sostituiscono il parere di un professionista — le storie, vere e proprie, stanno nei <a href="../#libri">libri</a>.</p>
         </div>
 
-        <div class="book-card">
+        <div class="book-card" id="attacchi-di-panico">
             <img src="../Asset/Collezione 3/attacchi_panico.png" class="book-img" alt="Attacchi di Panico">
             <div class="book-info">
                 <h2>Attacchi di Panico</h2>
                 <p class="desc">L'onda che arriva senza preavviso.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>Un attacco di panico è un'ondata improvvisa di paura intensa, con sintomi fisici forti — cuore in gola, mancanza d'aria, vertigini — che raggiunge il picco in pochi minuti. Spaventa moltissimo, ma non è pericoloso: capire cosa succede nel corpo è il primo passo per gestirlo.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     L'attacco di panico è un'onda improvvisa di paura, che travolge il respiro e il pensiero. Su Nettuno, pianeta degli abissi, Silen insegna che ogni onda, per quanto travolgente, prima o poi si ritira.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card reverse">
+        <div class="book-card reverse" id="disturbo-ansia-generalizzata">
             <img src="../Asset/Collezione 3/disturbo_ansia_generalizzata.png" class="book-img" alt="Disturbo d'Ansia Generalizzata">
             <div class="book-info">
                 <h2>Disturbo d'Ansia Generalizzata</h2>
                 <p class="desc">La preoccupazione che non trova mai riposo.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>Il disturbo d'Ansia Generalizzata è una preoccupazione costante e difficile da controllare per molte cose della vita quotidiana — lavoro, salute, famiglia — accompagnata da tensione, stanchezza e difficoltà di concentrazione. Non significa pensare troppo: è un'ansia che resta accesa anche quando non c'è un motivo reale.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     Il disturbo d'Ansia Generalizzata mantiene la mente in allerta su tutto, anche quando non serve. Questa luna racconta la fatica di convivere con un'ansia che non ha un nome preciso, e la possibilità di abitare il presente.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card">
+        <div class="book-card" id="disturbo-ossessivo-compulsivo">
             <img src="../Asset/Collezione 3/disturbo_ossessivo_compulsivo.png" class="book-img" alt="Disturbo Ossessivo-Compulsivo">
             <div class="book-info">
                 <h2>Disturbo Ossessivo-Compulsivo</h2>
                 <p class="desc">Il pensiero che si ripete per sentirsi al sicuro.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>Il disturbo ossessivo-compulsivo è fatto di ossessioni — pensieri intrusivi, spesso terrificanti — e compulsioni, i rituali messi in atto per placarle. Non è amore per l'ordine: le compulsioni non piacciono a chi le compie, e servono solo a spegnere l'ansia per poco.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     Il Disturbo Ossessivo-Compulsivo intrappola in pensieri ricorrenti e rituali di protezione. Questa luna parla del coraggio di chi lotta ogni giorno con la propria mente, e dell'importanza di cercare aiuto senza vergogna.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card reverse">
+        <div class="book-card reverse" id="disturbo-ansia-sociale">
             <img src="../Asset/Collezione 3/disturbo_ansia_sociale.png" class="book-img" alt="Disturbo d'Ansia Sociale">
             <div class="book-info">
                 <h2>Disturbo d'Ansia Sociale</h2>
                 <p class="desc">Lo sguardo degli altri come un palcoscenico.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>Il disturbo d'Ansia Sociale è la paura persistente di essere giudicati o messi in imbarazzo davanti agli altri. Non è timidezza: l'ansia anticipatoria può far evitare scuola, lavoro e relazioni, anche quando si vorrebbe partecipare.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     Il disturbo d'Ansia Sociale trasforma ogni incontro in una prova, ogni parola in un esame. Silen, su Nettuno, accompagna chi impara che gli altri sono spesso più gentili di quanto la paura lasci credere.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card">
+        <div class="book-card" id="mutismo-selettivo">
             <img src="../Asset/Collezione 3/mutismo_selettivo.png" class="book-img" alt="Mutismo Selettivo">
             <div class="book-info">
                 <h2>Mutismo Selettivo</h2>
                 <p class="desc">Il silenzio che protegge una voce.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>Il mutismo selettivo è un disturbo d'ansia dell'infanzia in cui il bambino parla liberamente in alcuni contesti, tipicamente in famiglia, e non riesce a parlare in altri, come la scuola. Non è testardaggine né una scelta: è un blocco d'ansia che si affronta con interventi graduali e ben guidati.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     Il mutismo selettivo è un silenzio che si accende in certi luoghi, lasciando intatta la voglia di comunicare altrove. Silen custodisce questa voce nascosta, e la pazienza necessaria per sentirla emergere.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card reverse">
+        <div class="book-card reverse" id="stress-post-traumatico">
             <img src="../Asset/Collezione 3/ptsd.png" class="book-img" alt="Disturbo da Stress Post-Traumatico">
             <div class="book-info">
                 <h2>Disturbo da Stress Post-Traumatico</h2>
                 <p class="desc">Quando la tempesta resta, dopo la tempesta.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>Il disturbo da stress post-traumatico può comparire dopo un evento percepito come terrificante: ricordi intrusivi e flashback, incubi, evitamento di ciò che ricorda l'evento, allarme costante. Non significa reagire male: è una risposta del cervello al trauma, che terapie specifiche — come l'EMDR o le terapie cognitivo-comportamentali — sanno trattare.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     Il disturbo da stress post-traumatico nasce quando un'esperienza terrificante continua a vivere nel presente: ricordi che tornano senza invito, il corpo allertato come se il pericolo non fosse mai passato. Non è debolezza: è una difesa che non si è ancora spenta. Nettuno, placando l'abisso, insegna che si può ritrovare la riva anche dopo il mare.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>

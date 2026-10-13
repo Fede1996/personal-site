@@ -22,7 +22,7 @@
         <nav class="desktop-nav">
             <a href="#hero">Introduzione</a>
             <a href="#mascotte">Mascotte</a>
-            <a href="#lune">Simboli</a>
+            <a href="#lune">Le lune</a>
         </nav>
         <div><a href="../" class="amazon-btn home-btn">HOME</a></div>
         <button class="hamburger" onclick="toggleMenu()">
@@ -36,7 +36,7 @@
         <button class="close-btn" onclick="toggleMenu()">×</button>
         <a href="#hero">Introduzione</a>
         <a href="#mascotte">Mascotte</a>
-        <a href="#lune">Simboli</a>
+        <a href="#lune">Le lune</a>
         <a href="../" class="amazon-btn mobile-home">HOME</a>
     </nav>
 
@@ -67,74 +67,99 @@
         <div class="desc-section-box">
             <h2 class="section-title">OGNI <span class="title-white">LUNA</span> UN VOLTO DEL SÉ</h2>
             <p class="license-text lead">Ogni luna di Venere osserva un volto del paesaggio interiore: le difese, le emozioni, gli specchi.<br/>Esplora le schede dedicate ai disturbi di personalità, con uno sguardo che non giudica.</p>
+            <p class="license-text note-lead">Ogni scheda ha due voci: <strong>Cos'è</strong> spiega il tema con parole chiare, <strong>La luna racconta</strong> lo attraversa con la voce del progetto. Sono testi divulgativi: non sostituiscono il parere di un professionista — le storie, vere e proprie, stanno nei <a href="../#libri">libri</a>.</p>
         </div>
 
-        <div class="book-card">
+        <div class="book-card" id="disturbo-evitante">
             <img src="../Asset/Collezione 5/disturbo_evitante_personalità.png" class="book-img" alt="Disturbo Evitante di Personalità">
             <div class="book-info">
                 <h2>Disturbo Evitante di Personalità</h2>
                 <p class="desc">La distanza come modo di proteggersi.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>Il disturbo di personalità evitante è un pattern stabile di forte timidezza, paura del rifiuto e senso di inadeguatezza, che porta a evitare relazioni e occasioni anche quando le si desidera. Non è semplice timidezza: è un modo di stare al mondo che soffre, e si può trattare.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     Il disturbo evitante costruisce muri dove vorrebbe costruire ponti, per paura del rifiuto. Su Venere, pianeta dell'incontro, Silen racconta il coraggio lento di mostrarsi, un passo alla volta.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card reverse">
+        <div class="book-card reverse" id="disturbo-antisociale">
             <img src="../Asset/Collezione 5/disturbo_antisociale_personalità.png" class="book-img" alt="Disturbo Antisociale di Personalità">
             <div class="book-info">
                 <h2>Disturbo Antisociale di Personalità</h2>
                 <p class="desc">Quando le regole sembrano scritte per altri.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>Il disturbo di personalità antisociale è un pattern di trasgressione delle regole, scarso interesse per i diritti altrui e difficoltà a provare senso di colpa, che si manifesta entro l'adolescenza. Non significa essere solitari o antipatici: è una condizione clinica seria, da non confondere con la cattiveria.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     Il disturbo antisociale di personalità nasconde spesso una diffidenza appresa e una ferita mai del tutto nominata. Questa luna non giudica: osserva, e cerca un'altra via per stare tra gli altri.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card">
+        <div class="book-card" id="disturbo-paranoide">
             <img src="../Asset/Collezione 5/disturbo_paranoide_personalità.png" class="book-img" alt="Disturbo Paranoide di Personalità">
             <div class="book-info">
                 <h2>Disturbo Paranoide di Personalità</h2>
                 <p class="desc">La guardia che non si abbassa mai.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>Il disturbo di personalità paranoide è un pattern diffuso di sfiducia e sospettosità: le intenzioni degli altri vengono lette come minacciose o meschine. È una lente costante sulla realtà, spesso radicata in esperienze passate, e si accompagna con un percorso psicologico.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     Il disturbo paranoide mantiene l'allerta sempre accesa, trasformando il mondo in un pericolo da decifrare. Silen parla qui della fatica di vivere in guardia, e della possibilità di abbassare, un poco alla volta, le armi.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card reverse">
+        <div class="book-card reverse" id="disturbo-borderline">
             <img src="../Asset/Collezione 5/disturbo_borderline_personalità.png" class="book-img" alt="Disturbo Borderline di Personalità">
             <div class="book-info">
                 <h2>Disturbo Borderline di Personalità</h2>
                 <p class="desc">Emozioni che bruciano a piena intensità.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>Il disturbo di personalità borderline è caratterizzato da instabilità emotiva, relazioni intense e altalenanti, forte paura dell'abbandono e un'immagine di sé incerta. Non significa essere eccessivi: è un disturbo riconosciuto, e le terapie specifiche — come la DBT — danno risultati concreti.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     Il disturbo borderline vive sul confine tra abbandono e fusione, tra luce e buio, con un'intensità che tutto accelera. Questa luna racconta la forza di chi sente immensamente e impara, giorno dopo giorno, a dargli forma.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card">
+        <div class="book-card" id="disturbo-narcisistico">
             <img src="../Asset/Collezione 5/disturbo_narcisistico_personalità.png" class="book-img" alt="Disturbo Narcisistico di Personalità">
             <div class="book-info">
                 <h2>Disturbo Narcisistico di Personalità</h2>
                 <p class="desc">Lo specchio che chiede conferma.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>Il disturbo di personalità narcisistico è un pattern di grandiosità, bisogno di ammirazione e difficoltà a riconoscere i bisogni altrui, che spesso nasconde una stima di sé fragile. Non è semplice vanità: è un modo rigido di funzionare che crea sofferenza, anche a chi lo vive.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     Il disturbo narcisistico di personalità costruisce un'armatura dietro la quale spesso si nasconde un'insicurezza antica. Su Venere, pianeta della bellezza, Silen cerca lo sguardo vero oltre il riflesso.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
             </div>
         </div>
 
-        <div class="book-card reverse">
+        <div class="book-card reverse" id="disturbo-istrionico">
             <img src="../Asset/Collezione 5/disturbo_istrionico_personalità.png" class="book-img" alt="Disturbo Istrionico di Personalità">
             <div class="book-info">
                 <h2>Disturbo Istrionico di Personalità</h2>
                 <p class="desc">Il ritratto che cerca uno specchio.</p>
-                <div><span>
+                <div class="cos-e">
+                    <span class="voce-label">Cos'è</span>
+                    <p>Il disturbo di personalità istrionico è un pattern di emotività intensa e ricerca di attenzione, con relazioni vissute come più intime di quanto siano. Non significa fare scene: è uno stile relazionale stabile e sofferente, che si può esplorare in terapia.</p>
+                </div>
+                <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     Il disturbo istrionico di personalità vive di emozioni intense e del bisogno di essere visti: dietro la scena c'è spesso una domanda semplice — «sono abbastanza, quando nessuno guarda?». Su Venere, questa luna parla del coraggio di esistere anche fuori dal palcoscenico, quando il teatro si spegne e resta solo il ritratto.
                 </span></div>
                 <a href="https://www.redbubble.com/people/ChicoMaloIta/explore" class="amazon-btn">Vai su Redbubble</a>
