@@ -7,6 +7,13 @@
     max-width: 1000px;
     margin: 0 auto;
 }
+/* Titoli centrati come nel resto del sito (questa sezione non ereditava
+   text-align dalle altre, e i titoli restavano a sinistra) */
+.section-passaporto-builder > .section-title,
+.section-passaporto-builder .preview-title,
+.section-passaporto-builder .gate-title {
+    text-align: center;
+}
 .section-passaporto-builder .license-text.lead {
     text-align: center;
     max-width: 720px;
@@ -133,17 +140,21 @@
     outline-offset: 3px;
 }
 .moon-grid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    /* Esattamente due neurodivergenze per riga, come richiesto */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
 }
 
 /* Le lune sono checkbox con lo stile delle moon-chip del sito */
 .moon-choice {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 10px;
-    padding: 8px 12px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 10px 12px;
     background: rgba(255, 255, 255, 0.55);
     border: 1px solid rgba(96, 43, 160, 0.18);
     border-radius: 12px;
@@ -172,12 +183,14 @@
 .moon-choice:hover {
     background: rgba(96, 43, 160, 0.12);
 }
-.moon-choice:has(input:checked) {
+/* Stato selezionato: la classe la aggiunge passaporto.js (più portabile
+   di :has(), che manca su browser non recentissimi) */
+.moon-choice.selezionata {
     background: var(--viola);
     color: var(--crema);
     border-color: var(--viola);
 }
-.moon-choice:has(input:focus-visible) {
+.moon-choice:focus-within {
     outline: 2px solid var(--viola);
     outline-offset: 3px;
 }
@@ -276,6 +289,20 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 16px;
+}
+.gate-primary { margin: 26px 0 10px; }
+.gate-primary .amazon-btn {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 1.05rem;
+    padding: 15px 30px;
+}
+.gate-primary-hint {
+    display: block;
+    margin-top: 12px;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    color: var(--viola);
 }
 .gate-frame-wrap { margin: 26px 0; }
 .gate-frame {

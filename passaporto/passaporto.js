@@ -110,6 +110,12 @@
         const scelte = selectedMoons();
         const totaleLune = scelte.reduce((n, s) => n + s.lune.length, 0);
 
+        // Evidenzia le chip selezionate (classe, non :has(): più portabile)
+        picker.querySelectorAll('.moon-choice').forEach(label => {
+            const check = label.querySelector('.moon-check');
+            label.classList.toggle('selezionata', !!(check && check.checked));
+        });
+
         // Contatori per pianeta
         picker.querySelectorAll('.planet-panel').forEach(panel => {
             const n = panel.querySelectorAll('.moon-check:checked').length;
@@ -186,6 +192,13 @@
 
         if (!isSubscribed()) {
             gate.hidden = false;
+            // L'iframe del form parte senza src: un iframe lazy dentro un
+            // contenitore hidden non carica mai nemmeno dopo lo show. Qui,
+            // quando il gate diventa visibile, assegniamo il src una volta.
+            const iframe = gate.querySelector('#gate-frame');
+            if (iframe && !iframe.src && iframe.dataset.src) {
+                iframe.src = iframe.dataset.src;
+            }
             gate.scrollIntoView({ behavior: 'smooth', block: 'start' });
             return;
         }

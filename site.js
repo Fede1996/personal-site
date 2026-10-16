@@ -17,14 +17,37 @@
     const menu = document.querySelector('.mobile-menu');
     const hamburger = document.querySelector('.hamburger');
 
+    // L'attributo inert (tutto il menu fuori dal tab order quando è chiuso)
+    // non è supportato ovunque: qui un fallback che toglie e rimette il
+    // tabindex sui contenuti del menu.
+    const supportaInert = typeof HTMLElement !== 'undefined' && 'inert' in HTMLElement.prototype;
+
+    function rendiMenuInerte(inerte) {
+        if (!menu) return;
+        if (supportaInert) {
+            menu.inert = inerte;
+            return;
+        }
+        menu.querySelectorAll('a, button').forEach(el => {
+            if (inerte) {
+                if (!el.hasAttribute('tabindex')) {
+                    el.dataset.tabindexSalvato = '1';
+                    el.setAttribute('tabindex', '-1');
+                }
+            } else if (el.dataset.tabindexSalvato) {
+                el.removeAttribute('tabindex');
+                delete el.dataset.tabindexSalvato;
+            }
+        });
+    }
+
     function setMenuState(open) {
         if (!menu) return;
         menu.classList.toggle('open', open);
         // Blocca lo scroll della pagina quando il menu è aperto
         document.body.style.overflow = open ? 'hidden' : 'auto';
         if (hamburger) hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
-        // inert: i link fuori schermo non ricevono il focus nemmeno senza CSS
-        menu.inert = !open;
+        rendiMenuInerte(!open);
         if (open) {
             const closeBtn = menu.querySelector('.close-btn');
             if (closeBtn) closeBtn.focus();

@@ -187,12 +187,26 @@ nav a:hover { opacity: 0.6; }
 .hero {
     min-height: 100vh;
     min-height: 100svh;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 0 20px;
+    /* In alto lascia il posto all'header (position: fixed). Senza questo
+       spazio, quando il testo della hero è più alto del viewport — è il
+       caso del passaporto, con l'introduzione lunga — le linee verticali
+       e il titolo salivano sotto la barra superiore. */
+    padding: 110px 20px 50px;
+}
+/* Molle flessibili sopra e sotto il contenuto: lo centrano come prima, ma
+   quando non c'è spazio si azzerano e la hero cresce in basso. Il
+   justify-content: center che c'era prima, a spazio insufficiente,
+   faceva sbordare il contenuto in alto, dentro l'header. */
+.hero::before,
+.hero::after {
+    content: "";
+    /* 0% e non 0: Safari su base unitless in flex-basis non è affidabile */
+    flex: 1 0 0%;
 }
 .hero h1 {
     font-size: clamp(2.5rem, 8vw, 4.5rem);
@@ -481,9 +495,7 @@ footer {
     /* Il retro invisibile non deve rubare hover/click: si attiva solo quando è girato */
     pointer-events: none;
 }
-.flip-card.flipped .flip-card-back,
-.flip-card:focus-visible .flip-card-back,
-.flip-card:has(:focus-visible) .flip-card-back {
+.flip-card.flipped .flip-card-back {
     pointer-events: auto;
 }
 @media (hover: hover) and (pointer: fine) {
