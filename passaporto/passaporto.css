@@ -1,0 +1,305 @@
+/* Stili del Passaporto Neurodivergente.
+   Estende style.css: qui entrano solo le regole della pagina builder. */
+
+/* ============ SEZIONE CREA ============ */
+.section-passaporto-builder {
+    padding: clamp(60px, 10vw, 110px) clamp(16px, 5vw, 40px);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.section-passaporto-builder .license-text.lead {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 40px;
+}
+
+/* Campi nome e soprannome */
+.passport-form { margin-top: 10px; }
+.identity-fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+    max-width: 720px;
+    margin: 0 auto 40px;
+}
+.field label {
+    display: block;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--inchiostro);
+    margin-bottom: 8px;
+}
+.field-optional {
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--viola);
+}
+.field input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 16px;
+    font-family: var(--sans);
+    font-size: 1rem;
+    color: var(--inchiostro);
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(96, 43, 160, 0.25);
+    border-radius: 12px;
+}
+.field input:focus-visible {
+    outline: 2px solid var(--viola);
+    outline-offset: 2px;
+}
+
+/* ============ SELEZIONE PIANETI ============ */
+.planet-picker {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.planet-panel {
+    background: rgba(247, 231, 212, 0.92);
+    border-radius: 20px;
+    box-shadow: var(--ombra);
+    overflow: hidden;
+}
+.planet-panel summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 18px;
+    padding: 22px clamp(18px, 4vw, 30px);
+    font-family: var(--sans);
+}
+.planet-panel summary::-webkit-details-marker { display: none; }
+.planet-panel summary:focus-visible {
+    outline: 2px solid var(--viola);
+    outline-offset: -4px;
+    border-radius: 20px;
+}
+.planet-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(33, 21, 51, 0.25);
+}
+.planet-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--inchiostro);
+}
+.planet-theme {
+    font-family: var(--serif-it);
+    color: var(--viola);
+    font-size: 1rem;
+}
+.planet-count {
+    margin-left: auto;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--viola);
+}
+.planet-panel-body {
+    padding: 0 clamp(18px, 4vw, 30px) 26px;
+    border-top: 1px solid rgba(96, 43, 160, 0.12);
+}
+.planet-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 14px 0 6px;
+}
+.select-all-btn {
+    background: none;
+    border: none;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--viola);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    padding: 6px 4px;
+}
+.select-all-btn:focus-visible {
+    outline: 2px solid var(--viola);
+    outline-offset: 3px;
+}
+.moon-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* Le lune sono checkbox con lo stile delle moon-chip del sito */
+.moon-choice {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(96, 43, 160, 0.18);
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: var(--serif-it);
+    color: var(--inchiostro);
+    transition: background 0.25s ease, color 0.25s ease;
+}
+.moon-choice img {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 4px rgba(33, 21, 51, 0.25));
+}
+.moon-choice span {
+    font-size: 0.85rem;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+}
+.moon-choice input {
+    width: 1.1rem;
+    height: 1.1rem;
+    accent-color: var(--viola);
+    flex-shrink: 0;
+}
+.moon-choice:hover {
+    background: rgba(96, 43, 160, 0.12);
+}
+.moon-choice:has(input:checked) {
+    background: var(--viola);
+    color: var(--crema);
+    border-color: var(--viola);
+}
+.moon-choice:has(input:focus-visible) {
+    outline: 2px solid var(--viola);
+    outline-offset: 3px;
+}
+
+/* ============ ANTEPRIMA ============ */
+.passport-preview {
+    background: rgba(247, 231, 212, 0.92);
+    border-radius: 20px;
+    box-shadow: var(--ombra);
+    padding: clamp(24px, 4vw, 36px);
+    margin: 40px auto;
+    max-width: 720px;
+}
+.preview-title {
+    font-family: var(--sans);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+}
+.preview-identity {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    color: var(--viola);
+    margin-bottom: 10px;
+}
+.preview-count {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+}
+.preview-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.preview-list li {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+}
+.preview-list .preview-planet {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--viola);
+    margin-bottom: 4px;
+}
+.preview-list .preview-moons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.preview-tag {
+    background: rgba(96, 43, 160, 0.12);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 0.85rem;
+}
+
+/* ============ GENERAZIONE + GATE ============ */
+.generate-row {
+    text-align: center;
+    margin: 30px 0 10px;
+}
+.generate-btn {
+    font-size: 1.05rem;
+    padding: 16px 34px;
+}
+.generate-btn:disabled,
+.generate-btn:disabled:hover {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+.generate-hint {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    color: var(--viola);
+    margin-top: 14px;
+}
+
+.newsletter-gate {
+    background: rgba(247, 231, 212, 0.92);
+    border-radius: 20px;
+    box-shadow: var(--ombra);
+    padding: clamp(26px, 5vw, 44px);
+    margin: 40px auto 0;
+    max-width: 720px;
+    text-align: center;
+}
+.gate-title {
+    font-family: var(--sans);
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+}
+.gate-frame-wrap { margin: 26px 0; }
+.gate-frame {
+    width: 100%;
+    max-width: 560px;
+    height: 620px;
+    border: 1px solid rgba(96, 43, 160, 0.2);
+    border-radius: 12px;
+    background: #fff;
+}
+.gate-fallback { margin-top: 12px; font-family: var(--sans); font-size: 0.95rem; }
+.gate-confirm-btn { margin-top: 8px; }
+.privacy-note {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--inchiostro);
+    max-width: 520px;
+    margin: 22px auto 0;
+    line-height: 1.55;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 850px) {
+    .planet-count { margin-left: 0; width: 100%; }
+    .moon-choice img { width: 32px; height: 32px; }
+    .gate-frame { height: 720px; }
+}

@@ -9,17 +9,20 @@
 
     <!-- Collegamento al file CSS -->
     <link rel="stylesheet" href="../style.css">
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GPJ7HE51SH"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-GPJ7HE51SH');
-</script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GPJ7HE51SH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GPJ7HE51SH');
+    </script>
+</head>
 <body>
+
+    <a class="skip-link" href="#contenuto">Vai al contenuto</a>
 
     <div class="aurora-bg"></div>
 
@@ -28,24 +31,26 @@
             <img src="../Asset/firme.png" class="logo" alt="Federico Gorrino">
             <img src="../Asset/firme-mobile.png" class="logo logo-mobile" alt="Federico Gorrino">
         </div>
-        <nav class="desktop-nav">
+        <nav class="desktop-nav" aria-label="Navigazione principale">
             <a href="#mascotte">Mascotte</a>
             <a href="#lune">Temi</a>
         </nav>
         <div><a href="../" class="amazon-btn home-btn">HOME</a></div>
-        <button class="hamburger" onclick="toggleMenu()">
+        <button class="hamburger" onclick="toggleMenu()" aria-expanded="false" aria-controls="menu-mobile" aria-label="Apri il menu">
             <span></span>
             <span></span>
             <span></span>
         </button>
     </header>
 
-    <nav class="mobile-menu">
-        <button class="close-btn" onclick="toggleMenu()">×</button>
+    <nav class="mobile-menu" id="menu-mobile" aria-label="Menu">
+        <button class="close-btn" onclick="toggleMenu()" aria-label="Chiudi il menu"><span aria-hidden="true">×</span></button>
         <a href="#mascotte">Mascotte</a>
         <a href="#lune">Temi</a>
         <a href="../" class="amazon-btn mobile-home">HOME</a>
     </nav>
+
+    <main id="contenuto">
 
     <section class="hero" id="hero">
         <div class="vertical-line"></div>
@@ -61,7 +66,7 @@
         <div class="book-card reverse">
             <img src="../Asset/Planet forms/VENUS.png" class="book-img" alt="Silen nella forma di Venere">
             <div class="book-info">
-                <h2>Silen <img class="mascotte-circle" src="../Asset/circles/venus.png" alt=""/></h2>
+                <h3>Silen <img class="mascotte-circle" src="../Asset/circles/venus.png" alt=""/></h3>
                 <p class="desc">La forma di Silen che abita il paesaggio del sé.</p>
                 <span>
                     Silen è la specie ancestrale da cui discendono tutti i visitatori del nostro universo. Nella sua forma venusiana esplora il paesaggio del sé: le emozioni che bruciano, le difese che si alzano, gli specchi in cui cerchiamo conferma. Questa collezione osserva i disturbi di personalità con uno sguardo gentile, per trasformare il giudizio in comprensione e la distanza in incontro.
@@ -80,11 +85,11 @@
         <div class="book-card" id="disturbo-evitante">
             <img src="../Asset/Collezione 5/disturbo_evitante_personalità.png" class="book-img" alt="Disturbo Evitante di Personalità">
             <div class="book-info">
-                <h2>Disturbo Evitante di Personalità</h2>
+                <h3>Disturbo Evitante di Personalità</h3>
                 <p class="desc">La distanza come modo di proteggersi.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
-                    <p>Il disturbo di personalità evitante è un pattern stabile di forte timidezza, paura del rifiuto e senso di inadeguatezza, che porta a evitare relazioni e occasioni anche quando le si desidera. Non è semplice timidezza: è un modo di stare al mondo che soffre, e si può trattare.</p>
+                    <p>Il disturbo di personalità evitante è un pattern stabile di forte timidezza, paura del rifiuto e senso di inadeguatezza, che porta a evitare relazioni e occasioni anche quando le si desidera. Non è semplice timidezza: è un modo di stare al mondo che porta sofferenza, e si può trattare.</p>
                 </div>
                 <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     Il disturbo evitante costruisce muri dove vorrebbe costruire ponti, per paura del rifiuto. Su Venere, pianeta dell'incontro, Silen racconta il coraggio lento di mostrarsi, un passo alla volta.
@@ -96,7 +101,7 @@
         <div class="book-card reverse" id="disturbo-antisociale">
             <img src="../Asset/Collezione 5/disturbo_antisociale_personalità.png" class="book-img" alt="Disturbo Antisociale di Personalità">
             <div class="book-info">
-                <h2>Disturbo Antisociale di Personalità</h2>
+                <h3>Disturbo Antisociale di Personalità</h3>
                 <p class="desc">Quando le regole sembrano scritte per altri.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -112,7 +117,7 @@
         <div class="book-card" id="disturbo-paranoide">
             <img src="../Asset/Collezione 5/disturbo_paranoide_personalità.png" class="book-img" alt="Disturbo Paranoide di Personalità">
             <div class="book-info">
-                <h2>Disturbo Paranoide di Personalità</h2>
+                <h3>Disturbo Paranoide di Personalità</h3>
                 <p class="desc">La guardia che non si abbassa mai.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -128,7 +133,7 @@
         <div class="book-card reverse" id="disturbo-borderline">
             <img src="../Asset/Collezione 5/disturbo_borderline_personalità.png" class="book-img" alt="Disturbo Borderline di Personalità">
             <div class="book-info">
-                <h2>Disturbo Borderline di Personalità</h2>
+                <h3>Disturbo Borderline di Personalità</h3>
                 <p class="desc">Emozioni che bruciano a piena intensità.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -144,7 +149,7 @@
         <div class="book-card" id="disturbo-narcisistico">
             <img src="../Asset/Collezione 5/disturbo_narcisistico_personalità.png" class="book-img" alt="Disturbo Narcisistico di Personalità">
             <div class="book-info">
-                <h2>Disturbo Narcisistico di Personalità</h2>
+                <h3>Disturbo Narcisistico di Personalità</h3>
                 <p class="desc">Lo specchio che chiede conferma.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -160,7 +165,7 @@
         <div class="book-card reverse" id="disturbo-istrionico">
             <img src="../Asset/Collezione 5/disturbo_istrionico_personalità.png" class="book-img" alt="Disturbo Istrionico di Personalità">
             <div class="book-info">
-                <h2>Disturbo Istrionico di Personalità</h2>
+                <h3>Disturbo Istrionico di Personalità</h3>
                 <p class="desc">Il ritratto che cerca uno specchio.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -189,36 +194,12 @@
         </div>
     </section>
 
+    </main>
+
     <footer>
         UNA VOCE DAL PROFONDO • Federico Gorrino &copy; 2026
     </footer>
 
-    <script>
-        const header = document.querySelector('header');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) { // Se scrolli più di 50px
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        function toggleMenu() {
-            const menu = document.querySelector('.mobile-menu');
-            menu.classList.toggle('open');
-            // Blocca scroll pagina
-            document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : 'auto';
-        }
-
-        // CHIUSURA AUTOMATICA
-        document.querySelectorAll('.mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                const menu = document.querySelector('.mobile-menu');
-                menu.classList.remove('open');
-                document.body.style.overflow = 'auto'; // Ripristina scroll
-            });
-        });
-    </script>
+    <script src="../site.js" defer></script>
 </body>
 </html>

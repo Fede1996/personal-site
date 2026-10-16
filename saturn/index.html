@@ -9,17 +9,20 @@
 
     <!-- Collegamento al file CSS -->
     <link rel="stylesheet" href="../style.css">
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GPJ7HE51SH"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-GPJ7HE51SH');
-</script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GPJ7HE51SH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GPJ7HE51SH');
+    </script>
+</head>
 <body>
+
+    <a class="skip-link" href="#contenuto">Vai al contenuto</a>
 
     <div class="aurora-bg"></div>
 
@@ -28,24 +31,26 @@
             <img src="../Asset/firme.png" class="logo" alt="Federico Gorrino">
             <img src="../Asset/firme-mobile.png" class="logo logo-mobile" alt="Federico Gorrino">
         </div>
-        <nav class="desktop-nav">
+        <nav class="desktop-nav" aria-label="Navigazione principale">
             <a href="#mascotte">Mascotte</a>
             <a href="#lune">Temi</a>
         </nav>
         <div><a href="../" class="amazon-btn home-btn">HOME</a></div>
-        <button class="hamburger" onclick="toggleMenu()">
+        <button class="hamburger" onclick="toggleMenu()" aria-expanded="false" aria-controls="menu-mobile" aria-label="Apri il menu">
             <span></span>
             <span></span>
             <span></span>
         </button>
     </header>
 
-    <nav class="mobile-menu">
-        <button class="close-btn" onclick="toggleMenu()">×</button>
+    <nav class="mobile-menu" id="menu-mobile" aria-label="Menu">
+        <button class="close-btn" onclick="toggleMenu()" aria-label="Chiudi il menu"><span aria-hidden="true">×</span></button>
         <a href="#mascotte">Mascotte</a>
         <a href="#lune">Temi</a>
         <a href="../" class="amazon-btn mobile-home">HOME</a>
     </nav>
+
+    <main id="contenuto">
 
     <section class="hero" id="hero">
         <div class="vertical-line"></div>
@@ -61,7 +66,7 @@
         <div class="book-card reverse">
             <img src="../Asset/Planet forms/SATURN.png" class="book-img" alt="Silen nella forma di Saturno">
             <div class="book-info">
-                <h2>Silen <img class="mascotte-circle" src="../Asset/circles/saturn.png" alt=""/></h2>
+                <h3>Silen <img class="mascotte-circle" src="../Asset/circles/saturn.png" alt=""/></h3>
                 <p class="desc">La forma di Silen che segue i cicli della crescita.</p>
                 <span>
                     Silen è la specie ancestrale da cui discendono tutti i visitatori del nostro universo. Nella sua forma saturniana segue i cicli lenti della crescita: le menti che crescono troppo in fretta, i sensi che percepiscono troppo, le strade che non riescono a scegliersi. Questa collezione parla di neurosviluppo e delle sue asincronie, per insegnare che ogni tempo ha la sua dignità.
@@ -80,7 +85,7 @@
         <div class="book-card" id="multipotenzialita">
             <img src="../Asset/Collezione 8/multi_potenzialità.png" class="book-img" alt="Multipotenzialità">
             <div class="book-info">
-                <h2>Multipotenzialità</h2>
+                <h3>Multipotenzialità</h3>
                 <p class="desc">Troppe strade, tutte vere.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -96,7 +101,7 @@
         <div class="book-card reverse" id="persona-altamente-sensibile">
             <img src="../Asset/Collezione 8/persona_altamente_sensibile.png" class="book-img" alt="Persona Altamente Sensibile">
             <div class="book-info">
-                <h2>Persona Altamente Sensibile</h2>
+                <h3>Persona Altamente Sensibile</h3>
                 <p class="desc">Sentire il mondo con la pelle dell'anima.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -112,7 +117,7 @@
         <div class="book-card" id="plusdotazione">
             <img src="../Asset/Collezione 8/plusdotazione.png" class="book-img" alt="Plusdotazione">
             <div class="book-info">
-                <h2>Plusdotazione</h2>
+                <h3>Plusdotazione</h3>
                 <p class="desc">Una mente che chiede orizzonti più ampi.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -128,7 +133,7 @@
         <div class="book-card reverse" id="sviluppo-asincrono">
             <img src="../Asset/Collezione 8/asincronia_sviluppo.png" class="book-img" alt="Sviluppo Asincrono">
             <div class="book-info">
-                <h2>Sviluppo Asincrono</h2>
+                <h3>Sviluppo Asincrono</h3>
                 <p class="desc">Crescere a velocità diverse.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -144,7 +149,7 @@
         <div class="book-card" id="iperreattivita-sensoriale">
             <img src="../Asset/Collezione 8/iper_reattività_sensoriale.png" class="book-img" alt="Iperreattività Sensoriale">
             <div class="book-info">
-                <h2>Iperreattività Sensoriale</h2>
+                <h3>Iperreattività Sensoriale</h3>
                 <p class="desc">Il mondo arriva a volume pieno.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -160,7 +165,7 @@
         <div class="book-card reverse" id="doppia-eccezionalita">
             <img src="../Asset/Collezione 8/2e.png" class="book-img" alt="Doppia Eccezionalità">
             <div class="book-info">
-                <h2>Doppia Eccezionalità</h2>
+                <h3>Doppia Eccezionalità</h3>
                 <p class="desc">Due luci nella stessa orbita.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -189,36 +194,12 @@
         </div>
     </section>
 
+    </main>
+
     <footer>
         UNA VOCE DAL PROFONDO • Federico Gorrino &copy; 2026
     </footer>
 
-    <script>
-        const header = document.querySelector('header');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) { // Se scrolli più di 50px
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        function toggleMenu() {
-            const menu = document.querySelector('.mobile-menu');
-            menu.classList.toggle('open');
-            // Blocca scroll pagina
-            document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : 'auto';
-        }
-
-        // CHIUSURA AUTOMATICA
-        document.querySelectorAll('.mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                const menu = document.querySelector('.mobile-menu');
-                menu.classList.remove('open');
-                document.body.style.overflow = 'auto'; // Ripristina scroll
-            });
-        });
-    </script>
+    <script src="../site.js" defer></script>
 </body>
 </html>

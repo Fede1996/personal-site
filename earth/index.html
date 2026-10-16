@@ -9,17 +9,20 @@
 
     <!-- Collegamento al file CSS -->
     <link rel="stylesheet" href="../style.css">
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GPJ7HE51SH"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-GPJ7HE51SH');
-</script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GPJ7HE51SH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GPJ7HE51SH');
+    </script>
+</head>
 <body>
+
+    <a class="skip-link" href="#contenuto">Vai al contenuto</a>
 
     <div class="aurora-bg"></div>
 
@@ -28,24 +31,26 @@
             <img src="../Asset/firme.png" class="logo" alt="Federico Gorrino">
             <img src="../Asset/firme-mobile.png" class="logo logo-mobile" alt="Federico Gorrino">
         </div>
-        <nav class="desktop-nav">
+        <nav class="desktop-nav" aria-label="Navigazione principale">
             <a href="#mascotte">Mascotte</a>
             <a href="#lune">Temi</a>
         </nav>
         <div><a href="../" class="amazon-btn home-btn">HOME</a></div>
-        <button class="hamburger" onclick="toggleMenu()">
+        <button class="hamburger" onclick="toggleMenu()" aria-expanded="false" aria-controls="menu-mobile" aria-label="Apri il menu">
             <span></span>
             <span></span>
             <span></span>
         </button>
     </header>
 
-    <nav class="mobile-menu">
-        <button class="close-btn" onclick="toggleMenu()">×</button>
+    <nav class="mobile-menu" id="menu-mobile" aria-label="Menu">
+        <button class="close-btn" onclick="toggleMenu()" aria-label="Chiudi il menu"><span aria-hidden="true">×</span></button>
         <a href="#mascotte">Mascotte</a>
         <a href="#lune">Temi</a>
         <a href="../" class="amazon-btn mobile-home">HOME</a>
     </nav>
+
+    <main id="contenuto">
 
     <section class="hero" id="hero">
         <div class="vertical-line"></div>
@@ -61,7 +66,7 @@
         <div class="book-card reverse">
             <img src="../Asset/Planet forms/EARTH.png" class="book-img" alt="Silen nella forma della Terra">
             <div class="book-info">
-                <h2>Silen <img class="mascotte-circle" src="../Asset/circles/earth.png" alt=""/></h2>
+                <h3>Silen <img class="mascotte-circle" src="../Asset/circles/earth.png" alt=""/></h3>
                 <p class="desc">La forma di Silen che esplora i sensi e la percezione.</p>
                 <span>
                     Silen è la specie ancestrale da cui discendono tutti i visitatori del nostro universo. Nella sua forma terrestre abita i sensi e la percezione: i corpi che ricordano, i colori dei suoni, i volti che sfuggono, i doni che brillano fuori misura. Un viaggio nel cervello umano e nelle sue meraviglie, per scoprire che percepire il mondo è già, di per sé, un'esperienza straordinaria.
@@ -80,7 +85,7 @@
         <div class="book-card" id="arto-fantasma">
             <img src="../Asset/Collezione 7/arto_fantasma.png" class="book-img" alt="Arto Fantasma">
             <div class="book-info">
-                <h2>Arto Fantasma</h2>
+                <h3>Arto Fantasma</h3>
                 <p class="desc">La memoria del corpo oltre il corpo.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -96,7 +101,7 @@
         <div class="book-card reverse" id="ipertimesia">
             <img src="../Asset/Collezione 7/ipertimesia.png" class="book-img" alt="Ipertimesia">
             <div class="book-info">
-                <h2>Ipertimesia</h2>
+                <h3>Ipertimesia</h3>
                 <p class="desc">Il tempo non passa: si deposita.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -112,11 +117,11 @@
         <div class="book-card" id="prosopagnosia">
             <img src="../Asset/Collezione 7/prosopagnosia.png" class="book-img" alt="Prosopagnosia">
             <div class="book-info">
-                <h2>Prosopagnosia</h2>
+                <h3>Prosopagnosia</h3>
                 <p class="desc">Volti senza nome, volti senza memoria.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
-                    <p>La prosopagnosia, o cecità ai volti, è la difficoltà a riconoscere i volti, anche di persone familiari. Non dipende da problemi di vista o di memoria: è una difficoltà specifica del cervello nel processare i volti, e chi ne soffre impara a basarsi su voce, passo e contesto.</p>
+                    <p>La prosopagnosia, o cecità ai volti, è la difficoltà a riconoscere i volti, anche di persone familiari. Non dipende da problemi di vista o di memoria: è una difficoltà specifica del cervello nel processare i volti, e chi la vive impara a basarsi su voce, passo e contesto.</p>
                 </div>
                 <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     La prosopagnosia impedisce di riconoscere i volti, anche i più amati. Silen ci ricorda che le persone possono essere riconosciute in mille altri modi: dalla voce, dal passo, dal modo di stare al mondo.
@@ -128,7 +133,7 @@
         <div class="book-card reverse" id="sindrome-savant">
             <img src="../Asset/Collezione 7/sindrome_savant.png" class="book-img" alt="Sindrome Savant">
             <div class="book-info">
-                <h2>Sindrome Savant</h2>
+                <h3>Sindrome Savant</h3>
                 <p class="desc">Un dono che brilla fuori misura.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -144,7 +149,7 @@
         <div class="book-card" id="sinestesia">
             <img src="../Asset/Collezione 7/sinestesia.png" class="book-img" alt="Sinestesia">
             <div class="book-info">
-                <h2>Sinestesia</h2>
+                <h3>Sinestesia</h3>
                 <p class="desc">Quando i suoni hanno un colore.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -160,11 +165,11 @@
         <div class="book-card reverse" id="afantasia">
             <img src="../Asset/Collezione 7/afantasia.png" class="book-img" alt="Afantasia">
             <div class="book-info">
-                <h2>Afantasia</h2>
+                <h3>Afantasia</h3>
                 <p class="desc">Immaginare, anche senza immagini.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
-                    <p>L'afantasia è l'assenza o la debolezza dell'immaginazione visiva: chi ne è affetto non vede le immagini con la mente, pur ricordando i fatti. Non è mancanza di fantasia — si pensa lo stesso, solo con altri canali.</p>
+                    <p>L'afantasia è l'assenza o la riduzione delle immagini mentali visive: chi vive con l'afantasia non vede le immagini con la mente, pur ricordando i fatti. Non è mancanza di fantasia — si pensa lo stesso, solo con altri canali.</p>
                 </div>
                 <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     L'afantasia è l'assenza di immagini mentali: chiudendo gli occhi il buio resta buio, e i ricordi parlano per parole, sensazioni e concetti invece che per figure. Non è mancanza di fantasia: è un'altra mappa interiore. La Terra, radicata nel reale, insegna che si può esplorare l'infinito anche senza vederlo.
@@ -189,36 +194,12 @@
         </div>
     </section>
 
+    </main>
+
     <footer>
         UNA VOCE DAL PROFONDO • Federico Gorrino &copy; 2026
     </footer>
 
-    <script>
-        const header = document.querySelector('header');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) { // Se scrolli più di 50px
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        function toggleMenu() {
-            const menu = document.querySelector('.mobile-menu');
-            menu.classList.toggle('open');
-            // Blocca scroll pagina
-            document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : 'auto';
-        }
-
-        // CHIUSURA AUTOMATICA
-        document.querySelectorAll('.mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                const menu = document.querySelector('.mobile-menu');
-                menu.classList.remove('open');
-                document.body.style.overflow = 'auto'; // Ripristina scroll
-            });
-        });
-    </script>
+    <script src="../site.js" defer></script>
 </body>
 </html>

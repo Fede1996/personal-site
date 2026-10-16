@@ -151,10 +151,20 @@ nav a:hover { opacity: 0.6; }
     justify-content: center;
     gap: 40px;
     z-index: 9999;
-    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    /* visibility:hidden (non solo right:-350px) toglie i link fuori schermo
+       dal tab order anche senza JS; lo scambio è ritardato alla fine della
+       transizione in chiusura, così la slide resta visibile */
+    visibility: hidden;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0s linear 0.4s;
     box-shadow: var(--ombra);
 }
-.mobile-menu.open { right: 0; }
+.mobile-menu.open {
+    right: 0;
+    visibility: visible;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0s linear 0s;
+}
 .close-btn {
     position: absolute;
     top: 30px;
@@ -256,9 +266,13 @@ nav a:hover { opacity: 0.6; }
 }
 .section-books,
 .section-community,
+.section-passaporto,
 .section-support {
     padding: clamp(40px, 5vw, 65px) 20px;
     text-align: center;
+}
+.section-passaporto .community-lead {
+    max-width: 720px;
 }
 .section-support { font-family: var(--sans); }
 
@@ -285,8 +299,8 @@ h2.section-title {
 footer {
     padding: 50px;
     text-align: center;
-    font-size: 0.7rem;
-    opacity: 0.5;
+    font-size: 0.85rem;
+    color: #5a4778;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -343,19 +357,14 @@ footer {
     .card-disble:hover .flip-card-front { transform: none; visibility: visible; }
     .card-disble:hover .flip-card-back { transform: rotateY(-180deg); visibility: hidden; }
 }
-/* Flip su tap (smartphone) e da tastiera (solo focus da tastiera, non da tap) */
-.flip-card.flipped .flip-card-front,
-.flip-card:focus-visible .flip-card-front,
-.flip-card:has(:focus-visible) .flip-card-front { transform: rotateY(180deg); visibility: hidden; }
-.flip-card.flipped .flip-card-back,
-.flip-card:focus-visible .flip-card-back,
-.flip-card:has(:focus-visible) .flip-card-back { transform: rotateY(0deg); visibility: visible; }
-.card-disble.flipped .flip-card-front,
-.card-disble:focus-visible .flip-card-front,
-.card-disble:has(:focus-visible) .flip-card-front { transform: none; visibility: visible; }
-.card-disble.flipped .flip-card-back,
-.card-disble:focus-visible .flip-card-back,
-.card-disble:has(:focus-visible) .flip-card-back { transform: rotateY(-180deg); visibility: hidden; }
+/* Flip su tap e da tastiera: la classe .flipped la aggiunge site.js al click
+   del pulsante sul fronte. Niente auto-flip su :focus-visible: il pulsante
+   vive sul fronte, che diventerebbe visibility:hidden e gli farebbe perdere
+   il focus (la card oscillerebbe). */
+.flip-card.flipped .flip-card-front { transform: rotateY(180deg); visibility: hidden; }
+.flip-card.flipped .flip-card-back { transform: rotateY(0deg); visibility: visible; }
+.card-disble.flipped .flip-card-front { transform: none; visibility: visible; }
+.card-disble.flipped .flip-card-back { transform: rotateY(-180deg); visibility: hidden; }
 
 /* Fronte */
 .flip-card-front {
@@ -428,7 +437,7 @@ footer {
 }
 .card-tagline {
     font-family: var(--serif);
-    font-size: 0.55rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     line-height: 1.6;
@@ -443,7 +452,7 @@ footer {
     transform: translateX(-50%);
     z-index: 2;
     font-family: var(--sans);
-    font-size: 0.62rem;
+    font-size: 0.75rem;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--viola);
@@ -542,7 +551,7 @@ footer {
 .shop-text {
     font-family: var(--sans);
     color: var(--inchiostro);
-    font-size: 11px;
+    font-size: 0.8rem;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -593,7 +602,7 @@ footer {
 }
 .moon-chip span {
     font-family: var(--serif-it);
-    font-size: 11px;
+    font-size: 0.8rem;
     letter-spacing: 0.2px;
     line-height: 1.3;
     /* Le etichette lunghe ("Disturbo Ossessivo-Compulsivo") vanno a capo
@@ -677,7 +686,8 @@ footer {
     border-radius: 4px;
 }
 .book-info { flex: 2; }
-.book-info h2 {
+.book-info h2,
+.book-info h3 {
     font-family: var(--sans);
     font-size: clamp(1.5rem, 4vw, 2.2rem);
     line-height: 1.25;
@@ -736,7 +746,7 @@ footer {
 .sun-badge small,
 .sun-badge-reverse small {
     font-family: var(--sans);
-    font-size: 0.6rem;
+    font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 1.5px;
     text-transform: uppercase;
@@ -749,7 +759,7 @@ footer {
 .voce-label {
     display: block;
     font-family: var(--sans);
-    font-size: 0.65rem;
+    font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -880,14 +890,16 @@ footer {
     margin-bottom: 20px;
     object-fit: cover;
 }
-.review-card h4 { font-family: var(--sans); margin-bottom: 5px; }
+.review-card h3 { font-family: var(--sans); margin-bottom: 5px; }
 .review-card p { font-size: 0.85rem; font-style: italic; color: #4a4054; }
 .subtitle-user { font-family: var(--serif-it); color: var(--viola); }
 .desc-user { font-family: var(--serif); color: var(--inchiostro); }
 
 /* ============ SUPPORTO / LICENZE ============ */
 .support-box {
-    backdrop-filter: blur(10px);
+    background: rgba(247, 231, 212, 0.92);
+    border-radius: 20px;
+    box-shadow: var(--ombra);
     padding: clamp(30px, 6vw, 60px);
     max-width: 800px;
     margin: 0 auto;
@@ -910,8 +922,7 @@ footer {
     font-family: var(--serif-it);
     font-size: 0.75rem;
     margin-top: 20px;
-    color: var(--crema);
-    text-shadow: -1px -1px 0 var(--viola), 1px -1px 0 var(--viola), -1px 1px 0 var(--viola), 1px 1px 0 var(--viola);
+    color: var(--inchiostro);
 }
 .license-text + .license-text { margin-top: 0; }
 
@@ -949,7 +960,7 @@ footer {
     .book-info { order: 3; width: 100%; }
     .book-meta li { justify-content: center; }
     .desc-section-box { max-width: 100%; min-height: 22vh; }
-    .card-tagline { font-size: 0.65rem; }
+    .card-tagline { font-size: 0.8rem; }
     .cosa-trovi-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
@@ -962,9 +973,104 @@ footer {
         gap: 8px;
     }
     .moon-chip img { width: 32px; height: 32px; }
-    .moon-chip span { font-size: 10px; }
+    .moon-chip span { font-size: 0.8rem; }
     .support-box p { font-size: 1.15rem; }
 }
+
+/* ============ ACCESSIBILITÀ ============ */
+
+/* Link "vai al contenuto": invisibile finché non riceve il focus */
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 20000;
+    padding: 12px 20px;
+    background: var(--viola);
+    color: var(--crema);
+    font-family: var(--sans);
+    text-decoration: none;
+    border-radius: 0 0 8px 0;
+}
+.skip-link:focus {
+    left: 0;
+}
+
+/* Solo per screen reader: contenuto visivamente nascosto ma leggibile */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Pulsanti di controllo della flip-card. Stanno FUORI dalle facce
+   animate: la visibilità delle facce scambia a metà transizione, quindi
+   un pulsante dentro il fronte o il retro non sarebbe subito focusabile.
+   Qui invece show/hide è immediato e il focus funziona sempre. */
+.flip-toggle {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    /* Il fronte ha pointer-events: none: il pulsante deve riprenderli */
+    pointer-events: auto;
+    border-radius: 4px;
+}
+/* Card girata: il toggle sparisce subito e non copre i link del retro */
+.flip-card.flipped .flip-toggle { display: none; }
+/* Con l'hover la card si gira da sola: il toggle resta tabbabile ma non
+   deve intercettare i click sui link del retro */
+@media (hover: hover) and (pointer: fine) {
+    .flip-card:hover .flip-toggle { pointer-events: none; }
+}
+.flip-toggle:focus-visible {
+    outline: 2px solid var(--viola);
+    outline-offset: -4px;
+}
+
+/* Focus visibile anche sui controlli che non lo avevano */
+.desktop-nav a:focus-visible,
+.mobile-menu a:focus-visible,
+.amazon-btn:focus-visible,
+.amazon-btn-disabled:focus-visible,
+.text-link:focus-visible,
+.hamburger:focus-visible,
+.close-btn:focus-visible,
+.flip-close:focus-visible {
+    outline: 2px solid var(--viola);
+    outline-offset: 3px;
+}
+
+/* Pulsante di chiusura del retro: appare solo quando la card è girata */
+.flip-close {
+    display: none;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 4;
+    background: rgba(247, 231, 212, 0.9);
+    border: 1px solid rgba(96, 43, 160, 0.25);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--inchiostro);
+    cursor: pointer;
+}
+.flip-card.flipped .flip-close { display: block; }
 
 /* Accessibilità: ferma le rotazioni per chi preferisce meno animazioni */
 @media (prefers-reduced-motion: reduce) {
@@ -972,7 +1078,12 @@ footer {
     .blob-button::after { animation: none; }
     .flip-card-inner, .blob-button, .shop-text { transition: none; }
     /* Flip istantaneo: anche lo scambio delle facce deve essere immediato */
-    .flip-card-front, .flip-card-back { transition: none; }}
+    .flip-card-front, .flip-card-back { transition: none; }
+    header { transition: none; }
+    .mobile-menu { transition: none; }
+    .amazon-btn, .moon-chip, .text-link { transition: none; }
+    .amazon-btn:hover, .moon-chip:hover { transform: none; }
+}
 
 /* ============ ANIMAZIONI ============ */
 @keyframes ringPulse {

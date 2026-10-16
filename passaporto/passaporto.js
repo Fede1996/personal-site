@@ -1,0 +1,205 @@
+// Logica del builder del passaporto: selezione lune, anteprima e gate
+// newsletter. Il PDF è in passaporto-pdf.js.
+//
+// Richiede dati-lune.js (const PIANETI) caricato prima di questo file.
+
+(function () {
+    'use strict';
+
+    const GATE_KEY = 'uvdp-passaporto-iscrizione';
+
+    const picker = document.getElementById('planet-picker');
+    const nomeInput = document.getElementById('nome');
+    const soprannomeInput = document.getElementById('soprannome');
+    const previewIdentity = document.getElementById('preview-identity');
+    const previewCount = document.getElementById('preview-count');
+    const previewList = document.getElementById('preview-list');
+    const generaBtn = document.getElementById('genera-pdf');
+    const generateHint = document.getElementById('generate-hint');
+    const gate = document.getElementById('newsletter-gate');
+    const gateConfirm = document.getElementById('conferma-iscrizione');
+
+    if (!picker || typeof PIANETI === 'undefined') return;
+
+    // ---------- Costruzione dei pannelli ----------
+    PIANETI.forEach(pianeta => {
+        const details = document.createElement('details');
+        details.className = 'planet-panel';
+        details.dataset.slug = pianeta.slug;
+
+        const summary = document.createElement('summary');
+        summary.innerHTML =
+            '<span class="planet-dot" aria-hidden="true"></span>' +
+            '<span class="planet-name"></span>' +
+            '<span class="planet-theme"></span>' +
+            '<span class="planet-count">0 lune selezionate</span>';
+        summary.querySelector('.planet-dot').style.background =
+            'radial-gradient(circle, rgba(96,43,160,0.85), rgba(96,43,160,0.35))';
+        summary.querySelector('.planet-name').textContent = pianeta.nome;
+        summary.querySelector('.planet-theme').textContent = pianeta.tema;
+        details.appendChild(summary);
+
+        const body = document.createElement('div');
+        body.className = 'planet-panel-body';
+
+        const actions = document.createElement('div');
+        actions.className = 'planet-actions';
+        const selectAll = document.createElement('button');
+        selectAll.type = 'button';
+        selectAll.className = 'select-all-btn';
+        selectAll.textContent = 'Seleziona tutte le lune';
+        actions.appendChild(selectAll);
+        body.appendChild(actions);
+
+        const grid = document.createElement('div');
+        grid.className = 'moon-grid';
+        pianeta.lune.forEach(luna => {
+            const label = document.createElement('label');
+            label.className = 'moon-choice';
+
+            const check = document.createElement('input');
+            check.type = 'checkbox';
+            check.className = 'moon-check';
+            check.value = pianeta.slug + '/' + luna.id;
+            check.dataset.planet = pianeta.slug;
+            check.dataset.moon = luna.id;
+
+            const img = document.createElement('img');
+            img.src = luna.icona;
+            img.alt = '';
+
+            const span = document.createElement('span');
+            span.textContent = luna.nome;
+
+            label.appendChild(check);
+            label.appendChild(img);
+            label.appendChild(span);
+            grid.appendChild(label);
+        });
+        body.appendChild(grid);
+        details.appendChild(body);
+        picker.appendChild(details);
+
+        selectAll.addEventListener('click', () => {
+            const checks = grid.querySelectorAll('.moon-check');
+            const allOn = Array.from(checks).every(c => c.checked);
+            checks.forEach(c => { c.checked = !allOn; });
+            update();
+        });
+    });
+
+    // ---------- Stato selezione ----------
+    function selectedMoons() {
+        const scelte = [];
+        picker.querySelectorAll('.moon-check:checked').forEach(check => {
+            const pianeta = PIANETI.find(p => p.slug === check.dataset.planet);
+            if (!pianeta) return;
+            const luna = pianeta.lune.find(l => l.id === check.dataset.moon);
+            if (!luna) return;
+            let gruppo = scelte.find(s => s.pianeta.slug === pianeta.slug);
+            if (!gruppo) {
+                gruppo = { pianeta: pianeta, lune: [] };
+                scelte.push(gruppo);
+            }
+            gruppo.lune.push(luna);
+        });
+        return scelte;
+    }
+
+    function update() {
+        const scelte = selectedMoons();
+        const totaleLune = scelte.reduce((n, s) => n + s.lune.length, 0);
+
+        // Contatori per pianeta
+        picker.querySelectorAll('.planet-panel').forEach(panel => {
+            const n = panel.querySelectorAll('.moon-check:checked').length;
+            panel.querySelector('.planet-count').textContent =
+                n === 1 ? '1 luna selezionata' : n + ' lune selezionate';
+        });
+
+        // Anteprima identità
+        const nome = (nomeInput.value || '').trim();
+        const soprannome = (soprannomeInput.value || '').trim();
+        if (nome && soprannome) {
+            previewIdentity.textContent = nome + ' — «' + soprannome + '»';
+        } else if (nome) {
+            previewIdentity.textContent = nome;
+        } else {
+            previewIdentity.textContent = 'Il tuo nome comparirà qui.';
+        }
+
+        // Anteprima selezione
+        if (totaleLune === 0) {
+            previewCount.textContent = 'Nessuna luna selezionata: apri un pianeta e scegli quelle che ti parlano.';
+        } else {
+            const nPianeti = scelte.length;
+            const pagine = totaleLune + 2; // copertina + retro (QR)
+            previewCount.textContent =
+                totaleLune + (totaleLune === 1 ? ' luna' : ' lune') +
+                ' su ' + nPianeti + (nPianeti === 1 ? ' pianeta' : ' pianeti') +
+                ' → ' + pagine + ' pagine totali, copertina e QR compresi.';
+        }
+
+        previewList.innerHTML = '';
+        scelte.forEach(gruppo => {
+            const li = document.createElement('li');
+            const titolo = document.createElement('div');
+            titolo.className = 'preview-planet';
+            titolo.textContent = gruppo.pianeta.nome + ' · ' + gruppo.pianeta.tema;
+            const tags = document.createElement('div');
+            tags.className = 'preview-moons';
+            gruppo.lune.forEach(luna => {
+                const tag = document.createElement('span');
+                tag.className = 'preview-tag';
+                tag.textContent = luna.nome;
+                tags.appendChild(tag);
+            });
+            li.appendChild(titolo);
+            li.appendChild(tags);
+            previewList.appendChild(li);
+        });
+
+        // Abilitazione del download
+        const pronto = nome.length > 0 && totaleLune > 0;
+        generaBtn.disabled = !pronto;
+        generateHint.textContent = pronto
+            ? 'Tutto pronto: premi "Genera il PDF".'
+            : 'Inserisci il nome e scegli almeno una luna per abilitare il download.';
+    }
+
+    picker.addEventListener('change', update);
+    nomeInput.addEventListener('input', update);
+    soprannomeInput.addEventListener('input', update);
+    update();
+
+    // ---------- Gate newsletter ----------
+    function isSubscribed() {
+        try { return localStorage.getItem(GATE_KEY) === 'ok'; }
+        catch (e) { return false; }
+    }
+
+    function generate() {
+        const scelte = selectedMoons();
+        const nome = (nomeInput.value || '').trim();
+        const soprannome = (soprannomeInput.value || '').trim();
+        if (!nome || !scelte.length) return;
+
+        if (!isSubscribed()) {
+            gate.hidden = false;
+            gate.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            return;
+        }
+        // Il PDF lo genera passaporto-pdf.js (esposto su window)
+        if (typeof window.generaPassaportoPDF === 'function') {
+            window.generaPassaportoPDF({ nome: nome, soprannome: soprannome, scelte: scelte });
+        }
+    }
+
+    generaBtn.addEventListener('click', generate);
+
+    gateConfirm.addEventListener('click', () => {
+        try { localStorage.setItem(GATE_KEY, 'ok'); } catch (e) { /* localStorage non disponibile */ }
+        gate.hidden = true;
+        generate();
+    });
+})();

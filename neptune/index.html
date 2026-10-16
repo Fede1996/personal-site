@@ -9,17 +9,20 @@
 
     <!-- Collegamento al file CSS -->
     <link rel="stylesheet" href="../style.css">
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GPJ7HE51SH"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-GPJ7HE51SH');
-</script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GPJ7HE51SH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GPJ7HE51SH');
+    </script>
+</head>
 <body>
+
+    <a class="skip-link" href="#contenuto">Vai al contenuto</a>
 
     <div class="aurora-bg"></div>
 
@@ -28,24 +31,26 @@
             <img src="../Asset/firme.png" class="logo" alt="Federico Gorrino">
             <img src="../Asset/firme-mobile.png" class="logo logo-mobile" alt="Federico Gorrino">
         </div>
-        <nav class="desktop-nav">
+        <nav class="desktop-nav" aria-label="Navigazione principale">
             <a href="#mascotte">Mascotte</a>
             <a href="#lune">Temi</a>
         </nav>
         <div><a href="../" class="amazon-btn home-btn">HOME</a></div>
-        <button class="hamburger" onclick="toggleMenu()">
+        <button class="hamburger" onclick="toggleMenu()" aria-expanded="false" aria-controls="menu-mobile" aria-label="Apri il menu">
             <span></span>
             <span></span>
             <span></span>
         </button>
     </header>
 
-    <nav class="mobile-menu">
-        <button class="close-btn" onclick="toggleMenu()">×</button>
+    <nav class="mobile-menu" id="menu-mobile" aria-label="Menu">
+        <button class="close-btn" onclick="toggleMenu()" aria-label="Chiudi il menu"><span aria-hidden="true">×</span></button>
         <a href="#mascotte">Mascotte</a>
         <a href="#lune">Temi</a>
         <a href="../" class="amazon-btn mobile-home">HOME</a>
     </nav>
+
+    <main id="contenuto">
 
     <section class="hero" id="hero">
         <div class="vertical-line"></div>
@@ -61,7 +66,7 @@
         <div class="book-card reverse">
             <img src="../Asset/Planet forms/NEPTUNE.png" class="book-img" alt="Silen nella forma di Nettuno">
             <div class="book-info">
-                <h2>Silen <img class="mascotte-circle" src="../Asset/circles/neptune.png" alt=""/></h2>
+                <h3>Silen <img class="mascotte-circle" src="../Asset/circles/neptune.png" alt=""/></h3>
                 <p class="desc">La forma di Silen che si tuffa negli abissi dell'ansia.</p>
                 <span>
                     Silen è la specie ancestrale da cui discendono tutti i visitatori del nostro universo. Nella sua forma nettuniana si tuffa negli abissi dell'ansia: le onde di panico, le preoccupazioni senza nome, i silenzi che proteggono. Questa collezione accompagna chi attraversa le acque più profonde, per ricordare che ogni abisso ha una riva.
@@ -80,7 +85,7 @@
         <div class="book-card" id="attacchi-di-panico">
             <img src="../Asset/Collezione 3/attacchi_panico.png" class="book-img" alt="Attacchi di Panico">
             <div class="book-info">
-                <h2>Attacchi di Panico</h2>
+                <h3>Attacchi di Panico</h3>
                 <p class="desc">L'onda che arriva senza preavviso.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -96,7 +101,7 @@
         <div class="book-card reverse" id="disturbo-ansia-generalizzata">
             <img src="../Asset/Collezione 3/disturbo_ansia_generalizzata.png" class="book-img" alt="Disturbo d'Ansia Generalizzata">
             <div class="book-info">
-                <h2>Disturbo d'Ansia Generalizzata</h2>
+                <h3>Disturbo d'Ansia Generalizzata</h3>
                 <p class="desc">La preoccupazione che non trova mai riposo.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -112,7 +117,7 @@
         <div class="book-card" id="disturbo-ossessivo-compulsivo">
             <img src="../Asset/Collezione 3/disturbo_ossessivo_compulsivo.png" class="book-img" alt="Disturbo Ossessivo-Compulsivo">
             <div class="book-info">
-                <h2>Disturbo Ossessivo-Compulsivo</h2>
+                <h3>Disturbo Ossessivo-Compulsivo</h3>
                 <p class="desc">Il pensiero che si ripete per sentirsi al sicuro.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -128,7 +133,7 @@
         <div class="book-card reverse" id="disturbo-ansia-sociale">
             <img src="../Asset/Collezione 3/disturbo_ansia_sociale.png" class="book-img" alt="Disturbo d'Ansia Sociale">
             <div class="book-info">
-                <h2>Disturbo d'Ansia Sociale</h2>
+                <h3>Disturbo d'Ansia Sociale</h3>
                 <p class="desc">Lo sguardo degli altri come un palcoscenico.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -144,7 +149,7 @@
         <div class="book-card" id="mutismo-selettivo">
             <img src="../Asset/Collezione 3/mutismo_selettivo.png" class="book-img" alt="Mutismo Selettivo">
             <div class="book-info">
-                <h2>Mutismo Selettivo</h2>
+                <h3>Mutismo Selettivo</h3>
                 <p class="desc">Il silenzio che protegge una voce.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -160,7 +165,7 @@
         <div class="book-card reverse" id="stress-post-traumatico">
             <img src="../Asset/Collezione 3/ptsd.png" class="book-img" alt="Disturbo da Stress Post-Traumatico">
             <div class="book-info">
-                <h2>Disturbo da Stress Post-Traumatico</h2>
+                <h3>Disturbo da Stress Post-Traumatico</h3>
                 <p class="desc">Quando la tempesta resta, dopo la tempesta.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -189,36 +194,12 @@
         </div>
     </section>
 
+    </main>
+
     <footer>
         UNA VOCE DAL PROFONDO • Federico Gorrino &copy; 2026
     </footer>
 
-    <script>
-        const header = document.querySelector('header');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) { // Se scrolli più di 50px
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        function toggleMenu() {
-            const menu = document.querySelector('.mobile-menu');
-            menu.classList.toggle('open');
-            // Blocca scroll pagina
-            document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : 'auto';
-        }
-
-        // CHIUSURA AUTOMATICA
-        document.querySelectorAll('.mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                const menu = document.querySelector('.mobile-menu');
-                menu.classList.remove('open');
-                document.body.style.overflow = 'auto'; // Ripristina scroll
-            });
-        });
-    </script>
+    <script src="../site.js" defer></script>
 </body>
 </html>

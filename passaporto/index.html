@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il tuo Passaporto Neurodivergente - Una Voce Dal Profondo</title>
+    <meta name="description" content="Crea il tuo passaporto neurodivergente: scegli le lune che parlano di te fra tutti gli otto pianeti, dagli un nome da esploratore e scarica il PDF.">
+    <link rel="icon" type="image/png" href="../Asset/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Collegamento ai file CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="passaporto.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GPJ7HE51SH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GPJ7HE51SH');
+    </script>
+</head>
+<body>
+
+    <a class="skip-link" href="#contenuto">Vai al contenuto</a>
+
+    <div class="aurora-bg"></div>
+
+    <header>
+        <div>
+            <a href="../">
+                <img src="../Asset/firme.png" class="logo" alt="Una Voce Dal Profondo, torna alla home">
+                <img src="../Asset/firme-mobile.png" class="logo logo-mobile" alt="Una Voce Dal Profondo, torna alla home">
+            </a>
+        </div>
+        <nav class="desktop-nav" aria-label="Navigazione principale">
+            <a href="#come-funziona">Come funziona</a>
+            <a href="#crea">Crea</a>
+            <a href="../#esploratori">Esploratori</a>
+        </nav>
+        <div><a href="../" class="amazon-btn home-btn">HOME</a></div>
+        <button class="hamburger" onclick="toggleMenu()" aria-expanded="false" aria-controls="menu-mobile" aria-label="Apri il menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <nav class="mobile-menu" id="menu-mobile" aria-label="Menu">
+        <button class="close-btn" onclick="toggleMenu()" aria-label="Chiudi il menu"><span aria-hidden="true">×</span></button>
+        <a href="#come-funziona">Come funziona</a>
+        <a href="#crea">Crea</a>
+        <a href="../#esploratori">Esploratori</a>
+        <a href="../" class="amazon-btn mobile-home">HOME</a>
+    </nav>
+
+    <main id="contenuto">
+
+    <section class="hero" id="hero">
+        <div class="vertical-line"></div>
+        <h1>Il tuo passaporto<br>neurodivergente</h1>
+        <p class="subtitle">una mappa del cielo che parla <span class="subtitle-white">di te</span>.</p>
+        <div class="vertical-line"></div>
+        <p class="intro">Ogni esploratore porta con sé una mappa del proprio universo interiore. Scegli fra le quarantotto lune degli otto pianeti quelle che ti somigliano, dagli un nome e un nomignolo da esploratore, e costruisci un passaporto da tenere con te.</p>
+    </section>
+
+    <section class="section-cosa-trovi" id="come-funziona">
+        <h2 class="section-title">COME <span class="title-white">FUNZIONA</span></h2>
+        <p class="license-text lead">Tre mosse, come nel resto del nostro universo:</p>
+        <div class="cosa-trovi-grid">
+            <div class="info-card">
+                <h3>1. Datti un nome</h3>
+                <p>Scrivi il tuo nome e, se vuoi, un nomignolo da esploratore. Compaiono sulla copertina del passaporto, e restano solo sul tuo dispositivo.</p>
+            </div>
+            <div class="info-card">
+                <h3>2. Scegli le tue lune</h3>
+                <p>Apri i pianeti e integra solo le neurodivergenze e i temi che ti interessano. Nessuna obbligo, nessuna gerarchia: il passaporto è tuo.</p>
+            </div>
+            <div class="info-card">
+                <h3>3. Scarica il PDF</h3>
+                <p>Una pagina per ogni pianeta scelto, con le lune che hai selezionato. All'ultima pagina c'è il QR del sito: condividilo con chi ami.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-passaporto-builder" id="crea">
+        <h2 class="section-title">CREA IL TUO <span class="title-white">PASSAPORTO</span></h2>
+        <p class="license-text lead">Parti da come vuoi essere chiamato, poi apri i pianeti che ti parlano.</p>
+
+        <form class="passport-form" id="passport-form" novalidate>
+            <div class="identity-fields">
+                <div class="field">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome" maxlength="60" autocomplete="given-name" placeholder="Come vuoi essere chiamato?" required>
+                </div>
+                <div class="field">
+                    <label for="soprannome">Nome da esploratore <span class="field-optional">(facoltativo)</span></label>
+                    <input type="text" id="soprannome" name="soprannome" maxlength="60" placeholder="Es. Stella del Nord">
+                </div>
+            </div>
+
+            <div class="planet-picker" id="planet-picker">
+                <!-- Pannelli per pianeta, generati da passaporto.js -->
+            </div>
+        </form>
+
+        <aside class="passport-preview" id="passport-preview" aria-live="polite">
+            <h3 class="preview-title">Anteprima del passaporto</h3>
+            <p class="preview-identity" id="preview-identity">Il tuo nome comparirà qui.</p>
+            <p class="preview-count" id="preview-count">Nessuna luna selezionata: apri un pianeta e scegli quelle che ti parlano.</p>
+            <ul class="preview-list" id="preview-list"></ul>
+        </aside>
+
+        <div class="generate-row">
+            <button type="button" class="amazon-btn generate-btn" id="genera-pdf" disabled>Genera il PDF</button>
+            <p class="generate-hint" id="generate-hint">Inserisci il nome e scegli almeno una luna per abilitare il download.</p>
+        </div>
+
+        <!-- Gate newsletter: appare al click su "Genera il PDF" -->
+        <section class="newsletter-gate" id="newsletter-gate" hidden>
+            <h3 class="gate-title">Un ultimo passaggio</h3>
+            <p class="license-text">Il passaporto è un regalo: per riceverlo, iscriviti alla newsletter di Una Voce Dal Profondo. Bastano pochi secondi, e resterai aggiornato su libri, storie e nuove lune.</p>
+
+            <div class="gate-frame-wrap">
+                <iframe
+                    class="gate-frame"
+                    title="Modulo di iscrizione alla newsletter"
+                    loading="lazy"
+                    src="https://0b10e469.sibforms.com/serve/MUIFAIguKo3HCSpxspO7aW3tSfFqVj0rgH1V-i9cvXVdmNv8fuBdWN2vPZIsbZwdyiU9dwBzaZV8zv9RRLvWyQyTM8TRV8MCQofAO-VR1VhXJd82_zAoLN71sAIdRdc1SVIaombVQzSodtz2gLOCNwpHNyyuu76vMpRHiwAm-OI3b0UfxJE5z347f9ypEN4gDXtpv83EcVS29VKV"></iframe>
+                <p class="gate-fallback">
+                    <a class="text-link" href="https://0b10e469.sibforms.com/serve/MUIFAIguKo3HCSpxspO7aW3tSfFqVj0rgH1V-i9cvXVdmNv8fuBdWN2vPZIsbZwdyiU9dwBzaZV8zv9RRLvWyQyTM8TRV8MCQofAO-VR1VhXJd82_zAoLN71sAIdRdc1SVIaombVQzSodtz2gLOCNwpHNyyuu76vMpRHiwAm-OI3b0UfxJE5z347f9ypEN4gDXtpv83EcVS29VKV" target="_blank" rel="noopener">Apri il modulo in una nuova scheda</a>
+                </p>
+            </div>
+
+            <button type="button" class="amazon-btn gate-confirm-btn" id="conferma-iscrizione">Ho già fatto l'iscrizione</button>
+            <p class="privacy-note">Iscrivendoti alla newsletter accetti di ricevere aggiornamenti da Una Voce Dal Profondo. Il passaporto resta sul tuo dispositivo: non raccogliamo i dati che inserisci.</p>
+        </section>
+    </section>
+
+    <section class="section-support">
+        <div class="support-box">
+            <h2 class="section-title">INFORMAZIONI E LICENZE</h2>
+            <p class="license-text">Le opere esposte sono tutelate da diritto d'autore. Per collaborazioni, richieste professionali o per consultare il catalogo delle licenze autorizzate, puoi trovarmi qui:</p>
+
+            <div class="btn-group">
+                <a href="mailto:fs.gorrino.pub@gmail.com" class="amazon-btn">Email</a>
+                <a href="https://www.instagram.com/gorrinoreal/" class="amazon-btn">Instagram</a>
+                <a href="https://www.redbubble.com/people/ChicoMaloIta/shop?ref=account-nav-dropdown&collections=4503968" class="amazon-btn">Redbubble (Licenze)</a>
+            </div>
+
+            <p class="legal-note">Ogni riproduzione non autorizzata è vietata.</p>
+        </div>
+    </section>
+
+    </main>
+
+    <footer>
+        UNA VOCE DAL PROFONDO • Federico Gorrino &copy; 2026
+    </footer>
+
+    <!-- Librerie del PDF (CDN, versioni stabili) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+
+    <script src="../site.js" defer></script>
+    <script src="dati-lune.js" defer></script>
+    <script src="passaporto-pdf.js" defer></script>
+    <script src="passaporto.js" defer></script>
+</body>
+</html>

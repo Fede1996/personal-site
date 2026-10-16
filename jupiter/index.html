@@ -9,17 +9,20 @@
 
     <!-- Collegamento al file CSS -->
     <link rel="stylesheet" href="../style.css">
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GPJ7HE51SH"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-GPJ7HE51SH');
-</script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GPJ7HE51SH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GPJ7HE51SH');
+    </script>
+</head>
 <body>
+
+    <a class="skip-link" href="#contenuto">Vai al contenuto</a>
 
     <div class="aurora-bg"></div>
 
@@ -28,24 +31,26 @@
             <img src="../Asset/firme.png" class="logo" alt="Federico Gorrino">
             <img src="../Asset/firme-mobile.png" class="logo logo-mobile" alt="Federico Gorrino">
         </div>
-        <nav class="desktop-nav">
+        <nav class="desktop-nav" aria-label="Navigazione principale">
             <a href="#mascotte">Mascotte</a>
             <a href="#lune">Temi</a>
         </nav>
         <div><a href="../" class="amazon-btn home-btn">HOME</a></div>
-        <button class="hamburger" onclick="toggleMenu()">
+        <button class="hamburger" onclick="toggleMenu()" aria-expanded="false" aria-controls="menu-mobile" aria-label="Apri il menu">
             <span></span>
             <span></span>
             <span></span>
         </button>
     </header>
 
-    <nav class="mobile-menu">
-        <button class="close-btn" onclick="toggleMenu()">×</button>
+    <nav class="mobile-menu" id="menu-mobile" aria-label="Menu">
+        <button class="close-btn" onclick="toggleMenu()" aria-label="Chiudi il menu"><span aria-hidden="true">×</span></button>
         <a href="#mascotte">Mascotte</a>
         <a href="#lune">Temi</a>
         <a href="../" class="amazon-btn mobile-home">HOME</a>
     </nav>
+
+    <main id="contenuto">
 
     <section class="hero" id="hero">
         <div class="vertical-line"></div>
@@ -61,7 +66,7 @@
         <div class="book-card reverse">
             <img src="../Asset/Planet forms/JUPITER.png" class="book-img" alt="Silen nella forma di Giove">
             <div class="book-info">
-                <h2>Silen <img class="mascotte-circle" src="../Asset/circles/jupiter.png" alt=""/></h2>
+                <h3>Silen <img class="mascotte-circle" src="../Asset/circles/jupiter.png" alt=""/></h3>
                 <p class="desc">La forma di Silen che accoglie ogni diversità.</p>
                 <span>
                     Silen è la specie ancestrale da cui discendono tutti i visitatori del nostro universo. Nella sua forma giovana si fa grande quanto basta per contenere tutte le diversità del neurosviluppo: la comunicazione che cambia forma, l'attenzione che corre, il corpo che parla prima del pensiero. Una raccolta dedicata alla neurodivergenza in tutte le sue sfumature, da accogliere con meraviglia e rispetto.
@@ -80,7 +85,7 @@
         <div class="book-card" id="autismo-livello-1">
             <img src="../Asset/Collezione 1/autismo_lv1.png" class="book-img" alt="Autismo Livello 1">
             <div class="book-info">
-                <h2>Autismo Livello 1</h2>
+                <h3>Autismo Livello 1</h3>
                 <p class="desc">Il mondo si sente troppo, e si capisce in modo unico.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -96,7 +101,7 @@
         <div class="book-card reverse" id="autismo-livello-2">
             <img src="../Asset/Collezione 1/autismo_lv2.png" class="book-img" alt="Autismo Livello 2">
             <div class="book-info">
-                <h2>Autismo Livello 2</h2>
+                <h3>Autismo Livello 2</h3>
                 <p class="desc">Un bisogno di chiarezza in un mondo confuso.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -112,7 +117,7 @@
         <div class="book-card" id="autismo-livello-3">
             <img src="../Asset/Collezione 1/autismo_lv3.png" class="book-img" alt="Autismo Livello 3">
             <div class="book-info">
-                <h2>Autismo Livello 3</h2>
+                <h3>Autismo Livello 3</h3>
                 <p class="desc">Comunicare oltre le parole.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -128,7 +133,7 @@
         <div class="book-card reverse" id="sindrome-di-tourette">
             <img src="../Asset/Collezione 1/sindrome_tourette.png" class="book-img" alt="Sindrome di Tourette">
             <div class="book-info">
-                <h2>Sindrome di Tourette</h2>
+                <h3>Sindrome di Tourette</h3>
                 <p class="desc">Il corpo che parla prima del pensiero.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -144,11 +149,11 @@
         <div class="book-card" id="adhd">
             <img src="../Asset/Collezione 1/adhd.png" class="book-img" alt="ADHD">
             <div class="book-info">
-                <h2>ADHD</h2>
+                <h3>ADHD</h3>
                 <p class="desc">L'attenzione che non sta ferma, ma sa dove andare.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
-                    <p>L'ADHD, il disturbo da deficit di attenzione/iperattività, è una condizione neurosviluppiva che rende difficile regolare attenzione, impulsività e livello di attività. Non è pigrizia: il cervello organizza le priorità in modo diverso, e struttura, strategie e a volte farmaci fanno la differenza.</p>
+                    <p>L'ADHD — in clinica, disturbo da deficit di attenzione/iperattività — è una condizione neurosviluppativa che rende difficile regolare attenzione, impulsività e livello di attività. Non è pigrizia: il cervello organizza le priorità in modo diverso, e struttura, strategie e a volte farmaci fanno la differenza.</p>
                 </div>
                 <div class="luna-racconto"><span class="voce-label">La luna racconta</span><span>
                     L'ADHD porta energia, slancio e pensieri che corrono più veloci delle parole. Silen celebra questa velocità interiore, e la capacità di trasformarla in creatività quando trova il canale giusto.
@@ -160,7 +165,7 @@
         <div class="book-card reverse" id="alessitimia">
             <img src="../Asset/Collezione 1/alessitimia.png" class="book-img" alt="Alessitimia">
             <div class="book-info">
-                <h2>Alessitimia</h2>
+                <h3>Alessitimia</h3>
                 <p class="desc">Emozioni che chiedono un nome.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -189,36 +194,12 @@
         </div>
     </section>
 
+    </main>
+
     <footer>
         UNA VOCE DAL PROFONDO • Federico Gorrino &copy; 2026
     </footer>
 
-    <script>
-        const header = document.querySelector('header');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) { // Se scrolli più di 50px
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        function toggleMenu() {
-            const menu = document.querySelector('.mobile-menu');
-            menu.classList.toggle('open');
-            // Blocca scroll pagina
-            document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : 'auto';
-        }
-
-        // CHIUSURA AUTOMATICA
-        document.querySelectorAll('.mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                const menu = document.querySelector('.mobile-menu');
-                menu.classList.remove('open');
-                document.body.style.overflow = 'auto'; // Ripristina scroll
-            });
-        });
-    </script>
+    <script src="../site.js" defer></script>
 </body>
 </html>

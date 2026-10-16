@@ -9,17 +9,20 @@
 
     <!-- Collegamento al file CSS -->
     <link rel="stylesheet" href="../style.css">
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GPJ7HE51SH"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-GPJ7HE51SH');
-</script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GPJ7HE51SH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GPJ7HE51SH');
+    </script>
+</head>
 <body>
+
+    <a class="skip-link" href="#contenuto">Vai al contenuto</a>
 
     <div class="aurora-bg"></div>
 
@@ -28,24 +31,26 @@
             <img src="../Asset/firme.png" class="logo" alt="Federico Gorrino">
             <img src="../Asset/firme-mobile.png" class="logo logo-mobile" alt="Federico Gorrino">
         </div>
-        <nav class="desktop-nav">
+        <nav class="desktop-nav" aria-label="Navigazione principale">
             <a href="#mascotte">Mascotte</a>
             <a href="#lune">Temi</a>
         </nav>
         <div><a href="../" class="amazon-btn home-btn">HOME</a></div>
-        <button class="hamburger" onclick="toggleMenu()">
+        <button class="hamburger" onclick="toggleMenu()" aria-expanded="false" aria-controls="menu-mobile" aria-label="Apri il menu">
             <span></span>
             <span></span>
             <span></span>
         </button>
     </header>
 
-    <nav class="mobile-menu">
-        <button class="close-btn" onclick="toggleMenu()">×</button>
+    <nav class="mobile-menu" id="menu-mobile" aria-label="Menu">
+        <button class="close-btn" onclick="toggleMenu()" aria-label="Chiudi il menu"><span aria-hidden="true">×</span></button>
         <a href="#mascotte">Mascotte</a>
         <a href="#lune">Temi</a>
         <a href="../" class="amazon-btn mobile-home">HOME</a>
     </nav>
+
+    <main id="contenuto">
 
     <section class="hero" id="hero">
         <div class="vertical-line"></div>
@@ -61,7 +66,7 @@
         <div class="book-card reverse">
             <img src="../Asset/Planet forms/URANUS.png" class="book-img" alt="Silen nella forma di Urano">
             <div class="book-info">
-                <h2>Silen <img class="mascotte-circle" src="../Asset/circles/uranus.png" alt=""/></h2>
+                <h3>Silen <img class="mascotte-circle" src="../Asset/circles/uranus.png" alt=""/></h3>
                 <p class="desc">La forma di Silen che attraversa le tempeste del sistema nervoso.</p>
                 <span>
                     Silen è la specie ancestrale da cui discendono tutti i visitatori del nostro universo. Nella sua forma uraniana attraversa le tempeste elettriche del sistema nervoso: le parole che smarriscono la strada, il dolore che torna, i fulmini che scuotono il corpo. Questo percorso accompagna chi impara a convivere con l'imprevisto e a ritrovare, ogni volta, la propria orbita.
@@ -80,7 +85,7 @@
         <div class="book-card" id="afasia">
             <img src="../Asset/Collezione 6/afasia.png" class="book-img" alt="Afasia">
             <div class="book-info">
-                <h2>Afasia</h2>
+                <h3>Afasia</h3>
                 <p class="desc">Le parole smarriscono la strada.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -96,7 +101,7 @@
         <div class="book-card reverse" id="emicrania-cronica">
             <img src="../Asset/Collezione 6/emicrania_cronica.png" class="book-img" alt="Emicrania Cronica">
             <div class="book-info">
-                <h2>Emicrania Cronica</h2>
+                <h3>Emicrania Cronica</h3>
                 <p class="desc">Un dolore che torna, e insegna il rispetto dei propri limiti.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -112,7 +117,7 @@
         <div class="book-card" id="epilessia">
             <img src="../Asset/Collezione 6/epilessia.png" class="book-img" alt="Epilessia">
             <div class="book-info">
-                <h2>Epilessia</h2>
+                <h3>Epilessia</h3>
                 <p class="desc">La tempesta elettrica che attraversa il cervello.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -128,7 +133,7 @@
         <div class="book-card reverse" id="malattia-di-parkinson">
             <img src="../Asset/Collezione 6/malattia_parkinson.png" class="book-img" alt="Malattia di Parkinson">
             <div class="book-info">
-                <h2>Malattia di Parkinson</h2>
+                <h3>Malattia di Parkinson</h3>
                 <p class="desc">Il tempo che rallenta il gesto.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -144,7 +149,7 @@
         <div class="book-card" id="sclerosi-multipla">
             <img src="../Asset/Collezione 6/sclerosi_multipla.png" class="book-img" alt="Sclerosi Multipla">
             <div class="book-info">
-                <h2>Sclerosi Multipla</h2>
+                <h3>Sclerosi Multipla</h3>
                 <p class="desc">Un corpo che cambia le proprie mappe.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -160,7 +165,7 @@
         <div class="book-card reverse" id="sla">
             <img src="../Asset/Collezione 6/sla.png" class="book-img" alt="Sclerosi Laterale Amiotrofica (SLA)">
             <div class="book-info">
-                <h2>Sclerosi Laterale Amiotrofica (SLA)</h2>
+                <h3>Sclerosi Laterale Amiotrofica (SLA)</h3>
                 <p class="desc">Quando il movimento si fa silenzio.</p>
                 <div class="cos-e">
                     <span class="voce-label">Cos'è</span>
@@ -189,36 +194,12 @@
         </div>
     </section>
 
+    </main>
+
     <footer>
         UNA VOCE DAL PROFONDO • Federico Gorrino &copy; 2026
     </footer>
 
-    <script>
-        const header = document.querySelector('header');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) { // Se scrolli più di 50px
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        function toggleMenu() {
-            const menu = document.querySelector('.mobile-menu');
-            menu.classList.toggle('open');
-            // Blocca scroll pagina
-            document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : 'auto';
-        }
-
-        // CHIUSURA AUTOMATICA
-        document.querySelectorAll('.mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                const menu = document.querySelector('.mobile-menu');
-                menu.classList.remove('open');
-                document.body.style.overflow = 'auto'; // Ripristina scroll
-            });
-        });
-    </script>
+    <script src="../site.js" defer></script>
 </body>
 </html>
