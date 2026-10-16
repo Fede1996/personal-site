@@ -29,6 +29,17 @@
     max-width: 720px;
     margin: 0 auto 40px;
 }
+.field {
+    display: flex;
+    flex-direction: column;
+    /* Le due caselle devono restare allineate anche quando una delle due
+       etichette va a capo (capita con "Nome da esploratore (facoltativo)",
+       che è più lungo). Le celle della griglia hanno la stessa altezza:
+       così la coppia etichetta + casella resta unita e si appoggia in
+       basso, con lo stacco uguale per entrambi i campi. Dove le due
+       etichette occupano la stessa riga, non cambia nulla. */
+    justify-content: flex-end;
+}
 .field label {
     display: block;
     font-family: var(--sans);
