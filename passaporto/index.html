@@ -112,6 +112,14 @@
         <div class="generate-row">
             <button type="button" class="amazon-btn generate-btn" id="genera-pdf" disabled>Genera il PDF</button>
             <p class="generate-hint" id="generate-hint">Inserisci il nome e scegli almeno una luna per abilitare il download.</p>
+
+            <!-- Avanzamento: appare durante la generazione del PDF -->
+            <div class="avanzamento" id="avanzamento" hidden>
+                <div class="progress-bar" role="progressbar" aria-label="Avanzamento della generazione del passaporto">
+                    <div class="progress-fill" id="avanzamento-fill"></div>
+                </div>
+                <p class="avanzamento-testo" id="avanzamento-testo" aria-live="polite"></p>
+            </div>
         </div>
 
         <!-- Gate newsletter: appare al click su "Genera il PDF".

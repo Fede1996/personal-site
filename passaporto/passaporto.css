@@ -285,6 +285,60 @@
     transform: none;
     box-shadow: none;
 }
+/* Durante la generazione il pulsante è vivo: gira lo spinner */
+.generate-btn.in-corso {
+    opacity: 1;
+    cursor: progress;
+}
+.spinner {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-right: 0.5em;
+    vertical-align: -0.12em;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: giro-spinner 0.75s linear infinite;
+}
+@keyframes giro-spinner {
+    to { transform: rotate(360deg); }
+}
+
+/* ============ AVANZAMENTO ============ */
+.avanzamento {
+    max-width: 420px;
+    margin: 18px auto 0;
+}
+.progress-bar {
+    height: 10px;
+    background: rgba(96, 43, 160, 0.18);
+    border-radius: 999px;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--viola);
+    border-radius: 999px;
+    transition: width 0.35s ease;
+}
+.avanzamento-testo {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    color: var(--viola);
+    margin-top: 10px;
+}
+
+/* Chi preferisce meno animazioni: niente giro, niente scorrimento barra */
+@media (prefers-reduced-motion: reduce) {
+    .spinner {
+        animation: none;
+        border-right-color: currentColor;
+        opacity: 0.55;
+    }
+    .progress-fill { transition: none; }
+}
 .generate-hint {
     font-family: var(--sans);
     font-size: 0.9rem;

@@ -16,6 +16,9 @@
     const previewList = document.getElementById('preview-list');
     const generaBtn = document.getElementById('genera-pdf');
     const generateHint = document.getElementById('generate-hint');
+    const avanzamento = document.getElementById('avanzamento');
+    const avanzFill = document.getElementById('avanzamento-fill');
+    const avanzTesto = document.getElementById('avanzamento-testo');
     const gate = document.getElementById('newsletter-gate');
     const gateConfirm = document.getElementById('conferma-iscrizione');
 
@@ -199,6 +202,16 @@
         }
     }
 
+    // Barra di avanzamento della generazione: mostra che la pagina lavora.
+    function aggiornaAvanzamento(etichetta, fatti, totale) {
+        if (!avanzamento) return;
+        const perc = totale > 0 ? Math.round((fatti / totale) * 100) : 0;
+        if (avanzFill) avanzFill.style.width = perc + '%';
+        if (avanzTesto) {
+            avanzTesto.textContent = etichetta + (totale > 1 ? '  (' + fatti + ' di ' + totale + ')' : '');
+        }
+    }
+
     async function generate() {
         const scelte = selectedMoons();
         const nome = (nomeInput.value || '').trim();
@@ -235,13 +248,22 @@
 
         // Stato "in lavorazione": con tutte le lune selezionate la
         // generazione richiede qualche secondo, e senza un segnale visibile
-        // sembra tutto bloccato.
-        const etichetta = generaBtn.textContent;
+        // sembra tutto bloccato. Qui spinner + barra di avanzamento.
+        const etichetta = generaBtn.dataset.etichettaOrigine || generaBtn.textContent;
+        generaBtn.dataset.etichettaOrigine = etichetta;
         generaBtn.disabled = true;
-        generaBtn.textContent = 'Generazione in corso…';
-        messaggio('Sto componendo il tuo passaporto: attendi qualche secondo.', 'info');
+        generaBtn.classList.add('in-corso');
+        generaBtn.innerHTML = '<span class="spinner" aria-hidden="true"></span>Generazione in corso…';
+        avanzamento.hidden = false;
+        aggiornaAvanzamento('Preparo il tuo passaporto…', 0, 1);
+        messaggio('Qualche secondo e il PDF è pronto.', 'info');
+
         try {
-            await window.generaPassaportoPDF({ nome: nome, soprannome: soprannome, scelte: scelte });
+            await window.generaPassaportoPDF(
+                { nome: nome, soprannome: soprannome, scelte: scelte },
+                (p) => aggiornaAvanzamento(p.etichetta, p.fatti, p.totale)
+            );
+            aggiornaAvanzamento('Fatto!', 1, 1);
             messaggio('Fatto! Il passaporto è stato scaricato: controlla la cartella dei download.', 'info');
             return true;
         } catch (e) {
@@ -249,7 +271,10 @@
             return false;
         } finally {
             generaBtn.disabled = false;
+            generaBtn.classList.remove('in-corso');
             generaBtn.textContent = etichetta;
+            // la barra resta un attimo sul risultato, poi si richiude
+            setTimeout(() => { avanzamento.hidden = true; }, 2500);
             update();
         }
     }

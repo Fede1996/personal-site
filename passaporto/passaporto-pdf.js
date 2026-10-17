@@ -283,7 +283,14 @@
     }
 
     // ---------- Orchestrazione ----------
-    async function generaPassaportoPDF(dati) {
+    // onProgress (facoltativo) riceve { etichetta, fatti, totale }: serve
+    // alla pagina per mostrare che il lavoro sta procedendo.
+    async function generaPassaportoPDF(dati, onProgress) {
+        const avanza = (etichetta, fatti, totale) => {
+            if (typeof onProgress === 'function') {
+                try { onProgress({ etichetta, fatti, totale }); } catch (e) { /* mai fatale */ }
+            }
+        };
         if (typeof window.jspdf === 'undefined' || typeof window.qrcode === 'undefined') {
             throw new Error('Le librerie del PDF non sono ancora caricate: riprova tra un attimo.');
         }
@@ -295,23 +302,37 @@
         const elenco = dati.scelte.flatMap(gruppo =>
             gruppo.lune.map(luna => ({ chiave: gruppo.pianeta.slug + '/' + luna.id, src: luna.icona }))
         );
+        avanza('Preparo le immagini delle lune…', 0, elenco.length);
         for (let i = 0; i < elenco.length; i += 8) {
             await Promise.all(elenco.slice(i, i + 8).map(async voce => {
                 const img = await caricaImmagine(voce.src);
                 if (img) immagini[voce.chiave] = img;
             }));
+            avanza('Preparo le immagini delle lune…', Math.min(i + 8, elenco.length), elenco.length);
             await respiro();
         }
 
+        // Copertina, una pagina per pianeta, chiusura con il QR
+        const totalePagine = 1 + dati.scelte.length + 1;
+        let pagina = 0;
+
         paginaCopertina(doc, dati);
+        pagina++;
+        avanza('La copertina è pronta…', pagina, totalePagine);
         await respiro();
+
         for (const gruppo of dati.scelte) {
             doc.addPage();
             paginaPianeta(doc, gruppo, immagini);
+            pagina++;
+            avanza('Compongo ' + gruppo.pianeta.nome + '…', pagina, totalePagine);
             await respiro();
         }
+
         doc.addPage();
         paginaQr(doc);
+        pagina++;
+        avanza('Aggiungo il QR e chiudo…', pagina, totalePagine);
 
         const slug = (dati.nome || 'passaporto')
             .toLowerCase()
@@ -320,6 +341,7 @@
             .replace(/[^a-z0-9]+/g, '-')
             .replace(/^-|-$/g, '');
         doc.save('passaporto-neurodivergente-' + (slug || 'esploratore') + '.pdf');
+        avanza('Fatto!', totalePagine, totalePagine);
     }
 
     window.generaPassaportoPDF = generaPassaportoPDF;
