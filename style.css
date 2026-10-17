@@ -944,6 +944,44 @@ footer {
     margin-top: 20px;
     color: var(--inchiostro);
 }
+
+/* ============ MAILING LIST (in Informazioni e licenze) ============ */
+.mailing-block {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(96, 43, 160, 0.18);
+}
+.mailing-title {
+    font-family: var(--sans);
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+/* selettori più specifici di .support-box p, che alzerebbe il corpo del testo */
+.support-box p.mailing-lead {
+    font-family: var(--serif);
+    font-size: 1rem;
+    max-width: 520px;
+    margin: 0 auto 22px;
+}
+.mailing-frame {
+    width: 100%;
+    max-width: 560px;
+    height: 620px;
+    border: 1px solid rgba(96, 43, 160, 0.2);
+    border-radius: 12px;
+    background: #fff;
+}
+.support-box p.mailing-fallback {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    margin-top: 12px;
+    margin-bottom: 0;
+}
+@media (max-width: 850px) {
+    .mailing-frame { height: 720px; }
+}
 .license-text + .license-text { margin-top: 0; }
 
 /* ============ RESPONSIVE ============ */
