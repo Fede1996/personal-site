@@ -230,13 +230,8 @@
 
         if (!isSubscribed()) {
             gate.hidden = false;
-            // L'iframe del form parte senza src: un iframe lazy dentro un
-            // contenitore hidden non carica mai nemmeno dopo lo show. Qui,
-            // quando il gate diventa visibile, assegniamo il src una volta.
-            const iframe = gate.querySelector('#gate-frame');
-            if (iframe && !iframe.src && iframe.dataset.src) {
-                iframe.src = iframe.dataset.src;
-            }
+            // Il form del gate è HTML in pagina (non più iframe): si vede
+            // subito, senza assegnare alcun src.
             gate.scrollIntoView({ behavior: 'smooth', block: 'start' });
             return false;
         }

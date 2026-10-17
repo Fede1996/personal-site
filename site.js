@@ -108,6 +108,71 @@
         });
     }
 
+    // ---------- Torna su ----------
+    const backToTop = document.querySelector('.back-to-top');
+    if (backToTop) {
+        const aggiornaTornaSu = () => {
+            backToTop.classList.toggle('visibile', window.scrollY > 400);
+        };
+        window.addEventListener('scroll', aggiornaTornaSu, { passive: true });
+        aggiornaTornaSu();
+        backToTop.addEventListener('click', () => {
+            // scroll istantaneo per chi ha disattivato le animazioni
+            const soft = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.scrollTo({ top: 0, behavior: soft ? 'smooth' : 'auto' });
+        });
+    }
+
+    // ---------- Form Brevo incorporato ----------
+    // Il form non è più un iframe (sul quale il CSS del sito non può agire):
+    // è HTML in pagina e viene inviato in AJAX allo stesso endpoint che usava
+    // lo script di Brevo — POST a /serve/…?isAjax=1, risposta JSON.
+    document.querySelectorAll('form.brevo-form').forEach((form) => {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const msg = form.querySelector('.brevo-messaggio');
+            const btn = form.querySelector('.brevo-submit');
+            const hp = form.querySelector('input[name="email_address_check"]');
+
+            function mostra(tipo, testo) {
+                if (!msg) return;
+                msg.hidden = false;
+                msg.dataset.tipo = tipo;
+                msg.textContent = testo;
+            }
+
+            // Honeypot compilato: è un bot. Fingo il successo e non invio nulla.
+            if (hp && hp.value) {
+                mostra('ok', 'La tua iscrizione è andata a buon fine.');
+                return;
+            }
+
+            if (btn) btn.disabled = true;
+            try {
+                const res = await fetch(form.action + '?isAjax=1', {
+                    method: 'POST',
+                    body: new FormData(form),
+                });
+                const data = await res.json();
+                if (data.redirect) {
+                    window.top.location.replace(data.redirect);
+                    return;
+                }
+                if (data.success) {
+                    mostra('ok', data.message || 'La tua iscrizione è andata a buon fine.');
+                    form.reset();
+                } else {
+                    const erroreCampo = data.errors && Object.values(data.errors)[0];
+                    mostra('errore', erroreCampo || data.message || 'La tua iscrizione non è andata a buon fine. Riprova.');
+                }
+            } catch (err) {
+                mostra('errore', 'La tua iscrizione non è andata a buon fine. Riprova.');
+            } finally {
+                if (btn) btn.disabled = false;
+            }
+        });
+    });
+
     // ---------- Flip-card (solo homepage) ----------
     // Pattern disclosure: un pulsante sul fronte apre il retro, che contiene
     // i link dei temi. I due pulsanti stanno fuori dalle facce animate, così

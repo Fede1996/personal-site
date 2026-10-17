@@ -369,29 +369,8 @@
     letter-spacing: 2px;
     margin-bottom: 16px;
 }
-.gate-primary { margin: 26px 0 10px; }
-.gate-primary .amazon-btn {
-    display: inline-block;
-    text-decoration: none;
-    font-size: 1.05rem;
-    padding: 15px 30px;
-}
-.gate-primary-hint {
-    display: block;
-    margin-top: 12px;
-    font-family: var(--sans);
-    font-size: 0.9rem;
-    color: var(--viola);
-}
 .gate-frame-wrap { margin: 26px 0; }
-.gate-frame {
-    width: 100%;
-    max-width: 560px;
-    height: 620px;
-    border: 1px solid rgba(96, 43, 160, 0.2);
-    border-radius: 12px;
-    background: #fff;
-}
+.gate-frame-wrap .brevo-form { text-align: left; }
 .gate-fallback { margin-top: 12px; font-family: var(--sans); font-size: 0.95rem; }
 .gate-confirm-btn { margin-top: 8px; }
 .privacy-note {
@@ -422,5 +401,4 @@
 @media (max-width: 850px) {
     .planet-count { margin-left: 0; width: 100%; }
     .moon-choice img { width: 32px; height: 32px; }
-    .gate-frame { height: 720px; }
 }

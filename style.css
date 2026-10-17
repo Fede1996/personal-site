@@ -108,15 +108,18 @@ header.scrolled {
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 30px;
+    /* gap ridotto: con 6 voci il menu centrato arrivava fin sotto la firma */
+    gap: 16px;
 }
 .desktop-nav a,
 nav a {
     text-decoration: none;
     color: var(--inchiostro);
-    font-size: 0.75rem;
+    /* corpo e interlettera ridotti: la barra centrata non deve più
+       accavallarsi con il logo a sinistra */
+    font-size: 0.65rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1.2px;
     font-weight: 600;
     transition: opacity 0.3s;
 }
@@ -965,13 +968,112 @@ footer {
     max-width: 520px;
     margin: 0 auto 22px;
 }
-.mailing-frame {
+
+/* Form Brevo incorporato (prima era un iframe, dentro il quale il CSS
+   del sito non può entrare). Qui il form usa i colori e i font del sito. */
+.brevo-form {
     width: 100%;
     max-width: 560px;
-    height: 620px;
-    border: 1px solid rgba(96, 43, 160, 0.2);
+    margin: 0 auto;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(96, 43, 160, 0.18);
     border-radius: 12px;
-    background: #fff;
+    padding: clamp(22px, 4vw, 32px);
+}
+.brevo-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.brevo-label {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--inchiostro);
+}
+.brevo-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 16px;
+    border: 1px solid rgba(96, 43, 160, 0.3);
+    border-radius: 8px;
+    background: var(--crema);
+    color: var(--inchiostro);
+    font-family: var(--sans);
+    font-size: 1rem;
+}
+.brevo-input::placeholder { color: rgba(33, 21, 51, 0.45); }
+.brevo-input:focus-visible {
+    outline: 2px solid var(--viola);
+    outline-offset: 2px;
+}
+.brevo-optin {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    cursor: pointer;
+}
+.brevo-optin input {
+    margin-top: 4px;
+    width: 17px;
+    height: 17px;
+    accent-color: var(--viola);
+    flex-shrink: 0;
+}
+/* più specifico di .support-box p (font-size 1.5rem) */
+.brevo-form p.brevo-decl {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    line-height: 1.55;
+    color: #5a4778;
+    margin: 0;
+}
+.brevo-form p.brevo-decl a { color: var(--viola); }
+.brevo-submit {
+    align-self: flex-start;
+    border: none;
+    cursor: pointer;
+    font-size: 0.85rem;
+    padding: 13px 30px;
+}
+.brevo-submit:disabled {
+    opacity: 0.6;
+    cursor: wait;
+    transform: none;
+}
+/* Esito dell'iscrizione (al posto dei pannelli che c'erano nell'iframe) */
+.brevo-messaggio {
+    margin: 0;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+.brevo-messaggio[data-tipo="ok"] {
+    background: #e7faf0;
+    color: #085229;
+    border: 1px solid #13ce66;
+}
+.brevo-messaggio[data-tipo="errore"] {
+    background: #ffeded;
+    color: #661d1d;
+    border: 1px solid #ff4949;
+}
+/* Honeypot anti-spam: fuori schermo, ma presente nel POST */
+.brevo-hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
 }
 .support-box p.mailing-fallback {
     font-family: var(--sans);
@@ -979,21 +1081,21 @@ footer {
     margin-top: 12px;
     margin-bottom: 0;
 }
-@media (max-width: 850px) {
-    .mailing-frame { height: 720px; }
-}
 .license-text + .license-text { margin-top: 0; }
 
 /* ============ RESPONSIVE ============ */
-@media (max-width: 1050px) {
+/* La firma larga (214px a h=30) lascia poco spazio al menu centrato:
+   sotto i 1200px si passa alla versione compatta */
+@media (max-width: 1200px) {
     .logo { display: none; }
     .logo-mobile { display: block; }
-    .home-btn { display: none; }
 }
 @media (max-width: 850px) {
     header, header.scrolled { padding: 20px; }
     .desktop-nav { display: none; }
     .hamburger { display: flex; }
+    /* HOME vive nel menu hamburger sotto gli 850px */
+    .home-btn { display: none; }
     .grid-container { grid-template-columns: 1fr; }
     .flip-card { height: min(550px, 145vw); }
     .book-card, .book-card.reverse {
@@ -1034,6 +1136,40 @@ footer {
     .moon-chip span { font-size: 0.8rem; }
     .support-box p { font-size: 1.15rem; }
 }
+
+/* ============ TORNA SU ============ */
+.back-to-top {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 9000;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: var(--viola);
+    color: var(--crema);
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(33, 21, 51, 0.3);
+    /* invisibile finché non si scorre: visibility toglie il pulsante dal
+       tab order mentre è nascosto, opacity fa solo la dissolvenza */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
+    transform: translateY(8px);
+}
+.back-to-top.visibile {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0s;
+}
+.back-to-top:hover { background: var(--crema); color: var(--viola); }
+.back-to-top svg { width: 20px; height: 20px; display: block; }
 
 /* ============ ACCESSIBILITÀ ============ */
 
@@ -1106,6 +1242,7 @@ footer {
 .text-link:focus-visible,
 .hamburger:focus-visible,
 .close-btn:focus-visible,
+.back-to-top:focus-visible,
 .flip-close:focus-visible {
     outline: 2px solid var(--viola);
     outline-offset: 3px;
@@ -1141,6 +1278,7 @@ footer {
     .mobile-menu { transition: none; }
     .amazon-btn, .moon-chip, .text-link { transition: none; }
     .amazon-btn:hover, .moon-chip:hover { transform: none; }
+    .back-to-top { transition: none; }
 }
 
 /* ============ ANIMAZIONI ============ */
