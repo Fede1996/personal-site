@@ -14,13 +14,54 @@
     const GRIGIO = [90, 71, 120];
 
     // ---------- Utilità ----------
+    // Le icone originali pesano centinaia di KB l'una (34 MB in tutto) e
+    // finirebbero nel PDF a piena risoluzione: su un telefono la
+    // generazione restava bloccata per decine di secondi. Le riduciamo qui
+    // a una misura più che sufficiente (nel PDF sono ~22 mm) e passiamo a
+    // jsPDF il risultato, non l'originale.
+    const LATO_ICONA = 128;
+
     function caricaImmagine(src) {
         return new Promise(resolve => {
             const img = new Image();
-            img.onload = () => resolve(img);
+            img.onload = () => {
+                try {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = canvas.height = LATO_ICONA;
+                    const ctx = canvas.getContext('2d');
+                    // La qualità "high" del ridimensionamento viene calcolata
+                    // al momento della codifica e costa oltre 200 ms per icona:
+                    // con quarantotto lune era questo a bloccare la pagina.
+                    // Con "medium" il risultato è identico a occhio e costa
+                    // meno di un millisecondo.
+                    ctx.imageSmoothingQuality = 'medium';
+                    // Sfondo come la pagina del PDF: se l'icona ha angoli
+                    // trasparenti non resta un quadrato bianco.
+                    ctx.fillStyle = '#f7e7d4';
+                    ctx.fillRect(0, 0, LATO_ICONA, LATO_ICONA);
+                    // Mantiene le proporzioni e centra, senza deformare
+                    const l = Math.max(img.naturalWidth, img.naturalHeight) || 1;
+                    const s = LATO_ICONA / l;
+                    const w = img.naturalWidth * s;
+                    const h = img.naturalHeight * s;
+                    ctx.drawImage(img, (LATO_ICONA - w) / 2, (LATO_ICONA - h) / 2, w, h);
+                    // JPEG invece di PNG: la codifica PNG di quarantotto
+                    // immagini era ciò che bloccava il telefono. Lo sfondo
+                    // crema disegnato sopra fa sparire i bordi.
+                    resolve(canvas.toDataURL('image/jpeg', 0.85));
+                } catch (e) {
+                    resolve(null);
+                }
+            };
             img.onerror = () => resolve(null);
             img.src = src;
         });
+    }
+
+    // Lascia respirare l'interfaccia fra una pagina e l'altra: senza questo
+    // respiro il browser resta occupato e sembra bloccato.
+    function respiro() {
+        return new Promise(r => setTimeout(r, 0));
     }
 
     function qrPngDataUrl(testo) {
@@ -158,7 +199,7 @@
             const iconaR = 11;
             if (img) {
                 try {
-                    doc.addImage(img, 'PNG', iconaX, iconaY, iconaR * 2, iconaR * 2);
+                    doc.addImage(img, 'JPEG', iconaX, iconaY, iconaR * 2, iconaR * 2);
                 } catch (e) {
                     imgFallback(doc, iconaX, iconaY, iconaR, luna.nome);
                 }
@@ -244,26 +285,31 @@
     // ---------- Orchestrazione ----------
     async function generaPassaportoPDF(dati) {
         if (typeof window.jspdf === 'undefined' || typeof window.qrcode === 'undefined') {
-            alert('Le librerie del PDF non sono ancora caricate: riprova tra un attimo.');
-            return;
+            throw new Error('Le librerie del PDF non sono ancora caricate: riprova tra un attimo.');
         }
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
 
-        // Precarica le icone delle lune selezionate
+        // Riduce le icone delle lune selezionate, un po' alla volta
         const immagini = {};
-        await Promise.all(dati.scelte.flatMap(gruppo =>
-            gruppo.lune.map(async luna => {
-                const img = await caricaImmagine(luna.icona);
-                if (img) immagini[gruppo.pianeta.slug + '/' + luna.id] = img;
-            })
-        ));
+        const elenco = dati.scelte.flatMap(gruppo =>
+            gruppo.lune.map(luna => ({ chiave: gruppo.pianeta.slug + '/' + luna.id, src: luna.icona }))
+        );
+        for (let i = 0; i < elenco.length; i += 8) {
+            await Promise.all(elenco.slice(i, i + 8).map(async voce => {
+                const img = await caricaImmagine(voce.src);
+                if (img) immagini[voce.chiave] = img;
+            }));
+            await respiro();
+        }
 
         paginaCopertina(doc, dati);
-        dati.scelte.forEach(gruppo => {
+        await respiro();
+        for (const gruppo of dati.scelte) {
             doc.addPage();
             paginaPianeta(doc, gruppo, immagini);
-        });
+            await respiro();
+        }
         doc.addPage();
         paginaQr(doc);
 

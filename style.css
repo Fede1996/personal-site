@@ -80,7 +80,11 @@ header {
     padding: 20px 60px;
     position: fixed;
     top: 0;
-    width: 100%;
+    /* left/right invece di width: 100%: resta ancorato a tutta la finestra
+       anche quando c'è uno scroll orizzontale o una barra di scorrimento,
+       e non lascia mai un lembo scoperto ai lati */
+    left: 0;
+    right: 0;
     z-index: 9999;
     transition: all 0.3s ease;
     background: transparent;
@@ -214,6 +218,10 @@ nav a:hover { opacity: 0.6; }
     text-transform: uppercase;
     letter-spacing: 4px;
     margin-bottom: 10px;
+    /* Le parole lunghe ("NEURODIVERGENTE") altrimenti escono dalla finestra
+       e la pagina scrolla in orizzontale oltre il 100vw */
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 .hero p.subtitle {
     font-family: var(--serif);

@@ -24,23 +24,25 @@
 .passport-form { margin-top: 10px; }
 .identity-fields {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 22px;
+    /* Grid a due righe, come una tabella: la prima riga è delle etichette,
+       la seconda delle caselle. Restano allineate anche quando un'etichetta
+       va a capo — succede con "Nome da esploratore (facoltativo)", che è
+       più lungo di "Nome". */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 22px;
+    row-gap: 10px;
     max-width: 720px;
     margin: 0 auto 40px;
 }
+/* display: contents salta il contenitore .field (un semplice div: non si
+   perde nulla di semantico) e fa di etichette e caselle voci dirette della
+   griglia: etichette in riga 1, caselle in riga 2. */
 .field {
-    display: flex;
-    flex-direction: column;
-    /* Le due caselle devono restare allineate anche quando una delle due
-       etichette va a capo (capita con "Nome da esploratore (facoltativo)",
-       che è più lungo). Le celle della griglia hanno la stessa altezza:
-       così la coppia etichetta + casella resta unita e si appoggia in
-       basso, con lo stacco uguale per entrambi i campi. Dove le due
-       etichette occupano la stessa riga, non cambia nulla. */
-    justify-content: flex-end;
+    display: contents;
 }
 .field label {
+    grid-row: 1;
+    align-self: start;
     display: block;
     font-family: var(--sans);
     font-size: 0.85rem;
@@ -48,8 +50,13 @@
     text-transform: uppercase;
     letter-spacing: 1.5px;
     color: var(--inchiostro);
-    margin-bottom: 8px;
 }
+.field input {
+    grid-row: 2;
+}
+/* Ogni campo sta nella sua colonna: la coppia etichetta + caselle */
+.field:nth-child(1) > * { grid-column: 1; }
+.field:nth-child(2) > * { grid-column: 2; }
 .field-optional {
     font-weight: 400;
     text-transform: none;
@@ -283,6 +290,13 @@
     font-size: 0.9rem;
     color: var(--viola);
     margin-top: 14px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.generate-hint[data-tipo="errore"] {
+    color: #8c2f2f;
+    font-weight: 700;
 }
 
 .newsletter-gate {
@@ -336,6 +350,21 @@
 }
 
 /* ============ RESPONSIVE ============ */
+@media (max-width: 600px) {
+    /* Schermi stretti: ogni campo torna compatto, etichetta sopra la sua
+       casella, uno sotto l'altro */
+    .identity-fields {
+        grid-template-columns: 1fr;
+        row-gap: 22px;
+    }
+    .field {
+        display: flex;
+        flex-direction: column;
+    }
+    .field label {
+        margin-bottom: 8px;
+    }
+}
 @media (max-width: 850px) {
     .planet-count { margin-left: 0; width: 100%; }
     .moon-choice img { width: 32px; height: 32px; }

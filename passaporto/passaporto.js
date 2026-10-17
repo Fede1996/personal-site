@@ -179,16 +179,41 @@
     update();
 
     // ---------- Gate newsletter ----------
+    // Il via libera all'iscrizione: in localStorage se possibile, almeno per
+    // questa sessione se localStorage non è disponibile (es. navigazione
+    // privata di Safari), altrimenti il gate si riaprirebbe all'infinito.
+    let sbloccato = false;
     function isSubscribed() {
+        if (sbloccato) return true;
         try { return localStorage.getItem(GATE_KEY) === 'ok'; }
         catch (e) { return false; }
     }
 
-    function generate() {
+    // Messaggio accanto al pulsante di generazione: è l'unico posto dove
+    // l'utente guarda quando non succede nulla.
+    function messaggio(testo, tipo) {
+        generateHint.textContent = testo;
+        generateHint.dataset.tipo = tipo || 'info';
+        if (tipo === 'errore') {
+            generateHint.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+
+    async function generate() {
         const scelte = selectedMoons();
         const nome = (nomeInput.value || '').trim();
         const soprannome = (soprannomeInput.value || '').trim();
-        if (!nome || !scelte.length) return;
+
+        // Prima di tutto: se manca qualcosa, dillo invece di non fare nulla.
+        if (!nome) {
+            messaggio('Manca il nome: scrivilo qui sopra per poter creare il passaporto.', 'errore');
+            nomeInput.focus();
+            return false;
+        }
+        if (!scelte.length) {
+            messaggio('Non hai ancora scelto nessuna luna: apri un pianeta e seleziona quelle che ti parlano.', 'errore');
+            return false;
+        }
 
         if (!isSubscribed()) {
             gate.hidden = false;
@@ -200,19 +225,43 @@
                 iframe.src = iframe.dataset.src;
             }
             gate.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            return;
+            return false;
         }
-        // Il PDF lo genera passaporto-pdf.js (esposto su window)
-        if (typeof window.generaPassaportoPDF === 'function') {
-            window.generaPassaportoPDF({ nome: nome, soprannome: soprannome, scelte: scelte });
+
+        if (typeof window.generaPassaportoPDF !== 'function') {
+            messaggio('Qualcosa non ha funzionato nel caricamento del generatore: ricarica la pagina e riprova.', 'errore');
+            return false;
+        }
+
+        // Stato "in lavorazione": con tutte le lune selezionate la
+        // generazione richiede qualche secondo, e senza un segnale visibile
+        // sembra tutto bloccato.
+        const etichetta = generaBtn.textContent;
+        generaBtn.disabled = true;
+        generaBtn.textContent = 'Generazione in corso…';
+        messaggio('Sto componendo il tuo passaporto: attendi qualche secondo.', 'info');
+        try {
+            await window.generaPassaportoPDF({ nome: nome, soprannome: soprannome, scelte: scelte });
+            messaggio('Fatto! Il passaporto è stato scaricato: controlla la cartella dei download.', 'info');
+            return true;
+        } catch (e) {
+            messaggio('Non sono riuscito a generare il PDF' + (e && e.message ? ': ' + e.message : '') + '. Riprova, o ricarica la pagina.', 'errore');
+            return false;
+        } finally {
+            generaBtn.disabled = false;
+            generaBtn.textContent = etichetta;
+            update();
         }
     }
 
-    generaBtn.addEventListener('click', generate);
+    generaBtn.addEventListener('click', () => { generate(); });
 
-    gateConfirm.addEventListener('click', () => {
+    gateConfirm.addEventListener('click', async () => {
+        sbloccato = true;
         try { localStorage.setItem(GATE_KEY, 'ok'); } catch (e) { /* localStorage non disponibile */ }
+        // Il via libera è dato: il gate non serve più. Se poi manca il nome
+        // o le lune, è generate() a dirlo con un messaggio chiaro.
         gate.hidden = true;
-        generate();
+        await generate();
     });
 })();

@@ -8,9 +8,14 @@
     // ---------- Header opaco allo scroll ----------
     const header = document.querySelector('header');
     if (header) {
-        window.addEventListener('scroll', () => {
+        const aggiornaHeader = () => {
             header.classList.toggle('scrolled', window.scrollY > 50);
-        });
+        };
+        window.addEventListener('scroll', aggiornaHeader);
+        // Anche al caricamento e al ridimensionamento: se la pagina si apre
+        // già scorso l'header deve subito avere il suo sfondo
+        window.addEventListener('resize', aggiornaHeader);
+        aggiornaHeader();
     }
 
     // ---------- Menu mobile ----------
