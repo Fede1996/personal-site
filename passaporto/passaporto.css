@@ -372,7 +372,6 @@
 .gate-frame-wrap { margin: 26px 0; }
 .gate-frame-wrap .brevo-form { text-align: left; }
 .gate-fallback { margin-top: 12px; font-family: var(--sans); font-size: 0.95rem; }
-.gate-confirm-btn { margin-top: 8px; }
 .privacy-note {
     font-family: var(--sans);
     font-size: 0.85rem;

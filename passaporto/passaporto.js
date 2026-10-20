@@ -20,7 +20,6 @@
     const avanzFill = document.getElementById('avanzamento-fill');
     const avanzTesto = document.getElementById('avanzamento-testo');
     const gate = document.getElementById('newsletter-gate');
-    const gateConfirm = document.getElementById('conferma-iscrizione');
 
     if (!picker || typeof PIANETI === 'undefined') return;
 
@@ -276,12 +275,26 @@
 
     generaBtn.addEventListener('click', () => { generate(); });
 
-    gateConfirm.addEventListener('click', async () => {
+    // Quello che conta è che l'email passi per il form: sia che la mail sia
+    // nuova in lista, sia che sia già iscritta (site.js la riconosce e non
+    // la reinvia), il passaporto si genera lo stesso. Il pulsante "Ho già
+    // fatto l'iscrizione" è sparito: l'iscrizione è l'unico passaggio.
+    gate.addEventListener('brevo:esito', async (e) => {
+        const esito = e.detail && e.detail.esito;
+        if (esito !== 'ok' && esito !== 'gia-iscritto') return;
+
         sbloccato = true;
-        try { localStorage.setItem(GATE_KEY, 'ok'); } catch (e) { /* localStorage non disponibile */ }
+        try { localStorage.setItem(GATE_KEY, 'ok'); } catch (err) { /* localStorage non disponibile */ }
         // Il via libera è dato: il gate non serve più. Se poi manca il nome
         // o le lune, è generate() a dirlo con un messaggio chiaro.
         gate.hidden = true;
-        await generate();
+
+        const fatto = await generate();
+        // Col gate chiuso il messaggio del form non si vede più: se la mail
+        // era già in lista lo riscriviamo accanto al pulsante, dove l'utente
+        // guarda per il download.
+        if (fatto && esito === 'gia-iscritto') {
+            messaggio('Utente già iscritto: la tua email era già in lista, non è stata aggiunta di nuovo. Il passaporto è stato scaricato lo stesso.', 'info');
+        }
     });
 })();

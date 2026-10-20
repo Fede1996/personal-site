@@ -127,12 +127,48 @@
     // Il form non è più un iframe (sul quale il CSS del sito non può agire):
     // è HTML in pagina e viene inviato in AJAX allo stesso endpoint che usava
     // lo script di Brevo — POST a /serve/…?isAjax=1, risposta JSON.
+    //
+    // L'endpoint di Brevo accetta anche una mail già in lista (upsert) e
+    // risponde comunque con success: non dice "utente già iscritto". Qui
+    // teniamo quindi traccia delle iscrizioni riuscite da questo browser e,
+    // se la mail è già presente, evitiamo il POST e lo diciamo all'utente.
+    // Resta fuori dalle iscrizioni fatte da altri dispositivi, che per noi
+    // sono indistinguibili dai nuovi arrivi.
+    const ISCRITTI_KEY = 'uvdp-breve-iscritti';
+
+    function emailIscritte() {
+        try {
+            const raw = localStorage.getItem(ISCRITTI_KEY);
+            const elenco = raw ? JSON.parse(raw) : [];
+            return Array.isArray(elenco) ? elenco : [];
+        } catch (e) {
+            return [];
+        }
+    }
+
+    function segnaIscritta(email) {
+        if (!email) return;
+        try {
+            const elenco = emailIscritte();
+            if (!elenco.includes(email)) {
+                elenco.push(email);
+                localStorage.setItem(ISCRITTI_KEY, JSON.stringify(elenco));
+            }
+        } catch (e) { /* localStorage non disponibile */ }
+    }
+
+    function normalizzaEmail(valore) {
+        return (valore || '').trim().toLowerCase();
+    }
+
     document.querySelectorAll('form.brevo-form').forEach((form) => {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const msg = form.querySelector('.brevo-messaggio');
             const btn = form.querySelector('.brevo-submit');
             const hp = form.querySelector('input[name="email_address_check"]');
+            const emailInput = form.querySelector('input[name="EMAIL"]');
+            const email = normalizzaEmail(emailInput && emailInput.value);
 
             function mostra(tipo, testo) {
                 if (!msg) return;
@@ -141,9 +177,56 @@
                 msg.textContent = testo;
             }
 
+            // Dice a chi contiene il form (il gate del passaporto) come è
+            // andata, così può procedere o restare dov'è.
+            function notifica(esito, testo) {
+                form.dispatchEvent(new CustomEvent('brevo:esito', {
+                    bubbles: true,
+                    detail: { esito: esito, messaggio: testo, email: email }
+                }));
+            }
+
             // Honeypot compilato: è un bot. Fingo il successo e non invio nulla.
             if (hp && hp.value) {
                 mostra('ok', 'La tua iscrizione è andata a buon fine.');
+                return;
+            }
+
+            // Captcha di Brevo (se attivo sul form): senza token non inviamo.
+            // Al momento il form servito non lo espone, ma se lo aggiungono
+            // deve valere anche per i nostri POST.
+            const captchaBox = form.querySelector('.sib-captcha, .g-recaptcha, .g-recaptcha-v3');
+            const body = new FormData(form);
+            if (captchaBox && window.grecaptcha && typeof window.grecaptcha.getResponse === 'function') {
+                const token = window.grecaptcha.getResponse(captchaBox);
+                if (!token) {
+                    const testo = 'Conferma che non sei un robot e riprova.';
+                    mostra('errore', testo);
+                    notifica('errore', testo);
+                    return;
+                }
+                if (!body.has('g-recaptcha-response')) {
+                    body.append('g-recaptcha-response', token);
+                }
+            }
+
+            // Mail già iscritta da questo browser: non reinviare, avvisa e basta.
+            if (email && emailIscritte().includes(email)) {
+                const testo = 'Utente già iscritto: la tua email era già in lista, non è stato necessario aggiungerla di nuovo.';
+                mostra('ok', testo);
+                notifica('gia-iscritto', testo);
+                return;
+            }
+
+            // Nuova iscrizione: serve l'opt-in. È validato qui e non con
+            // required sul checkbox, così chi è già iscritto non deve
+            // spuntarlo di nuovo per scaricare il passaporto.
+            const optIn = form.querySelector('input[name="OPT_IN"]');
+            if (optIn && !optIn.checked) {
+                const testo = 'Serve il tuo consenso: spunta la casella dell\'informativa per iscriverti.';
+                mostra('errore', testo);
+                notifica('errore', testo);
+                if (optIn.focus) optIn.focus();
                 return;
             }
 
@@ -151,7 +234,7 @@
             try {
                 const res = await fetch(form.action + '?isAjax=1', {
                     method: 'POST',
-                    body: new FormData(form),
+                    body: body,
                 });
                 const data = await res.json();
                 if (data.redirect) {
@@ -159,14 +242,30 @@
                     return;
                 }
                 if (data.success) {
-                    mostra('ok', data.message || 'La tua iscrizione è andata a buon fine.');
+                    const testo = 'La tua iscrizione è andata a buon fine.';
+                    segnaIscritta(email);
+                    mostra('ok', testo);
+                    notifica('ok', testo);
                     form.reset();
                 } else {
                     const erroreCampo = data.errors && Object.values(data.errors)[0];
-                    mostra('errore', erroreCampo || data.message || 'La tua iscrizione non è andata a buon fine. Riprova.');
+                    const testo = erroreCampo || data.message || 'La tua iscrizione non è andata a buon fine. Riprova.';
+                    // Se un giorno l'endpoint rifiutasse le mail già in lista,
+                    // lo trattiamo come "utente già iscritto" e non come errore.
+                    if (/already|exist|duplicate/i.test(testo)) {
+                        const avviso = 'Utente già iscritto: la tua email era già in lista, non è stato necessario aggiungerla di nuovo.';
+                        segnaIscritta(email);
+                        mostra('ok', avviso);
+                        notifica('gia-iscritto', avviso);
+                    } else {
+                        mostra('errore', testo);
+                        notifica('errore', testo);
+                    }
                 }
             } catch (err) {
-                mostra('errore', 'La tua iscrizione non è andata a buon fine. Riprova.');
+                const testo = 'La tua iscrizione non è andata a buon fine. Riprova.';
+                mostra('errore', testo);
+                notifica('errore', testo);
             } finally {
                 if (btn) btn.disabled = false;
             }

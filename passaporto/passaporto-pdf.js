@@ -207,17 +207,37 @@
                 imgFallback(doc, iconaX, iconaY, iconaR, luna.nome);
             }
 
-            doc.setTextColor(...INCHIOSTRO);
+            const testoX = x + iconaR * 2 + 6;
+            const testoLar = larghezzaCol - iconaR * 2 - 6;
+
+            // Il nome della condizione può essere lungo ("Disturbo Evitante
+            // di Personalità"): lo mandiamo a capo su due righe — e se non
+            // bastano ne rimpiccioliamo il corpo — invece di stampare solo la
+            // prima riga e tagliare il resto.
             doc.setFont('helvetica', 'bold');
-            doc.setFontSize(11);
-            const nomeRighe = doc.splitTextToSize(luna.nome, larghezzaCol - iconaR * 2 - 6);
-            doc.text(nomeRighe[0], x + iconaR * 2 + 6, y + 8);
+            let nomeCorpo = 11;
+            let nomeRighe;
+            for (;;) {
+                doc.setFontSize(nomeCorpo);
+                nomeRighe = doc.splitTextToSize(luna.nome, testoLar);
+                if (nomeRighe.length <= 2 || nomeCorpo <= 8) break;
+                nomeCorpo -= 0.5;
+            }
+            nomeRighe = nomeRighe.slice(0, 2);
+
+            doc.setTextColor(...INCHIOSTRO);
+            doc.text(nomeRighe, testoX, y + 8);
+
+            // Il motto scende sotto l'ultima riga del nome, senza toccarlo
+            // (passoNome è l'altezza di una riga in mm: il corpo è in punti).
+            const passoNome = nomeCorpo * 1.15 / 2.8346;
+            const mottoY = y + 8 + (nomeRighe.length - 1) * passoNome + 7;
 
             doc.setFont('helvetica', 'normal');
             doc.setFontSize(9);
             doc.setTextColor(...GRIGIO);
-            const mottoRighe = doc.splitTextToSize(luna.motto, larghezzaCol - iconaR * 2 - 6);
-            doc.text(mottoRighe.slice(0, 2), x + iconaR * 2 + 6, y + 15);
+            const mottoRighe = doc.splitTextToSize(luna.motto, testoLar);
+            doc.text(mottoRighe.slice(0, 2), testoX, mottoY);
         });
 
         // Piè di pagina del pianeta
