@@ -722,9 +722,17 @@ footer {
     color: var(--viola);
     margin-bottom: 18px;
 }
+/* Riga che dice cosa c'è su Redbubble per questa condizione: resta una
+   nota editoriale, non una vetrina — niente riquadri, niente prezzi. */
+.book-info p.redbubble-note {
+    font-family: var(--serif-it);
+    font-size: 0.95rem;
+    color: var(--viola);
+    margin: 20px 0 0;
+}
 .book-info .amazon-btn,
 .book-info .amazon-btn-disabled {
-    margin-top: 28px;
+    margin-top: 14px;
 }
 .book-meta {
     list-style: none;
@@ -940,6 +948,15 @@ footer {
     gap: 15px;
     flex-wrap: wrap;
     margin: 30px 0;
+}
+/* Riga sotto i bottoni: dice cosa c'è su Redbubble, in tono di nota
+   e non di negozio. Selettori più specifici di .support-box p. */
+.support-box p.redbubble-oggetti {
+    font-family: var(--serif-it);
+    font-size: 1rem;
+    max-width: 560px;
+    margin: 0 auto;
+    color: var(--viola);
 }
 .legal-note {
     font-family: var(--serif-it);
