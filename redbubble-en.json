@@ -78,7 +78,7 @@
       "id": "burnout",
       "collection": "mars",
       "title": "Burnout",
-      "tagline": "When the flame burns the one who keeps it.",
+      "tagline": "Not weakness: holding on for too long.",
       "description": "Burnout is the quiet aftermath of giving everything without pause. This design is for anyone learning that a flame is not protected by burning harder — it is protected by being tended, rested, and slowly rekindled.",
       "tags": [
         "burnout",
@@ -94,7 +94,7 @@
       "id": "stress",
       "collection": "mars",
       "title": "Stress",
-      "tagline": "The storm that asks to be heard.",
+      "tagline": "Useful in small doses. Wearing when it never switches off.",
       "description": "Stress is the inner weather that builds and builds until it asks for attention. This design is about the moment you stop fighting the storm and start listening to what it is trying to tell you.",
       "tags": [
         "stress",
@@ -110,7 +110,7 @@
       "id": "distimia",
       "collection": "mars",
       "title": "Dysthymia",
-      "tagline": "A fine rain that never stops.",
+      "tagline": "Not your personality: a condition that lasts for years.",
       "description": "Dysthymia is a low, quiet grey that stays so long it starts to feel like the sky itself. This design is for the ones who have learned to walk under a rain nobody else can see.",
       "tags": [
         "dysthymia",
@@ -126,7 +126,7 @@
       "id": "depressione",
       "collection": "mars",
       "title": "Depression",
-      "tagline": "Crossing the dark to find your orbit again.",
+      "tagline": "You cannot will yourself out of it.",
       "description": "Depression is a long night that takes the weight and the colour out of the world. This design walks through the dark without denying it — because even the deepest night has an edge you can reach.",
       "tags": [
         "depression",
@@ -142,7 +142,7 @@
       "id": "disturbo-bipolare",
       "collection": "mars",
       "title": "Bipolar Disorder",
-      "tagline": "Between two suns, a route that teaches rhythm.",
+      "tagline": "Not ups and downs: clinical phases.",
       "description": "Bipolar disorder lives between impossible heights and sudden depths. This design is about the art of navigating two lights at once — and learning your own rhythm before it becomes a storm.",
       "tags": [
         "bipolar",
@@ -158,7 +158,7 @@
       "id": "anedonia",
       "collection": "mars",
       "title": "Anhedonia",
-      "tagline": "When the flame stops giving warmth.",
+      "tagline": "Not indifference: the loss of pleasure.",
       "description": "Anhedonia is the ash that covers the fire: things keep happening, but nothing warms or interests you any more. This design is about the slow work of feeding the flame back to life, one small moment at a time.",
       "tags": [
         "anhedonia",
@@ -174,7 +174,7 @@
       "id": "dislessia",
       "collection": "mercury",
       "title": "Dyslexia",
-      "tagline": "Letters dance and teach another route.",
+      "tagline": "Thinking stays deep. Reading works differently.",
       "description": "For a dyslexic mind, letters move and words take the long way round. This design celebrates a different route through language — one that is not slower, only differently drawn.",
       "tags": [
         "dyslexia",
@@ -190,7 +190,7 @@
       "id": "disprassia",
       "collection": "mercury",
       "title": "Dyspraxia",
-      "tagline": "The body learns its own pace.",
+      "tagline": "Coordination, not intelligence.",
       "description": "Dyspraxia is about a body that takes its time to learn movements others take for granted. This design honours the patience of finding your own pace, step by step.",
       "tags": [
         "dyspraxia",
@@ -206,7 +206,7 @@
       "id": "iperlessia",
       "collection": "mercury",
       "title": "Hyperlexia",
-      "tagline": "Words arrive before their meaning.",
+      "tagline": "Reading early does not mean understanding everything.",
       "description": "Hyperlexia is when reading comes early and meaning takes its time to catch up. This design is for the children who met words before words could explain themselves.",
       "tags": [
         "hyperlexia",
@@ -222,7 +222,7 @@
       "id": "discalculia",
       "collection": "mercury",
       "title": "Dyscalculia",
-      "tagline": "Numbers are a foreign language.",
+      "tagline": "Numbers slip. It is not a measure of intelligence.",
       "description": "Dyscalculia is when numbers stay a foreign language no matter how long you study them. This design is for everyone who has counted on their fingers long after they were told not to.",
       "tags": [
         "dyscalculia",
@@ -238,7 +238,7 @@
       "id": "disgrafia",
       "collection": "mercury",
       "title": "Dysgraphia",
-      "tagline": "The hand looks for its shape.",
+      "tagline": "The idea is clear. The handwriting is the hard part.",
       "description": "Dysgraphia is the gap between what the mind has written and what the hand can put on paper. This design is about the shape a thought takes when the road to the page is longer than usual.",
       "tags": [
         "dysgraphia",
@@ -254,7 +254,7 @@
       "id": "disortografia",
       "collection": "mercury",
       "title": "Dysorthography",
-      "tagline": "Words look for their own way on the page.",
+      "tagline": "The thought is clear. Spelling is what fails.",
       "description": "Dysorthography is about spelling that keeps wandering off the expected path. This design is for everyone who has rewritten the same word a dozen times and still made it their own.",
       "tags": [
         "dysorthography",
@@ -270,7 +270,7 @@
       "id": "disturbo-evitante",
       "collection": "venus",
       "title": "Avoidant Personality Disorder",
-      "tagline": "Distance as a way of protecting yourself.",
+      "tagline": "Not shyness: fear of rejection that makes you avoid.",
       "description": "Avoidant personality disorder turns distance into a form of safety. This design is about the longing underneath the withdrawal — and the courage it takes to let someone closer.",
       "tags": [
         "avoidant personality",
@@ -286,7 +286,7 @@
       "id": "disturbo-antisociale",
       "collection": "venus",
       "title": "Antisocial Personality Disorder",
-      "tagline": "When the rules seem written for someone else.",
+      "tagline": "Not cruelty: a serious clinical condition.",
       "description": "Antisocial personality disorder is a different relationship with rules, boundaries and other people. This design looks at it without easy judgement — as something to understand rather than to label.",
       "tags": [
         "antisocial personality",
@@ -302,7 +302,7 @@
       "id": "disturbo-paranoide",
       "collection": "venus",
       "title": "Paranoid Personality Disorder",
-      "tagline": "The guard that never comes down.",
+      "tagline": "Not suspicion: a lens that never comes off.",
       "description": "Paranoid personality disorder is a guard that never lowers its weapon. This design is about the exhaustion of always watching — and the relief of one moment of trust.",
       "tags": [
         "paranoid personality",
@@ -318,7 +318,7 @@
       "id": "disturbo-borderline",
       "collection": "venus",
       "title": "Borderline Personality Disorder",
-      "tagline": "Emotions that burn at full intensity.",
+      "tagline": "Not being too much: clinical instability.",
       "description": "Borderline personality disorder is emotion at full volume, all of the time. This design honours the intensity beneath it — the depth of feeling that also makes love, colour and closeness possible.",
       "tags": [
         "borderline",
@@ -334,7 +334,7 @@
       "id": "disturbo-narcisistico",
       "collection": "venus",
       "title": "Narcissistic Personality Disorder",
-      "tagline": "The mirror that asks for confirmation.",
+      "tagline": "Not vanity: fragile self-esteem.",
       "description": "Narcissistic personality disorder is a mirror that keeps asking to be confirmed. This design looks past the reflection to the fragile thing that built it.",
       "tags": [
         "narcissistic personality",
@@ -350,7 +350,7 @@
       "id": "disturbo-istrionico",
       "collection": "venus",
       "title": "Histrionic Personality Disorder",
-      "tagline": "The portrait looking for a mirror.",
+      "tagline": "Not making scenes: a stable way of being in relationships.",
       "description": "Histrionic personality disorder is a portrait that needs a mirror to feel complete. This design is about being seen — and about the person behind the performance.",
       "tags": [
         "histrionic personality",
@@ -366,7 +366,7 @@
       "id": "arto-fantasma",
       "collection": "earth",
       "title": "Phantom Limb",
-      "tagline": "The body’s memory beyond the body.",
+      "tagline": "The brain keeps the map of what is no longer there.",
       "description": "A phantom limb is the body remembering what is no longer there. This design is about a memory that lives in the nervous system — proof that the map of us is larger than our outline.",
       "tags": [
         "phantom limb",
@@ -382,7 +382,7 @@
       "id": "ipertimesia",
       "collection": "earth",
       "title": "Hyperthymesia",
-      "tagline": "Time does not pass: it settles.",
+      "tagline": "An archive that never switches off.",
       "description": "Hyperthymesia is an autobiographical memory that keeps every day in full detail. This design is about time that does not fade — and the weight and the beauty of remembering everything.",
       "tags": [
         "hyperthymesia",
@@ -398,7 +398,7 @@
       "id": "prosopagnosia",
       "collection": "earth",
       "title": "Prosopagnosia",
-      "tagline": "Faces without names, faces without memory.",
+      "tagline": "Faces arrive without their names.",
       "description": "Prosopagnosia, or face blindness, is a world where faces do not come with names attached. This design is about recognising people in other ways — voice, step, presence.",
       "tags": [
         "prosopagnosia",
@@ -414,7 +414,7 @@
       "id": "sindrome-savant",
       "collection": "earth",
       "title": "Savant Syndrome",
-      "tagline": "A gift that shines beyond measure.",
+      "tagline": "An extraordinary gift, inside a whole person.",
       "description": "Savant syndrome is an extraordinary ability living alongside a very different mind. This design celebrates the gift that shines out of all proportion — and the whole person around it.",
       "tags": [
         "savant",
@@ -430,7 +430,7 @@
       "id": "sinestesia",
       "collection": "earth",
       "title": "Synaesthesia",
-      "tagline": "When sounds have a colour.",
+      "tagline": "Senses cross over: numbers have a colour.",
       "description": "Synaesthesia is a world where sounds have colours, numbers have personalities and words have taste. This design is for those who experience more than one sense at once.",
       "tags": [
         "synaesthesia",
@@ -446,7 +446,7 @@
       "id": "afantasia",
       "collection": "earth",
       "title": "Aphantasia",
-      "tagline": "To imagine, even without images.",
+      "tagline": "Close your eyes and see nothing. Imagination stays.",
       "description": "Aphantasia is a mind with no inner screen — imagining without seeing. This design is about a different way of thinking, remembering and dreaming.",
       "tags": [
         "aphantasia",
@@ -462,7 +462,7 @@
       "id": "autismo-livello-1",
       "collection": "jupiter",
       "title": "Autism Level 1",
-      "tagline": "The world is felt too much, and understood in a unique way.",
+      "tagline": "The level describes the support needed, not the person.",
       "description": "Autism Level 1 is a mind that receives the world at full volume and reads it in its own language. This design is for the daily work of translating yourself to others.",
       "tags": [
         "autism",
@@ -478,7 +478,7 @@
       "id": "autismo-livello-2",
       "collection": "jupiter",
       "title": "Autism Level 2",
-      "tagline": "A need for clarity in a confusing world.",
+      "tagline": "Substantial support, not generic patience.",
       "description": "Autism Level 2 is a deep need for clarity in a world that rarely offers any. This design honours the effort of navigating noise, change and mixed signals all day long.",
       "tags": [
         "autism",
@@ -494,7 +494,7 @@
       "id": "autismo-livello-3",
       "collection": "jupiter",
       "title": "Autism Level 3",
-      "tagline": "To communicate beyond words.",
+      "tagline": "Very substantial support. The presence stays whole.",
       "description": "Autism Level 3 is communication that travels on roads other than speech. This design is about being understood without words — and about the people who learn to listen there.",
       "tags": [
         "autism",
@@ -510,7 +510,7 @@
       "id": "sindrome-di-tourette",
       "collection": "jupiter",
       "title": "Tourette Syndrome",
-      "tagline": "The body that speaks before thought.",
+      "tagline": "Tics are not a choice.",
       "description": "Tourette syndrome is a body that speaks before the mind has time to. This design is about tics, words and movements that arrive uninvited — and the person who lives with them.",
       "tags": [
         "tourette",
@@ -526,7 +526,7 @@
       "id": "adhd",
       "collection": "jupiter",
       "title": "ADHD",
-      "tagline": "Attention that never sits still, but knows where it is going.",
+      "tagline": "Not laziness: a different way of setting priorities.",
       "description": "ADHD is an attention that moves, jumps and connects things others keep apart. This design is for the energy that is not a fault — only a different engine.",
       "tags": [
         "adhd",
@@ -542,7 +542,7 @@
       "id": "alessitimia",
       "collection": "jupiter",
       "title": "Alexithymia",
-      "tagline": "Emotions that ask for a name.",
+      "tagline": "The emotions are there. The words are missing.",
       "description": "Alexithymia is feeling everything and still not knowing what to call it. This design is about emotions that arrive before their name does.",
       "tags": [
         "alexithymia",
@@ -558,7 +558,7 @@
       "id": "multipotenzialita",
       "collection": "saturn",
       "title": "Multipotentiality",
-      "tagline": "Too many roads, all of them real.",
+      "tagline": "Not a lack of focus: a way of being.",
       "description": "A multipotentialite has too many passions to choose just one. This design is for those who have been told to specialise — and instead kept every road open.",
       "tags": [
         "multipotentialite",
@@ -574,7 +574,7 @@
       "id": "persona-altamente-sensibile",
       "collection": "saturn",
       "title": "Highly Sensitive Person",
-      "tagline": "Feeling the world with the skin of the soul.",
+      "tagline": "Not a disorder: a studied trait.",
       "description": "A highly sensitive person feels the world with the skin of their soul: noise, light, moods, everything lands deeper. This design honours sensitivity as a way of being, not a flaw.",
       "tags": [
         "highly sensitive",
@@ -590,7 +590,7 @@
       "id": "plusdotazione",
       "collection": "saturn",
       "title": "Giftedness",
-      "tagline": "A mind that asks for wider horizons.",
+      "tagline": "It is not just about getting good grades.",
       "description": "Giftedness is a mind that needs wider horizons than the ones it is offered. This design is about intensity, depth and the hunger for something larger.",
       "tags": [
         "gifted",
@@ -606,7 +606,7 @@
       "id": "sviluppo-asincrono",
       "collection": "saturn",
       "title": "Asynchronous Development",
-      "tagline": "Growing at different speeds.",
+      "tagline": "Not inconsistency: different timings.",
       "description": "Asynchronous development is growing at several speeds at once — a young mind in an older head, a tender heart in a fast brain. This design is about not matching the calendar.",
       "tags": [
         "asynchronous development",
@@ -622,7 +622,7 @@
       "id": "iperreattivita-sensoriale",
       "collection": "saturn",
       "title": "Sensory Hyperreactivity",
-      "tagline": "The world arrives at full volume.",
+      "tagline": "Not overreacting: a different nervous system.",
       "description": "Sensory hyperreactivity is the world arriving at full volume: lights, textures, sounds, everything amplified. This design is for those who feel more, and earlier, than the room around them.",
       "tags": [
         "sensory",
@@ -638,7 +638,7 @@
       "id": "doppia-eccezionalita",
       "collection": "saturn",
       "title": "Twice Exceptionality",
-      "tagline": "Two lights in the same orbit.",
+      "tagline": "Talent hides the struggle. The struggle hides the talent.",
       "description": "Twice exceptionality is a gifted mind and a learning difficulty sharing the same orbit. This design is for those who have been called brilliant and struggling in the same week.",
       "tags": [
         "twice exceptional",
@@ -654,7 +654,7 @@
       "id": "afasia",
       "collection": "uranus",
       "title": "Aphasia",
-      "tagline": "Words lose their way.",
+      "tagline": "Intelligence stays intact. Words are missing.",
       "description": "Aphasia is when the thought is there but the words cannot find their way out. This design is about speaking in other forms — gesture, gaze, presence.",
       "tags": [
         "aphasia",
@@ -670,7 +670,7 @@
       "id": "emicrania-cronica",
       "collection": "uranus",
       "title": "Chronic Migraine",
-      "tagline": "A pain that returns, and teaches respect for your limits.",
+      "tagline": "Not just a headache.",
       "description": "Chronic migraine is a pain that keeps coming back and rearranges the whole week around itself. This design is about learning your limits the hard way — and respecting them.",
       "tags": [
         "migraine",
@@ -686,7 +686,7 @@
       "id": "epilessia",
       "collection": "uranus",
       "title": "Epilepsy",
-      "tagline": "The electrical storm that crosses the brain.",
+      "tagline": "Seizures recur. Medication controls them for most people.",
       "description": "Epilepsy is an electrical storm crossing the brain without warning. This design is about living with a sky that can change suddenly — and still planning for tomorrow.",
       "tags": [
         "epilepsy",
@@ -702,7 +702,7 @@
       "id": "malattia-di-parkinson",
       "collection": "uranus",
       "title": "Parkinson’s Disease",
-      "tagline": "Time that slows the gesture.",
+      "tagline": "Movement slows down. The person does not.",
       "description": "Parkinson’s disease slows the gesture without slowing the person inside it. This design is about patience, dignity and the long distance a small movement can travel.",
       "tags": [
         "parkinson",
@@ -718,7 +718,7 @@
       "id": "sclerosi-multipla",
       "collection": "uranus",
       "title": "Multiple Sclerosis",
-      "tagline": "A body that redraws its own maps.",
+      "tagline": "Symptoms vary. Treatments exist.",
       "description": "Multiple sclerosis is a body that keeps redrawing its own maps. This design is about navigating a landscape that changes — and still finding a route through it.",
       "tags": [
         "multiple sclerosis",
@@ -734,7 +734,7 @@
       "id": "sla",
       "collection": "uranus",
       "title": "ALS",
-      "tagline": "When movement falls silent.",
+      "tagline": "Mind and senses stay intact. Movement decreases.",
       "description": "ALS, or motor neurone disease, is movement slowly falling silent while the person stays fully present. This design is a tribute to that presence — and to those who stay close.",
       "tags": [
         "als",
@@ -750,7 +750,7 @@
       "id": "attacchi-di-panico",
       "collection": "neptune",
       "title": "Panic Attacks",
-      "tagline": "The wave that arrives without warning.",
+      "tagline": "Terrifying. Not dangerous.",
       "description": "A panic attack is a wave that arrives without warning and takes the whole body with it. This design is about learning that the wave always, always passes.",
       "tags": [
         "panic attack",
@@ -766,7 +766,7 @@
       "id": "disturbo-ansia-generalizzata",
       "collection": "neptune",
       "title": "Generalised Anxiety Disorder",
-      "tagline": "Worry that never finds rest.",
+      "tagline": "Not overthinking: anxiety that stays switched on.",
       "description": "Generalised anxiety disorder is worry that never finds a place to rest. This design is for the minds that keep running scenarios long after the day is over.",
       "tags": [
         "anxiety",
@@ -782,7 +782,7 @@
       "id": "disturbo-ossessivo-compulsivo",
       "collection": "neptune",
       "title": "Obsessive-Compulsive Disorder",
-      "tagline": "The thought that repeats itself to feel safe.",
+      "tagline": "Not a love of order: rituals against anxiety.",
       "description": "OCD is a thought that repeats itself, looking for safety it never quite finds. This design is about the loop — and about the courage of stepping outside it.",
       "tags": [
         "ocd",
@@ -798,7 +798,7 @@
       "id": "disturbo-ansia-sociale",
       "collection": "neptune",
       "title": "Social Anxiety Disorder",
-      "tagline": "Other people’s gaze as a stage.",
+      "tagline": "Not shyness: fear of judgement.",
       "description": "Social anxiety is a room where every gaze feels like a stage light. This design is about being seen — and slowly learning that the audience was never that harsh.",
       "tags": [
         "social anxiety",
@@ -814,7 +814,7 @@
       "id": "mutismo-selettivo",
       "collection": "neptune",
       "title": "Selective Mutism",
-      "tagline": "The silence that protects a voice.",
+      "tagline": "Not stubbornness: an anxiety block.",
       "description": "Selective mutism is a silence that protects a voice that is very much alive. This design is for the words waiting just behind the door.",
       "tags": [
         "selective mutism",
@@ -830,7 +830,7 @@
       "id": "stress-post-traumatico",
       "collection": "neptune",
       "title": "Post-Traumatic Stress Disorder",
-      "tagline": "When the storm stays, after the storm.",
+      "tagline": "Not a bad reaction: the brain's response to trauma.",
       "description": "PTSD is when the storm stays in the body long after the sky has cleared. This design is about memory that does not know the danger has passed — and about feeling safe again.",
       "tags": [
         "ptsd",
