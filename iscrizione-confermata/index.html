@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Iscrizione confermata: benvenuto nella newsletter di Una Voce Dal Profondo.">
+    <meta name="robots" content="noindex">
+    <title>Iscrizione confermata — Una Voce Dal Profondo</title>
+    <link rel="icon" type="image/png" href="../Asset/icon.png">
+
+    <!-- Font del sito -->
+    <style>
+        @font-face {
+            font-family: 'Arimo';
+            src: url('../Asset/fonts/Arimo-VariableFont_wght.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Instrumental Serif';
+            src: url('../Asset/fonts/InstrumentSerif-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --crema: #f7e7d4;
+            --viola: #602ba0;
+            --inchiostro: #211533;
+            --sans: 'Arimo', sans-serif;
+            --serif: 'Instrumental Serif', serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--sans);
+            background-color: var(--crema);
+            color: var(--inchiostro);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 48px 20px 32px;
+        }
+
+        .contenitore {
+            width: 100%;
+            max-width: 640px;
+            text-align: center;
+        }
+
+        /* Intestazione come sul sito */
+        .marca {
+            font-family: var(--sans);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--viola);
+            margin-bottom: 36px;
+        }
+
+        h1 {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 6vw, 2.8rem);
+            font-weight: normal;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .filetto {
+            width: 110px;
+            height: 2px;
+            background: var(--viola);
+            border: 0;
+            margin: 0 auto 28px;
+        }
+
+        .testo {
+            font-family: var(--serif);
+            font-size: 1.15rem;
+            line-height: 1.7;
+            max-width: 520px;
+            margin: 0 auto 18px;
+        }
+
+        .testo.sec {
+            font-family: var(--sans);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--inchiostro);
+        }
+
+        /* Riquadro: cosa arriva dopo */
+        .riquadro {
+            background: rgba(96, 43, 160, 0.08);
+            border-left: 3px solid var(--viola);
+            border-radius: 0 12px 12px 0;
+            padding: 18px 22px;
+            margin: 32px auto;
+            max-width: 520px;
+            text-align: left;
+        }
+        .riquadro .titolo {
+            font-family: var(--sans);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--viola);
+            margin-bottom: 10px;
+        }
+        .riquadro p {
+            font-family: var(--sans);
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
+        .riquadro p + p { margin-top: 8px; }
+
+        /* Bottoni e link, stile del sito */
+        .azioni {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin: 36px 0 28px;
+        }
+        .bottone {
+            display: inline-block;
+            text-decoration: none;
+            padding: 15px 32px;
+            border-radius: 8px;
+            font-family: var(--sans);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            border: 2px solid var(--viola);
+            box-sizing: border-box;
+            background: var(--viola);
+            color: var(--crema);
+        }
+        .bottone:hover {
+            background: var(--crema);
+            color: #583d8c;
+            transform: translateY(-3px);
+        }
+        .bottone:focus-visible {
+            outline: 3px solid var(--viola);
+            outline-offset: 3px;
+        }
+
+        .link-terno {
+            display: inline-block;
+            font-family: var(--sans);
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--viola);
+            text-decoration: none;
+            border-bottom: 2px solid var(--viola);
+            padding-bottom: 2px;
+            transition: opacity 0.3s;
+        }
+        .link-terno:hover { opacity: 0.6; }
+
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(96, 43, 160, 0.18);
+            font-family: var(--serif);
+            font-size: 0.85rem;
+            color: var(--inchiostro);
+        }
+        footer a { color: var(--viola); }
+
+        /* Pulsante torna su */
+        .torna-su {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid var(--viola);
+            background: var(--crema);
+            color: var(--viola);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        .torna-su.visibile {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .torna-su:hover { background: var(--viola); color: var(--crema); }
+        .torna-su:focus-visible {
+            outline: 3px solid var(--viola);
+            outline-offset: 3px;
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .torna-su svg { width: 20px; height: 20px; }
+    </style>
+</head>
+<body>
+
+    <a class="marca" href="../" style="text-decoration:none">Una Voce Dal Profondo</a>
+
+    <main class="contenitore">
+        <h1>Iscrizione confermata</h1>
+        <hr class="filetto">
+
+        <p class="testo">Fatto: sei nella newsletter di Una Voce Dal Profondo.</p>
+
+        <p class="testo sec">Ti scriverò quando esce un libro, quando aggiungo una scheda al sito, o quando il progetto cambia in modo concreto. Qualche email, mai di più.</p>
+
+        <div class="riquadro">
+            <p class="titolo">Cosa ti arriva</p>
+            <p>Un'avvisata quando c'è un'aggiunta vera al progetto.</p>
+            <p>Divulgazione psicologica e storie — le due cose che fa il sito. Nient'altro, e mai più di una volta per novità.</p>
+        </div>
+
+        <p class="testo sec">Nel frattempo puoi esplorare ciò che c'è già:</p>
+
+        <div class="azioni">
+            <a class="bottone" href="../#collezioni">Le collezioni</a>
+            <a class="bottone" href="../passaporto/">Crea il passaporto</a>
+        </div>
+
+        <a class="link-terno" href="../">Torna al sito</a>
+
+        <footer>
+            <p>Una Voce Dal Profondo — Federico Gorrino</p>
+            <p>Per scrivere: <a href="mailto:fs.gorrino.pub@gmail.com">fs.gorrino.pub@gmail.com</a></p>
+        </footer>
+    </main>
+
+    <button class="torna-su" type="button" aria-label="Torna su">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    </button>
+
+    <script>
+        // Torna su: come sul sito (compare dopo 400px di scroll)
+        (function () {
+            var btn = document.querySelector('.torna-su');
+            if (!btn) return;
+            function aggiorna() {
+                btn.classList.toggle('visibile', window.scrollY > 400);
+            }
+            window.addEventListener('scroll', aggiorna, { passive: true });
+            aggiorna();
+            btn.addEventListener('click', function () {
+                var soft = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                window.scrollTo({ top: 0, behavior: soft ? 'smooth' : 'auto' });
+            });
+        })();
+    </script>
+
+</body>
+</html>
