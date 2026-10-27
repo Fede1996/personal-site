@@ -1,0 +1,567 @@
+{
+  "_leggi_prima": "Blueprint per creare a mano il server Discord del sito 'Una Voce Dal Profondo' (www.gorrinoofficial.it). Discord NON importa file JSON: questo file è la scheda di progetto da seguire mentre crei ruoli, canali e permessi dall'interfaccia (Impostazioni server → Ruoli / Canali / Community). L'ordine consigliato è: immagini e nome → ruoli (dall'alto in basso, l'ordine dell'array conta) → categorie e canali → permessi per canale → onboarding e regole → emoji. I campi 'permessi' elencano i nomi dei permessi come compaiono nell'interfaccia Discord (in italiano o in inglese, sono gli stessi toggle). I colori sono hex esadecimali incollabili nel selettore colore del ruolo. Il tono di tutti i testi segue il vincolo del progetto: psicologia e narrazione, concreto, mai spirituale/new-age, mai da negozio (Federico non ha partita IVA: Redbubble paga royalties). Pubblico = 'esploratori', NON 'comunità'. Marchi di terzi mai nominati.",
+
+  "meta": {
+    "progetto": "personal-site-new",
+    "sito": "https://www.gorrinoofficial.it",
+    "invito_discord": "https://discord.gg/563Us4z3F",
+    "redbubble": "https://www.redbubble.com/people/ChicoMaloIta/explore",
+    "data": "2026-10-27",
+    "autore_blueprint": "Claude Code con Federico",
+    "nota_invito": "Il tasto Discord è già nel sito: in tutte e 10 le pagine, sezione INFORMAZIONI E LICENZE, tra Instagram e Redbubble (classe amazon-btn, target=_blank rel=noopener)."
+  },
+
+  "server": {
+    "nome": "Voci dal Profondo",
+    "nome_alternativi": [
+      "Una Voce Dal Profondo",
+      "Voci dal Profondo · Esploratori"
+    ],
+    "descrizione_breve": "Il server del sito Una Voce Dal Profondo: psicologia e narrazione, le otto collezioni pianeta, i tre volumi, il Passaporto Neurodivergente.",
+    "descrizione_lunga": "Qui parliamo di come funzionano mente, emozioni e neurodivergenza — e raccontiamo storie. Le otto collezioni raccolgono le schede delle lune, i tre volumi sono le storie, il passaporto lo puoi costruire e scaricare dal sito. Nessuna vendita, nessuna diagnosi: divulgazione psicologica e narrazione.",
+    "impostazioni": {
+      "verifica_membri": "Alta (email verificata + 10 minuti sul server)",
+      "filtro_contenuti_espliciti": "Scansiona i messaggi di tutti i membri",
+      "notifiche_predefinite": "Solo @menzioni",
+      "lingua_preferita": "Italiano (it)",
+      "community_server": true,
+      "canale_regole": "#regole",
+      "canale_aggiornamenti_pubblici": "#annunci",
+      "canale_di_sistema": "#benvenuto",
+      "benvenuto_personalizzato": "Mostra i canali consigliati (onboarding attivo)",
+      "sfondo_server_boost": "Non previsto — il server non chiede boost"
+    },
+    "immagini": {
+      "icona_server": {
+        "formato": "PNG o JPG, 512x512, max 10 MB",
+        "sorgente_consigliata": "Asset/mascotte.png (ritagliare Silen al centro, sfondo --crema #f7e7d4)",
+        "alternativa": "Asset/icon.png (icona già usata dal sito)",
+        "nota": "Silen su sfondo crema: riconoscibile anche a 48px nella lista server"
+      },
+      "banner_server": {
+        "formato": "PNG o JPG, minimo 960x540, consigliato 1920x1080, max 10 MB",
+        "sorgente_consigliata": "composizione da Asset/thumb/copertina.jpg + mascotte, con titolo 'Voci dal Profondo'",
+        "testo_banner": "Voci dal Profondo — psicologia e narrazione",
+        "colori_sfondo": "#211533 (inchiostro) con accenti #602ba0 (viola) e scritte #f7e7d4 (crema)",
+        "nota": "Il banner richiede il boost livello 1: se non sbloccato, usare lo stesso file come 'Immagine del benvenuto' nell'onboarding"
+      },
+      "immagine_benvenuto_onboarding": {
+        "formato": "PNG, 720x400 circa",
+        "sorgente_consigliata": "Asset/mascotte.png su crema, con la riga: 'Spiego come funzionano mente, emozioni e neurodivergenza. Poi racconto storie.'"
+      },
+      "icona_invito": "Asset/thumb/mascotte.png se serve un'anteprima piccola"
+    },
+    "colori": {
+      "crema": "#f7e7d4",
+      "viola": "#602ba0",
+      "inchiostro": "#211533",
+      "viola_chiaro": "#8b5cc7",
+      "crema_scura": "#c9b29a",
+      "uso": "crema = sfondi e testi chiari; viola = ruolo fondazione e bottoni; inchiostro = testo su crema. Stessa identica palette di style.css."
+    }
+  },
+
+  "ruoli": [
+    {
+      "nome": "Silen",
+      "emoji_nome": "🌙",
+      "colore": "#602ba0",
+      "posizione": 1,
+      "mostra_separatamente": true,
+      "consentisci_menzione": false,
+      "permessi": ["Amministratore"],
+      "nota": "Il ruolo del proprietario (Federico). Nome = mascotte del sito, così resta coerente anche se 'fondatore/fondatrice' non si adatta. Tutti i permessi."
+    },
+    {
+      "nome": "Moderazione",
+      "emoji_nome": "🛡️",
+      "colore": "#8b5cc7",
+      "posizione": 2,
+      "mostra_separatamente": true,
+      "consentisci_menzione": true,
+      "permessi": [
+        "Espelli membri",
+        "Banna membri",
+        "Gestisci messaggi",
+        "Gestisci thread",
+        "Gestisci nickname",
+        "Modera membri (timeout)",
+        "Gestisci reazioni",
+        "Aggancia messaggi",
+        "Muta membri (canali vocali)",
+        "Sposta membri (canali vocali)",
+        "Leggi registro revisioni"
+      ],
+      "denied": ["Gestisci canali", "Gestisci ruoli", "Gestisci server", "Menziona @everyone, @here e tutti i ruoli"],
+      "nota": "Solo strumenti di moderazione, mai struttura del server. Assegnatelo 1-2 persone di fiducia."
+    },
+    {
+      "nome": "Esploratori",
+      "emoji_nome": "🚀",
+      "colore": "#c9b29a",
+      "posizione": 3,
+      "mostra_separatamente": true,
+      "consentisci_menzione": true,
+      "permessi": [],
+      "nota": "Ruolo tinted per chi entra (assegnato dall'onboarding). Non ha permessi extra: serve a dare un colore e a poter pingare il gruppo senza toccare @everyone. Il nome viene dal sito: chi visita il progetto è un 'esploratore'. NON chiamarlo 'comunità' né 'abitanti'."
+    },
+    {
+      "nome": "Novità",
+      "emoji_nome": "📣",
+      "colore": "#602ba0",
+      "posizione": 4,
+      "mostra_separatamente": false,
+      "consentisci_menzione": true,
+      "permessi": [],
+      "nota": "Opt-in: chi vuole le notifiche quando pubblici un aggiornamento o un nuovo volume. Da menzionare in #annunci (mai @everyone)."
+    },
+    {
+      "nome": "Pianeta · Marte",
+      "colore": "#c1443c",
+      "posizione": 5,
+      "mostra_separatamente": false,
+      "consentisci_menzione": true,
+      "permessi": [],
+      "nota": "Ruolo cosmetico a scelta (onboarding: 'Qual è il tuo pianeta?'). Solo colore e identità. Gli 8 ruoli pianeta hanno lo stesso trattamento."
+    },
+    {
+      "nome": "Pianeta · Mercurio",
+      "colore": "#8e8680",
+      "posizione": 6,
+      "mostra_separatamente": false,
+      "consentisci_menzione": true,
+      "permessi": []
+    },
+    {
+      "nome": "Pianeta · Venere",
+      "colore": "#e0a06b",
+      "posizione": 7,
+      "mostra_separatamente": false,
+      "consentisci_menzione": true,
+      "permessi": []
+    },
+    {
+      "nome": "Pianeta · Terra",
+      "colore": "#3e7c6b",
+      "posizione": 8,
+      "mostra_separatamente": false,
+      "consentisci_menzione": true,
+      "permessi": []
+    },
+    {
+      "nome": "Pianeta · Giove",
+      "colore": "#c9803c",
+      "posizione": 9,
+      "mostra_separatamente": false,
+      "consentisci_menzione": true,
+      "permessi": []
+    },
+    {
+      "nome": "Pianeta · Saturno",
+      "colore": "#c4a46a",
+      "posizione": 10,
+      "mostra_separatamente": false,
+      "consentisci_menzione": true,
+      "permessi": []
+    },
+    {
+      "nome": "Pianeta · Urano",
+      "colore": "#6fa8b8",
+      "posizione": 11,
+      "mostra_separatamente": false,
+      "consentisci_menzione": true,
+      "permessi": []
+    },
+    {
+      "nome": "Pianeta · Nettuno",
+      "colore": "#3d5aa8",
+      "posizione": 12,
+      "mostra_separatamente": false,
+      "consentisci_menzione": true,
+      "permessi": []
+    },
+    {
+      "nome": "Follower Amazon",
+      "colore": "#555555",
+      "posizione": 13,
+      "mostra_separatamente": false,
+      "consentisci_menzione": false,
+      "permessi": [],
+      "nota": "OPZIONALE, rimuovilo se non serve. Tieni presente il vincolo royalties: il server NON deve sembrare uno shop, quindi niente 'clienti', 'ordini', 'sconti'. Se lo tieni è solo un etichetta neutra per chi segue la collana su Amazon."
+    }
+  ],
+
+  "permessi_everyone": {
+    "consentiti": [
+      "Visualizza canali",
+      "Invia messaggi",
+      "Invia messaggi in thread",
+      "Crea thread pubblici",
+      "Aggiungi reazioni",
+      "Incorpora link",
+      "Allega file",
+      "Leggi cronologia messaggi",
+      "Usa emoji esterne",
+      "Usa sticker esterni",
+      "Collegati (vocale)",
+      "Parla (vocale)",
+      "Video",
+      "Cambia nickname",
+      "Usa comandi app",
+      "Invia messaggi vocali",
+      "Crea sondaggi"
+    ],
+    "negati": [
+      "Menziona @everyone, @here e tutti i ruoli",
+      "Menziona tutti i ruoli",
+      "Gestisci canali",
+      "Gestisci server",
+      "Gestisci ruoli",
+      "Gestisci messaggi",
+      "Gestisci thread",
+      "Gestisci webhook",
+      "Gestisci emoji e sticker",
+      "Espelli membri",
+      "Banna membri",
+      "Modera membri",
+      "Crea inviti istantanei lasciandoli permanenti (i permessi di invito restano ok)",
+      "Invia messaggi TTS",
+      "Amministratore"
+    ],
+    "nota": "Default sobri: chiunque legga e scriva, nessuno moderi. '@everyone' non si pinga mai: per gli annunci c'è il ruolo Novità."
+  },
+
+  "categorie_e_canali": [
+    {
+      "categoria": "📌 INFORMAZIONI",
+      "canali": [
+        {
+          "nome": "benvenuto",
+          "tipo": "testo",
+          "topic": "Il primo canale: chi sei, da dove arrivi, cosa trovi qui.",
+          "slowmode_secondi": 30,
+          "permessi_canale": {
+            "everyone": ["Visualizza canali", "Invia messaggi", "Leggi cronologia messaggi"],
+            "nota": "Messaggio di benvenuto automatico (Impostazioni server → Canale di sistema). Testo sotto, in 'testi_pronti'."
+          }
+        },
+        {
+          "nome": "regole",
+          "tipo": "testo (canale regole)",
+          "topic": "Le regole del server. Un messaggio per regola, con le reazioni di accettazione se attivi il membership screening.",
+          "permessi_canale": {
+            "everyone": ["Visualizza canali", "Leggi cronologia messaggi"],
+            "Silen": ["tutti"],
+            "Moderazione": ["Invia messaggi", "Aggancia messaggi", "Gestisci messaggi"]
+          }
+        },
+        {
+          "nome": "annunci",
+          "tipo": "testo",
+          "topic": "Novità del sito, nuove lune, nuovi volumi. Solo scrittura staff — qui si menziona @Novità.",
+          "permessi_canale": {
+            "everyone": ["Visualizza canali", "Leggi cronologia messaggi", "Aggiungi reazioni"],
+            "Silen": ["tutti"],
+            "Moderazione": ["Invia messaggi", "Aggancia messaggi"]
+          }
+        },
+        {
+          "nome": "novita-del-sito",
+          "tipo": "testo",
+          "topic": "Cosa cambia su gorrinoofficial.it: nuove schede luna, aggiornamenti del passaporto, correzioni. Una riga per aggiornamento + link.",
+          "slowmode_secondi": 60,
+          "permessi_canale": {
+            "everyone": ["Visualizza canali", "Invia messaggi", "Leggi cronologia messaggi"],
+            "nota": "Aperto: se qualcuno trova un bug sul sito lo scrive qui. Staff lo aggancia."
+          }
+        }
+      ]
+    },
+    {
+      "categoria": "🌌 IL PROGETTO",
+      "canali": [
+        {
+          "nome": "il-progetto",
+          "tipo": "testo",
+          "topic": "Cos'è Una Voce Dal Profondo: due finalità dichiarate — divulgazione psicologica (le collezioni) e storie (i tre volumi). Nessuna delle due nasconde l'altra.",
+          "permessi_canale": {
+            "everyone": ["Visualizza canali", "Invia messaggi", "Leggi cronologia messaggi"],
+            "nota": "Qui si aggancia il testo di #progetto del sito (la sezione 'IL MIO PROGETTO': Silen, collezioni = divulgazione, libri = storie)."
+          }
+        },
+        {
+          "nome": "chi-e-silen",
+          "tipo": "testo",
+          "topic": "La mascotte del progetto: lo stesso viaggiatore che si adatta all'ecosistema di ogni pianeta. Geometria diversa, stessa voce.",
+          "permessi_canale": {
+            "everyone": ["Visualizza canali", "Invia messaggi", "Leggi cronologia messaggi"]
+          }
+        },
+        {
+          "nome": "passaporto",
+          "tipo": "testo",
+          "topic": "Il Passaporto Neurodivergente: come si costruisce su gorrinoofficial.it/passaporto/, quali lune scegliere, come si scarica il PDF.",
+          "permessi_canale": {
+            "everyone": ["Visualizza canali", "Invia messaggi", "Leggi cronologia messaggi", "Allega file", "Incorpora link"],
+            "nota": "Qui la gente può allegare il proprio PDF o uno screenshot del passaporto. Niente obbligo: non è una gara."
+          }
+        }
+      ]
+    },
+    {
+      "categoria": "🪐 LE COLLEZIONI",
+      "canali": [
+        {
+          "nome": "le-otto-collezioni",
+          "tipo": "testo",
+          "topic": "Panoramica delle otto collezioni pianeta. Per le discussioni generali sulle schede.",
+          "permessi_canale": {
+            "everyone": ["Visualizza canali", "Invia messaggi", "Leggi cronologia messaggi"]
+          }
+        },
+        {
+          "nome": "le-lune",
+          "tipo": "testo",
+          "topic": "Le 48 lune, una per volta. Ogni luna ha tre voci sul sito: Cos'è (divulgativo), La luna racconta (come si vive), il motto. Qui si parla di quello — con esempi concreti, non diagnosi.",
+          "slowmode_secondi": 15,
+          "permessi_canale": {
+            "everyone": ["Visualizza canali", "Invia messaggi", "Invia messaggi in thread", "Crea thread pubblici", "Leggi cronologia messaggi"],
+            "nota": "CONSIGLIO: un thread per luna, titolo = nome luna (es. 'Burnout — Marte'). Il thread evita di mischiare 48 argomenti in un flusso unico."
+          },
+          "thread_consigliati": [
+            "Energia — Marte",
+            "Burnout — Marte",
+            "Maschere sociali — Terra",
+            "…un thread per ogni luna, creati man mano che servono"
+          ]
+        },
+        {
+          "nome": "i-tre-volumi",
+          "tipo": "testo",
+          "topic": "I libri della collana, con la geografia del sole: +23,4° Speranza (vol. 1), −23,4° Verità (vol. 2), 0° Equilibrio (vol. 3). Qui si parla delle storie, senza spoiler non segnalati.",
+          "nota_spoiler": "I messaggi con spoiler si scrivono in un thread marcato 'spoiler' o con il tag spoiler di Discord.",
+          "permessi_canale": {
+            "everyone": ["Visualizza canali", "Invia messaggi", "Leggi cronologia messaggi"],
+            "nota": "MAI linguaggio da vendita (acquista, prezzo, carrello, sconto, offerta). Si parla di storie e di dove sono pubblicate, non di prodotti."
+          }
+        }
+      ]
+    },
+    {
+      "categoria": "💬 CONVERSAZIONI",
+      "canali": [
+        {
+          "nome": "salotto",
+          "tipo": "testo",
+          "topic": "Ciao a tutti. Presentazioni, cose del giorno, quello che vi passa per la testa.",
+          "slowmode_secondi": 0,
+          "permessi_canale": {
+            "everyone": ["Visualizza canali", "Invia messaggi", "Leggi cronologia messaggi", "Aggiungi reazioni", "Allega file"]
+          }
+        },
+        {
+          "nome": "psicologia-concreta",
+          "tipo": "testo",
+          "topic": "Come funzionano mente, emozioni e neurodivergenza — spiegato bene. Domande, esempi di vita reale, fonti. La psicologia la esplichiamo, non la sostituiamo: qui non si fanno diagnosi.",
+          "slowmode_secondi": 30,
+          "permessi_canale": {
+            "everyone": ["Visualizza canali", "Invia messaggi", "Leggi cronologia messaggi"],
+            "nota": "Va agganciato il disclaimer delle schede luna: 'non sostituisce il parere di un professionista'."
+          }
+        },
+        {
+          "nome": "storie",
+          "tipo": "testo",
+          "topic": "Scrittura e narrazione: bozzetti, esercizi, quello che avete scritto voi. Feedback solo se richiesti.",
+          "permessi_canale": {
+            "everyone": ["Visualizza canali", "Invia messaggi", "Leggi cronologia messaggi", "Allega file"]
+          }
+        },
+        {
+          "nome": "un-posto-comodo",
+          "tipo": "testo",
+          "topic": "Stimoli, sovraccarichi, bisogno di calma: qui si può scrivere di come si sta, senza dover spiegare tutto. Risposte leggere, niente pressione di rispondere subito.",
+          "slowmode_secondi": 60,
+          "permessi_canale": {
+            "everyone": ["Visualizza canali", "Invia messaggi", "Leggi cronologia messaggi"],
+            "nota": "Canale a bassa stimolazione: niente mention non necessarie, niente thread rumorosi. Le crisi acute vanno indirizzate ai servizi di emergenza (112) — lo staff non è un servizio clinico."
+          }
+        },
+        {
+          "nome": "off-topic",
+          "tipo": "testo",
+          "topic": "Tutto il resto: libri, film, gatti, caffè.",
+          "permessi_canale": {
+            "everyone": ["Visualizza canali", "Invia messaggi", "Leggi cronologia messaggi", "Allega file", "Incorpora link"]
+          }
+        }
+      ]
+    },
+    {
+      "categoria": "🔊 VOCE",
+      "canali": [
+        {
+          "nome": "il-salotto",
+          "tipo": "voce",
+          "topic": "Canale vocale libero. Microfono opzionale: si può anche solo ascoltare.",
+          "limite_utenti": 0,
+          "permessi_canale": {
+            "everyone": ["Collegati", "Parla", "Video", "Usa attività incorporate", "Usa soundboard"]
+          }
+        },
+        {
+          "nome": "leggiamo-insieme",
+          "tipo": "voce",
+          "topic": "Per gli eventi: lettura di un capitolo, discussione di una luna, presentazione di un volume.",
+          "limite_utenti": 12,
+          "permessi_canale": {
+            "everyone": ["Collegati", "Parla"],
+            "Silen": ["tutti"],
+            "Moderazione": ["Sposta membri", "Muta membri"]
+          }
+        },
+        {
+          "nome": "stage-eventi",
+          "tipo": "canale eventi / stage",
+          "topic": "Solo per eventi programmati (Impostazioni server → Eventi). Da creare solo quando hai il primo evento in calendario.",
+          "nota": "Facoltativo: se non organizzi eventi vocali, cancellalo."
+        }
+      ]
+    },
+    {
+      "categoria": "🛟 SUPPORTO (privato)",
+      "canali": [
+        {
+          "nome": "segnalazioni",
+          "tipo": "testo",
+          "topic": "Per scrivere allo staff: problemi con altri membri, contenuti da rivedere, dubbi sul server.",
+          "permessi_canale": {
+            "everyone": [],
+            "denied": ["Visualizza canali"],
+            "Silen": ["tutti"],
+            "Moderazione": ["Visualizza canali", "Invia messaggi", "Leggi cronologia messaggi"],
+            "nota": "Sovrascrittura: nega a @everyone la visibilità, la concede a Moderazione e Silen. Thread privati consigliati: un thread per segnalazione."
+          }
+        },
+        {
+          "nome": "moderazione",
+          "tipo": "testo",
+          "topic": "Coordinamento staff: promemoria, decisioni, follow-up delle segnalazioni.",
+          "permessi_canale": {
+            "everyone": [],
+            "denied": ["Visualizza canali"],
+            "Silen": ["tutti"],
+            "Moderazione": ["Visualizza canali", "Invia messaggi", "Leggi cronologia messaggi"]
+          }
+        }
+      ]
+    }
+  ],
+
+  "onboarding": {
+    "attivo": true,
+    "benvenuto": "Benvenuto su Voci dal Profondo. Prima di scrivere, scegli da dove arrivi — poi i canali giusti te li mostriamo noi.",
+    "canali_di_partenza": ["#salotto", "#il-progetto", "#le-otto-collezioni", "#passaporto"],
+    "prompt": [
+      {
+        "domanda": "Da dove arrivi?",
+        "scelta_multipla": true,
+        "opzioni": [
+          { "risposta": "Dalle schede delle lune", "mostra_canali": ["#le-lune", "#le-otto-collezioni"], "assegna_ruolo": "Esploratori" },
+          { "risposta": "Dai tre volumi", "mostra_canali": ["#i-tre-volumi", "#storie"], "assegna_ruolo": "Esploratori" },
+          { "risposta": "Dal Passaporto Neurodivergente", "mostra_canali": ["#passaporto"], "assegna_ruolo": "Esploratori" },
+          { "risposta": "Curiosità: non conosco ancora il sito", "mostra_canali": ["#il-progetto", "#chi-e-silen"], "assegna_ruolo": "Esploratori" }
+        ]
+      },
+      {
+        "domanda": "Qual è il tuo pianeta?",
+        "scelta_multipla": false,
+        "opzioni": [
+          { "risposta": "Marte", "assegna_ruolo": "Pianeta · Marte" },
+          { "risposta": "Mercurio", "assegna_ruolo": "Pianeta · Mercurio" },
+          { "risposta": "Venere", "assegna_ruolo": "Pianeta · Venere" },
+          { "risposta": "Terra", "assegna_ruolo": "Pianeta · Terra" },
+          { "risposta": "Giove", "assegna_ruolo": "Pianeta · Giove" },
+          { "risposta": "Saturno", "assegna_ruolo": "Pianeta · Saturno" },
+          { "risposta": "Urano", "assegna_ruolo": "Pianeta · Urano" },
+          { "risposta": "Nettuno", "assegna_ruolo": "Pianeta · Nettuno" }
+        ],
+        "nota": "Domanda cosmetica, nessun significato clinico. Le risposte sono gli 8 nomi visualizzati in italiano, come sul sito."
+      },
+      {
+        "domanda": "Vuoi ricevere gli annunci?",
+        "scelta_multipla": false,
+        "opzioni": [
+          { "risposta": "Sì, avvisami quando c'è una novità", "assegna_ruolo": "Novità", "mostra_canali": ["#annunci"] },
+          { "risposta": "No, controllo io quando passo", "assegna_ruolo": null }
+        ]
+      }
+    ]
+  },
+
+  "regole": [
+    "Rispetto prima di tutto. Qui si parla di mente, emozioni e neurodivergenza: nessuno viene ridotto a una diagnosi, a un sintomo o a un'etichetta.",
+    "Niente diagnosi, niente consigli medici. Le schede del sito sono divulgazione psicologica e non sostituiscono il parere di un professionista. Vale anche qui.",
+    "Le esperienze personali si raccontano in prima persona. Non si dice a qualcun altro cosa ha o cosa dovrebbe fare.",
+    "Privacy: non condividere dati personali propri o di altri. Niente screenshot di chat private senza il consenso di chi c'è dentro.",
+    "Niente spam, niente pubblicità, niente inviti ad altri server senza chiedere allo staff. Niente linguaggio da vendita: questo server non è un negozio.",
+    "Contenuti sensibili: segnala con il tag spoiler e avvisa nei contenuti. Se stai male davvero, chiama il 112 o i servizi di emergenza: qui non c'è un servizio clinico.",
+    "Chi rompe le regole riceve prima un avviso, poi il timeout, poi l'espulsione. Le decisioni dello staff sono definitive — puoi chiedere chiarimenti in #segnalazioni."
+  ],
+
+  "testi_pronti": {
+    "messaggio_benvenuto_sistema": "Benvenuto su Voci dal Profondo. Qui spiego come funzionano mente, emozioni e neurodivergenza — e racconto storie.\n\n• Leggi #regole\n• Presentati in #salotto se vuoi\n• Scopri il progetto in #il-progetto\n\nIl sito: https://www.gorrinoofficial.it",
+    "messaggio_pinned_il_progetto": "Una Voce Dal Profondo ha due finalità, e nessuna delle due nasconde l'altra:\n\n1. **Divulgazione psicologica** — le otto collezioni pianeta, una scheda per luna: Cos'è (come funziona) e La luna racconta (come si vive).\n2. **Storie** — i tre volumi, con la geografia del sole: +23,4° Speranza, −23,4° Verità, 0° Equilibrio.\n\nIl tono è quello del sito: concreto, frasi brevi. La metafora celeste sta nelle immagini e nei nomi, non nelle spiegazioni.",
+    "messaggio_pinned_le_lune": "Come funziona questo canale: un thread per luna.\n\nOgni luna sul sito ha tre voci — **Cos'è** (divulgativo, distingue disturbo / sintomo / caratteristica), **La luna racconta** (come si vive e cosa può aiutare) e il **motto** (una cosa sola, senza definire).\n\nNel thread: cosa vi ha colpito, esempi concreti, domande. Niente diagnosi.",
+    "messaggio_pinned_passaporto": "Il Passaporto Neurodivergente si costruisce su https://www.gorrinoofficial.it/passaporto/\n\nScegli le tue lune tra tutti e 8 i pianeti (48 lune), personalizzalo con nome e nome da esploratore, scarica il PDF.\n\nQui puoi mostrarlo se vuoi — nessun obbligo.",
+    "badge_server": {
+      "community": "Il server è impostato come server Community (serve per onboarding, regole e canale annunci).",
+      "descrizione_server_visibile": "Voci dal Profondo — psicologia e narrazione. Le schede delle lune, i tre volumi, il Passaporto Neurodivergente."
+    }
+  },
+
+  "emoji_e_sticker": {
+    "nota": "Le emoji si caricano da Impostazioni server → Emoji (128x128, max 256 KB). Le sorgenti migliori sono le thumb già pronte in Asset/thumb/ (256px). Riduci a 128px prima di caricare. Massimo 50 emoji normali + 50 animate per il primo livello.",
+    "elenco": [
+      { "nome": "silen", "sorgente": "Asset/thumb/mascotte.png o Asset/mascotte.png", "uso": "la mascotte, per i messaggi dello staff" },
+      { "nome": "marte", "sorgente": "Asset/thumb512/marte.png ridotto a 128px", "uso": "la collezione Marte" },
+      { "nome": "terra", "sorgente": "Asset/thumb512/terra.png ridotto a 128px", "uso": "la collezione Terra" },
+      { "nome": "luna-burnout", "sorgente": "Asset/thumb/<id-luna>.png", "uso": "le reazioni sulle schede luna: prendi le 4-5 lune più discusse" },
+      { "nome": "passaporto", "sorgente": "composizione da Asset/thumb/copertina.jpg", "uso": "quando qualcuno mostra il suo passaporto" },
+      { "nome": "sole-alto", "sorgente": "il badge solare del sito (arco tratteggiato + punto sole, versione +23,4°)", "uso": "Speranza — vol. 1" },
+      { "nome": "sole-basso", "sorgente": "badge solare, versione −23,4°", "uso": "Verità — vol. 2" },
+      { "nome": "sole-mezzo", "sorgente": "badge solare, versione 0°", "uso": "Equilibrio — vol. 3" }
+    ],
+    "sticker_consigliati": [
+      { "nome": "benvenuto-esploratore", "testo": "Buon viaggio", "sorgente": "mascotte su crema" },
+      { "nome": "frase-breve", "testo": "Non è debolezza.", "sorgente": "stile tipografico del sito, serif su inchiostro" }
+    ]
+  },
+
+  "vincoli_di_tono": {
+    "da_ricordare_quando_scrivi_sul_server": [
+      "Tono concreto e materiale, frasi brevi. Federico è pragmatico: niente etereo, niente ovattato.",
+      "Niente linguaggio spirituale/new-age. Il progetto è psicologia e narrazione: la psicologia si aggancia esplicitamente nei testi chiave.",
+      "Niente linguaggio da vendita (acquista, prezzo, carrello, sconto, offerta) e niente elenco prodotti. Redbubble si presenta come 'riproduzione delle illustrazioni, di cui gestisce la vendita e mi corrisponde le royalties'.",
+      "Niente marchi di terzi nei testi (niente citazioni di Pokémon, brand, ecc.). Per spiegare perché Silen cambia forma: 'si adatta all'ecosistema di ogni pianeta'.",
+      "Il pubblico sono 'esploratori che hanno visitato il nostro universo' — NON una 'comunità', NON 'abitanti'.",
+      "La metafora celeste resta nelle immagini e nei nomi (pianeti, lune, sole), non nelle spiegazioni.",
+      "Le voci Cos'è delle lune restano il cuore divulgativo: vanno riportate integrali, non assottigliate."
+    ]
+  },
+
+  "checklist_creazione": [
+    "1. Crea il server con il template 'Crea il mio' → nome 'Voci dal Profondo'.",
+    "2. Impostazioni server → Profilo della community: carica icona (Asset/mascotte.png su crema) e banner se sbloccato.",
+    "3. Crea i ruoli nell'ordine dell'array 'ruoli' (dal più potente al meno potente). Colori hex dal campo 'colore'.",
+    "4. Ruolo Silen = proprietario, toggle 'Amministratore'. Moderazione = solo i permessi elencati.",
+    "5. Crea le categorie e i canali come in 'categorie_e_canali'. Per ogni canale, apri i permessi e applica le sovrascritture indicate.",
+    "6. #segnalazioni e #moderazione: nega 'Visualizza canali' a @everyone, concedilo a Moderazione e Silen.",
+    "7. #regole: attiva 'È il canale delle regole del server' nelle impostazioni server → Community. #annunci = 'Canale degli aggiornamenti pubblici'. #benvenuto = canale di sistema.",
+    "8. Attiva l'onboarding e imposta i 3 prompt come in 'onboarding'.",
+    "9. Scrivi i messaggi fissati usando i 'testi_pronti'.",
+    "10. Carica le emoji (Asset/thumb/ sono già a 256px, riduci a 128px).",
+    "11. Membership screening: incolla le 7 regole.",
+    "12. Prova l'ingresso con un account secondario: verifica che l'onboarding assegni Esploratori e che #segnalazioni resti invisibile."
+  ]
+}
