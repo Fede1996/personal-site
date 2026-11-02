@@ -470,13 +470,28 @@ footer {
     transform: translateX(-50%);
     z-index: 2;
     font-family: var(--sans);
-    font-size: 0.88rem;
-    letter-spacing: 1.5px;
+    /* Misura di sicurezza senza container query: la riga è di 37
+       caratteri e, a 320px di viewport, la card ne offre ~280. Con le
+       container query (subito sotto) scala invece con la card. */
+    font-size: 0.7rem;
+    letter-spacing: 0.6px;
     text-transform: uppercase;
     color: var(--viola);
     opacity: 0.75;
+    /* Una sola riga: con l'andare a capo il fronte non ha spazio
+       verticale e la scritta finiva sotto la tagline */
     white-space: nowrap;
     pointer-events: none;
+}
+/* A 0.88rem + 1.5px di interlettera la riga è ~350px: su mobile la card
+   ne offre ~300 e, con overflow: hidden sul fronte, il testo veniva
+   tagliato alle due estremità. Qui il corpo e l'interlettera seguono
+   la larghezza della card, e la riga ci sta sempre. */
+@supports (container-type: size) {
+    .flip-hint {
+        font-size: clamp(0.7rem, 3.1cqw, 0.88rem);
+        letter-spacing: clamp(0.6px, 0.28cqw, 1.5px);
+    }
 }
 @media (hover: none), (pointer: coarse) {
     .flip-card.flipped .flip-hint { display: none; }
