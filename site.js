@@ -277,7 +277,9 @@
     // i link dei temi. I due pulsanti stanno fuori dalle facce animate, così
     // il focus si sposta subito senza attendere lo scambio di visibility.
     const cards = document.querySelectorAll('.flip-card:not(.card-disble)');
-    if (!cards.length) return;
+    // Niente return qui: le pagine dei pianeti non hanno flip-card e, con un
+    // return anticipato, se ne veniva via tutto lo script (torna su compreso).
+    if (cards.length) {
 
     function closeCard(card, restoreFocus) {
         card.classList.remove('flipped');
@@ -329,4 +331,5 @@
             }
         });
     });
+    }
 })();

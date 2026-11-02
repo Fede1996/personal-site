@@ -40,6 +40,9 @@ body {
     font-family: var(--sans);
     background-color: var(--crema);
     color: var(--inchiostro);
+    /* 17px: il corpo ereditato (testo delle schede, descrizioni) era
+       leggermente piccolo per una lettura prolungata */
+    font-size: 1.0625rem;
     line-height: 1.6;
     overflow-x: hidden;
 }
@@ -115,11 +118,12 @@ header.scrolled {
 nav a {
     text-decoration: none;
     color: var(--inchiostro);
-    /* corpo e interlettera ridotti: la barra centrata non deve più
-       accavallarsi con il logo a sinistra */
-    font-size: 0.65rem;
+    /* corpo leggibile: sotto 0.75rem il menu diventava microscopico.
+       La sovrapposizione col logo la evitiamo alzando la soglia del
+       logo compatto (vedi @media max-width: 1400px), non rimpicciolendo il testo */
+    font-size: 0.78rem;
     text-transform: uppercase;
-    letter-spacing: 1.2px;
+    letter-spacing: 1px;
     font-weight: 600;
     transition: opacity 0.3s;
 }
@@ -236,6 +240,7 @@ nav a:hover { opacity: 0.6; }
     max-width: min(600px, 100%);
     font-weight: 300;
     font-family: var(--serif);
+    font-size: 1.3rem;
 }
 .vertical-line {
     width: 1px;
@@ -320,11 +325,11 @@ h2.section-title {
     color: var(--inchiostro);
     font-family: var(--serif);
 }
-.license-text.lead { font-size: 1.1rem; }
+.license-text.lead { font-size: 1.22rem; }
 footer {
     padding: 50px;
     text-align: center;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     color: #5a4778;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -406,19 +411,7 @@ footer {
        resta dietro ed era lui a "mangiarsi" gli eventi del pulsante */
     pointer-events: none;
 }
-/* Blob colorato al centro */
-.blob {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-    height: 60%;
-    filter: blur(50px);
-    opacity: 0.7;
-    z-index: 0;
-    border-radius: 50%;
-}
+/* Blob colorato al centro (posizione e forma in "CERCHI / ANELLI PIANETA") */
 .blob-1  { background: radial-gradient(circle, #FF4500, #8B0000, #2F0000); }
 .blob-2  { background: radial-gradient(circle, #FFFACD, #CD853F, #5D4037); }
 .blob-3  { background: radial-gradient(circle, #FFFF00, #FF8C00, #DAA520); }
@@ -450,9 +443,9 @@ footer {
 }
 .card-col-num {
     font-family: var(--serif);
-    font-size: 0.7rem;
+    font-size: 0.92rem;
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 2.5px;
     margin-bottom: 14px;
 }
 .card-divider {
@@ -462,9 +455,9 @@ footer {
 }
 .card-tagline {
     font-family: var(--serif);
-    font-size: 0.75rem;
+    font-size: 0.95rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1.6px;
     line-height: 1.6;
 }
 
@@ -477,7 +470,7 @@ footer {
     transform: translateX(-50%);
     z-index: 2;
     font-family: var(--sans);
-    font-size: 0.75rem;
+    font-size: 0.88rem;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--viola);
@@ -514,7 +507,7 @@ footer {
 }
 .flip-card-back h3 {
     font-family: var(--sans);
-    font-size: 2rem;
+    font-size: 2.15rem;
     margin-bottom: 20px;
 }
 
@@ -574,7 +567,7 @@ footer {
 .shop-text {
     font-family: var(--sans);
     color: var(--inchiostro);
-    font-size: 0.8rem;
+    font-size: 0.92rem;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -590,7 +583,7 @@ footer {
 /* Retro card: i temi come elenco leggibile di link veri (niente orbita) */
 .back-title {
     font-family: var(--sans);
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -625,7 +618,7 @@ footer {
 }
 .moon-chip span {
     font-family: var(--serif-it);
-    font-size: 0.8rem;
+    font-size: 0.95rem;
     letter-spacing: 0.2px;
     line-height: 1.3;
     /* Le etichette lunghe ("Disturbo Ossessivo-Compulsivo") vanno a capo
@@ -652,13 +645,45 @@ footer {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+/* Il pianeta deve restare un cerchio vero a ogni larghezza della card.
+   width/height in % sulla card (che non è quadrata) davano ellissi sempre
+   più schiacciate man mano che la card si stringeva: su mobile il frame
+   veniva alto quasi il doppio della larghezza.
+   Fallback: lato = 60% della larghezza, con aspect-ratio a chiuderlo in
+   quadrato. Poi, dove i container query ci sono, il lato diventa il 60%
+   del lato più corto della card, così non sborda mai in verticale. */
 .circle-frame {
     width: 60%;
-    height: 60%;
+    aspect-ratio: 1;
     border: 1px solid var(--inchiostro);
     border-radius: 50%;
     z-index: 2;
     pointer-events: none;
+}
+.blob {
+    width: 80%;
+    aspect-ratio: 1;
+    /* leggermente più in alto del frame: il colore sta dietro al testo */
+    top: 45%;
+    filter: blur(50px);
+    opacity: 0.7;
+    z-index: 0;
+    border-radius: 50%;
+}
+@supports (container-type: size) {
+    .flip-card-front {
+        container-type: size;
+    }
+    .circle-frame {
+        width: min(60cqw, 60cqh);
+        height: auto;
+    }
+    .blob {
+        width: min(80cqw, 80cqh);
+        height: auto;
+        /* top al 45% come prima, così il pianeta resta centrato sul testo */
+        top: 45%;
+    }
 }
 .saturn-ring {
     position: absolute;
@@ -698,8 +723,14 @@ footer {
     border-radius: 20px;
     padding: clamp(25px, 5vw, 50px);
     display: flex;
+    /* wrap: la riga del badge occupa tutta la card e va a capo */
+    flex-wrap: wrap;
     align-items: center;
-    gap: clamp(25px, 5vw, 50px);
+    /* orizzontale (copertina | testo) più ampia della verticale
+       (riga del badge → copertina e testo): il badge resta agganciato
+       al blocco invece di galleggiare in alto */
+    column-gap: clamp(25px, 5vw, 50px);
+    row-gap: clamp(24px, 4vw, 32px);
 }
 .book-card.reverse { flex-direction: row-reverse; }
 .book-img {
@@ -736,52 +767,67 @@ footer {
 }
 .book-meta {
     list-style: none;
-    margin-bottom: 30px;
+    /* sopra: "Il libro racconta" non ha margine inferiore e l'elenco vi
+       restava incollato; sotto: prima sommava il suo margine a quello
+       del bottone, con un buco doppio */
+    margin: 16px 0 18px;
     font-family: var(--serif);
 }
 .book-meta li {
     margin-bottom: 10px;
-    font-size: 0.9rem;
+    font-size: 1.02rem;
     display: flex;
     align-items: center;
     gap: 10px;
 }
-/* Badge del sole: arco di percorso + declinazione, niente emoji */
-.sun-badge,
-.sun-badge-reverse {
-    position: absolute;
-    top: 15px;
-    line-height: 1;
-    z-index: 10;
+/* Badge del meteo: icona + tempo + tema. Occupa una riga intera della
+   card ed è centrato: prima stava dentro .book-info e, sulle card
+   reverse (dove il testo sta a sinistra), l'icona sembrava sfalsata
+   rispetto alle altre due. Qui tutti e tre i badge stanno nello
+   stesso punto, al centro della card. Lo distanzia dal blocco la
+   row-gap della card, senza margini aggiuntivi. */
+.sun-badge {
+    flex: 1 0 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    line-height: 1.15;
+    color: var(--viola);
+    text-align: center;
+}
+.sun-badge-text {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    color: var(--viola);
+    align-items: center;
+    gap: 2px;
+    min-width: 0;
 }
-.sun-badge { right: 15px; align-items: flex-end; text-align: right; }
-.sun-badge-reverse { left: 15px; align-items: flex-start; text-align: left; }
-.sun-arc {
-    width: 40px;
-    height: 26px;
-    fill: none;
-    stroke: currentColor;
-}
-/* Tratteggio = traiettoria possibile del sole; il punto è dove si ferma */
-.sun-arc .arc { stroke-width: 1.2; stroke-dasharray: 2.5 2.5; opacity: 0.55; }
-.sun-arc .horizon { stroke-width: 1.2; opacity: 0.55; }
-.sun-arc .sun-dot { fill: currentColor; stroke: none; }
 .sun-deg {
     font-family: var(--serif);
-    font-size: 1.4rem;
+    font-size: 1.45rem;
 }
-.sun-badge small,
-.sun-badge-reverse small {
+.sun-badge small {
     font-family: var(--sans);
-    font-size: 0.72rem;
+    font-size: 0.82rem;
     font-weight: 700;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     opacity: 0.75;
+}
+
+/* ============ METEO → TEMA DEL LIBRO ============
+   Il badge accanto a ogni volume mostra il tempo atmosferico (icona +
+   nome) e il tema che consiglia. */
+.meteo-icon {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 /* ============ SCHEDA LUNA: DUE VOCI ============
@@ -790,7 +836,7 @@ footer {
 .voce-label {
     display: block;
     font-family: var(--sans);
-    font-size: 0.72rem;
+    font-size: 0.82rem;
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -807,7 +853,7 @@ footer {
 }
 .cos-e p {
     font-family: var(--sans);
-    font-size: 0.92rem;
+    font-size: 1.02rem;
     line-height: 1.6;
 }
 .luna-racconto { margin-top: 4px; }
@@ -823,7 +869,7 @@ footer {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-size: 0.8rem;
+    font-size: 0.92rem;
     transition: 0.3s;
     border: 2px solid var(--viola);
     box-sizing: border-box;
@@ -875,7 +921,7 @@ footer {
     align-self: flex-start;
     font-family: var(--sans);
     font-weight: 700;
-    font-size: 0.75rem;
+    font-size: 0.88rem;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--viola);
@@ -922,7 +968,7 @@ footer {
     object-fit: cover;
 }
 .review-card h3 { font-family: var(--sans); margin-bottom: 5px; }
-.review-card p { font-size: 0.85rem; font-style: italic; color: #4a4054; }
+.review-card p { font-size: 1rem; font-style: italic; color: #4a4054; }
 .subtitle-user { font-family: var(--serif-it); color: var(--viola); }
 .desc-user { font-family: var(--serif); color: var(--inchiostro); }
 
@@ -960,7 +1006,7 @@ footer {
 }
 .legal-note {
     font-family: var(--serif-it);
-    font-size: 0.75rem;
+    font-size: 0.88rem;
     margin-top: 20px;
     color: var(--inchiostro);
 }
@@ -1047,7 +1093,7 @@ footer {
 /* più specifico di .support-box p (font-size 1.5rem) */
 .brevo-form p.brevo-decl {
     font-family: var(--sans);
-    font-size: 0.78rem;
+    font-size: 0.88rem;
     line-height: 1.55;
     color: #5a4778;
     margin: 0;
@@ -1101,9 +1147,10 @@ footer {
 .license-text + .license-text { margin-top: 0; }
 
 /* ============ RESPONSIVE ============ */
-/* La firma larga (214px a h=30) lascia poco spazio al menu centrato:
-   sotto i 1200px si passa alla versione compatta */
-@media (max-width: 1200px) {
+/* La firma larga (214px a h=30) lascia poco spazio al menu centrato.
+   Soglia alzata a 1400px: il menu ora ha un corpo più leggibile e serve
+   più spazio per non accavallarsi con il logo */
+@media (max-width: 1400px) {
     .logo { display: none; }
     .logo-mobile { display: block; }
 }
@@ -1125,19 +1172,18 @@ footer {
         align-self: center;
         max-width: min(300px, 80vw);
     }
-    /* Su mobile il badge non sta più in angolo: entra nel flusso fra copertina e titolo */
-    .sun-badge,
-    .sun-badge-reverse {
-        position: static;
-        order: 2;
-        align-self: center;
-        align-items: center;
-        text-align: center;
+    /* Il badge del meteo resta centrato sopra copertina e testo.
+       In colonna il flex-basis al 100% non serve (occuperebbe tutta
+       l'altezza della card): basta l'ordine e la larghezza piena. */
+    .sun-badge {
+        order: 0;
+        flex: 0 0 auto;
+        width: 100%;
     }
     .book-info { order: 3; width: 100%; }
     .book-meta li { justify-content: center; }
     .desc-section-box { max-width: 100%; min-height: 22vh; }
-    .card-tagline { font-size: 0.8rem; }
+    .card-tagline { font-size: 0.95rem; }
     .cosa-trovi-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
@@ -1150,7 +1196,7 @@ footer {
         gap: 8px;
     }
     .moon-chip img { width: 32px; height: 32px; }
-    .moon-chip span { font-size: 0.8rem; }
+    .moon-chip span { font-size: 0.92rem; }
     .support-box p { font-size: 1.15rem; }
 }
 
