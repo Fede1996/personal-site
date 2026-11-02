@@ -982,6 +982,18 @@ footer {
     margin: 0 auto;
 }
 .support-box p { font-family: var(--sans); font-size: 1.5rem; margin-bottom: 30px; }
+/* Il paragrafo delle licenze è lungo: il corpo 1.5rem della regola qui
+   sopra serve per testi brevi. Selettore più specifico, che regge anche
+   contro .support-box p nel media query mobile. */
+.support-box p.license-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+/* Titolo del riquadro: fuori da .desc-section-box il reset azzera i
+   margini di .section-title e il titolo restava incollato al paragrafo */
+.support-box .section-title {
+    margin-bottom: 24px;
+}
 .support-box h3 {
     margin-bottom: 20px;
     font-size: 1.1rem;
@@ -1004,20 +1016,31 @@ footer {
     margin: 0 auto;
     color: var(--viola);
 }
-.legal-note {
+/* .support-box p.legal-note e non .legal-note: la regola .support-box p
+   (1.5rem sans) aveva la precedenza e la nota legale si vedeva grande
+   quanto il titolo del riquadro */
+.support-box p.legal-note {
     font-family: var(--serif-it);
     font-size: 0.88rem;
     margin-top: 20px;
+    /* ultimo elemento del riquadro: il margin-bottom ereditato da
+       .support-box p lasciava 30px vuoti sotto la nota */
+    margin-bottom: 0;
     color: var(--inchiostro);
 }
 
 /* ============ MAILING LIST (in Informazioni e licenze) ============ */
 .mailing-block {
-    margin-top: 36px;
+    /* la riga di separazione sta a metà strada fra ciò che c'è sopra
+       (28px) e il titolo della mailing (28px): prima era 36/28 */
+    margin-top: 28px;
     padding-top: 28px;
     border-top: 1px solid rgba(96, 43, 160, 0.18);
 }
-.mailing-title {
+/* .support-box .mailing-title e non .mailing-title: la regola
+   .support-box h3 (margine 20px) aveva la precedenza e il titolo
+   della mailing stava più distante del previsto dal testo sotto */
+.support-box .mailing-title {
     font-family: var(--sans);
     font-size: 1.15rem;
     text-transform: uppercase;
