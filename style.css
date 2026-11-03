@@ -197,8 +197,8 @@ nav a:hover { opacity: 0.6; }
     text-decoration: none;
     color: var(--inchiostro);
 }
-.mobile-home { color: var(--crema) !important; }
-.mobile-home:hover { color: var(--viola) !important; }
+/* .mobile-home ha lo stile qui sotto (dopo .amazon-btn): qui restava solo
+   il vecchio giro di colori della pillola */
 
 /* ============ HERO ============ */
 .hero {
@@ -297,16 +297,21 @@ nav a:hover { opacity: 0.6; }
 .section-mascotte,
 .section-cards,
 .section-cosa-trovi {
-    padding: clamp(45px, 6vw, 75px) 20px;
     max-width: 1100px;
     margin: 0 auto;
-    text-align: center;
 }
+/* Stesso respiro verticale in tutte le sezioni: prima c'erano due clamp
+   diversi (75px per Progetto/Mascotte/Collezioni, 64px per Libri e le
+   successive) e "Le otto collezioni" e "I tre volumi" non avevano lo
+   stesso ritmo. */
+.section-mascotte,
+.section-cards,
+.section-cosa-trovi,
 .section-books,
 .section-community,
 .section-passaporto,
 .section-support {
-    padding: clamp(40px, 5vw, 65px) 20px;
+    padding: clamp(45px, 6vw, 75px) 20px;
     text-align: center;
 }
 .section-passaporto .community-lead {
@@ -327,8 +332,12 @@ h2.section-title {
     font-family: var(--sans);
     font-size: clamp(1.8rem, 5vw, 2.5rem);
     line-height: 1.2;
+    /* Aria uguale fra titolo e primo sottotitolo in TUTTE le sezioni.
+       Prima era 28px solo dentro .desc-section-box e 0 altrove (il reset
+       azzera i margini): "Il mio progetto" aveva il titolo incollato al
+       lead, "Esploratori" e "Passaporto" 18px, "Contatti" 24px. */
+    margin-bottom: 28px;
 }
-.desc-section-box .section-title { margin-bottom: 28px; }
 .license-text {
     color: var(--inchiostro);
     font-family: var(--serif);
@@ -741,7 +750,10 @@ footer {
 /* ============ LIBRI ============ */
 .book-card {
     position: relative;
-    scroll-margin-top: 110px;
+    /* 90px come le sezioni: l'header fisso è alto 60-70px e la scheda
+       atterra con la stessa aria sotto la barra. Prima 110px, tarato sul
+       vecchio header da 98px delle pagine interne. */
+    scroll-margin-top: 90px;
     background: var(--crema);
     box-shadow: var(--ombra);
     max-width: 950px;
@@ -904,6 +916,41 @@ footer {
 .amazon-btn:hover { background: var(--crema); color: #583d8c; transform: translateY(-3px); }
 .amazon-btn-disabled { background: var(--crema); color: #583d8c; }
 
+/* HOME nelle pagine interne (pianeti, passaporto): deve dare all'header
+   la stessa altezza dell'index. Prima ereditava .amazon-btn (58px) e la
+   barra passava da 70px a 98px. Qui il bottone rientra nel giro
+   tipografico del menu (0.78rem, come i link della nav) e non alza più
+   l'header. Regole DOPO .amazon-btn: stessa specificità, vince l'ultima. */
+.home-btn {
+    padding: 5px 16px;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    border-radius: 8px;
+}
+/* HOME nel menu mobile: stessa pillola del tasto in header (viola,
+   testo crema, MAIUSCOLO), ma più compatta delle voci del menu (22px):
+   stessa identità visiva ai due breakpoint senza allungare il menu.
+   Altezza ~35px, uguale a quella delle voci accanto. */
+.mobile-menu a.mobile-home {
+    padding: 6px 18px;
+    font-size: 1rem;
+    line-height: 1.2;
+    letter-spacing: 1px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 2px solid var(--viola);
+    border-radius: 8px;
+    background: var(--viola);
+    color: var(--crema);
+}
+.mobile-menu a.mobile-home:hover {
+    background: var(--crema);
+    color: #583d8c;
+    transform: none;
+    opacity: 1;
+}
+
 /* ============ COSA TROVI QUI (guida rapida al sito) ============ */
 .cosa-trovi-grid {
     display: grid;
@@ -1015,11 +1062,8 @@ footer {
     font-size: 1.05rem;
     line-height: 1.7;
 }
-/* Titolo del riquadro: fuori da .desc-section-box il reset azzera i
-   margini di .section-title e il titolo restava incollato al paragrafo */
-.support-box .section-title {
-    margin-bottom: 24px;
-}
+/* Il margine sotto il titolo viene da h2.section-title (28px, come le
+   altre sezioni): prima qui c'era un'eccezione da 24px. */
 .support-box h3 {
     margin-bottom: 20px;
     font-size: 1.1rem;
@@ -1193,7 +1237,9 @@ footer {
     margin-top: 12px;
     margin-bottom: 0;
 }
-.license-text + .license-text { margin-top: 0; }
+/* I sottotitoli consecutivi (lead, note-lead) tengono il proprio
+   margine di 18px: la vecchia regola ".license-text + .license-text
+   { margin-top: 0 }" li incollava in un unico blocco di testo. */
 
 /* ============ RESPONSIVE ============ */
 /* La firma larga (214px a h=30) lascia poco spazio al menu centrato.
@@ -1203,12 +1249,17 @@ footer {
     .logo { display: none; }
     .logo-mobile { display: block; }
 }
-@media (max-width: 850px) {
+/* Header: la tria logo + menu centrato + pillola HOME non ci sta sotto
+   ~930px (Firefox ha il testo più largo e si sovrappone). Prima il passaggio
+   all'hamburger era a 850px: fra 850 e 1000 la nav toccava la firma e la
+   pillola entrava nel menu. Sotto i 1000px HOME vive nel menu hamburger. */
+@media (max-width: 1000px) {
     header, header.scrolled { padding: 20px; }
     .desktop-nav { display: none; }
     .hamburger { display: flex; }
-    /* HOME vive nel menu hamburger sotto gli 850px */
     .home-btn { display: none; }
+}
+@media (max-width: 850px) {
     .grid-container { grid-template-columns: 1fr; }
     .flip-card { height: min(550px, 145vw); }
     .book-card, .book-card.reverse {
