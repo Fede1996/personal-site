@@ -73,7 +73,10 @@ section { scroll-margin-top: 90px; }
 .support-box > * {
     max-width: 100%;
 }
-img { max-width: 100%; }
+/* Le immagini hanno width/height intrinseci in HTML (riservano lo spazio
+   prima del caricamento: niente layout shift, gli anchor atterrano giusti).
+   height:auto evita che il CSS fissa solo la larghezza le schiacci. */
+img { max-width: 100%; height: auto; }
 
 /* ============ HEADER ============ */
 header {
@@ -100,6 +103,9 @@ header.scrolled {
 }
 .logo {
     height: 30px;
+    /* l'img ha width/height intrinseci: qui l'altezza è fissata e la
+       larghezza deve seguire il suo rapporto, non restare a quella intrinseca */
+    width: auto;
     color: var(--viola);
     transform: rotate(-5deg);
     line-height: 1;
@@ -251,7 +257,9 @@ nav a:hover { opacity: 0.6; }
 .subtitle-white,
 .title-white {
     color: var(--crema);
-    text-shadow: -1px -1px 0 var(--viola), 1px -1px 0 var(--viola), -1px 1px 0 var(--viola), 1px 1px 0 var(--viola);
+    /* Contorno viola: stessa tonalità (--viola) ma reso quasi invisibile,
+       un alone sottile invece di un bordo netto */
+    text-shadow: -1px -1px 0 rgba(96, 43, 160, 0.4), 1px -1px 0 rgba(96, 43, 160, 0.4), -1px 1px 0 rgba(96, 43, 160, 0.4), 1px 1px 0 rgba(96, 43, 160, 0.4);
 }
 .subtitle-white { font-family: var(--serif-it); }
 .title-white { font-family: var(--sans); }
@@ -437,7 +445,9 @@ footer {
     font-family: var(--sans);
     font-size: clamp(2.2rem, 6vw, 4.5rem);
     line-height: 1.05;
-    margin-bottom: 12px;
+    /* Ritmo verticale uniforme: 14px fra ogni riga del fronte
+       (prima 12 / 28 / 14, con il ✦ troppo distante dal sottotitolo) */
+    margin-bottom: 14px;
     font-weight: 400;
     color: #1a1126;
 }
@@ -446,7 +456,8 @@ footer {
     font-size: 0.92rem;
     text-transform: uppercase;
     letter-spacing: 2.5px;
-    margin-bottom: 14px;
+    /* il margine resta tutto del divider: 0 qui, 14px sopra e sotto là */
+    margin-bottom: 0;
 }
 .card-divider {
     font-family: var(--serif);

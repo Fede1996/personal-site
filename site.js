@@ -108,6 +108,42 @@
         });
     }
 
+    // ---------- Ancore (es. mars/#burnout) ----------
+    // Il browser salta all'ancora appena il testo è lì, ma font e immagini
+    // possono spostare il layout subito dopo: la scheda finisce altrove e
+    // l'header fisso la copre. A fine caricamento riallineiamo lo scroll
+    // alla posizione vera dell'elemento, una sola volta e solo se l'utente
+    // non ha già iniziato a navigare (scroll manuale, click, tastiera).
+    if (window.location.hash) {
+        let utenteHaSpostato = false;
+        const segnaSpostamento = () => { utenteHaSpostato = true; };
+        ['wheel', 'touchmove', 'pointerdown', 'keydown'].forEach(t =>
+            window.addEventListener(t, segnaSpostamento, { passive: true, once: true }));
+
+        const riallineaAncora = () => {
+            if (utenteHaSpostato) return;
+            let id;
+            try { id = decodeURIComponent(window.location.hash.slice(1)); }
+            catch (e) { id = window.location.hash.slice(1); }
+            const target = id && document.getElementById(id);
+            if (!target) return;
+            // scroll istantaneo: è una correzione, non una navigazione;
+            // lo scroll-margin-top (spazio per l'header) viene rispettato
+            target.scrollIntoView({ behavior: 'instant', block: 'start' });
+        };
+
+        if (document.readyState === 'complete') {
+            riallineaAncora();
+        } else {
+            window.addEventListener('load', riallineaAncora);
+        }
+        // Secondo passaggio quando i web font sono pronti: i font di riserva
+        // hanno metriche diverse e spostano il target di una decina di px
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(riallineaAncora);
+        }
+    }
+
     // ---------- Torna su ----------
     const backToTop = document.querySelector('.back-to-top');
     if (backToTop) {
