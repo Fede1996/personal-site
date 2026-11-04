@@ -160,7 +160,12 @@ nav a:hover { opacity: 0.6; }
 .hamburger {
     display: none;
     flex-direction: column;
+    /* Le barre stanno al centro del bottone: prima erano incollate in alto
+       (il margin-bottom sull'ultima barra aggiungeva 5px sotto) e l'icona
+       sembrava fuori asse rispetto alla firma */
+    justify-content: center;
     justify-self: end;
+    gap: 5px;
     width: 40px;
     height: 30px;
     background: transparent;
@@ -173,7 +178,6 @@ nav a:hover { opacity: 0.6; }
     width: 30px;
     height: 3px;
     background-color: var(--inchiostro);
-    margin-bottom: 5px;
 }
 
 /* ============ MENU MOBILE ============ */
