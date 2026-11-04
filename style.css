@@ -62,7 +62,29 @@ body::before {
     z-index: -2;
     pointer-events: none;
 }
-section { scroll-margin-top: 90px; }
+/* ============ ANCORE ============ */
+/* Ogni ancora deve atterrare con lo stesso spazio fra l'header fisso e il
+   primo contenuto visibile, in tutti i breakpoint. Prima scroll-margin-top
+   era 90px fisso e lo spazio risultava diverso a seconda del target:
+   30px sotto l'header per le .book-card, 20px su mobile (header più alto),
+   105px per le sezioni (al padding-top interno si sommava il margine).
+   Qui --header-alto è l'altezza dell'header quando la pagina è già scorso
+   (lo stato in cui si trova quando un'ancora atterra: 15px×2 + logo 30px,
+   20px×2 sotto i 1000px) e --aria-ancora è l'aria voluta sotto la barra. */
+:root {
+    --header-alto: 60px;
+    --aria-ancora: 30px;
+}
+@media (max-width: 1000px) {
+    :root { --header-alto: 70px; }
+}
+section { scroll-margin-top: calc(var(--header-alto) + var(--aria-ancora)); }
+/* I titoli dentro .desc-section-box sono i bersagli delle loro ancore
+   (#collezioni, #libri, #lune): il box è trasparente e il titolo è il primo
+   contenuto visibile. L'ancora sul titolo — non sulla sezione — atterra
+   esatto anche qui: il box centra il contenuto in un'area alta 30vh e lo
+   scarto sopra il titolo cambia con l'altezza dello schermo. */
+h2.section-title { scroll-margin-top: calc(var(--header-alto) + var(--aria-ancora)); }
 
 /* Nei container flex centrati i figli di testo non devono superare la larghezza disponibile */
 .hero > *,
@@ -214,6 +236,9 @@ nav a:hover { opacity: 0.6; }
        caso del passaporto, con l'introduzione lunga — le linee verticali
        e il titolo salivano sotto la barra superiore. */
     padding: 110px 20px 50px;
+    /* Ha già il suo spazio per l'header: all'ancora atterra senza doppio
+       margine (vedi ANCORE) */
+    scroll-margin-top: 0;
 }
 /* Molle flessibili sopra e sotto il contenuto: lo centrano come prima, ma
    quando non c'è spazio si azzerano e la hero cresce in basso. Il
@@ -266,7 +291,10 @@ nav a:hover { opacity: 0.6; }
 
 /* ============ PROGETTO (paragrafo sotto la hero) ============ */
 .section-progetto {
-    padding: clamp(15px, 3vw, 35px) 20px clamp(45px, 6vw, 75px);
+    /* --pad-top per l'ancora: stesse regole delle altre sezioni (vedi ANCORE) */
+    --pad-top: clamp(15px, 3vw, 35px);
+    padding: var(--pad-top) 20px clamp(45px, 6vw, 75px);
+    scroll-margin-top: calc(var(--header-alto) + var(--aria-ancora) - var(--pad-top));
     max-width: 900px;
     margin: 0 auto;
     text-align: center;
@@ -311,7 +339,12 @@ nav a:hover { opacity: 0.6; }
 .section-community,
 .section-passaporto,
 .section-support {
-    padding: clamp(45px, 6vw, 75px) 20px;
+    /* Il padding-top delle sezioni è trasparente: all'ancora interessa il
+       contenuto, non la scatola. Lo togliamo dal calcolo così il titolo
+       atterra alla stessa aria dell'header delle .book-card (vedi ANCORE) */
+    --pad-top: clamp(45px, 6vw, 75px);
+    padding: var(--pad-top) 20px;
+    scroll-margin-top: calc(var(--header-alto) + var(--aria-ancora) - var(--pad-top));
     text-align: center;
 }
 .section-passaporto .community-lead {
@@ -750,10 +783,11 @@ footer {
 /* ============ LIBRI ============ */
 .book-card {
     position: relative;
-    /* 90px come le sezioni: l'header fisso è alto 60-70px e la scheda
-       atterra con la stessa aria sotto la barra. Prima 110px, tarato sul
-       vecchio header da 98px delle pagine interne. */
-    scroll-margin-top: 90px;
+    /* La scheda ha lo sfondo: è lei il contenuto visibile, non serve
+       compensare il padding. Atterra con la stessa aria sotto l'header
+       che hanno i titoli delle sezioni (vedi ANCORE). Prima 90px fissi:
+       30px di aria su desktop, solo 20px su mobile. */
+    scroll-margin-top: calc(var(--header-alto) + var(--aria-ancora));
     background: var(--crema);
     box-shadow: var(--ombra);
     max-width: 950px;
